@@ -1,0 +1,6 @@
+framework module Pods_Tricktionary {
+  umbrella header "Pods-Tricktionary-umbrella.h"
+
+  export *
+  module * { export * }
+}
