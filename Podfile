@@ -10,6 +10,7 @@ target 'Tricktionary' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
 	pod 'SnapKit'
+	pod 'ReactiveCocoa'
 
   target 'TricktionaryTests' do
     inherit! :search_paths

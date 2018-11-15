@@ -60,12 +60,33 @@
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
-		<key>SnapKit.xcscheme</key>
+		<key>ReactiveCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>16</integer>
+		</dict>
+		<key>ReactiveSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+		<key>Result.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
+		<key>SnapKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>19</integer>
 		</dict>
 		<key>gRPC-C++.xcscheme</key>
 		<dict>

@@ -10,6 +10,12 @@
 		21AE64B71C33C1370ACB4612 /* Pods_TricktionaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */; };
 		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
 		C15660105FB10D96D7056224 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
+		EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */; };
+		EA7AAB31219E2138000858EE /* TricksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB30219E2138000858EE /* TricksDataSource.swift */; };
+		EA7AAB33219E2160000858EE /* TricksDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB32219E2160000858EE /* TricksDelegate.swift */; };
+		EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB34219E21B8000858EE /* TricksLevelHeaderCell.swift */; };
+		EA7AAB37219E21FE000858EE /* TricksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB36219E21FE000858EE /* TricksViewModel.swift */; };
+		EA7AAB3A219E2257000858EE /* Trick.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB39219E2257000858EE /* Trick.swift */; };
 		EA8C1D5B219CE61D00F4D502 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D5A219CE61D00F4D502 /* AppDelegate.swift */; };
 		EA8C1D5D219CE61D00F4D502 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D5C219CE61D00F4D502 /* ViewController.swift */; };
 		EA8C1D60219CE61D00F4D502 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA8C1D5E219CE61D00F4D502 /* Main.storyboard */; };
@@ -48,6 +54,12 @@
 		9170FE651B247F1DC367109D /* Pods-Tricktionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tricktionary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tricktionary/Pods-Tricktionary.debug.xcconfig"; sourceTree = "<group>"; };
 		B5B3396B1EE7E1116033D700 /* Pods-TricktionaryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tricktionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickLevelCell.swift; sourceTree = "<group>"; };
+		EA7AAB30219E2138000858EE /* TricksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksDataSource.swift; sourceTree = "<group>"; };
+		EA7AAB32219E2160000858EE /* TricksDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksDelegate.swift; sourceTree = "<group>"; };
+		EA7AAB34219E21B8000858EE /* TricksLevelHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksLevelHeaderCell.swift; sourceTree = "<group>"; };
+		EA7AAB36219E21FE000858EE /* TricksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksViewModel.swift; sourceTree = "<group>"; };
+		EA7AAB39219E2257000858EE /* Trick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trick.swift; sourceTree = "<group>"; };
 		EA8C1D57219CE61D00F4D502 /* Tricktionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tricktionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA8C1D5A219CE61D00F4D502 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA8C1D5C219CE61D00F4D502 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +130,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		EA7AAB2C219E1C9B000858EE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EA7AAB2D219E1CA2000858EE /* Cell */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EA7AAB2D219E1CA2000858EE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */,
+				EA7AAB34219E21B8000858EE /* TricksLevelHeaderCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		EA7AAB38219E2232000858EE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EA7AAB39219E2257000858EE /* Trick.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		EA8C1D4E219CE61C00F4D502 = {
 			isa = PBXGroup;
 			children = (
@@ -177,8 +214,9 @@
 		EAC23ABA219D8E3B0086D9E2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				EAC23ABC219D8E520086D9E2 /* Data */,
 				EAC23ABB219D8E490086D9E2 /* App */,
+				EAC23ABC219D8E520086D9E2 /* Data */,
+				EA7AAB2C219E1C9B000858EE /* Components */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -186,6 +224,7 @@
 		EAC23ABB219D8E490086D9E2 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				EA7AAB38219E2232000858EE /* Model */,
 				EAC23ABF219D8F750086D9E2 /* Tricks */,
 			);
 			path = App;
@@ -202,6 +241,9 @@
 			isa = PBXGroup;
 			children = (
 				EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */,
+				EA7AAB30219E2138000858EE /* TricksDataSource.swift */,
+				EA7AAB32219E2160000858EE /* TricksDelegate.swift */,
+				EA7AAB36219E21FE000858EE /* TricksViewModel.swift */,
 			);
 			path = Tricks;
 			sourceTree = "<group>";
@@ -384,6 +426,9 @@
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
@@ -398,6 +443,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
@@ -437,10 +485,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA7AAB33219E2160000858EE /* TricksDelegate.swift in Sources */,
+				EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */,
 				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
 				EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */,
 				EA8C1D5D219CE61D00F4D502 /* ViewController.swift in Sources */,
+				EA7AAB37219E21FE000858EE /* TricksViewModel.swift in Sources */,
+				EA7AAB31219E2138000858EE /* TricksDataSource.swift in Sources */,
 				EA8C1D5B219CE61D00F4D502 /* AppDelegate.swift in Sources */,
+				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
+				EA7AAB3A219E2257000858EE /* Trick.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,10 +674,7 @@
 				DEVELOPMENT_TEAM = GS54YR7LSQ;
 				INFOPLIST_FILE = Tricktionary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cz.pixmo.tricktionary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -640,10 +691,7 @@
 				DEVELOPMENT_TEAM = GS54YR7LSQ;
 				INFOPLIST_FILE = Tricktionary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cz.pixmo.tricktionary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -660,11 +708,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CTPJ8YRP37;
 				INFOPLIST_FILE = TricktionaryTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Stovicek.TricktionaryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -682,11 +726,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CTPJ8YRP37;
 				INFOPLIST_FILE = TricktionaryTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Stovicek.TricktionaryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -703,11 +743,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CTPJ8YRP37;
 				INFOPLIST_FILE = TricktionaryUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Stovicek.TricktionaryUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -724,11 +760,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CTPJ8YRP37;
 				INFOPLIST_FILE = TricktionaryUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Stovicek.TricktionaryUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

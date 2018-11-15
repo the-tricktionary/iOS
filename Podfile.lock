@@ -106,11 +106,17 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.6.1)
+  - ReactiveCocoa (8.0.2):
+    - ReactiveSwift (~> 4.0)
+  - ReactiveSwift (4.0.0):
+    - Result (~> 4.0)
+  - Result (4.0.0)
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
+  - ReactiveCocoa
   - SnapKit
 
 SPEC REPOS:
@@ -132,6 +138,9 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - ReactiveCocoa
+    - ReactiveSwift
+    - Result
     - SnapKit
 
 SPEC CHECKSUMS:
@@ -152,8 +161,11 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  ReactiveCocoa: fbd26e9ba60e98417ee47433e59465a98ed9da0f
+  ReactiveSwift: a2bb9ace428a109e9c0209615645d9d286c8c433
+  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 9d6875948d7861665a23b6eafbf74feb90fbe2c9
+PODFILE CHECKSUM: 9ebc61f1a8b1d80f2b5c18e71d46fd0d0adff52f
 
 COCOAPODS: 1.5.3

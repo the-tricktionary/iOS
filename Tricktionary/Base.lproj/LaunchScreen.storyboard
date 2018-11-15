@@ -22,14 +22,18 @@
                                 <rect key="frame" x="7.5" y="153.5" width="360" height="360"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="360" id="ANi-SL-x82"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="E7q-PU-Rcs"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="I2W-63-0y5"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="260" id="Yii-4Y-JSc"/>
                                     <constraint firstAttribute="width" constant="360" id="oLj-N4-6so"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="250" id="ugP-cT-EWr"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="FFN-O0-Zqm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="H4Y-VS-31H"/>
-                            <constraint firstItem="FFN-O0-Zqm" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Lwj-1I-seY"/>
+                            <constraint firstItem="FFN-O0-Zqm" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="HE7-aS-i7F"/>
+                            <constraint firstItem="FFN-O0-Zqm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="RCT-04-k2e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
