@@ -9,6 +9,7 @@ target 'Tricktionary' do
 
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
+	pod 'SnapKit'
 
   target 'TricktionaryTests' do
     inherit! :search_paths

@@ -19,6 +19,7 @@
 		EA8C1D73219CE61D00F4D502 /* TricktionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D72219CE61D00F4D502 /* TricktionaryTests.swift */; };
 		EA8C1D7E219CE61D00F4D502 /* TricktionaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D7D219CE61D00F4D502 /* TricktionaryUITests.swift */; };
 		EA8C1D90219CEA8A00F4D502 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA8C1D8F219CEA8A00F4D502 /* GoogleService-Info.plist */; };
+		EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		EA8C1D7D219CE61D00F4D502 /* TricktionaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricktionaryUITests.swift; sourceTree = "<group>"; };
 		EA8C1D7F219CE61D00F4D502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA8C1D8F219CEA8A00F4D502 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksViewController.swift; sourceTree = "<group>"; };
 		F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TricktionaryTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -141,6 +143,7 @@
 		EA8C1D59219CE61D00F4D502 /* Tricktionary */ = {
 			isa = PBXGroup;
 			children = (
+				EAC23ABA219D8E3B0086D9E2 /* Classes */,
 				EA8C1D5A219CE61D00F4D502 /* AppDelegate.swift */,
 				EA8C1D5C219CE61D00F4D502 /* ViewController.swift */,
 				EA8C1D5E219CE61D00F4D502 /* Main.storyboard */,
@@ -169,6 +172,38 @@
 				EA8C1D7F219CE61D00F4D502 /* Info.plist */,
 			);
 			path = TricktionaryUITests;
+			sourceTree = "<group>";
+		};
+		EAC23ABA219D8E3B0086D9E2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EAC23ABC219D8E520086D9E2 /* Data */,
+				EAC23ABB219D8E490086D9E2 /* App */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		EAC23ABB219D8E490086D9E2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EAC23ABF219D8F750086D9E2 /* Tricks */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		EAC23ABC219D8E520086D9E2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		EAC23ABF219D8F750086D9E2 /* Tricks */ = {
+			isa = PBXGroup;
+			children = (
+				EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */,
+			);
+			path = Tricks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,6 +384,7 @@
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -362,6 +398,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -400,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
 				EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */,
 				EA8C1D5D219CE61D00F4D502 /* ViewController.swift in Sources */,
 				EA8C1D5B219CE61D00F4D502 /* AppDelegate.swift in Sources */,

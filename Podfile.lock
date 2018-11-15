@@ -106,10 +106,12 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.6.1)
+  - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
+  - SnapKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -130,6 +132,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - SnapKit
 
 SPEC CHECKSUMS:
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
@@ -149,7 +152,8 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 04155112a7558d710f28909925a1f9c86f0e3424
+PODFILE CHECKSUM: 9d6875948d7861665a23b6eafbf74feb90fbe2c9
 
 COCOAPODS: 1.5.3
