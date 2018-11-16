@@ -43,13 +43,36 @@ class TricksViewController: UIViewController {
         view.backgroundColor = UIColor.lightGray
         
         tableView.backgroundColor = UIColor.lightGray
+        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         dataSource.viewModel = viewModel
+        delegate.viewModel = viewModel
+        delegate.viewController = self
         tableView.delegate = delegate
         tableView.dataSource = dataSource
         tableView.separatorStyle = .none
         tableView.register(TrickLevelCell.self, forCellReuseIdentifier: "TrickLevel")
         
         viewModel.level1.producer.startWithValues { (value) in
+            if value.count > 0 {
+                self.tableView.reloadData()
+            }
+        }
+        viewModel.level2.producer.startWithValues { (value) in
+            if value.count > 0 {
+                self.tableView.reloadData()
+            }
+        }
+        viewModel.level3.producer.startWithValues { (value) in
+            if value.count > 0 {
+                self.tableView.reloadData()
+            }
+        }
+        viewModel.level4.producer.startWithValues { (value) in
+            if value.count > 0 {
+                self.tableView.reloadData()
+            }
+        }
+        viewModel.level5.producer.startWithValues { (value) in
             if value.count > 0 {
                 self.tableView.reloadData()
             }

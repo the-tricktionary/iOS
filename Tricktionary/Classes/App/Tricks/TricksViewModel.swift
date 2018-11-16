@@ -12,8 +12,11 @@ import ReactiveSwift
 
 class TricksViewModel {
     
-    var tricks: MutableProperty<[Trick]> = MutableProperty<[Trick]>([])
     var level1: MutableProperty<[Trick]> = MutableProperty<[Trick]>([])
+    var level2: MutableProperty<[Trick]> = MutableProperty<[Trick]>([])
+    var level3: MutableProperty<[Trick]> = MutableProperty<[Trick]>([])
+    var level4: MutableProperty<[Trick]> = MutableProperty<[Trick]>([])
+    var level5: MutableProperty<[Trick]> = MutableProperty<[Trick]>([])
     
     // MARK: Variables
     
@@ -24,31 +27,11 @@ class TricksViewModel {
     // MARK: Publics
     
     func getTricks() {
-        let firestore = Firestore.firestore()
-        let documentReference = firestore.collection("tricksSR")
-        documentReference.getDocuments { (snapshot, error) in
-            if error != nil {
-                print(error?.localizedDescription)
-            }
-            
-            guard let snapshot = snapshot, snapshot.isEmpty == false else {
-                return
-            }
-            
-            let decoder = JSONDecoder()
-            
-            snapshot.documents.forEach({ (document) in
-                let dictionary = document.data()
-                do {
-                    let data = try JSONSerialization.data(withJSONObject: dictionary, options: [])
-                    let trick = try decoder.decode(Trick.self, from: data)
-                    self.tricks.value.append(trick)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            })
-            self.level1.value = self.tricks.value.filter { $0.level == 1 }
-        }
+        TrickService().getTricksByLevel(level: Level.level1.rawValue, tricks: &level1)
+        TrickService().getTricksByLevel(level: Level.level2.rawValue, tricks: &level2)
+        TrickService().getTricksByLevel(level: Level.level3.rawValue, tricks: &level3)
+        TrickService().getTricksByLevel(level: Level.level4.rawValue, tricks: &level4)
+        TrickService().getTricksByLevel(level: Level.level5.rawValue, tricks: &level5)
     }
     
 }

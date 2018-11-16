@@ -42,6 +42,7 @@ class TrickLevelCell: UITableViewCell {
         view.backgroundColor = UIColor.white
         
         selectionStyle = .none
+        isUserInteractionEnabled = true
         
         title.textColor = UIColor.darkGray
         title.font = UIFont.systemFont(ofSize: 14)
