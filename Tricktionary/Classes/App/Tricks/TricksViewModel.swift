@@ -27,11 +27,12 @@ class TricksViewModel {
     // MARK: Publics
     
     func getTricks() {
-        TrickService().getTricksByLevel(level: Level.level1.rawValue, tricks: &level1)
-        TrickService().getTricksByLevel(level: Level.level2.rawValue, tricks: &level2)
-        TrickService().getTricksByLevel(level: Level.level3.rawValue, tricks: &level3)
-        TrickService().getTricksByLevel(level: Level.level4.rawValue, tricks: &level4)
-        TrickService().getTricksByLevel(level: Level.level5.rawValue, tricks: &level5)
+        TrickNetwork().getTricks()
+//        TrickService().getTricksByLevel(level: Level.level1.rawValue, tricks: &level1)
+//        TrickService().getTricksByLevel(level: Level.level2.rawValue, tricks: &level2)
+//        TrickService().getTricksByLevel(level: Level.level3.rawValue, tricks: &level3)
+//        TrickService().getTricksByLevel(level: Level.level4.rawValue, tricks: &level4)
+//        TrickService().getTricksByLevel(level: Level.level5.rawValue, tricks: &level5)
     }
     
 }
