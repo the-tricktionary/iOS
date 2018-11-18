@@ -81,7 +81,7 @@ class TricksViewController: UIViewController {
         setupViewConstraints()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         viewModel.getTricks()
     }
     

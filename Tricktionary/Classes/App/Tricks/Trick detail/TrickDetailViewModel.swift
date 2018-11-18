@@ -10,4 +10,14 @@ import Foundation
 
 class TrickDetailViewModel {
     
+    
+    // MARK: Variables
+    
+    var trick: Trick
+    
+    // MARK: Life cycles
+    
+    init(trick: Trick) {
+        self.trick = trick
+    }
 }

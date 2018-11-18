@@ -22,8 +22,9 @@ class TricksDelegate: NSObject, UITableViewDelegate {
         
             if indexPath.section == 0 && indexPath.row > 0 {
                 print("Klikam na trick z levelu 1")
-//                let trick = viewModel.level1.value[indexPath.row - 1]
-                viewController.navigationController?.pushViewController(TrickDetailViewController(), animated: true)
+                let trick = viewModel.level1.value[indexPath.row - 1]
+                let trickDetailViewModel = TrickDetailViewModel(trick: trick)
+                viewController.navigationController?.pushViewController(TrickDetailViewController(viewModel: trickDetailViewModel), animated: true)
             }
         
     }

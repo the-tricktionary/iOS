@@ -14,16 +14,17 @@ class TrickNetwork {
     
     // MARK: Variables
     
-    let executor = QueryExecutor<TrickService>()
-    
-    // MARK: Public
-    
-    func getTricks() {
-        executor.request(.listData())
-            .subscribe(onSuccess: { (value) in
-                print("USPESNE PROVEDEN REQUEST DO FIRESTORE: \(value)")
-            }) { (error) in
-                print("CHYBAAAAAAAAAAAAAAA")
-            }.dispose()
-    }
+//    let executor = QueryExecutor<TrickService>()
+//    
+//    // MARK: Public
+//    
+//    func getTricks() {
+//        print("SBIRAM DATA")
+//        executor.request(.listData())
+//            .subscribe(onSuccess: { model in
+//                print("USPESNE PROVEDEN REQUEST DO FIRESTORE: \(model)")
+//            }) { (error) in
+//                print("CHYBAAAAAAAAAAAAAAA")
+//            }.dispose()
+//    }
 }
