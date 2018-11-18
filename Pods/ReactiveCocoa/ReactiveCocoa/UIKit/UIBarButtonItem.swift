@@ -28,7 +28,7 @@ extension Reactive where Base: UIBarButtonItem {
 	}
 
 	/// Sets the style of the bar button item.
-	public var style: BindingTarget<UIBarButtonItem.Style> {
+	public var style: BindingTarget<UIBarButtonItemStyle> {
 		return makeBindingTarget { $0.style = $1 }
 	}
 

@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tricksViewController = TricksViewController(viewModel: tricksViewModel)
         let navigationController = UINavigationController(rootViewController: tricksViewController)
         navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController.navigationBar.tintColor = UIColor.white
         navigationController.navigationBar.barTintColor = UIColor.red
         navigationController.navigationBar.isTranslucent = false
         window?.rootViewController = navigationController

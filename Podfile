@@ -12,6 +12,9 @@ target 'Tricktionary' do
 	pod 'SnapKit'
 	pod 'ReactiveCocoa'
 	pod 'RxFirestoreExecutor'
+	pod 'YouTubePlayerSwift'
+  #	pod 'YoutubeKit'
+  #	pod ‘youtube-ios-player-helper’
 
   target 'TricktionaryTests' do
     inherit! :search_paths

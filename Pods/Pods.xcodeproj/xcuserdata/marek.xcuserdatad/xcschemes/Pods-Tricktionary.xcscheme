@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B8D86D36EC9D866A98C13F2858502998"
+               BlueprintIdentifier = "E948A0735F0063E495C79E159BB96554"
                BuildableName = "Pods_Tricktionary.framework"
                BlueprintName = "Pods-Tricktionary"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B8D86D36EC9D866A98C13F2858502998"
+            BlueprintIdentifier = "E948A0735F0063E495C79E159BB96554"
             BuildableName = "Pods_Tricktionary.framework"
             BlueprintName = "Pods-Tricktionary"
             ReferencedContainer = "container:Pods.xcodeproj">

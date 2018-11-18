@@ -74,6 +74,7 @@ PODS:
     - RxAtomic (~> 4.4)
   - SnapKit (4.2.0)
   - SwiftyJSON (4.2.0)
+  - YouTubePlayerSwift (0.1.3)
 
 DEPENDENCIES:
   - Firebase/Core
@@ -81,6 +82,7 @@ DEPENDENCIES:
   - ReactiveCocoa
   - RxFirestoreExecutor
   - SnapKit
+  - YouTubePlayerSwift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -106,6 +108,7 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - SwiftyJSON
+    - YouTubePlayerSwift
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
@@ -130,7 +133,8 @@ SPEC CHECKSUMS:
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  YouTubePlayerSwift: be399dbf5de5511831a9387310aafd0f51eb1d24
 
-PODFILE CHECKSUM: b9eb2266147a7ac8af6a0201389cf31d39d2f64a
+PODFILE CHECKSUM: 7adbb8f54e12b4053d626ed832744329d76c45f2
 
 COCOAPODS: 1.5.3

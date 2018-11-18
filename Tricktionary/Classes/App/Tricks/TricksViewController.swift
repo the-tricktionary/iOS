@@ -25,6 +25,7 @@ class TricksViewController: UIViewController {
     
     init(viewModel: TricksViewModel) {
         self.viewModel = viewModel
+        self.viewModel.getTricks()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -82,7 +83,7 @@ class TricksViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.getTricks()
+        
     }
     
     // MARK: Privates

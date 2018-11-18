@@ -42,7 +42,7 @@ class TricksDataSource: NSObject, UITableViewDataSource {
             }
             let cell = TrickLevelCell()
             let trick = viewModel.level1.value[indexPath.row - 1]
-            cell.title.text = trick.name!
+            cell.title.text = trick.name
             return cell
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
@@ -52,7 +52,7 @@ class TricksDataSource: NSObject, UITableViewDataSource {
             }
             let cell = TrickLevelCell()
             let trick = viewModel.level2.value[indexPath.row - 1]
-            cell.title.text = trick.name!
+            cell.title.text = trick.name
             return cell
         } else if indexPath.section == 2 {
             if indexPath.row == 0 {
@@ -62,7 +62,7 @@ class TricksDataSource: NSObject, UITableViewDataSource {
             }
             let cell = TrickLevelCell()
             let trick = viewModel.level3.value[indexPath.row - 1]
-            cell.title.text = trick.name!
+            cell.title.text = trick.name
             return cell
         } else if indexPath.section == 3 {
             if indexPath.row == 0 {
@@ -72,7 +72,7 @@ class TricksDataSource: NSObject, UITableViewDataSource {
             }
             let cell = TrickLevelCell()
             let trick = viewModel.level4.value[indexPath.row - 1]
-            cell.title.text = trick.name!
+            cell.title.text = trick.name
             return cell
         } else if indexPath.section == 4 {
             if indexPath.row == 0 {
@@ -82,7 +82,7 @@ class TricksDataSource: NSObject, UITableViewDataSource {
             }
             let cell = TrickLevelCell()
             let trick = viewModel.level5.value[indexPath.row - 1]
-            cell.title.text = trick.name!
+            cell.title.text = trick.name
             return cell
         }
         

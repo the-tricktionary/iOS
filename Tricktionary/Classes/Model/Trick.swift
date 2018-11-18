@@ -9,8 +9,16 @@
 import Foundation
 
 
+struct Video: Codable {
+    var youtube: String?
+}
+
 class Trick: Codable {
     
-    var name: String?
-    var level: Int?
+    var name: String
+    var level: Int
+    var videos: Video
+    var description: String
+    var type: String
+    
 }

@@ -15,17 +15,17 @@ public enum KeyboardEvent {
 	fileprivate var notificationName: Notification.Name {
 		switch self {
 		case .willShow:
-			return UIResponder.keyboardWillShowNotification
+			return .UIKeyboardWillShow
 		case .didShow:
-			return UIResponder.keyboardDidShowNotification
+			return .UIKeyboardDidShow
 		case .willHide:
-			return UIResponder.keyboardWillHideNotification
+			return .UIKeyboardWillHide
 		case .didHide:
-			return UIResponder.keyboardDidHideNotification
+			return .UIKeyboardDidHide
 		case .willChangeFrame:
-			return UIResponder.keyboardWillChangeFrameNotification
+			return .UIKeyboardWillChangeFrame
 		case .didChangeFrame:
-			return UIResponder.keyboardDidChangeFrameNotification
+			return .UIKeyboardDidChangeFrame
 		}
 	}
 }
@@ -39,25 +39,25 @@ public struct KeyboardChangeContext {
 
 	/// The current frame of the system keyboard.
 	public var beginFrame: CGRect {
-		return base[UIResponder.keyboardFrameBeginUserInfoKey] as! CGRect
+		return base[UIKeyboardFrameBeginUserInfoKey] as! CGRect
 	}
 
 	/// The final frame of the system keyboard.
 	public var endFrame: CGRect {
-		return base[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+		return base[UIKeyboardFrameEndUserInfoKey] as! CGRect
 	}
 
 	/// The animation curve which the system keyboard will use to animate the
 	/// change in its frame.
-	public var animationCurve: UIView.AnimationCurve {
-		let value = base[UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber
-		return UIView.AnimationCurve(rawValue: value.intValue)!
+	public var animationCurve: UIViewAnimationCurve {
+		let value = base[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+		return UIViewAnimationCurve(rawValue: value.intValue)!
 	}
 
 	/// The duration in which the system keyboard expects to animate the change in
 	/// its frame.
 	public var animationDuration: Double {
-		return base[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+		return base[UIKeyboardAnimationDurationUserInfoKey] as! Double
 	}
 
 	/// Indicates whether the change is triggered locally. Used in iPad
@@ -65,7 +65,7 @@ public struct KeyboardChangeContext {
 	/// in the system keyboard's frame.
 	@available(iOS 9.0, *)
 	public var isLocal: Bool {
-		return base[UIResponder.keyboardIsLocalUserInfoKey] as! Bool
+		return base[UIKeyboardIsLocalUserInfoKey] as! Bool
 	}
 
 	fileprivate init(userInfo: [AnyHashable: Any], event: KeyboardEvent) {

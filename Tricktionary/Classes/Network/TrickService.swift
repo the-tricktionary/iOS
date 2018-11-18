@@ -9,7 +9,6 @@
 import Foundation
 import FirebaseFirestore
 import ReactiveSwift
-import RxFirestoreExecutor
 import RxSwift
 
 //enum TrickService {

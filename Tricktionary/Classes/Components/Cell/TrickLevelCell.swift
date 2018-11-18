@@ -51,7 +51,7 @@ class TrickLevelCell: UITableViewCell {
     fileprivate func setupViewConstraints() {
         
         view.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView)
+            make.top.equalTo(contentView).inset(3)
             make.leading.equalTo(contentView).inset(16)
             make.trailing.equalTo(contentView).inset(16)
             make.bottom.equalTo(contentView)

@@ -39,11 +39,11 @@ class TrickLevelHeaderCell: UITableViewCell {
     
     fileprivate func setup() {
         contentView.backgroundColor = UIColor.lightGray
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.red
         
         selectionStyle = .none
         
-        title.textColor = UIColor.darkGray
+        title.textColor = UIColor.white
         title.font = UIFont.boldSystemFont(ofSize: 24)
         title.textAlignment = .center
     }
@@ -51,9 +51,9 @@ class TrickLevelHeaderCell: UITableViewCell {
     fileprivate func setupViewConstraints() {
         
         view.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView)
-            make.leading.equalTo(contentView)
-            make.trailing.equalTo(contentView)
+            make.top.equalTo(contentView).inset(8)
+            make.leading.equalTo(contentView).inset(16)
+            make.trailing.equalTo(contentView).inset(16)
             make.bottom.equalTo(contentView)
         }
         
