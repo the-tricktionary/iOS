@@ -14,9 +14,10 @@ class TrickDetailViewController: UIViewController {
     
     // MARK: Variables
     
+    let tableView: UITableView = UITableView()
+    
     var viewModel: TrickDetailViewModel
-    var playerView: YouTubePlayerView = YouTubePlayerView()
-    var descriptionLabel: UILabel = UILabel()
+    var dataSource: TrickDetailDataSource = TrickDetailDataSource()
     
     // MARK: Life cycles
     
@@ -31,8 +32,7 @@ class TrickDetailViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        view.addSubview(playerView)
-        view.addSubview(descriptionLabel)
+        view.addSubview(tableView)
     }
     
     override func viewDidLoad() {
@@ -40,19 +40,15 @@ class TrickDetailViewController: UIViewController {
         
         title = viewModel.trick.name
         
-        view.backgroundColor = UIColor.lightGray
+        view.backgroundColor = UIColor.white
         
-        playerView.backgroundColor = UIColor.black
-        playerView.play(videoID: viewModel.trick.videos.youtube!)
+        dataSource.viewModel = viewModel
         
-        descriptionLabel.font = UIFont.systemFont(ofSize: 16)
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.contentMode = .scaleAspectFit
-        descriptionLabel.baselineAdjustment = .alignBaselines
-        descriptionLabel.lineBreakMode = .byTruncatingTail
-        descriptionLabel.textColor = UIColor.black
-        descriptionLabel.text = viewModel.trick.description
-        descriptionLabel.autoresizesSubviews = true
+        tableView.backgroundColor = UIColor.white
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 250
+        tableView.dataSource = dataSource
         
         setupViewConstraints()
     }
@@ -60,18 +56,11 @@ class TrickDetailViewController: UIViewController {
     // MARK: Private
     
     fileprivate func setupViewConstraints() {
-        playerView.snp.makeConstraints { (make) in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(8)
-            make.leading.equalTo(view)
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(view)
             make.trailing.equalTo(view)
-            make.height.equalTo(250)
-        }
-        
-        descriptionLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(8)
-            make.leading.equalTo(view).inset(10)
-            make.trailing.equalTo(view).inset(10)
-            make.height.equalTo(55)
+            make.leading.equalTo(view)
+            make.bottom.equalTo(view)
         }
     }
 }
