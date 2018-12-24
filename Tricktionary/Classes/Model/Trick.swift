@@ -8,11 +8,6 @@
 
 import Foundation
 
-
-struct Video: Codable {
-    var youtube: String?
-}
-
 class Trick: Codable {
     
     var name: String
@@ -20,5 +15,20 @@ class Trick: Codable {
     var videos: Video
     var description: String
     var type: String
+    var levels: Levels
     
+}
+
+struct Video: Codable {
+    var youtube: String?
+}
+
+struct Levels: Codable {
+    
+    var irsf: LevelsFields
+    var wjr: LevelsFields
+}
+
+struct LevelsFields: Codable {
+    var level: Int
 }

@@ -32,12 +32,12 @@ class TrickDetailDataSource: NSObject, UITableViewDataSource {
         } else if indexPath.row == 2 {
             let infoCell = InformationCell()
             infoCell.title.text = "Level WJR:"
-            infoCell.info.text = "1"
+            infoCell.info.text = "\(viewModel.trick.levels.wjr.level)"
             return infoCell
         } else if indexPath.row == 3 {
             let infoCell = InformationCell()
             infoCell.title.text = "Level IJRF:"
-            infoCell.info.text = "2"
+            infoCell.info.text = "\(viewModel.trick.levels.irsf.level)"
             return infoCell
         }
         

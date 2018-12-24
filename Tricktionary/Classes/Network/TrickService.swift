@@ -59,15 +59,6 @@ import RxSwift
 
 class TrickService {
 
-    // MARK: Variables
-
-//    var tricks: [Trick] = [Trick]()
-
-//    let firestore: Firestore = Firestore.firestore()
-
-    // MARK: Life cycles
-
-    // MARK: Public
 
     func getTricksByLevel(level: Int, tricks: inout MutableProperty<[Trick]>) {
         let firestore = Firestore.firestore()

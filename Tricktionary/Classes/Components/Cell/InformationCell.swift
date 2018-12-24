@@ -43,7 +43,7 @@ class InformationCell: UITableViewCell {
         contentView.backgroundColor = UIColor.gray
         view.backgroundColor = UIColor.white
         
-        title.font = UIFont.boldSystemFont(ofSize: 18)
+        title.font = UIFont.systemFont(ofSize: 18)
         title.textColor = UIColor.gray
         
         info.font = UIFont.systemFont(ofSize: 18)

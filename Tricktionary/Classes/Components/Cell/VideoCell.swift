@@ -40,6 +40,7 @@ class VideoCell: UITableViewCell {
     
     fileprivate func setup() {
         contentView.backgroundColor = UIColor.black
+
         view.backgroundColor = UIColor.black
         selectionStyle = .none
     }
