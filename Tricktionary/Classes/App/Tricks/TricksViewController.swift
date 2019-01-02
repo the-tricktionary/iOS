@@ -11,15 +11,18 @@ import UIKit
 import SnapKit
 import FirebaseFirestore
 import ReactiveSwift
+import KJExpandableTableTree
 
 class TricksViewController: UIViewController {
     
     // MARK: Variables
     
-    fileprivate let tableView: UITableView = UITableView()
+    let tableView: UITableView = UITableView()
     fileprivate var viewModel: TricksViewModel
     fileprivate let delegate: TricksDelegate = TricksDelegate()
     fileprivate let dataSource: TricksDataSource = TricksDataSource()
+    
+    var kjtreeInstance: KJTree = KJTree()
     
     // MARK: Life cycles
     
@@ -47,34 +50,37 @@ class TricksViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         dataSource.viewModel = viewModel
         delegate.viewModel = viewModel
+        dataSource.viewController = self
         delegate.viewController = self
         tableView.delegate = delegate
         tableView.dataSource = dataSource
         tableView.separatorStyle = .none
         tableView.register(TrickLevelCell.self, forCellReuseIdentifier: "TrickLevel")
         
-        viewModel.level1.producer.startWithValues { (value) in
-            if value.count > 0 {
-                self.tableView.reloadData()
-            }
-        }
-        viewModel.level2.producer.startWithValues { (value) in
-            if value.count > 0 {
-                self.tableView.reloadData()
-            }
-        }
-        viewModel.level3.producer.startWithValues { (value) in
-            if value.count > 0 {
-                self.tableView.reloadData()
-            }
-        }
-        viewModel.level4.producer.startWithValues { (value) in
-            if value.count > 0 {
-                self.tableView.reloadData()
-            }
-        }
-        viewModel.level5.producer.startWithValues { (value) in
-            if value.count > 0 {
+        viewModel.isLoaded.producer.startWithValues { (value) in
+            if value {
+                let parents = self.viewModel.trickList.value.getJSONData()
+//                print(parents)
+                var jsonDictionary: NSDictionary?
+                do {
+                    jsonDictionary = try JSONSerialization.jsonObject(with: parents, options: .init(rawValue: 0)) as? NSDictionary
+                }catch{
+                    print("error")
+                }
+                
+                var arrayParents: NSArray?
+                if let treeDictionary = jsonDictionary?.object(forKey: "Tree") as? NSDictionary {
+                    if let arrayOfParents = treeDictionary.object(forKey: "Parents") as? NSArray {
+                        arrayParents = arrayOfParents
+                    }
+                }
+                
+                if let arrayOfParents = arrayParents {
+                    print(arrayOfParents)
+                    self.kjtreeInstance = KJTree(parents: arrayOfParents, childrenKey: "child", expandableKey: "Expanded", key: "Id")
+                }
+                
+                self.kjtreeInstance.isInitiallyExpanded = true
                 self.tableView.reloadData()
             }
         }

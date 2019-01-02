@@ -23,6 +23,7 @@ class TrickDetailViewController: UIViewController {
     
     init(viewModel: TrickDetailViewModel) {
         self.viewModel = viewModel
+        self.viewModel.getTrick()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -38,7 +39,7 @@ class TrickDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = viewModel.trick.name
+        title = viewModel.trickName
         
         view.backgroundColor = UIColor.white
         
@@ -49,6 +50,12 @@ class TrickDetailViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 250
         tableView.dataSource = dataSource
+        
+        viewModel.loaded.producer.startWithValues { (value) in
+            if value {
+                self.tableView.reloadData()
+            }
+        }
         
         setupViewConstraints()
     }

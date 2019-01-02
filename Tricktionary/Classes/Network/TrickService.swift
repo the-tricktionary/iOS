@@ -11,58 +11,12 @@ import FirebaseFirestore
 import ReactiveSwift
 import RxSwift
 
-//enum TrickService {
-//
-//    case listData()
-//}
-//
-//extension TrickService: QueryTargetProtocol {
-//
-//    //Only  collection is not optional.
-//
-//    var collection: CollectionRef {
-//        switch self {
-//        case .listData():
-//            return "tricksSR"
-//        }
-//    }
-//
-//    var singleDocument: SingleDocument {
-//        switch self {
-//        case .listData():
-//            return ""
-//        }
-//    }
-//
-//    // everything else should return nil if not used.
-//
-//    var params: TraitList {
-//        return nil
-//    }
-//
-//    var data: UpdateableData {
-//        return (nil, nil)
-//    }
-//
-//    var nestedCollection: NestedCollection {
-//        return nil
-//    }
-//
-//    var orPair: ConditionPair {
-//        return nil
-//    }
-//
-//    var order: OrderTrait {
-//        return nil
-//    }
-//}
-
 class TrickService {
 
 
-    func getTricksByLevel(level: Int, tricks: inout MutableProperty<[Trick]>) {
+    func getTricksByLevel(completion: @escaping ([String : Any]) -> Void, finish: @escaping () -> Void) {
         let firestore = Firestore.firestore()
-        let documentReference = firestore.collection("tricksSR").whereField("level", isEqualTo: level)
+        let documentReference = firestore.collection("tricksSR") //.whereField("level", isEqualTo: level)
         documentReference.getDocuments { (snapshot, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Some error")
@@ -72,16 +26,29 @@ class TrickService {
                 return
             }
 
-            let decoder = JSONDecoder()
             snapshot.documents.forEach({ (document) in
-                let dictionary = document.data()
-                do {
-                    let data = try JSONSerialization.data(withJSONObject: dictionary, options: [])
-                    let trick = try decoder.decode(Trick.self, from: data)
-                    tricks.value.append(trick)
-                } catch {
-                    print(error.localizedDescription)
-                }
+                completion(document.data())
+            })
+            
+            finish()
+        }
+        finish()
+    }
+    
+    func getTrickByName(name: String, completion: @escaping ([String : Any]) -> Void) {
+        let firestore = Firestore.firestore()
+        let documentReference = firestore.collection("tricksSR").whereField("name", isEqualTo: name)
+        documentReference.getDocuments { (snapshot, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "Some error")
+            }
+            
+            guard let snapshot = snapshot, snapshot.isEmpty == false else {
+                return
+            }
+            
+            snapshot.documents.forEach({ (document) in
+                completion(document.data())
             })
         }
     }

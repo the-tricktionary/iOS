@@ -20,27 +20,13 @@ class TricksDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-            if indexPath.section == 0 && indexPath.row > 0 {
-                let trick = viewModel.level1.value[indexPath.row - 1]
-                let trickDetailViewModel = TrickDetailViewModel(trick: trick)
-                viewController.navigationController?.pushViewController(TrickDetailViewController(viewModel: trickDetailViewModel), animated: true)
-            } else if indexPath.section == 1 && indexPath.row > 0 {
-                let trick = viewModel.level2.value[indexPath.row - 1]
-                let trickDetailViewModel = TrickDetailViewModel(trick: trick)
-                viewController.navigationController?.pushViewController(TrickDetailViewController(viewModel: trickDetailViewModel), animated: true)
-            } else if indexPath.section == 2 && indexPath.row > 0 {
-                let trick = viewModel.level3.value[indexPath.row - 1]
-                let trickDetailViewModel = TrickDetailViewModel(trick: trick)
-                viewController.navigationController?.pushViewController(TrickDetailViewController(viewModel: trickDetailViewModel), animated: true)
-            } else if indexPath.section == 3 && indexPath.row > 0 {
-                let trick = viewModel.level4.value[indexPath.row - 1]
-                let trickDetailViewModel = TrickDetailViewModel(trick: trick)
-                viewController.navigationController?.pushViewController(TrickDetailViewController(viewModel: trickDetailViewModel), animated: true)
-            } else if indexPath.section == 4 && indexPath.row > 0 {
-                let trick = viewModel.level5.value[indexPath.row - 1]
-                let trickDetailViewModel = TrickDetailViewModel(trick: trick)
-                viewController.navigationController?.pushViewController(TrickDetailViewController(viewModel: trickDetailViewModel), animated: true)
-            }
+        let node = viewController.kjtreeInstance.tableView(tableView, didSelectRowAt: indexPath)
+        let indexTuples = node.index.components(separatedBy: ".")
         
+        if indexTuples.count == 3 {
+            let trickDetailViewModel = TrickDetailViewModel(trick: node.key)
+            let trickDetalViewController = TrickDetailViewController(viewModel: trickDetailViewModel)
+            viewController.navigationController?.pushViewController(trickDetalViewController, animated: true)
+        }
     }
 }

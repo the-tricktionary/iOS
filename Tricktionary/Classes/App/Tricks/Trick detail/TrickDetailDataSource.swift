@@ -14,32 +14,48 @@ class TrickDetailDataSource: NSObject, UITableViewDataSource {
     // MARK: Variables
     
     var viewModel: TrickDetailViewModel!
+    var prerequisiteIndex: Int = 0
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        if let _ = viewModel.trick {
+            return 4
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
             let descriptionCell = DescriptionCell()
-            descriptionCell.descriptionText.text = viewModel.trick.description
+            descriptionCell.descriptionText.text = viewModel.trick!.description
             return descriptionCell
         } else if indexPath.row == 1 {
             let videoCell = VideoCell()
-            videoCell.setVideo(url: viewModel.trick.videos.youtube!)
+            videoCell.setVideo(url: viewModel.trick!.videos.youtube)
             return videoCell
         } else if indexPath.row == 2 {
             let infoCell = InformationCell()
             infoCell.title.text = "Level WJR:"
-            infoCell.info.text = "\(viewModel.trick.levels.wjr.level)"
+            infoCell.info.text = viewModel.trick!.levels.wjr.level
             return infoCell
         } else if indexPath.row == 3 {
             let infoCell = InformationCell()
-            infoCell.title.text = "Level IJRF:"
-            infoCell.info.text = "\(viewModel.trick.levels.irsf.level)"
+            infoCell.title.text = "Level FISAC-IJRF:"
+            infoCell.info.text = viewModel.trick!.levels.irsf.level
             return infoCell
         }
+        /* if viewModel.trick.prerequisites != nil {
+            if indexPath.row == 4 {
+                let cell = UITableViewCell()
+                cell.textLabel?.text = "Prerequisites"
+                return cell
+            }
+            let infoCell = InformationCell()
+            let prerequsite = viewModel.trick.prerequisites![prerequisiteIndex]
+            infoCell.title.text = prerequsite.name
+            prerequisiteIndex += 1
+            return infoCell
+        } */
         
         return UITableViewCell()
     }

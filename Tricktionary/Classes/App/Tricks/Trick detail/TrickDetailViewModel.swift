@@ -7,17 +7,29 @@
 //
 
 import Foundation
+import ReactiveSwift
 
 class TrickDetailViewModel {
     
     
     // MARK: Variables
     
-    var trick: Trick
+    var trick: Trick?
+    var trickName: String
+    var loaded: MutableProperty<Bool> = MutableProperty<Bool>(false)
     
     // MARK: Life cycles
     
-    init(trick: Trick) {
-        self.trick = trick
+    init(trick: String) {
+        self.trickName = trick
+    }
+    
+    // MARK: Public
+    
+    func getTrick() {
+        TrickService().getTrickByName(name: trickName) { (trick) in
+            self.trick = Trick(trick)
+            self.loaded.value = true
+        }
     }
 }

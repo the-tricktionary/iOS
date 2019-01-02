@@ -10,9 +10,9 @@
 		21AE64B71C33C1370ACB4612 /* Pods_TricktionaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */; };
 		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
 		C15660105FB10D96D7056224 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
+		EA26412121D9A68900631852 /* TrickList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26412021D9A68900631852 /* TrickList.swift */; };
 		EA6C93A8219EC8AF00FF9BCC /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6C93A7219EC8AF00FF9BCC /* Type.swift */; };
 		EA6C93AA219EC91F00FF9BCC /* TrickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6C93A9219EC91F00FF9BCC /* TrickService.swift */; };
-		EA76FCA821A0DDD700E94A63 /* TrickNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FCA721A0DDD700E94A63 /* TrickNetwork.swift */; };
 		EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */; };
 		EA7AAB31219E2138000858EE /* TricksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB30219E2138000858EE /* TricksDataSource.swift */; };
 		EA7AAB33219E2160000858EE /* TricksDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB32219E2160000858EE /* TricksDelegate.swift */; };
@@ -65,9 +65,9 @@
 		9170FE651B247F1DC367109D /* Pods-Tricktionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tricktionary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tricktionary/Pods-Tricktionary.debug.xcconfig"; sourceTree = "<group>"; };
 		B5B3396B1EE7E1116033D700 /* Pods-TricktionaryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tricktionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA26412021D9A68900631852 /* TrickList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickList.swift; sourceTree = "<group>"; };
 		EA6C93A7219EC8AF00FF9BCC /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		EA6C93A9219EC91F00FF9BCC /* TrickService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickService.swift; sourceTree = "<group>"; };
-		EA76FCA721A0DDD700E94A63 /* TrickNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickNetwork.swift; sourceTree = "<group>"; };
 		EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickLevelCell.swift; sourceTree = "<group>"; };
 		EA7AAB30219E2138000858EE /* TricksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksDataSource.swift; sourceTree = "<group>"; };
 		EA7AAB32219E2160000858EE /* TricksDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +178,7 @@
 			children = (
 				EA7AAB39219E2257000858EE /* Trick.swift */,
 				EA6C93A7219EC8AF00FF9BCC /* Type.swift */,
+				EA26412021D9A68900631852 /* TrickList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -280,7 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				EA6C93A9219EC91F00FF9BCC /* TrickService.swift */,
-				EA76FCA721A0DDD700E94A63 /* TrickNetwork.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -474,6 +474,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Tricktionary/Pods-Tricktionary-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/KJExpandableTableTree/KJExpandableTableTree.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
@@ -494,6 +495,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KJExpandableTableTree.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
@@ -543,8 +545,8 @@
 				EA7AAB33219E2160000858EE /* TricksDelegate.swift in Sources */,
 				EA7AAB3D219E390E000858EE /* Level.swift in Sources */,
 				EA6C93AA219EC91F00FF9BCC /* TrickService.swift in Sources */,
+				EA26412121D9A68900631852 /* TrickList.swift in Sources */,
 				EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */,
-				EA76FCA821A0DDD700E94A63 /* TrickNetwork.swift in Sources */,
 				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
 				EAACBCE221D04B3B007AEDFE /* InformationCell.swift in Sources */,
 				EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */,

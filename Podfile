@@ -13,8 +13,7 @@ target 'Tricktionary' do
 	pod 'ReactiveCocoa'
 	pod 'RxFirestoreExecutor'
 	pod 'YouTubePlayerSwift'
-  #	pod 'YoutubeKit'
-  #	pod ‘youtube-ios-player-helper’
+	pod 'KJExpandableTableTree'
 
   target 'TricktionaryTests' do
     inherit! :search_paths
