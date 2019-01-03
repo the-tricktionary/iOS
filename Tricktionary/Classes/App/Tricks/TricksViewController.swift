@@ -80,7 +80,7 @@ class TricksViewController: UIViewController {
                     self.kjtreeInstance = KJTree(parents: arrayOfParents, childrenKey: "child", expandableKey: "Expanded", key: "Id")
                 }
                 
-                self.kjtreeInstance.isInitiallyExpanded = true
+                self.kjtreeInstance.isInitiallyExpanded = false
                 self.tableView.reloadData()
             }
         }

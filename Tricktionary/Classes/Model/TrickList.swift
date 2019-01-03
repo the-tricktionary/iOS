@@ -37,7 +37,10 @@ class TrickList: Codable {
      }
     
     func getJSONData() -> Data {
-        Tree["Tree"]!["Parents"] = parents
+        
+        Tree["Tree"]!["Parents"] = parents.sorted(by: { (parent1, parent2) -> Bool in
+            parent1.Id < parent2.Id
+        })
         var data: Data?
         let encoder = JSONEncoder()
         do {
@@ -101,7 +104,7 @@ class Childs: Codable {
     // MARK: Varables
     
     var Id: String
-    var Expanded: Bool = true
+    var Expanded: Bool = false
     var child: [Childs]
     
     // MARK: Life cycles
