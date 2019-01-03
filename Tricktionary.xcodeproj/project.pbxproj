@@ -11,7 +11,6 @@
 		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
 		C15660105FB10D96D7056224 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
 		EA26412121D9A68900631852 /* TrickList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26412021D9A68900631852 /* TrickList.swift */; };
-		EA6C93A8219EC8AF00FF9BCC /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6C93A7219EC8AF00FF9BCC /* Type.swift */; };
 		EA6C93AA219EC91F00FF9BCC /* TrickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6C93A9219EC91F00FF9BCC /* TrickService.swift */; };
 		EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */; };
 		EA7AAB31219E2138000858EE /* TricksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB30219E2138000858EE /* TricksDataSource.swift */; };
@@ -66,7 +65,6 @@
 		B5B3396B1EE7E1116033D700 /* Pods-TricktionaryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tricktionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA26412021D9A68900631852 /* TrickList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickList.swift; sourceTree = "<group>"; };
-		EA6C93A7219EC8AF00FF9BCC /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		EA6C93A9219EC91F00FF9BCC /* TrickService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickService.swift; sourceTree = "<group>"; };
 		EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickLevelCell.swift; sourceTree = "<group>"; };
 		EA7AAB30219E2138000858EE /* TricksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksDataSource.swift; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				EA7AAB39219E2257000858EE /* Trick.swift */,
-				EA6C93A7219EC8AF00FF9BCC /* Type.swift */,
 				EA26412021D9A68900631852 /* TrickList.swift */,
 			);
 			path = Model;
@@ -560,7 +557,6 @@
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
 				EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */,
 				EA7AAB3A219E2257000858EE /* Trick.swift in Sources */,
-				EA6C93A8219EC8AF00FF9BCC /* Type.swift in Sources */,
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,
 				EA85B515219EDFA200F975A2 /* TrickDetailViewModel.swift in Sources */,
 			);

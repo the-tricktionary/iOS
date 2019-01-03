@@ -17,8 +17,8 @@ class TrickDetailDataSource: NSObject, UITableViewDataSource {
     var prerequisiteIndex: Int = 0
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let _ = viewModel.trick {
-            return 4
+        if let trick = viewModel.trick {
+            return 4 + (trick.prerequisites.count + 1)
         }
         return 0
     }
@@ -44,18 +44,20 @@ class TrickDetailDataSource: NSObject, UITableViewDataSource {
             infoCell.info.text = viewModel.trick!.levels.irsf.level
             return infoCell
         }
-        /* if viewModel.trick.prerequisites != nil {
+        if viewModel.trick!.prerequisites.count > 0 {
             if indexPath.row == 4 {
                 let cell = UITableViewCell()
                 cell.textLabel?.text = "Prerequisites"
                 return cell
             }
             let infoCell = InformationCell()
-            let prerequsite = viewModel.trick.prerequisites![prerequisiteIndex]
-            infoCell.title.text = prerequsite.name
-            prerequisiteIndex += 1
+            let prerequsite = viewModel.trick!.prerequisites[prerequisiteIndex]
+            infoCell.title.text = prerequsite
+            if viewModel.trick!.prerequisites.count > prerequisiteIndex + 1 {
+                prerequisiteIndex += 1
+            }
             return infoCell
-        } */
+        }
         
         return UITableViewCell()
     }

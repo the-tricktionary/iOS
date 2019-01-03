@@ -7,19 +7,24 @@
 //
 
 import Foundation
+import Firebase
 
-class Trick: Codable {
+class Trick {
     
     // MARK: Variables
     
     var name: String
-//    var level: Int
     var videos: Video
     var description: String
     var type: String
     var levels: Levels
+    var prerequisites: [String] = []
+    
+    fileprivate var data: [String : Any]
+    
     
     init(_ data: [String : Any]) {
+        self.data = data
         name = data["name"] as! String
         description = data["description"] as! String
         type = data["type"] as! String
@@ -27,10 +32,20 @@ class Trick: Codable {
         levels = Levels(data["levels"] as! [String : Any])
     }
     
+    // MARK: Public
     
-    //var prerequisites: [Prerequisite]?
-    //var levels: Levels
-    
+    func getPrerequisites(finish: @escaping () -> Void) {
+        if let prerequisitesData = data["prerequisites"] as? [[String : Any]] {
+            prerequisitesData.forEach { (prerequisite) in
+                if let id = prerequisite["id"] as? String {
+                    TrickService().getTrickNameById(id: id, completion: { (data) in
+                        self.prerequisites.append(data["name"] as! String)
+                        finish()
+                    })
+                }
+            }
+        }
+    }
 }
 
 struct Video: Codable {
@@ -72,8 +87,4 @@ struct LevelsFields: Codable {
     init(_ data: [String : Any]) {
         level = data["level"] as? String
     }
-}
-
-struct Prerequisite: Codable {
-    var name: String
 }

@@ -59,27 +59,9 @@ class TricksViewController: UIViewController {
         
         viewModel.isLoaded.producer.startWithValues { (value) in
             if value {
-                let parents = self.viewModel.trickList.value.getJSONData()
-//                print(parents)
-                var jsonDictionary: NSDictionary?
-                do {
-                    jsonDictionary = try JSONSerialization.jsonObject(with: parents, options: .init(rawValue: 0)) as? NSDictionary
-                }catch{
-                    print("error")
-                }
-                
-                var arrayParents: NSArray?
-                if let treeDictionary = jsonDictionary?.object(forKey: "Tree") as? NSDictionary {
-                    if let arrayOfParents = treeDictionary.object(forKey: "Parents") as? NSArray {
-                        arrayParents = arrayOfParents
-                    }
-                }
-                
-                if let arrayOfParents = arrayParents {
-                    print(arrayOfParents)
+                if let arrayOfParents = self.viewModel.getArrayOfParrents() {
                     self.kjtreeInstance = KJTree(parents: arrayOfParents, childrenKey: "child", expandableKey: "Expanded", key: "Id")
                 }
-                
                 self.kjtreeInstance.isInitiallyExpanded = false
                 self.tableView.reloadData()
             }

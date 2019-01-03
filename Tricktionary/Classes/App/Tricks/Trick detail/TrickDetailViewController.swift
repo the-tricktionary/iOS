@@ -57,6 +57,12 @@ class TrickDetailViewController: UIViewController {
             }
         }
         
+        viewModel.loadedPrerequisites.producer.startWithValues { (value) in
+            if value {
+                self.tableView.reloadData()
+            }
+        }
+        
         setupViewConstraints()
     }
     

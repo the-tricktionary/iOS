@@ -28,4 +28,22 @@ class TricksViewModel {
         }
     }
     
+    func getArrayOfParrents() -> NSArray? {
+        let parents = trickList.value.getJSONData()
+        var jsonDictionary: NSDictionary?
+        do {
+            jsonDictionary = try JSONSerialization.jsonObject(with: parents, options: .init(rawValue: 0)) as? NSDictionary
+        }catch{
+            print("error")
+        }
+        
+        var arrayParents: NSArray?
+        if let treeDictionary = jsonDictionary?.object(forKey: "Tree") as? NSDictionary {
+            if let arrayOfParents = treeDictionary.object(forKey: "Parents") as? NSArray {
+                arrayParents = arrayOfParents
+            }
+        }
+        return arrayParents
+    }
+    
 }

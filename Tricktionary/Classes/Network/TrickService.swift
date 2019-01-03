@@ -52,4 +52,20 @@ class TrickService {
             })
         }
     }
+    
+    func getTrickNameById(id: String, completion: @escaping ([String : Any]) -> Void) {
+        let firestore = Firestore.firestore()
+        let documentReference = firestore.collection("tricksSR").document(id)
+        documentReference.getDocument { (snapshot, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "Some error")
+            }
+            
+            guard let snapshot = snapshot else {
+                return
+            }
+            
+            completion(snapshot.data()!)
+        }
+    }
 }

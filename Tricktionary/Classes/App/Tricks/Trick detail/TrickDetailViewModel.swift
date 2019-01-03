@@ -17,6 +17,7 @@ class TrickDetailViewModel {
     var trick: Trick?
     var trickName: String
     var loaded: MutableProperty<Bool> = MutableProperty<Bool>(false)
+    var loadedPrerequisites: MutableProperty<Bool> = MutableProperty<Bool>(false)
     
     // MARK: Life cycles
     
@@ -29,6 +30,9 @@ class TrickDetailViewModel {
     func getTrick() {
         TrickService().getTrickByName(name: trickName) { (trick) in
             self.trick = Trick(trick)
+            self.trick?.getPrerequisites(finish: {
+                self.loadedPrerequisites.value = true
+            })
             self.loaded.value = true
         }
     }
