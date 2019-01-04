@@ -50,11 +50,8 @@ class TrickDetailDataSource: NSObject, UITableViewDataSource {
                 return cell
             }
             let infoCell = InformationCell()
-            let prerequsite = viewModel.trick!.prerequisites[viewModel.prerequisiteIndex]
+            let prerequsite = viewModel.trick!.prerequisites[indexPath.row - 5]
             infoCell.title.text = prerequsite
-            if viewModel.trick!.prerequisites.count > viewModel.prerequisiteIndex + 1 {
-                viewModel.prerequisiteIndex += 1
-            }
             return infoCell
         }
         

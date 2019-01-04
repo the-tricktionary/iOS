@@ -16,7 +16,6 @@ class TrickDetailViewModel {
     
     var trick: Trick?
     var trickName: String
-    var prerequisiteIndex: Int = 0
     var loaded: MutableProperty<Bool> = MutableProperty<Bool>(false)
     var loadedPrerequisites: MutableProperty<Bool> = MutableProperty<Bool>(false)
     

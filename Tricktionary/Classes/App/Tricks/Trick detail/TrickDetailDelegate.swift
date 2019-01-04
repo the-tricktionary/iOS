@@ -18,7 +18,6 @@ class TrickDetailDelegate: NSObject, UITableViewDelegate {
         if let trick = viewModel.trick {
             if trick.prerequisites.count > 0 {
                 if indexPath.row > 4 {
-                    viewModel.prerequisiteIndex = 0
                     let cell = tableView.cellForRow(at: indexPath) as! InformationCell
                     viewModel.trickName = cell.title.text!
                     viewModel.getTrick()
