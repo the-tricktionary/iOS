@@ -21,7 +21,9 @@ class TrickList: Codable {
         let type = data["type"] as! String
         let name = data["name"] as! String
         let level = data["level"] as? Int
-        
+        if level == nil {
+            print(data["name"])
+        }
         addParent(id: level ?? 0)
         
         parents.forEach { (parent) in

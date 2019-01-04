@@ -14,7 +14,6 @@ class TrickDetailDataSource: NSObject, UITableViewDataSource {
     // MARK: Variables
     
     var viewModel: TrickDetailViewModel!
-    var prerequisiteIndex: Int = 0
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let trick = viewModel.trick {
@@ -51,10 +50,10 @@ class TrickDetailDataSource: NSObject, UITableViewDataSource {
                 return cell
             }
             let infoCell = InformationCell()
-            let prerequsite = viewModel.trick!.prerequisites[prerequisiteIndex]
+            let prerequsite = viewModel.trick!.prerequisites[viewModel.prerequisiteIndex]
             infoCell.title.text = prerequsite
-            if viewModel.trick!.prerequisites.count > prerequisiteIndex + 1 {
-                prerequisiteIndex += 1
+            if viewModel.trick!.prerequisites.count > viewModel.prerequisiteIndex + 1 {
+                viewModel.prerequisiteIndex += 1
             }
             return infoCell
         }

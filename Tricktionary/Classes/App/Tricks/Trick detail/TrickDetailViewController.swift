@@ -18,6 +18,7 @@ class TrickDetailViewController: UIViewController {
     
     var viewModel: TrickDetailViewModel
     var dataSource: TrickDetailDataSource = TrickDetailDataSource()
+    var delegate: TrickDetailDelegate = TrickDetailDelegate()
     
     // MARK: Life cycles
     
@@ -44,12 +45,15 @@ class TrickDetailViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         dataSource.viewModel = viewModel
+        delegate.viewController = self
+        delegate.viewModel = viewModel
         
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 250
         tableView.dataSource = dataSource
+        tableView.delegate = delegate
         
         viewModel.loaded.producer.startWithValues { (value) in
             if value {
