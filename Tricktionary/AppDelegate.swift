@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
+import SideMenuSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,14 +20,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        SideMenuController.preferences.basic.position = .sideBySide
+        SideMenuController.preferences.basic.menuWidth = 240
+        
         let tricksViewModel = TricksViewModel()
         let tricksViewController = TricksViewController(viewModel: tricksViewModel)
-        let navigationController = UINavigationController(rootViewController: tricksViewController)
-        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController.navigationBar.tintColor = UIColor.white
-        navigationController.navigationBar.barTintColor = UIColor.red
-        navigationController.navigationBar.isTranslucent = false
-        window?.rootViewController = navigationController
+        let contentViewController = UINavigationController(rootViewController: tricksViewController)
+        contentViewController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        contentViewController.navigationBar.tintColor = UIColor.white
+        contentViewController.navigationBar.barTintColor = UIColor.red
+        contentViewController.navigationBar.isTranslucent = false
+        let menuViewController = MenuViewController()
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = SideMenuController(contentViewController: contentViewController,
+                                                        menuViewController: menuViewController)
+        
+        window?.makeKeyAndVisible()
+//        let navigationController = UINavigationController(rootViewController: tricksViewController)
+//        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//        navigationController.navigationBar.tintColor = UIColor.white
+//        navigationController.navigationBar.barTintColor = UIColor.red
+//        navigationController.navigationBar.isTranslucent = false
+//        window?.rootViewController = navigationController
+        
         return true
     }
 

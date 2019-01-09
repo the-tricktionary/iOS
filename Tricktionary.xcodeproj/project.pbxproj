@@ -11,6 +11,12 @@
 		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
 		C15660105FB10D96D7056224 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
 		EA26412121D9A68900631852 /* TrickList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26412021D9A68900631852 /* TrickList.swift */; };
+		EA37A3A721E6902C0061E44D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3A621E6902C0061E44D /* MenuViewController.swift */; };
+		EA37A3A921E6913B0061E44D /* MenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3A821E6913B0061E44D /* MenuDelegate.swift */; };
+		EA37A3AB21E691640061E44D /* MenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3AA21E691640061E44D /* MenuDataSource.swift */; };
+		EA37A3AE21E693C40061E44D /* BaseContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3AD21E693C40061E44D /* BaseContentViewController.swift */; };
+		EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3B021E696DE0061E44D /* LoginViewController.swift */; };
+		EA37A3B821E699650061E44D /* SideMenuExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3B721E699650061E44D /* SideMenuExtension.swift */; };
 		EA6C93AA219EC91F00FF9BCC /* TrickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6C93A9219EC91F00FF9BCC /* TrickService.swift */; };
 		EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */; };
 		EA7AAB31219E2138000858EE /* TricksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB30219E2138000858EE /* TricksDataSource.swift */; };
@@ -65,6 +71,12 @@
 		B5B3396B1EE7E1116033D700 /* Pods-TricktionaryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tricktionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA26412021D9A68900631852 /* TrickList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickList.swift; sourceTree = "<group>"; };
+		EA37A3A621E6902C0061E44D /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		EA37A3A821E6913B0061E44D /* MenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDelegate.swift; sourceTree = "<group>"; };
+		EA37A3AA21E691640061E44D /* MenuDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDataSource.swift; sourceTree = "<group>"; };
+		EA37A3AD21E693C40061E44D /* BaseContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseContentViewController.swift; sourceTree = "<group>"; };
+		EA37A3B021E696DE0061E44D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		EA37A3B721E699650061E44D /* SideMenuExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuExtension.swift; sourceTree = "<group>"; };
 		EA6C93A9219EC91F00FF9BCC /* TrickService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickService.swift; sourceTree = "<group>"; };
 		EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickLevelCell.swift; sourceTree = "<group>"; };
 		EA7AAB30219E2138000858EE /* TricksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksDataSource.swift; sourceTree = "<group>"; };
@@ -150,9 +162,46 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		EA37A3A521E690160061E44D /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				EA37A3A621E6902C0061E44D /* MenuViewController.swift */,
+				EA37A3A821E6913B0061E44D /* MenuDelegate.swift */,
+				EA37A3AA21E691640061E44D /* MenuDataSource.swift */,
+			);
+			name = Menu;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		EA37A3AC21E693B30061E44D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EA37A3AD21E693C40061E44D /* BaseContentViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		EA37A3AF21E696CF0061E44D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EA37A3B021E696DE0061E44D /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		EA37A3B421E698DA0061E44D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EA37A3B721E699650061E44D /* SideMenuExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		EA7AAB2C219E1C9B000858EE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EA37A3B421E698DA0061E44D /* Extensions */,
+				EA37A3AC21E693B30061E44D /* Base */,
 				EA7AAB3B219E38FD000858EE /* Enums */,
 				EA7AAB2D219E1CA2000858EE /* Cell */,
 			);
@@ -269,6 +318,8 @@
 		EAC23ABB219D8E490086D9E2 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				EA37A3AF21E696CF0061E44D /* Login */,
+				EA37A3A521E690160061E44D /* Menu */,
 				EAC23ABF219D8F750086D9E2 /* Tricks */,
 			);
 			path = App;
@@ -478,6 +529,7 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenuSwift/SideMenuSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/YouTubePlayerSwift/YouTubePlayerSwift.framework",
@@ -499,6 +551,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayerSwift.framework",
@@ -539,22 +592,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA37A3AB21E691640061E44D /* MenuDataSource.swift in Sources */,
+				EA37A3B821E699650061E44D /* SideMenuExtension.swift in Sources */,
 				EA7AAB33219E2160000858EE /* TricksDelegate.swift in Sources */,
 				EA7AAB3D219E390E000858EE /* Level.swift in Sources */,
 				EA6C93AA219EC91F00FF9BCC /* TrickService.swift in Sources */,
 				EA26412121D9A68900631852 /* TrickList.swift in Sources */,
+				EA37A3AE21E693C40061E44D /* BaseContentViewController.swift in Sources */,
 				EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */,
 				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
 				EAACBCE221D04B3B007AEDFE /* InformationCell.swift in Sources */,
 				EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */,
 				EAACBCE421D04C3E007AEDFE /* DescriptionCell.swift in Sources */,
 				EA8C1D5D219CE61D00F4D502 /* ViewController.swift in Sources */,
+				EA37A3A721E6902C0061E44D /* MenuViewController.swift in Sources */,
+				EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */,
 				EAACBCDC21D02E83007AEDFE /* VideoCell.swift in Sources */,
 				EA7AAB37219E21FE000858EE /* TricksViewModel.swift in Sources */,
 				EA7AAB31219E2138000858EE /* TricksDataSource.swift in Sources */,
 				EA8C1D5B219CE61D00F4D502 /* AppDelegate.swift in Sources */,
 				EAACBCE021D0365E007AEDFE /* TrickDetailDelegate.swift in Sources */,
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
+				EA37A3A921E6913B0061E44D /* MenuDelegate.swift in Sources */,
 				EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */,
 				EA7AAB3A219E2257000858EE /* Trick.swift in Sources */,
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,

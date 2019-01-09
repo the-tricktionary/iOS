@@ -15,7 +15,7 @@ class InformationCell: UITableViewCell {
     
     let title: UILabel = UILabel()
     let info: UILabel = UILabel()
-    fileprivate let view: UIView = UIView()
+    let view: UIView = UIView()
     
     
     // MARK: Life cycle

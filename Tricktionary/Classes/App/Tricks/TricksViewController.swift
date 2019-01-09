@@ -12,8 +12,9 @@ import SnapKit
 import FirebaseFirestore
 import ReactiveSwift
 import KJExpandableTableTree
+import SideMenuSwift
 
-class TricksViewController: UIViewController {
+class TricksViewController: BaseContentViewController {
     
     // MARK: Variables
     
