@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LoginViewController: BaseContentViewController {
+class LoginViewController: MenuItemViewController {
     
     // MARK: Variables
     
@@ -26,5 +26,22 @@ class LoginViewController: BaseContentViewController {
         view.backgroundColor = UIColor.white
         
         navigationItem.title = "Login"
+        
+        let menuButton = UIBarButtonItem(image: UIImage(named: "list"),
+                                         style: .plain,
+                                         target: self, action: #selector(menuTapped))
+        navigationItem.leftBarButtonItem = menuButton
+        
+        if let del = delegate {
+            print("MAM DELEGATA")
+        } else {
+            print("NEMAM DELEGATA")
+        }
+    }
+    
+    // MARK: User action
+    
+    @objc func menuTapped() {
+        delegate?.toggleMenu()
     }
 }

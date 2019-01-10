@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import Firebase
-import SideMenuSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,29 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        SideMenuController.preferences.basic.position = .sideBySide
-        SideMenuController.preferences.basic.menuWidth = 240
-        
-        let tricksViewModel = TricksViewModel()
-        let tricksViewController = TricksViewController(viewModel: tricksViewModel)
-        let contentViewController = UINavigationController(rootViewController: tricksViewController)
-        contentViewController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        contentViewController.navigationBar.tintColor = UIColor.white
-        contentViewController.navigationBar.barTintColor = UIColor.red
-        contentViewController.navigationBar.isTranslucent = false
-        let menuViewController = MenuViewController()
+        let navigationBar = UINavigationBar.appearance()
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationBar.tintColor = UIColor.white
+        navigationBar.barTintColor = UIColor.red
+        navigationBar.isTranslucent = false
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = SideMenuController(contentViewController: contentViewController,
-                                                        menuViewController: menuViewController)
+        window?.rootViewController = MenuManagerViewController()
         
         window?.makeKeyAndVisible()
-//        let navigationController = UINavigationController(rootViewController: tricksViewController)
-//        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-//        navigationController.navigationBar.tintColor = UIColor.white
-//        navigationController.navigationBar.barTintColor = UIColor.red
-//        navigationController.navigationBar.isTranslucent = false
-//        window?.rootViewController = navigationController
         
         return true
     }
@@ -116,6 +102,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 }
 

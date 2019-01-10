@@ -7,13 +7,4 @@
 //
 
 import Foundation
-import SideMenuSwift
 
-extension SideMenuController {
-    
-    func setContentViewController(contentViewController: UIViewController, animation: Bool, completion: (() -> Void)? = nil) {
-        
-        let navigationController = UINavigationController(rootViewController: contentViewController)
-        setContentViewController(to: navigationController, animated: animation, completion: completion)
-    }
-}

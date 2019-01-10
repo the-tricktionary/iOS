@@ -12,15 +12,14 @@ import SnapKit
 import FirebaseFirestore
 import ReactiveSwift
 import KJExpandableTableTree
-import SideMenuSwift
 
-class TricksViewController: BaseContentViewController {
+class TricksViewController: MenuItemViewController {
     
     // MARK: Variables
     
     let tableView: UITableView = UITableView()
     fileprivate var viewModel: TricksViewModel
-    fileprivate let delegate: TricksDelegate = TricksDelegate()
+    fileprivate let tableDelegate: TricksDelegate = TricksDelegate()
     fileprivate let dataSource: TricksDataSource = TricksDataSource()
     
     var kjtreeInstance: KJTree = KJTree()
@@ -47,13 +46,18 @@ class TricksViewController: BaseContentViewController {
         navigationItem.title = "Tricks"
         view.backgroundColor = UIColor.lightGray
         
+        let menuButton = UIBarButtonItem(image: UIImage(named: "list"),
+                                         style: .plain,
+                                         target: self, action: #selector(menuTapped))
+        navigationItem.leftBarButtonItem = menuButton
+        
         tableView.backgroundColor = UIColor.lightGray
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         dataSource.viewModel = viewModel
-        delegate.viewModel = viewModel
+        tableDelegate.viewModel = viewModel
         dataSource.viewController = self
-        delegate.viewController = self
-        tableView.delegate = delegate
+        tableDelegate.viewController = self
+        tableView.delegate = tableDelegate
         tableView.dataSource = dataSource
         tableView.separatorStyle = .none
         tableView.register(TrickLevelCell.self, forCellReuseIdentifier: "TrickLevel")
@@ -71,10 +75,6 @@ class TricksViewController: BaseContentViewController {
         setupViewConstraints()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
-    
     // MARK: Privates
     
     fileprivate func setupViewConstraints() {
@@ -85,5 +85,11 @@ class TricksViewController: BaseContentViewController {
             make.trailing.equalTo(view)
             make.bottom.equalTo(view)
         }
+    }
+    
+    // MARK: User action
+    
+    @objc func menuTapped() {
+        delegate?.toggleMenu()
     }
 }

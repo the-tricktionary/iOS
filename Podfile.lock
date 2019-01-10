@@ -73,7 +73,6 @@ PODS:
     - SwiftyJSON (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
-  - SideMenuSwift (1.0.0)
   - SnapKit (4.2.0)
   - SwiftyJSON (4.2.0)
   - YouTubePlayerSwift (0.1.3)
@@ -84,7 +83,6 @@ DEPENDENCIES:
   - KJExpandableTableTree
   - ReactiveCocoa
   - RxFirestoreExecutor
-  - SideMenuSwift
   - SnapKit
   - YouTubePlayerSwift
 
@@ -111,7 +109,6 @@ SPEC REPOS:
     - RxAtomic
     - RxFirestoreExecutor
     - RxSwift
-    - SideMenuSwift
     - SnapKit
     - SwiftyJSON
     - YouTubePlayerSwift
@@ -138,11 +135,10 @@ SPEC CHECKSUMS:
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxFirestoreExecutor: 1b8f32f0c5805b4948cd7e8a256f54ddc9a09780
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
-  SideMenuSwift: f8567754feb36ade13ffd613f608829f4b86d4b3
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   YouTubePlayerSwift: be399dbf5de5511831a9387310aafd0f51eb1d24
 
-PODFILE CHECKSUM: 1af108bbe3a330d1e080a35c093dd8ef224075d5
+PODFILE CHECKSUM: 7958e0929dd0bb05b3732875022c6636bbed61dc
 
 COCOAPODS: 1.5.3
