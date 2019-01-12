@@ -31,12 +31,6 @@ class LoginViewController: MenuItemViewController {
                                          style: .plain,
                                          target: self, action: #selector(menuTapped))
         navigationItem.leftBarButtonItem = menuButton
-        
-        if let del = delegate {
-            print("MAM DELEGATA")
-        } else {
-            print("NEMAM DELEGATA")
-        }
     }
     
     // MARK: User action

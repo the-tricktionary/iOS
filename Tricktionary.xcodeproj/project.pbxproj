@@ -20,7 +20,6 @@
 		EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB34219E21B8000858EE /* TricksLevelHeaderCell.swift */; };
 		EA7AAB37219E21FE000858EE /* TricksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB36219E21FE000858EE /* TricksViewModel.swift */; };
 		EA7AAB3A219E2257000858EE /* Trick.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB39219E2257000858EE /* Trick.swift */; };
-		EA7AAB3D219E390E000858EE /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB3C219E390E000858EE /* Level.swift */; };
 		EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7F22D3219EDC5600C43599 /* TrickDetailViewController.swift */; };
 		EA85B515219EDFA200F975A2 /* TrickDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85B514219EDFA200F975A2 /* TrickDetailViewModel.swift */; };
 		EA8C1D5B219CE61D00F4D502 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D5A219CE61D00F4D502 /* AppDelegate.swift */; };
@@ -79,7 +78,6 @@
 		EA7AAB34219E21B8000858EE /* TricksLevelHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksLevelHeaderCell.swift; sourceTree = "<group>"; };
 		EA7AAB36219E21FE000858EE /* TricksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksViewModel.swift; sourceTree = "<group>"; };
 		EA7AAB39219E2257000858EE /* Trick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trick.swift; sourceTree = "<group>"; };
-		EA7AAB3C219E390E000858EE /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		EA7F22D3219EDC5600C43599 /* TrickDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickDetailViewController.swift; sourceTree = "<group>"; };
 		EA85B514219EDFA200F975A2 /* TrickDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickDetailViewModel.swift; sourceTree = "<group>"; };
 		EA8C1D57219CE61D00F4D502 /* Tricktionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tricktionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,7 +181,6 @@
 		EA7AAB2C219E1C9B000858EE /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				EA7AAB3B219E38FD000858EE /* Enums */,
 				EA7AAB2D219E1CA2000858EE /* Cell */,
 			);
 			path = Components;
@@ -208,14 +205,6 @@
 				EA26412021D9A68900631852 /* TrickList.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		EA7AAB3B219E38FD000858EE /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				EA7AAB3C219E390E000858EE /* Level.swift */,
-			);
-			path = Enums;
 			sourceTree = "<group>";
 		};
 		EA7F22D2219EDC3C00C43599 /* Trick detail */ = {
@@ -597,7 +586,6 @@
 			files = (
 				EA7AAB33219E2160000858EE /* TricksDelegate.swift in Sources */,
 				EACF594221E7E3380037FE2B /* MenuItemViewController.swift in Sources */,
-				EA7AAB3D219E390E000858EE /* Level.swift in Sources */,
 				EA6C93AA219EC91F00FF9BCC /* TrickService.swift in Sources */,
 				EA26412121D9A68900631852 /* TrickList.swift in Sources */,
 				EACF594921E7ED000037FE2B /* MenuItemView.swift in Sources */,
