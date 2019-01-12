@@ -17,8 +17,9 @@ class SidePanelViewController: UIViewController {
     
     // MARK: Variables
     
-    fileprivate let loginItem: MenuItemView = MenuItemView()
-    fileprivate let tricksItem: MenuItemView = MenuItemView()
+    var tableView: UITableView = UITableView()
+    var dataSource: SidePanelDataSource = SidePanelDataSource()
+    var tableDelegate: SidePanelDelegate = SidePanelDelegate()
     
     var delegate: SidePanelViewControllerDelegate?
     
@@ -26,8 +27,7 @@ class SidePanelViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        view.addSubview(loginItem)
-        view.addSubview(tricksItem)
+        view.addSubview(tableView)
     }
     
     override func viewDidLoad() {
@@ -35,15 +35,15 @@ class SidePanelViewController: UIViewController {
         
         view.backgroundColor = UIColor.red
         
-        loginItem.title.text = "Login"
-        loginItem.isUserInteractionEnabled = true
-        loginItem.addGestureRecognizer(UITapGestureRecognizer(target: self,
-                                                              action: #selector(loginTapped)))
+        tableDelegate.viewController = self
         
-        tricksItem.title.text = "Tricks"
-        tricksItem.isUserInteractionEnabled = true
-        tricksItem.addGestureRecognizer(UITapGestureRecognizer(target: self,
-                                                            action: #selector(tricksTapped)))
+        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.red
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 40
+        tableView.dataSource = dataSource
+        tableView.delegate = tableDelegate
         
         setupViewConstraints()
     }
@@ -52,28 +52,11 @@ class SidePanelViewController: UIViewController {
     
     fileprivate func setupViewConstraints() {
         
-        tricksItem.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(16)
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(view)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.height.equalTo(40)
+            make.bottom.equalTo(view)
         }
-        
-        loginItem.snp.makeConstraints { (make) in
-            make.top.equalTo(tricksItem.snp.bottom).offset(1)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.height.equalTo(tricksItem.snp.height)
-        }
-    }
-    
-    // MARK: User actions
-    
-    @objc func loginTapped() {
-        delegate?.didSelectMenuItem(viewController: LoginViewController())
-    }
-    
-    @objc func tricksTapped() {
-        delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
     }
 }
