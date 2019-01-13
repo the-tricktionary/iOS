@@ -8,20 +8,25 @@
 
 import Foundation
 import UIKit
+import GoogleSignIn
 
-class LoginViewController: MenuItemViewController {
+class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
     
     // MARK: Variables
+    
+    let signInButton: GIDSignInButton = GIDSignInButton()
     
     // MARK: Life cycles
     
     override func loadView() {
         super.loadView()
-
+        view.addSubview(signInButton)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
         
         view.backgroundColor = UIColor.white
         
@@ -31,6 +36,19 @@ class LoginViewController: MenuItemViewController {
                                          style: .plain,
                                          target: self, action: #selector(menuTapped))
         navigationItem.leftBarButtonItem = menuButton
+        
+        setupViewConstraints()
+    }
+    
+    // MARK: Privates
+    
+    fileprivate func setupViewConstraints() {
+        signInButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(view)
+            make.centerX.equalTo(view)
+            make.width.equalTo(250)
+            make.height.equalTo(150)
+        }
     }
     
     // MARK: User action

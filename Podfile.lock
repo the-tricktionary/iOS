@@ -7,6 +7,9 @@ PODS:
   - BoringSSL-GRPC/Interface (0.0.2)
   - Firebase (4.9.0):
     - Firebase/Core (= 4.9.0)
+  - Firebase/Auth (4.9.0):
+    - Firebase/Core
+    - FirebaseAuth (= 4.4.3)
   - Firebase/Core (4.9.0):
     - FirebaseAnalytics (= 4.0.9)
     - FirebaseCore (= 4.0.15)
@@ -18,6 +21,10 @@ PODS:
     - FirebaseInstanceID (~> 2.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
+  - FirebaseAuth (4.4.3):
+    - FirebaseAnalytics (~> 4.0)
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseCore (4.0.15):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseFirestore (0.10.1):
@@ -28,9 +35,20 @@ PODS:
     - Protobuf (~> 3.1)
   - FirebaseInstanceID (2.0.10):
     - FirebaseCore (~> 4.0)
+  - GoogleSignIn (4.4.0):
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.2.0):
+    - GoogleToolboxForMac/Defines (= 2.2.0)
   - GoogleToolboxForMac/Defines (2.2.0)
   - "GoogleToolboxForMac/NSData+zlib (2.2.0)":
     - GoogleToolboxForMac/Defines (= 2.2.0)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.0)":
+    - GoogleToolboxForMac/DebugUtils (= 2.2.0)
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.0)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
   - gRPC (1.17.0):
     - gRPC-RxLibrary (= 1.17.0)
     - gRPC/Main (= 1.17.0)
@@ -52,6 +70,7 @@ PODS:
   - gRPC/Main (1.17.0):
     - gRPC-Core (= 1.17.0)
     - gRPC-RxLibrary (= 1.17.0)
+  - GTMSessionFetcher/Core (1.2.1)
   - KJExpandableTableTree (1.1.2)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
@@ -78,8 +97,10 @@ PODS:
   - YouTubePlayerSwift (0.1.3)
 
 DEPENDENCIES:
+  - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - GoogleSignIn
   - KJExpandableTableTree
   - ReactiveCocoa
   - RxFirestoreExecutor
@@ -91,14 +112,17 @@ SPEC REPOS:
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
+    - FirebaseAuth
     - FirebaseCore
     - FirebaseFirestore
     - FirebaseInstanceID
+    - GoogleSignIn
     - GoogleToolboxForMac
     - gRPC
     - gRPC-Core
     - gRPC-ProtoRPC
     - gRPC-RxLibrary
+    - GTMSessionFetcher
     - KJExpandableTableTree
     - leveldb-library
     - nanopb
@@ -117,14 +141,17 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
   Firebase: 632216af3ed7f31e3be34776947fdc7546cfb572
   FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
+  FirebaseAuth: aaaf68d5064a6c8fec435758f83a43b8db26ccaa
   FirebaseCore: 3bd047463058fa6b5d312c97502c52e45401cdfb
   FirebaseFirestore: a6db7a47c6a47d26069892d7db39f7792f2f7f9a
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
+  GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   gRPC: 72b71666056dcb12235b5238f0ff5948fd60321a
   gRPC-Core: 4028031ed2c5267cca0d846c876d8046b1ecb9b6
   gRPC-ProtoRPC: 94e90774dd0dc089dece93ec22384d8383988f3f
   gRPC-RxLibrary: f2873a17e8133f66d8ce972f8805aa7a518ae974
+  GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   KJExpandableTableTree: b6b20b330e1067a63efec2d4eca69faba64676ca
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -139,6 +166,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   YouTubePlayerSwift: be399dbf5de5511831a9387310aafd0f51eb1d24
 
-PODFILE CHECKSUM: 7958e0929dd0bb05b3732875022c6636bbed61dc
+PODFILE CHECKSUM: 8b97d191c9d72c1758c4443603e5018dba530c48
 
 COCOAPODS: 1.5.3

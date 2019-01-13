@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Firebase
+import GoogleSignIn
 
 public protocol SidePanelViewControllerDelegate {
     func didSelectMenuItem(viewController: UIViewController)
@@ -33,6 +35,11 @@ class SidePanelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let user = Auth.auth().currentUser {
+            print("MAM PRIHLASENEHO \(user.displayName)")
+        } else {
+            print("MAM LEDA HOVNO")
+        }
         view.backgroundColor = UIColor.red
         
         tableDelegate.viewController = self
