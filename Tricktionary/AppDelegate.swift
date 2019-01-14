@@ -119,6 +119,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
         
         guard let authentication = user.authentication else { return }
+        var profileImage: URL?
+        if user.profile.hasImage {
+            profileImage = user.profile.imageURL(withDimension: 65)
+        }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
         
@@ -127,7 +131,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 print("CHYBA PRIHLASENI: \(error.localizedDescription)")
                 return
             }
-            print("USPESNE PRIHLASENEJ \(authResult?.user.displayName)")
+            
+            self.window?.rootViewController = MenuManagerViewController()
+            self.window?.makeKeyAndVisible()
         }
     }
 }

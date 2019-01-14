@@ -15,6 +15,7 @@
 		EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */; };
 		EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48DB21EAB8C10086FC79 /* Constants.swift */; };
 		EA26412121D9A68900631852 /* TrickList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26412021D9A68900631852 /* TrickList.swift */; };
+		EA2C6B1021ED38270090579F /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C6B0F21ED38270090579F /* UserCell.swift */; };
 		EA37A3A721E6902C0061E44D /* MenuManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3A621E6902C0061E44D /* MenuManagerViewController.swift */; };
 		EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3B021E696DE0061E44D /* LoginViewController.swift */; };
 		EA6C93AA219EC91F00FF9BCC /* TrickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6C93A9219EC91F00FF9BCC /* TrickService.swift */; };
@@ -77,6 +78,7 @@
 		EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDataSource.swift; sourceTree = "<group>"; };
 		EA1A48DB21EAB8C10086FC79 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA26412021D9A68900631852 /* TrickList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickList.swift; sourceTree = "<group>"; };
+		EA2C6B0F21ED38270090579F /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		EA37A3A621E6902C0061E44D /* MenuManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManagerViewController.swift; sourceTree = "<group>"; };
 		EA37A3B021E696DE0061E44D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EA6C93A9219EC91F00FF9BCC /* TrickService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickService.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				EAACBCE121D04B3B007AEDFE /* InformationCell.swift */,
 				EAACBCE321D04C3E007AEDFE /* DescriptionCell.swift */,
 				EA1A48D421EA78FA0086FC79 /* MenuCell.swift */,
+				EA2C6B0F21ED38270090579F /* UserCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				EA37A3A721E6902C0061E44D /* MenuManagerViewController.swift in Sources */,
 				EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */,
 				EAACBCDC21D02E83007AEDFE /* VideoCell.swift in Sources */,
+				EA2C6B1021ED38270090579F /* UserCell.swift in Sources */,
 				EA7AAB37219E21FE000858EE /* TricksViewModel.swift in Sources */,
 				EA7AAB31219E2138000858EE /* TricksDataSource.swift in Sources */,
 				EA8C1D5B219CE61D00F4D502 /* AppDelegate.swift in Sources */,

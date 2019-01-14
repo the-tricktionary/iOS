@@ -35,11 +35,6 @@ class SidePanelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let user = Auth.auth().currentUser {
-            print("MAM PRIHLASENEHO \(user.displayName)")
-        } else {
-            print("MAM LEDA HOVNO")
-        }
         view.backgroundColor = UIColor.red
         
         tableDelegate.viewController = self
@@ -48,7 +43,6 @@ class SidePanelViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.red
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 40
         tableView.dataSource = dataSource
         tableView.delegate = tableDelegate
         
@@ -64,6 +58,18 @@ class SidePanelViewController: UIViewController {
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.bottom.equalTo(view)
+        }
+    }
+    
+    // MARK: Public
+    
+    func openInstagram() {
+        let url: URL? = URL(string: Constatnts.instagramApp)
+        if UIApplication.shared.canOpenURL(url!) {
+            UIApplication.shared.open(url!)
+        } else {
+            //redirect to safari because the user doesn't have Instagram
+            UIApplication.shared.open(NSURL(string: Constatnts.instagram)! as URL)
         }
     }
 }
