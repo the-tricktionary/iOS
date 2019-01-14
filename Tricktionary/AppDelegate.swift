@@ -131,13 +131,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 print("CHYBA PRIHLASENI: \(error.localizedDescription)")
                 return
             }
-            
-            if user.profile.hasImage {
-                let pic = user.profile.imageURL(withDimension: 100)
-                print(pic?.absoluteString)
-                UserDefaults.standard.set(pic, forKey: "profileImage")
-            }
-            
             self.window?.rootViewController = MenuManagerViewController()
             self.window?.makeKeyAndVisible()
         }

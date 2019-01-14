@@ -30,9 +30,8 @@ class SidePanelDataSource: NSObject, UITableViewDataSource {
                         let data = try Data(contentsOf: photo)
                         cell.icon.image = UIImage(data: data)
                     } catch {
-                        print("error")
+                        print("Error: \(error.localizedDescription)")
                     }
-//                    cell.icon.image = UIImage(contentsOfFile: photo.absoluteString)
                 } else {
                     cell.icon.image = UIImage(named: "signin")
                 }
