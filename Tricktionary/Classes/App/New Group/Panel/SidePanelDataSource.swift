@@ -25,7 +25,17 @@ class SidePanelDataSource: NSObject, UITableViewDataSource {
         if let user = Auth.auth().currentUser {
             if indexPath.row == 0 {
                 let cell = UserCell() // TODO: User cell
-                cell.icon.image = UIImage(named: "signin")
+                if let photo = user.photoURL {
+                    do {
+                        let data = try Data(contentsOf: photo)
+                        cell.icon.image = UIImage(data: data)
+                    } catch {
+                        print("error")
+                    }
+//                    cell.icon.image = UIImage(contentsOfFile: photo.absoluteString)
+                } else {
+                    cell.icon.image = UIImage(named: "signin")
+                }
                 cell.title.text = user.displayName
                 return cell
             } else if indexPath.row == 1 {

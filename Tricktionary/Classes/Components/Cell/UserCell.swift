@@ -46,6 +46,8 @@ class UserCell: UITableViewCell {
         selectionStyle = .none
         
         icon.tintColor = UIColor.white
+        icon.layer.cornerRadius = 30
+        icon.clipsToBounds = true
         
         title.textColor = UIColor.white
         title.font = UIFont.boldSystemFont(ofSize: 16)
@@ -61,7 +63,7 @@ class UserCell: UITableViewCell {
         }
         
         icon.snp.makeConstraints { (make) in
-            make.size.equalTo(65)
+            make.size.equalTo(60)
             make.leading.equalTo(view).offset(5)
             make.centerY.equalTo(view)
         }
