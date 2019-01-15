@@ -45,6 +45,10 @@
 		EACF594221E7E3380037FE2B /* MenuItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF594121E7E3380037FE2B /* MenuItemViewController.swift */; };
 		EACF594621E7EAF40037FE2B /* SidePanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF594521E7EAF40037FE2B /* SidePanelViewController.swift */; };
 		EACF594921E7ED000037FE2B /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF594821E7ED000037FE2B /* MenuItemView.swift */; };
+		EACF63DC21EE961B00D7D836 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63DB21EE961B00D7D836 /* LoginView.swift */; };
+		EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63DD21EE962A00D7D836 /* RegistrationView.swift */; };
+		EACF63E121EE967700D7D836 /* IconTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63E021EE967700D7D836 /* IconTextField.swift */; };
+		EACF63E321EE96F500D7D836 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63E221EE96F500D7D836 /* GradientButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +118,10 @@
 		EACF594121E7E3380037FE2B /* MenuItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemViewController.swift; sourceTree = "<group>"; };
 		EACF594521E7EAF40037FE2B /* SidePanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelViewController.swift; sourceTree = "<group>"; };
 		EACF594821E7ED000037FE2B /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
+		EACF63DB21EE961B00D7D836 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		EACF63DD21EE962A00D7D836 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		EACF63E021EE967700D7D836 /* IconTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextField.swift; sourceTree = "<group>"; };
+		EACF63E221EE96F500D7D836 /* GradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
 		F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TricktionaryTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -191,6 +199,7 @@
 		EA37A3AF21E696CF0061E44D /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				EACF63DA21EE960800D7D836 /* View */,
 				EA37A3B021E696DE0061E44D /* LoginViewController.swift */,
 			);
 			path = Login;
@@ -199,6 +208,7 @@
 		EA7AAB2C219E1C9B000858EE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EACF63DF21EE966200D7D836 /* View */,
 				EA1A48DA21EAB88A0086FC79 /* Constants */,
 				EA7AAB2D219E1CA2000858EE /* Cell */,
 			);
@@ -358,6 +368,24 @@
 			isa = PBXGroup;
 			children = (
 				EACF594821E7ED000037FE2B /* MenuItemView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EACF63DA21EE960800D7D836 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EACF63DB21EE961B00D7D836 /* LoginView.swift */,
+				EACF63DD21EE962A00D7D836 /* RegistrationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EACF63DF21EE966200D7D836 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EACF63E021EE967700D7D836 /* IconTextField.swift */,
+				EACF63E221EE96F500D7D836 /* GradientButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -632,9 +660,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EACF63E121EE967700D7D836 /* IconTextField.swift in Sources */,
 				EA7AAB33219E2160000858EE /* TricksDelegate.swift in Sources */,
 				EACF594221E7E3380037FE2B /* MenuItemViewController.swift in Sources */,
 				EA6C93AA219EC91F00FF9BCC /* TrickService.swift in Sources */,
+				EACF63E321EE96F500D7D836 /* GradientButton.swift in Sources */,
 				EA26412121D9A68900631852 /* TrickList.swift in Sources */,
 				EACF594921E7ED000037FE2B /* MenuItemView.swift in Sources */,
 				EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */,
@@ -650,6 +680,7 @@
 				EAACBCDC21D02E83007AEDFE /* VideoCell.swift in Sources */,
 				EA2C6B1021ED38270090579F /* UserCell.swift in Sources */,
 				EA7AAB37219E21FE000858EE /* TricksViewModel.swift in Sources */,
+				EACF63DC21EE961B00D7D836 /* LoginView.swift in Sources */,
 				EA7AAB31219E2138000858EE /* TricksDataSource.swift in Sources */,
 				EA8C1D5B219CE61D00F4D502 /* AppDelegate.swift in Sources */,
 				EAACBCE021D0365E007AEDFE /* TrickDetailDelegate.swift in Sources */,
@@ -658,6 +689,7 @@
 				EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */,
 				EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */,
 				EA7AAB3A219E2257000858EE /* Trick.swift in Sources */,
+				EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */,
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,
 				EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */,
 				EA85B515219EDFA200F975A2 /* TrickDetailViewModel.swift in Sources */,
