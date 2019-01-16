@@ -73,8 +73,14 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
                            completion: { (user, error) in
                             if let error = error {
                                 print("Error: \(error.localizedDescription)")
+                                let alert = UIAlertController(title: "Error",
+                                                              message: "Signing in failed",
+                                                              preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                                self.present(alert, animated: true)
                                 return
                             }
+                            self.delegate?.toggleMenu()
                             print("User: \(user?.displayName) is signed in")
         })
     }
