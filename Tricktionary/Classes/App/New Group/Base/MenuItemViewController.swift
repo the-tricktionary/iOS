@@ -26,9 +26,20 @@ class MenuItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let menuButton = UIBarButtonItem(image: UIImage(named: "list"),
+                                         style: .plain,
+                                         target: self, action: #selector(menuTapped))
+        navigationItem.leftBarButtonItem = menuButton
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         delegate?.closeMenu()
+    }
+    
+    // MARK: User aciton
+    
+    @objc func menuTapped() {
+        delegate?.toggleMenu()
     }
 }

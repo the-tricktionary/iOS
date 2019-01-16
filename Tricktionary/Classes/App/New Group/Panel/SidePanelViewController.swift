@@ -42,7 +42,6 @@ class SidePanelViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.red
-        tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = dataSource
         tableView.delegate = tableDelegate
         

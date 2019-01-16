@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TrickLevelHeaderCell: UITableViewCell {
+class TrickLevelHeaderCell: BaseCell {
     
     // MARK: Variables
     
@@ -38,7 +38,8 @@ class TrickLevelHeaderCell: UITableViewCell {
     }
     
     fileprivate func setup() {
-        contentView.backgroundColor = UIColor.lightGray
+        contentView.backgroundColor = UIColor.white
+        layerView = view
         view.backgroundColor = UIColor.red
         
         selectionStyle = .none

@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 
-class TrickLevelCell: UITableViewCell {
+class TrickLevelCell: BaseCell {
     
     // MARK: Variables
     
     fileprivate let view: UIView = UIView()
+    fileprivate let topBorder: UIView = UIView()
     
     let title: UILabel = UILabel()
     
@@ -35,23 +36,32 @@ class TrickLevelCell: UITableViewCell {
     fileprivate func setupSubviews() {
         contentView.addSubview(view)
         view.addSubview(title)
+        contentView.addSubview(topBorder)
     }
     
     fileprivate func setup() {
-        contentView.backgroundColor = UIColor.lightGray
+        contentView.backgroundColor = UIColor.white
+        
+        
         view.backgroundColor = UIColor.white
+
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.lightGray.cgColor
         
         selectionStyle = .none
         isUserInteractionEnabled = true
         
         title.textColor = UIColor.darkGray
         title.font = UIFont.systemFont(ofSize: 14)
+        
+        topBorder.backgroundColor = UIColor.white
+        topBorder.isHidden = true
     }
     
     fileprivate func setupViewConstraints() {
         
         view.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).inset(3)
+            make.top.equalTo(contentView)
             make.leading.equalTo(contentView).inset(16)
             make.trailing.equalTo(contentView).inset(16)
             make.bottom.equalTo(contentView)
@@ -63,5 +73,18 @@ class TrickLevelCell: UITableViewCell {
             make.right.equalTo(view)
             make.height.equalTo(view.snp.height)
         }
+        
+        topBorder.snp.makeConstraints { (make) in
+            make.top.equalTo(contentView)
+            make.leading.equalTo(view).inset(1)
+            make.trailing.equalTo(view).inset(1)
+            make.height.equalTo(1)
+        }
+    }
+    
+    // MARK: Public
+    
+    func isTopBorderVisible(_ visible: Bool) {
+        topBorder.isHidden = visible
     }
 }

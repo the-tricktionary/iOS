@@ -49,6 +49,7 @@
 		EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63DD21EE962A00D7D836 /* RegistrationView.swift */; };
 		EACF63E121EE967700D7D836 /* IconTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63E021EE967700D7D836 /* IconTextField.swift */; };
 		EACF63E321EE96F500D7D836 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63E221EE96F500D7D836 /* GradientButton.swift */; };
+		EAF8CB8F21EFE0CE00684288 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF8CB8E21EFE0CE00684288 /* BaseCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		EACF63DD21EE962A00D7D836 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		EACF63E021EE967700D7D836 /* IconTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextField.swift; sourceTree = "<group>"; };
 		EACF63E221EE96F500D7D836 /* GradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
+		EAF8CB8E21EFE0CE00684288 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TricktionaryTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -218,6 +220,7 @@
 		EA7AAB2D219E1CA2000858EE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				EAF8CB8D21EFE0BB00684288 /* Base */,
 				EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */,
 				EA7AAB34219E21B8000858EE /* TricksLevelHeaderCell.swift */,
 				EAACBCDB21D02E83007AEDFE /* VideoCell.swift */,
@@ -388,6 +391,14 @@
 				EACF63E221EE96F500D7D836 /* GradientButton.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EAF8CB8D21EFE0BB00684288 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EAF8CB8E21EFE0CE00684288 /* BaseCell.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -688,6 +699,7 @@
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
 				EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */,
 				EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */,
+				EAF8CB8F21EFE0CE00684288 /* BaseCell.swift in Sources */,
 				EA7AAB3A219E2257000858EE /* Trick.swift in Sources */,
 				EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */,
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,

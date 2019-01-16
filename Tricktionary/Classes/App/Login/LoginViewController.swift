@@ -15,7 +15,6 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
     
     // MARK: Variables
     
-//    let signInButton: GIDSignInButton = GIDSignInButton()
     fileprivate let contentView: UIView = UIView()
     fileprivate let loginView: LoginView = LoginView()
     
@@ -36,13 +35,6 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
         
         navigationItem.title = "Login"
         
-        
-        // TODO: To base menu item view controller
-        let menuButton = UIBarButtonItem(image: UIImage(named: "list"),
-                                         style: .plain,
-                                         target: self, action: #selector(menuTapped))
-        navigationItem.leftBarButtonItem = menuButton
-        
         contentView.backgroundColor = .white
         contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 4
@@ -56,12 +48,6 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
     // MARK: Privates
     
     fileprivate func setupViewConstraints() {
-//        signInButton.snp.makeConstraints { (make) in
-//            make.centerY.equalTo(view)
-//            make.centerX.equalTo(view)
-//            make.width.equalTo(250)
-//            make.height.equalTo(150)
-//        }
         
         contentView.snp.makeConstraints { (make) in
             make.leading.equalTo(view).offset(16)
@@ -79,10 +65,6 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
     }
     
     // MARK: User action
-    
-    @objc func menuTapped() {
-        delegate?.toggleMenu()
-    }
     
     // TODO: Alert if login failed, on success redirect
     @objc func loginTapped() {

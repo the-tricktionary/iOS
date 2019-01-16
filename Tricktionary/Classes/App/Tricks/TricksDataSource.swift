@@ -35,11 +35,16 @@ class TricksDataSource: NSObject, UITableViewDataSource {
             
         } else if indexTuples.count == 2 {
             let cell = TrickLevelCell()
-            cell.title.textColor = UIColor.red
-            cell.title.text = node.key.uppercased()
+            if indexTuples[1] != "0" {
+                cell.isTopBorderVisible(false)
+            }
+            cell.title.textColor = UIColor.black
+            cell.title.font = UIFont.boldSystemFont(ofSize: 14)
+            cell.title.text = node.key.capitalized
             return cell
         } else if indexTuples.count == 3 {
             let cell = TrickLevelCell()
+            cell.isTopBorderVisible(false)
             cell.title.text = node.key
             return cell
         }
