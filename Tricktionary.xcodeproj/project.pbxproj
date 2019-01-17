@@ -10,6 +10,7 @@
 		21AE64B71C33C1370ACB4612 /* Pods_TricktionaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */; };
 		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
 		C15660105FB10D96D7056224 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
+		EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */; };
 		EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D421EA78FA0086FC79 /* MenuCell.swift */; };
 		EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */; };
 		EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */; };
@@ -78,6 +79,7 @@
 		9170FE651B247F1DC367109D /* Pods-Tricktionary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tricktionary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tricktionary/Pods-Tricktionary.debug.xcconfig"; sourceTree = "<group>"; };
 		B5B3396B1EE7E1116033D700 /* Pods-TricktionaryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tricktionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimerViewController.swift; sourceTree = "<group>"; };
 		EA1A48D421EA78FA0086FC79 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDelegate.swift; sourceTree = "<group>"; };
 		EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDataSource.swift; sourceTree = "<group>"; };
@@ -176,6 +178,14 @@
 				B5B3396B1EE7E1116033D700 /* Pods-TricktionaryUITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		EA01954721F1239D00A86011 /* SpeedTimer */ = {
+			isa = PBXGroup;
+			children = (
+				EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */,
+			);
+			path = SpeedTimer;
 			sourceTree = "<group>";
 		};
 		EA1A48DA21EAB88A0086FC79 /* Constants */ = {
@@ -322,6 +332,7 @@
 		EAC23ABB219D8E490086D9E2 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				EA01954721F1239D00A86011 /* SpeedTimer */,
 				EA37A3AF21E696CF0061E44D /* Login */,
 				EA37A3A521E690160061E44D /* Menu */,
 				EAC23ABF219D8F750086D9E2 /* Tricks */,
@@ -683,6 +694,7 @@
 				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
 				EAACBCE221D04B3B007AEDFE /* InformationCell.swift in Sources */,
 				EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */,
+				EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */,
 				EAACBCE421D04C3E007AEDFE /* DescriptionCell.swift in Sources */,
 				EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */,
 				EA8C1D5D219CE61D00F4D502 /* ViewController.swift in Sources */,

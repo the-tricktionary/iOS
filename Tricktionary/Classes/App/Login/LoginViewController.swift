@@ -17,6 +17,9 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
     
     fileprivate let contentView: UIView = UIView()
     fileprivate let loginView: LoginView = LoginView()
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
     
     // MARK: Life cycles
     
