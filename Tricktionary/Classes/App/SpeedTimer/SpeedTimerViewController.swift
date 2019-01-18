@@ -15,8 +15,10 @@ class SpeedTimerViewController: MenuItemViewController {
     
     fileprivate let clickButton: UIButton = UIButton()
     fileprivate let countLabel: UILabel = UILabel()
-    fileprivate let impact = UIImpactFeedbackGenerator()
+    fileprivate let impact: UIImpactFeedbackGenerator = UIImpactFeedbackGenerator()
+    fileprivate var timer: Timer?
     
+    fileprivate var eventTime: Float = 0.0
     fileprivate var count: Int = 0
     
     // MARK: Life cycles
@@ -32,6 +34,20 @@ class SpeedTimerViewController: MenuItemViewController {
         navigationItem.title = "Speed Timer"
         view.backgroundColor = UIColor.white
         
+        let timePickerButton = UIBarButtonItem(image: UIImage(named: "timer"),
+                                         landscapeImagePhone: nil,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(timePickerTapped))
+        
+        let eventPickerButton = UIBarButtonItem(image: UIImage(named: "writer"),
+                                                landscapeImagePhone: nil,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(eventPickerTapped))
+        
+        navigationItem.setRightBarButtonItems([eventPickerButton, timePickerButton], animated: true)
+        
         countLabel.textColor = UIColor.red
         countLabel.font = UIFont.boldSystemFont(ofSize: 38)
         countLabel.textAlignment = .center
@@ -39,7 +55,7 @@ class SpeedTimerViewController: MenuItemViewController {
         
         clickButton.isUserInteractionEnabled = true
         clickButton.addTarget(self, action: #selector(click), for: .touchDown)
-        
+
         setupViewConstraints()
     }
     
@@ -59,8 +75,22 @@ class SpeedTimerViewController: MenuItemViewController {
             make.leading.equalTo(clickButton)
             make.trailing.equalTo(clickButton)
             make.centerY.equalTo(clickButton)
-            
         }
+    }
+    
+    fileprivate func setupTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 0.1,
+                                     target: self,
+                                     selector: #selector(tick),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    fileprivate func timeFormatted(_ totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        //     let hours: Int = totalSeconds / 3600
+        return String(format: "%02d:%02d", minutes, seconds)
     }
     
     // MARK: Public
@@ -68,8 +98,27 @@ class SpeedTimerViewController: MenuItemViewController {
     // MARK: User action
     
     @objc func click() {
+        if timer == nil {
+            setupTimer()
+        }
         impact.impactOccurred()
         count += 1
         countLabel.text = "\(count)"
+    }
+    
+    @objc func timePickerTapped() {
+        print("TAPPED TIME PICKER")
+    }
+    
+    @objc func eventPickerTapped() {
+        print("EVENT PICEKR TAPPED")
+    }
+    
+    @objc func tick() {
+        eventTime += 0.1
+        if eventTime > 10 {
+            timer?.invalidate()
+        }
+        title = "\(timeFormatted(Int(eventTime)))"
     }
 }
