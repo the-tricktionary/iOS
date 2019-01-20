@@ -42,7 +42,7 @@ class SidePanelDelegate: NSObject, UITableViewDelegate {
             if indexPath.row == 1 {
                 viewController.delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
             } else if indexPath.row == 2 {
-                viewController.delegate?.didSelectMenuItem(viewController: SpeedTimerViewController())
+                viewController.delegate?.didSelectMenuItem(viewController: SpeedTimerViewController(viewModel: SpeedTimerViewModel()))
             } else if indexPath.row == 3 {
                 // TODO: Speed data
             } else if indexPath.row == 4 {
@@ -72,7 +72,7 @@ class SidePanelDelegate: NSObject, UITableViewDelegate {
             if indexPath.row == 1 {
                 viewController.delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
             } else if indexPath.row == 2 {
-                viewController.delegate?.didSelectMenuItem(viewController: SpeedTimerViewController())
+                viewController.delegate?.didSelectMenuItem(viewController: SpeedTimerViewController(viewModel: SpeedTimerViewModel()))
             } else if indexPath.row == 3 {
                 viewController.openInstagram()
             } else if indexPath.row == 4 {

@@ -8,24 +8,43 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class SpeedTimerViewController: MenuItemViewController {
     
     // MARK: Variables
     
+    fileprivate let controllView: ControllView = ControllView()
     fileprivate let clickButton: UIButton = UIButton()
     fileprivate let countLabel: UILabel = UILabel()
     fileprivate let impact: UIImpactFeedbackGenerator = UIImpactFeedbackGenerator()
     fileprivate var timer: Timer?
+    fileprivate let timePicker: UIPickerView = UIPickerView()
+    fileprivate let toolBar: UIToolbar = UIToolbar()
     
     fileprivate var eventTime: Float = 0.0
     fileprivate var count: Int = 0
+
+    fileprivate var usedTime: Int = 30
+    
+    var viewModel: SpeedTimerViewModel
     
     // MARK: Life cycles
+    
+    init(viewModel: SpeedTimerViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
         view.addSubview(clickButton)
+        view.addSubview(timePicker)
+        view.addSubview(controllView)
         clickButton.addSubview(countLabel)
     }
     
@@ -55,7 +74,28 @@ class SpeedTimerViewController: MenuItemViewController {
         
         clickButton.isUserInteractionEnabled = true
         clickButton.addTarget(self, action: #selector(click), for: .touchDown)
-
+        
+        timePicker.backgroundColor = UIColor.orange.withAlphaComponent(0.5)
+        timePicker.dataSource = self
+        timePicker.delegate = self
+//        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(setTime))
+//        let spaceTool = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        toolBar.setItems([spaceTool, doneButton], animated: true)
+//        toolBar.barTintColor = .white
+//        toolBar.tintColor = UIColor.red
+//        toolBar.sizeToFit()
+//        toolBar.isUserInteractionEnabled = true
+        timePicker.isHidden = true
+        
+        controllView.eventTime.text = timeFormatted(usedTime)
+        
+        if timer == nil {
+            controllView.stopButton.isHidden = true
+        }
+        
+        controllView.resetButton.isUserInteractionEnabled = true
+        controllView.resetButton.addTarget(self, action: #selector(resetCount), for: .touchDown)
+        
         setupViewConstraints()
     }
     
@@ -75,6 +115,20 @@ class SpeedTimerViewController: MenuItemViewController {
             make.leading.equalTo(clickButton)
             make.trailing.equalTo(clickButton)
             make.centerY.equalTo(clickButton)
+        }
+        
+        timePicker.snp.makeConstraints { (make) in
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.height.equalTo(300)
+            make.bottom.equalTo(view)
+        }
+        
+        controllView.snp.makeConstraints { (make) in
+            make.top.equalTo(view).offset(10)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.height.equalTo(32)
         }
     }
     
@@ -101,12 +155,13 @@ class SpeedTimerViewController: MenuItemViewController {
         if timer == nil {
             setupTimer()
         }
-        impact.impactOccurred()
         count += 1
         countLabel.text = "\(count)"
+        
     }
     
     @objc func timePickerTapped() {
+        timePicker.isHidden = !timePicker.isHidden
         print("TAPPED TIME PICKER")
     }
     
@@ -116,9 +171,53 @@ class SpeedTimerViewController: MenuItemViewController {
     
     @objc func tick() {
         eventTime += 0.1
-        if eventTime > 10 {
-            timer?.invalidate()
+        if Int(eventTime) == 10 {
+            let utterance = AVSpeechUtterance(string: "\(count)")
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            let synth = AVSpeechSynthesizer()
+            synth.speak(utterance)
+            impact.impactOccurred()
         }
         title = "\(timeFormatted(Int(eventTime)))"
+        if Int(eventTime) == usedTime {
+            eventTime = 0.0
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
+    @objc func resetCount() {
+        count = 0
+        countLabel.text = "\(count)"
+    }
+    
+//    @objc func setTime() {
+//        print("SETOVANO")
+//        timePicker.isHidden = true
+//        timePicker.endEditing(true)
+//    }
+}
+
+
+// Extensions TimePicker
+
+extension SpeedTimerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return viewModel.times.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return viewModel.timeFormatted(row)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        usedTime = viewModel.times[row]!
+        controllView.eventTime.text = viewModel.timeFormatted(row)
+        print("Selected \(viewModel.times[row])")
     }
 }
