@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ReactiveSwift
 import AVFoundation
 
 class SpeedTimerViewController: MenuItemViewController {
@@ -26,6 +27,9 @@ class SpeedTimerViewController: MenuItemViewController {
     fileprivate var count: Int = 0
 
     fileprivate var usedTime: Int = 30
+    
+    fileprivate var utterance: AVSpeechUtterance!
+    fileprivate let synth: AVSpeechSynthesizer = AVSpeechSynthesizer()
     
     var viewModel: SpeedTimerViewModel
     
@@ -67,6 +71,8 @@ class SpeedTimerViewController: MenuItemViewController {
         
         navigationItem.setRightBarButtonItems([eventPickerButton, timePickerButton], animated: true)
         
+        synth.delegate = self
+        
         countLabel.textColor = UIColor.red
         countLabel.font = UIFont.boldSystemFont(ofSize: 38)
         countLabel.textAlignment = .center
@@ -78,13 +84,7 @@ class SpeedTimerViewController: MenuItemViewController {
         timePicker.backgroundColor = UIColor.orange.withAlphaComponent(0.5)
         timePicker.dataSource = self
         timePicker.delegate = self
-//        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(setTime))
-//        let spaceTool = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        toolBar.setItems([spaceTool, doneButton], animated: true)
-//        toolBar.barTintColor = .white
-//        toolBar.tintColor = UIColor.red
-//        toolBar.sizeToFit()
-//        toolBar.isUserInteractionEnabled = true
+
         timePicker.isHidden = true
         
         controllView.eventTime.text = timeFormatted(usedTime)
@@ -95,6 +95,12 @@ class SpeedTimerViewController: MenuItemViewController {
         
         controllView.resetButton.isUserInteractionEnabled = true
         controllView.resetButton.addTarget(self, action: #selector(resetCount), for: .touchDown)
+        
+        controllView.playButton.isUserInteractionEnabled = true
+        controllView.playButton.addTarget(self, action: #selector(playTapped), for: .touchDown)
+        
+        controllView.stopButton.isUserInteractionEnabled = true
+        controllView.stopButton.addTarget(self, action: #selector(stopTapped), for: .touchDown)
         
         setupViewConstraints()
     }
@@ -147,14 +153,22 @@ class SpeedTimerViewController: MenuItemViewController {
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
+    fileprivate func playBeginSpeech() {
+        let begin = "Single rope speed. One by \(usedTime)."
+        utterance = AVSpeechUtterance(string: begin)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        synth.speak(utterance)
+    }
+    
     // MARK: Public
     
     // MARK: User action
     
     @objc func click() {
-        if timer == nil {
-            setupTimer()
-        }
+        impact.impactOccurred()
+//        if timer == nil {
+//            setupTimer()
+//        }
         count += 1
         countLabel.text = "\(count)"
         
@@ -171,12 +185,10 @@ class SpeedTimerViewController: MenuItemViewController {
     
     @objc func tick() {
         eventTime += 0.1
-        if Int(eventTime) == 10 {
-            let utterance = AVSpeechUtterance(string: "\(count)")
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            let synth = AVSpeechSynthesizer()
-            synth.speak(utterance)
-            impact.impactOccurred()
+        if Int(eventTime) == 10 { // TODO: Tell count at set time
+//            utterance = AVSpeechUtterance(string: "\(count)")
+//            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+//            synth.speak(utterance)
         }
         title = "\(timeFormatted(Int(eventTime)))"
         if Int(eventTime) == usedTime {
@@ -189,13 +201,27 @@ class SpeedTimerViewController: MenuItemViewController {
     @objc func resetCount() {
         count = 0
         countLabel.text = "\(count)"
+        controllView.playButton.isHidden = false
     }
     
-//    @objc func setTime() {
-//        print("SETOVANO")
-//        timePicker.isHidden = true
-//        timePicker.endEditing(true)
-//    }
+    @objc func playTapped() {
+        resetCount()
+        controllView.resetButton.isHidden = true
+        controllView.stopButton.isHidden = false
+        controllView.playButton.isHidden = true
+        playBeginSpeech()
+    }
+    
+    @objc func stopTapped() {
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+        }
+        eventTime = 0.0
+        navigationItem.title = "Speed Timer"
+        controllView.stopButton.isHidden = true
+        controllView.resetButton.isHidden = false
+    }
 }
 
 
@@ -218,6 +244,17 @@ extension SpeedTimerViewController: UIPickerViewDataSource, UIPickerViewDelegate
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         usedTime = viewModel.times[row]!
         controllView.eventTime.text = viewModel.timeFormatted(row)
-        print("Selected \(viewModel.times[row])")
+    }
+}
+
+
+// Extension speech
+
+extension SpeedTimerViewController: AVSpeechSynthesizerDelegate {
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        if timer == nil && count == 0 {
+            setupTimer()
+        }
     }
 }

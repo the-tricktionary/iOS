@@ -74,7 +74,7 @@ class ControllView: UIView {
         stopButton.snp.makeConstraints { (make) in
             make.size.equalTo(40)
             make.centerY.equalTo(self)
-            make.trailing.equalTo(resetButton.snp.leading).offset(-10)
+            make.trailing.equalTo(resetButton)
         }
         
         eventTime.snp.makeConstraints { (make) in
