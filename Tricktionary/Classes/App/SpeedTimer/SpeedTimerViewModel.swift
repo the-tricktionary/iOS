@@ -14,12 +14,15 @@ class SpeedTimerViewModel {
     // MARK: Variables
     
     fileprivate let speedTimes: SpeedTimes = SpeedTimes()
+    fileprivate let speedEvents: SpeedEvents = SpeedEvents()
     var times: [Int : Int]
+    var events: [Int : String]
     
     // MARK: Life cycles
     
     init() {
         self.times = speedTimes.data
+        self.events = speedEvents.data
     }
     
     // MARK: Public

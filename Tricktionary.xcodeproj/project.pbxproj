@@ -51,6 +51,10 @@
 		EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63DD21EE962A00D7D836 /* RegistrationView.swift */; };
 		EACF63E121EE967700D7D836 /* IconTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63E021EE967700D7D836 /* IconTextField.swift */; };
 		EACF63E321EE96F500D7D836 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63E221EE96F500D7D836 /* GradientButton.swift */; };
+		EAD3D73A21F8FE9F00F39A22 /* SpeachUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3D73921F8FE9F00F39A22 /* SpeachUtil.swift */; };
+		EAD3D73C21F916BE00F39A22 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3D73B21F916BE00F39A22 /* TimePicker.swift */; };
+		EAD3D73E21F9180100F39A22 /* EventPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3D73D21F9180100F39A22 /* EventPicker.swift */; };
+		EAD3D74021F9187500F39A22 /* SpeedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3D73F21F9187500F39A22 /* SpeedEvents.swift */; };
 		EAE6E1CC21F3DE560033D918 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6E1CB21F3DE560033D918 /* Picker.swift */; };
 		EAE6E1CE21F3E9C50033D918 /* SpeedTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6E1CD21F3E9C50033D918 /* SpeedTimerViewModel.swift */; };
 		EAE6E1D121F3F1F20033D918 /* ControllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6E1D021F3F1F20033D918 /* ControllView.swift */; };
@@ -130,6 +134,11 @@
 		EACF63DD21EE962A00D7D836 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		EACF63E021EE967700D7D836 /* IconTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextField.swift; sourceTree = "<group>"; };
 		EACF63E221EE96F500D7D836 /* GradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
+		EAD3D73921F8FE9F00F39A22 /* SpeachUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeachUtil.swift; sourceTree = "<group>"; };
+		EAD3D73B21F916BE00F39A22 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
+		EAD3D73D21F9180100F39A22 /* EventPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPicker.swift; sourceTree = "<group>"; };
+		EAD3D73F21F9187500F39A22 /* SpeedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedEvents.swift; sourceTree = "<group>"; };
+		EAD3D74521F922A400F39A22 /* beep.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = beep.m4a; sourceTree = "<group>"; };
 		EAE6E1CB21F3DE560033D918 /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
 		EAE6E1CD21F3E9C50033D918 /* SpeedTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimerViewModel.swift; sourceTree = "<group>"; };
 		EAE6E1D021F3F1F20033D918 /* ControllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllView.swift; sourceTree = "<group>"; };
@@ -194,6 +203,8 @@
 				EAE6E1CF21F3F1DB0033D918 /* View */,
 				EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */,
 				EAE6E1CD21F3E9C50033D918 /* SpeedTimerViewModel.swift */,
+				EAD3D73B21F916BE00F39A22 /* TimePicker.swift */,
+				EAD3D73D21F9180100F39A22 /* EventPicker.swift */,
 			);
 			path = SpeedTimer;
 			sourceTree = "<group>";
@@ -230,6 +241,7 @@
 		EA7AAB2C219E1C9B000858EE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EAD3D74121F9214700F39A22 /* Sound */,
 				EACF63DF21EE966200D7D836 /* View */,
 				EA1A48DA21EAB88A0086FC79 /* Constants */,
 				EA7AAB2D219E1CA2000858EE /* Cell */,
@@ -258,6 +270,7 @@
 				EA7AAB39219E2257000858EE /* Trick.swift */,
 				EA26412021D9A68900631852 /* TrickList.swift */,
 				EA45C47921F1A7D0009DC1A8 /* SpeedTimes.swift */,
+				EAD3D73F21F9187500F39A22 /* SpeedEvents.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -332,6 +345,7 @@
 		EAC23ABA219D8E3B0086D9E2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EAD3D73821F8FE8E00F39A22 /* Utils */,
 				EAC23ABB219D8E490086D9E2 /* App */,
 				EA7AAB38219E2232000858EE /* Model */,
 				EAC23ABC219D8E520086D9E2 /* Network */,
@@ -414,6 +428,22 @@
 				EAE6E1CB21F3DE560033D918 /* Picker.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EAD3D73821F8FE8E00F39A22 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EAD3D73921F8FE9F00F39A22 /* SpeachUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		EAD3D74121F9214700F39A22 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				EAD3D74521F922A400F39A22 /* beep.m4a */,
+			);
+			path = Sound;
 			sourceTree = "<group>";
 		};
 		EAE6E1CF21F3F1DB0033D918 /* View */ = {
@@ -715,14 +745,18 @@
 				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
 				EAACBCE221D04B3B007AEDFE /* InformationCell.swift in Sources */,
 				EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */,
+				EAD3D73A21F8FE9F00F39A22 /* SpeachUtil.swift in Sources */,
 				EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */,
 				EAACBCE421D04C3E007AEDFE /* DescriptionCell.swift in Sources */,
+				EAD3D73E21F9180100F39A22 /* EventPicker.swift in Sources */,
+				EAD3D74021F9187500F39A22 /* SpeedEvents.swift in Sources */,
 				EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */,
 				EA8C1D5D219CE61D00F4D502 /* ViewController.swift in Sources */,
 				EA37A3A721E6902C0061E44D /* MenuManagerViewController.swift in Sources */,
 				EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */,
 				EAACBCDC21D02E83007AEDFE /* VideoCell.swift in Sources */,
 				EAE6E1CE21F3E9C50033D918 /* SpeedTimerViewModel.swift in Sources */,
+				EAD3D73C21F916BE00F39A22 /* TimePicker.swift in Sources */,
 				EA2C6B1021ED38270090579F /* UserCell.swift in Sources */,
 				EA7AAB37219E21FE000858EE /* TricksViewModel.swift in Sources */,
 				EACF63DC21EE961B00D7D836 /* LoginView.swift in Sources */,

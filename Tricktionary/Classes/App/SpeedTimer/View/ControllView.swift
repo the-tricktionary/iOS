@@ -16,7 +16,8 @@ class ControllView: UIView {
     let playButton: UIButton = UIButton()
     let stopButton: UIButton = UIButton()
     let resetButton: UIButton = UIButton()
-    let eventTime: UILabel = UILabel()
+    let eventTime: UITextField = UITextField()
+    let eventType: UITextField = UITextField()
     
     // MARK: Life cycles
     
@@ -38,6 +39,7 @@ class ControllView: UIView {
         addSubview(stopButton)
         addSubview(resetButton)
         addSubview(eventTime)
+        addSubview(eventType)
     }
     
     fileprivate func setup() {
@@ -56,9 +58,16 @@ class ControllView: UIView {
         eventTime.font = UIFont.systemFont(ofSize: 22)
         eventTime.textColor = UIColor.gray
         eventTime.textAlignment = .center
+        
+        eventType.font = UIFont.systemFont(ofSize: 22)
+        eventType.textColor = UIColor.gray
+        eventType.textAlignment = .center
     }
     
     fileprivate func setupViewConstraints() {
+        
+        let width = (UIScreen.main.bounds.width - 100) / 2
+        
         playButton.snp.makeConstraints { (make) in
             make.size.equalTo(40)
             make.centerY.equalTo(self)
@@ -81,7 +90,14 @@ class ControllView: UIView {
             make.height.equalTo(40)
             make.centerY.equalTo(self)
             make.leading.equalTo(playButton.snp.trailing).offset(5)
-            make.trailing.equalTo(stopButton.snp.leading).inset(5)
+            make.width.equalTo(width)
+        }
+        
+        eventType.snp.makeConstraints { (make) in
+            make.height.equalTo(40)
+            make.centerY.equalTo(self)
+            make.leading.equalTo(eventTime.snp.trailing)
+            make.width.equalTo(width)
         }
     }
 }

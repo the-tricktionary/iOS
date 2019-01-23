@@ -15,23 +15,29 @@ class SpeedTimerViewController: MenuItemViewController {
     
     // MARK: Variables
     
-    fileprivate let controllView: ControllView = ControllView()
     fileprivate let clickButton: UIButton = UIButton()
     fileprivate let countLabel: UILabel = UILabel()
+    fileprivate let timePickerTextField: UITextField = UITextField()
     fileprivate let impact: UIImpactFeedbackGenerator = UIImpactFeedbackGenerator()
     fileprivate var timer: Timer?
     fileprivate let timePicker: UIPickerView = UIPickerView()
+    fileprivate let eventPicker: UIPickerView = UIPickerView()
     fileprivate let toolBar: UIToolbar = UIToolbar()
+    fileprivate var speachUtil: SpeachUtil = SpeachUtil()
+    fileprivate let synth = AVSpeechSynthesizer()
     
-    fileprivate var eventTime: Float = 0.0
+    fileprivate var eventTime: Int = 0
     fileprivate var count: Int = 0
-
-    fileprivate var usedTime: Int = 30
     
-    fileprivate var utterance: AVSpeechUtterance!
-    fileprivate let synth: AVSpeechSynthesizer = AVSpeechSynthesizer()
+    fileprivate var timePickerDelegate: TimePicker = TimePicker()
+    fileprivate var eventPickerDelegate: EventPicker = EventPicker()
     
+    let controllView: ControllView = ControllView()
+    var usedTime: Int = 30
     var viewModel: SpeedTimerViewModel
+    
+    var timeToSpeek: Int = 1
+    let speekBy: Int = 10
     
     // MARK: Life cycles
     
@@ -47,8 +53,8 @@ class SpeedTimerViewController: MenuItemViewController {
     override func loadView() {
         super.loadView()
         view.addSubview(clickButton)
-        view.addSubview(timePicker)
         view.addSubview(controllView)
+        view.addSubview(timePickerTextField)
         clickButton.addSubview(countLabel)
     }
     
@@ -56,20 +62,6 @@ class SpeedTimerViewController: MenuItemViewController {
         super.viewDidLoad()
         navigationItem.title = "Speed Timer"
         view.backgroundColor = UIColor.white
-        
-        let timePickerButton = UIBarButtonItem(image: UIImage(named: "timer"),
-                                         landscapeImagePhone: nil,
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(timePickerTapped))
-        
-        let eventPickerButton = UIBarButtonItem(image: UIImage(named: "writer"),
-                                                landscapeImagePhone: nil,
-                                                style: .plain,
-                                                target: self,
-                                                action: #selector(eventPickerTapped))
-        
-        navigationItem.setRightBarButtonItems([eventPickerButton, timePickerButton], animated: true)
         
         synth.delegate = self
         
@@ -82,12 +74,47 @@ class SpeedTimerViewController: MenuItemViewController {
         clickButton.addTarget(self, action: #selector(click), for: .touchDown)
         
         timePicker.backgroundColor = UIColor.orange.withAlphaComponent(0.5)
-        timePicker.dataSource = self
-        timePicker.delegate = self
-
-        timePicker.isHidden = true
+        timePickerDelegate.viewModel = viewModel
+        timePickerDelegate.viewController = self
+        timePicker.dataSource = timePickerDelegate
+        timePicker.delegate = timePickerDelegate
         
-        controllView.eventTime.text = timeFormatted(usedTime)
+        eventPicker.backgroundColor = UIColor.orange.withAlphaComponent(0.5)
+        eventPickerDelegate.viewModel = viewModel
+        eventPickerDelegate.viewController = self
+        eventPicker.dataSource = eventPickerDelegate
+        eventPicker.delegate = eventPickerDelegate
+        
+        let timeToolBar = UIToolbar()
+        timeToolBar.barStyle = UIBarStyle.default
+        timeToolBar.isTranslucent = true
+        timeToolBar.tintColor = UIColor.red.withAlphaComponent(0.5)
+        timeToolBar.sizeToFit()
+        
+        let eventToolBar = UIToolbar()
+        eventToolBar.barStyle = UIBarStyle.default
+        eventToolBar.isTranslucent = true
+        eventToolBar.tintColor = UIColor.red.withAlphaComponent(0.5)
+        eventToolBar.sizeToFit()
+        
+        let doneTimeButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneTimePicker))
+        let doneEventButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneEventPicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        timeToolBar.setItems([spaceButton, doneTimeButton], animated: false)
+        timeToolBar.isUserInteractionEnabled = true
+        
+        eventToolBar.setItems([spaceButton, doneEventButton], animated: false)
+        eventToolBar.isUserInteractionEnabled = true
+        
+        controllView.eventType.inputView = eventPicker
+        controllView.eventType.inputAccessoryView = eventToolBar
+        
+        controllView.eventTime.inputView = timePicker
+        controllView.eventTime.inputAccessoryView = timeToolBar
+        
+        controllView.eventTime.text = "Speed time"
+        controllView.eventType.text = "Event type"
         
         if timer == nil {
             controllView.stopButton.isHidden = true
@@ -123,13 +150,6 @@ class SpeedTimerViewController: MenuItemViewController {
             make.centerY.equalTo(clickButton)
         }
         
-        timePicker.snp.makeConstraints { (make) in
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.height.equalTo(300)
-            make.bottom.equalTo(view)
-        }
-        
         controllView.snp.makeConstraints { (make) in
             make.top.equalTo(view).offset(10)
             make.leading.equalTo(view)
@@ -139,7 +159,7 @@ class SpeedTimerViewController: MenuItemViewController {
     }
     
     fileprivate func setupTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.1,
+        timer = Timer.scheduledTimer(timeInterval: 1,
                                      target: self,
                                      selector: #selector(tick),
                                      userInfo: nil,
@@ -155,7 +175,11 @@ class SpeedTimerViewController: MenuItemViewController {
     
     fileprivate func playBeginSpeech() {
         let begin = "Single rope speed. One by \(usedTime)."
-        utterance = AVSpeechUtterance(string: begin)
+        speek(begin)
+    }
+    
+    fileprivate func speek(_ text: String) {
+        let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         synth.speak(utterance)
     }
@@ -166,36 +190,38 @@ class SpeedTimerViewController: MenuItemViewController {
     
     @objc func click() {
         impact.impactOccurred()
-//        if timer == nil {
-//            setupTimer()
-//        }
         count += 1
         countLabel.text = "\(count)"
         
     }
     
-    @objc func timePickerTapped() {
-        timePicker.isHidden = !timePicker.isHidden
-        print("TAPPED TIME PICKER")
+    @objc func doneTimePicker() {
+        controllView.eventTime.endEditing(true)
     }
     
-    @objc func eventPickerTapped() {
-        print("EVENT PICEKR TAPPED")
+    @objc func doneEventPicker() {
+        controllView.eventType.endEditing(true)
     }
     
     @objc func tick() {
-        eventTime += 0.1
-        if Int(eventTime) == 10 { // TODO: Tell count at set time
-//            utterance = AVSpeechUtterance(string: "\(count)")
-//            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-//            synth.speak(utterance)
-        }
+        eventTime += 1
         title = "\(timeFormatted(Int(eventTime)))"
-        if Int(eventTime) == usedTime {
-            eventTime = 0.0
+        if eventTime == usedTime {
+            eventTime = 0
             timer?.invalidate()
             timer = nil
+            timeToSpeek = 0
+            navigationItem.title = "Speed Timer"
+            controllView.stopButton.isHidden = true
+            controllView.resetButton.isHidden = false
+            controllView.eventTime.isEnabled = true
+            controllView.eventType.isEnabled = true
         }
+        if timeToSpeek == speekBy {
+            speek("\(count)")
+            timeToSpeek = 0
+        }
+        timeToSpeek += 1
     }
     
     @objc func resetCount() {
@@ -206,6 +232,8 @@ class SpeedTimerViewController: MenuItemViewController {
     
     @objc func playTapped() {
         resetCount()
+        controllView.eventTime.isEnabled = false
+        controllView.eventType.isEnabled = false
         controllView.resetButton.isHidden = true
         controllView.stopButton.isHidden = false
         controllView.playButton.isHidden = true
@@ -217,36 +245,14 @@ class SpeedTimerViewController: MenuItemViewController {
             timer?.invalidate()
             timer = nil
         }
-        eventTime = 0.0
+        eventTime = 0
         navigationItem.title = "Speed Timer"
         controllView.stopButton.isHidden = true
         controllView.resetButton.isHidden = false
+        controllView.eventTime.isEnabled = true
+        controllView.eventType.isEnabled = true
     }
 }
-
-
-// Extensions TimePicker
-
-extension SpeedTimerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return viewModel.times.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return viewModel.timeFormatted(row)
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        usedTime = viewModel.times[row]!
-        controllView.eventTime.text = viewModel.timeFormatted(row)
-    }
-}
-
 
 // Extension speech
 
