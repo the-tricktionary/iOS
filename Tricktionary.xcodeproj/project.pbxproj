@@ -11,6 +11,13 @@
 		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
 		C15660105FB10D96D7056224 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
 		EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */; };
+		EA073DF621FA792A0046799C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DF521FA792A0046799C /* SettingsViewController.swift */; };
+		EA073DF921FA83660046799C /* PxUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DF821FA83660046799C /* PxUserDefaults.swift */; };
+		EA073DFB21FA83FB0046799C /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DFA21FA83FB0046799C /* SettingsDelegate.swift */; };
+		EA073DFD21FA84080046799C /* SettingsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DFC21FA84080046799C /* SettingsDataSource.swift */; };
+		EA073DFF21FA84170046799C /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DFE21FA84170046799C /* SettingsViewModel.swift */; };
+		EA073E0121FA85570046799C /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073E0021FA85570046799C /* SwitchCell.swift */; };
+		EA073E0321FA8AFD0046799C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073E0221FA8AFD0046799C /* Color.swift */; };
 		EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D421EA78FA0086FC79 /* MenuCell.swift */; };
 		EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */; };
 		EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */; };
@@ -88,6 +95,13 @@
 		B5B3396B1EE7E1116033D700 /* Pods-TricktionaryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tricktionary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimerViewController.swift; sourceTree = "<group>"; };
+		EA073DF521FA792A0046799C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		EA073DF821FA83660046799C /* PxUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PxUserDefaults.swift; sourceTree = "<group>"; };
+		EA073DFA21FA83FB0046799C /* SettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
+		EA073DFC21FA84080046799C /* SettingsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataSource.swift; sourceTree = "<group>"; };
+		EA073DFE21FA84170046799C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		EA073E0021FA85570046799C /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		EA073E0221FA8AFD0046799C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		EA1A48D421EA78FA0086FC79 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDelegate.swift; sourceTree = "<group>"; };
 		EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDataSource.swift; sourceTree = "<group>"; };
@@ -209,6 +223,25 @@
 			path = SpeedTimer;
 			sourceTree = "<group>";
 		};
+		EA073DF421FA79150046799C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EA073DF521FA792A0046799C /* SettingsViewController.swift */,
+				EA073DFA21FA83FB0046799C /* SettingsDelegate.swift */,
+				EA073DFC21FA84080046799C /* SettingsDataSource.swift */,
+				EA073DFE21FA84170046799C /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		EA073DF721FA834B0046799C /* PxUserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				EA073DF821FA83660046799C /* PxUserDefaults.swift */,
+			);
+			path = PxUserDefaults;
+			sourceTree = "<group>";
+		};
 		EA1A48DA21EAB88A0086FC79 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,10 +274,12 @@
 		EA7AAB2C219E1C9B000858EE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EA073DF721FA834B0046799C /* PxUserDefaults */,
 				EAD3D74121F9214700F39A22 /* Sound */,
 				EACF63DF21EE966200D7D836 /* View */,
 				EA1A48DA21EAB88A0086FC79 /* Constants */,
 				EA7AAB2D219E1CA2000858EE /* Cell */,
+				EA073E0221FA8AFD0046799C /* Color.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -260,6 +295,7 @@
 				EAACBCE321D04C3E007AEDFE /* DescriptionCell.swift */,
 				EA1A48D421EA78FA0086FC79 /* MenuCell.swift */,
 				EA2C6B0F21ED38270090579F /* UserCell.swift */,
+				EA073E0021FA85570046799C /* SwitchCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -357,6 +393,7 @@
 		EAC23ABB219D8E490086D9E2 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				EA073DF421FA79150046799C /* Settings */,
 				EA01954721F1239D00A86011 /* SpeedTimer */,
 				EA37A3AF21E696CF0061E44D /* Login */,
 				EA37A3A521E690160061E44D /* Menu */,
@@ -672,7 +709,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/YouTubePlayerSwift/YouTubePlayerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/YoutubePlayerView/YoutubePlayerView.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
@@ -694,7 +731,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YoutubePlayerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
@@ -742,6 +779,7 @@
 				EAE6E1CC21F3DE560033D918 /* Picker.swift in Sources */,
 				EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */,
 				EACF594621E7EAF40037FE2B /* SidePanelViewController.swift in Sources */,
+				EA073E0121FA85570046799C /* SwitchCell.swift in Sources */,
 				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
 				EAACBCE221D04B3B007AEDFE /* InformationCell.swift in Sources */,
 				EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */,
@@ -749,6 +787,7 @@
 				EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */,
 				EAACBCE421D04C3E007AEDFE /* DescriptionCell.swift in Sources */,
 				EAD3D73E21F9180100F39A22 /* EventPicker.swift in Sources */,
+				EA073DFB21FA83FB0046799C /* SettingsDelegate.swift in Sources */,
 				EAD3D74021F9187500F39A22 /* SpeedEvents.swift in Sources */,
 				EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */,
 				EA8C1D5D219CE61D00F4D502 /* ViewController.swift in Sources */,
@@ -756,6 +795,7 @@
 				EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */,
 				EAACBCDC21D02E83007AEDFE /* VideoCell.swift in Sources */,
 				EAE6E1CE21F3E9C50033D918 /* SpeedTimerViewModel.swift in Sources */,
+				EA073DFD21FA84080046799C /* SettingsDataSource.swift in Sources */,
 				EAD3D73C21F916BE00F39A22 /* TimePicker.swift in Sources */,
 				EA2C6B1021ED38270090579F /* UserCell.swift in Sources */,
 				EA7AAB37219E21FE000858EE /* TricksViewModel.swift in Sources */,
@@ -763,18 +803,22 @@
 				EA7AAB31219E2138000858EE /* TricksDataSource.swift in Sources */,
 				EA8C1D5B219CE61D00F4D502 /* AppDelegate.swift in Sources */,
 				EAACBCE021D0365E007AEDFE /* TrickDetailDelegate.swift in Sources */,
+				EA073DF921FA83660046799C /* PxUserDefaults.swift in Sources */,
 				EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */,
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
 				EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */,
 				EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */,
+				EA073DF621FA792A0046799C /* SettingsViewController.swift in Sources */,
 				EAE6E1D121F3F1F20033D918 /* ControllView.swift in Sources */,
 				EAF8CB8F21EFE0CE00684288 /* BaseCell.swift in Sources */,
 				EA7AAB3A219E2257000858EE /* Trick.swift in Sources */,
+				EA073E0321FA8AFD0046799C /* Color.swift in Sources */,
 				EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */,
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,
 				EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */,
 				EA45C47A21F1A7D0009DC1A8 /* SpeedTimes.swift in Sources */,
 				EA85B515219EDFA200F975A2 /* TrickDetailViewModel.swift in Sources */,
+				EA073DFF21FA84170046799C /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

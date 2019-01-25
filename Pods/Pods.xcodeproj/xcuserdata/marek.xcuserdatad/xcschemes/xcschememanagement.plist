@@ -116,7 +116,7 @@
 			<key>orderHint</key>
 			<integer>22</integer>
 		</dict>
-		<key>YouTubePlayerSwift.xcscheme</key>
+		<key>YoutubePlayerView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

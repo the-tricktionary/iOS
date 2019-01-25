@@ -57,7 +57,7 @@ class SidePanelDelegate: NSObject, UITableViewDelegate {
             } else if indexPath.row == 8 {
                 // TODO: Writer
             } else if indexPath.row == 9 {
-                // TODO: Settings
+                viewController.delegate?.didSelectMenuItem(viewController: SettingsViewController())
             } else if indexPath.row == 10 {
                 let auth = Auth.auth()
                 do {
@@ -79,7 +79,7 @@ class SidePanelDelegate: NSObject, UITableViewDelegate {
                 guard let url = URL(string: Constatnts.websiteUrl) else { return }
                 UIApplication.shared.open(url)
             } else if indexPath.row == 5 {
-                // TODO: Settings
+                viewController.delegate?.didSelectMenuItem(viewController: SettingsViewController())
             }
         }
     }

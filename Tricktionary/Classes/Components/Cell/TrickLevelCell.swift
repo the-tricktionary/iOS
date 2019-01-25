@@ -40,7 +40,7 @@ class TrickLevelCell: BaseCell {
     }
     
     fileprivate func setup() {
-        contentView.backgroundColor = UIColor.white
+        contentView.backgroundColor = Color.background
         
         
         view.backgroundColor = UIColor.white

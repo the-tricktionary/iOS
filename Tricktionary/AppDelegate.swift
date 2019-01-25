@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let navigationBar = UINavigationBar.appearance()
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationBar.tintColor = UIColor.white
-        navigationBar.barTintColor = UIColor.red
+        navigationBar.barTintColor = Color.bar
         navigationBar.isTranslucent = false
         
         window = UIWindow(frame: UIScreen.main.bounds)

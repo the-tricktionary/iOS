@@ -44,9 +44,9 @@ class TricksViewController: MenuItemViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Tricks"
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = Color.background
         
-        tableView.backgroundColor = UIColor.white
+        tableView.backgroundColor = Color.background
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         dataSource.viewModel = viewModel
         tableDelegate.viewModel = viewModel

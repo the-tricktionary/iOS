@@ -14,7 +14,7 @@ target 'Tricktionary' do
 	pod 'SnapKit'
 	pod 'ReactiveCocoa'
 	pod 'RxFirestoreExecutor'
-	pod 'YouTubePlayerSwift'
+	pod 'YoutubePlayerView'
 	pod 'KJExpandableTableTree'
 
   target 'TricktionaryTests' do

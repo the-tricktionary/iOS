@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
-import YouTubePlayerSwift
+import YoutubePlayerView
+import AVFoundation
 
 class VideoCell: UITableViewCell {
     
     // MARK: Variables
     
-    let videoView: YouTubePlayerView = YouTubePlayerView()
+    let videoView: YoutubePlayerView = YoutubePlayerView()
+    fileprivate var playerVars: [String: Any]?
     fileprivate let view: UIView = UIView()
     
     
@@ -40,6 +42,16 @@ class VideoCell: UITableViewCell {
     
     fileprivate func setup() {
         contentView.backgroundColor = UIColor.black
+        
+        playerVars = [
+            "controls": 1,
+            "modestbranding": 0,
+            "playsinline": 1,
+            "rel": 1,
+            "showinfo": 1,
+            "autoplay": 0
+        ]
+        
 
         view.backgroundColor = UIColor.black
         selectionStyle = .none
@@ -66,6 +78,7 @@ class VideoCell: UITableViewCell {
     // MARK: Publics
     
     func setVideo(url: String) {
-        videoView.play(videoID: url)
+        videoView.loadWithVideoId(url, with: playerVars)
+        videoView.play()
     }
 }

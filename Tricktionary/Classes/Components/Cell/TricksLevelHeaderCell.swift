@@ -38,9 +38,9 @@ class TrickLevelHeaderCell: BaseCell {
     }
     
     fileprivate func setup() {
-        contentView.backgroundColor = UIColor.white
+        contentView.backgroundColor = Color.background
         layerView = view
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = Color.bar
         
         selectionStyle = .none
         

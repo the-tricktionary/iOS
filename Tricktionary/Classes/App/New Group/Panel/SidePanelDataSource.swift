@@ -45,7 +45,7 @@ class SidePanelDataSource: NSObject, UITableViewDataSource {
                     } else {
                         cell.icon.image = UIImage(named: "signin")
                     }
-                    cell.title.text = user.displayName
+                    cell.title.text = user.displayName ?? user.email
                     return cell
                 }
             } else if indexPath.row == 0 {

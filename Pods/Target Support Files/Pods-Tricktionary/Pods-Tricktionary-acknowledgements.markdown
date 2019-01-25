@@ -920,9 +920,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## YouTubePlayerSwift
+## YoutubePlayerView
 
-Copyright (c) 2018 st.mayr@grizzly.cc <st.mayr@grizzly.cc>
+Copyright (c) 2018 Mukesh Yadav <mails4ymukesh@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
