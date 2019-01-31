@@ -42,16 +42,17 @@ class VideoCell: UITableViewCell {
     
     fileprivate func setup() {
         contentView.backgroundColor = UIColor.black
-        
+        view.backgroundColor = UIColor.black
         playerVars = [
             "controls": 1,
             "modestbranding": 0,
-            "playsinline": 1,
+            "playsinline": UserDefaults.standard.value(forKey: PxSettings.fullscreen) as! Int,
             "rel": 1,
             "showinfo": 1,
-            "autoplay": 0
+            "autoplay": UserDefaults.standard.value(forKey: PxSettings.autoplay) as! Int
         ]
         
+        videoView.backgroundColor = UIColor.black
 
         view.backgroundColor = UIColor.black
         selectionStyle = .none

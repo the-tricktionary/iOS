@@ -8,12 +8,14 @@
 
 import Foundation
 import UIKit
+import ReactiveSwift
 
 class SwitchCell: UITableViewCell {
     
     let title: UILabel = UILabel()
     let switchButton: UISwitch = UISwitch()
     let view: UIView = UIView()
+    let switched: MutableProperty<Bool> = MutableProperty<Bool>(false)
     
     
     // MARK: Life cycle
