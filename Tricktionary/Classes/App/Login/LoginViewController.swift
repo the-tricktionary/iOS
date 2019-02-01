@@ -17,9 +17,7 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
     
     fileprivate let contentView: UIView = UIView()
     fileprivate let loginView: LoginView = LoginView()
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
+    fileprivate let registrationView: RegistrationView = RegistrationView()
     
     // MARK: Life cycles
     
@@ -27,6 +25,7 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
         super.loadView()
         view.addSubview(contentView)
         contentView.addSubview(loginView)
+        contentView.addSubview(registrationView)
     }
     
     override func viewDidLoad() {
@@ -45,6 +44,17 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
         
         loginView.signInButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         
+        loginView.registrationLabel.isUserInteractionEnabled = true
+        let registrationGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showRegistration))
+        loginView.registrationLabel.addGestureRecognizer(registrationGestureRecognizer)
+        
+        registrationView.isHidden = true
+        registrationView.signUpButton.isUserInteractionEnabled = true
+        registrationView.signUpButton.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
+        registrationView.signInLabel.isUserInteractionEnabled = true
+        let loginLabelGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showLogin))
+        registrationView.signInLabel.addGestureRecognizer(loginLabelGestureRecognizer)
+        
         setupViewConstraints()
     }
     
@@ -60,6 +70,13 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
         }
         
         loginView.snp.makeConstraints { (make) in
+            make.top.equalTo(contentView).offset(33)
+            make.leading.equalTo(contentView).offset(25)
+            make.trailing.equalTo(contentView).offset(-25)
+            make.bottom.equalTo(contentView).offset(-24)
+        }
+        
+        registrationView.snp.makeConstraints { (make) in
             make.top.equalTo(contentView).offset(33)
             make.leading.equalTo(contentView).offset(25)
             make.trailing.equalTo(contentView).offset(-25)
@@ -84,7 +101,47 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
                                 return
                             }
                             self.delegate?.toggleMenu()
-                            print("User: \(user?.displayName) is signed in")
         })
+    }
+    
+    @objc func signUpTapped() {
+        if registrationView.passwordTextField.textField.text !=
+            registrationView.repeatPasswordTextField.textField.text {
+            let alert = UIAlertController(title: "Error",
+                                          message: "Passwords are different",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+            return
+        }
+        Auth.auth().createUser(withEmail: registrationView.emailTextField.textField.text!,
+                               password: registrationView.passwordTextField.textField.text!,
+                               completion: { (user, error) in
+                                if let _ = error {
+                                    let alert = UIAlertController(title: "Error",
+                                                                  message: "Signing Up failed",
+                                                                  preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                                    self.present(alert, animated: true)
+                                    return
+                                }
+                                self.delegate?.toggleMenu()
+        })
+    }
+    
+    @objc func showRegistration() {
+        contentView.snp.updateConstraints { (make) in
+            make.height.equalTo(320)
+        }
+        loginView.isHidden = true
+        registrationView.isHidden = false
+    }
+    
+    @objc func showLogin() {
+        contentView.snp.updateConstraints { (make) in
+            make.height.equalTo(350)
+        }
+        loginView.isHidden = false
+        registrationView.isHidden = true
     }
 }

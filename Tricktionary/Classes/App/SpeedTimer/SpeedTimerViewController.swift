@@ -210,6 +210,7 @@ class SpeedTimerViewController: MenuItemViewController {
             eventTime = 0
             timer?.invalidate()
             timer = nil
+            clickButton.isUserInteractionEnabled = false
             timeToSpeek = 0
             navigationItem.title = "Speed Timer"
             controllView.stopButton.isHidden = true
@@ -228,10 +229,12 @@ class SpeedTimerViewController: MenuItemViewController {
         count = 0
         countLabel.text = "\(count)"
         controllView.playButton.isHidden = false
+        clickButton.isUserInteractionEnabled = true
     }
     
     @objc func playTapped() {
         resetCount()
+        clickButton.isUserInteractionEnabled = false
         controllView.eventTime.isEnabled = false
         controllView.eventType.isEnabled = false
         controllView.resetButton.isHidden = true
@@ -260,6 +263,7 @@ extension SpeedTimerViewController: AVSpeechSynthesizerDelegate {
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         if timer == nil && count == 0 {
+            clickButton.isUserInteractionEnabled = true
             setupTimer()
         }
     }
