@@ -31,7 +31,7 @@ class SidePanelDelegate: NSObject, UITableViewDelegate {
         if indexPath.section == 0 {
             if Auth.auth().currentUser == nil {
                 if indexPath.row == 0 {
-                    viewController.delegate?.didSelectMenuItem(viewController: LoginViewController())
+                    viewController.delegate?.didSelectMenuItem(viewController: LoginViewController(viewModel: LoginViewModel()))
                 }
             }
         }

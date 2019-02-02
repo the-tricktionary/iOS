@@ -45,6 +45,7 @@
 		EA8C1D73219CE61D00F4D502 /* TricktionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D72219CE61D00F4D502 /* TricktionaryTests.swift */; };
 		EA8C1D7E219CE61D00F4D502 /* TricktionaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D7D219CE61D00F4D502 /* TricktionaryUITests.swift */; };
 		EA8C1D90219CEA8A00F4D502 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA8C1D8F219CEA8A00F4D502 /* GoogleService-Info.plist */; };
+		EAA4EE4B2205E08F003347D6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA4EE4A2205E08F003347D6 /* LoginViewModel.swift */; };
 		EAACBCDC21D02E83007AEDFE /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACBCDB21D02E83007AEDFE /* VideoCell.swift */; };
 		EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACBCDD21D034FC007AEDFE /* TrickDetailDataSource.swift */; };
 		EAACBCE021D0365E007AEDFE /* TrickDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACBCDF21D0365E007AEDFE /* TrickDetailDelegate.swift */; };
@@ -135,6 +136,7 @@
 		EA8C1D7D219CE61D00F4D502 /* TricktionaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricktionaryUITests.swift; sourceTree = "<group>"; };
 		EA8C1D7F219CE61D00F4D502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA8C1D8F219CEA8A00F4D502 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EAA4EE4A2205E08F003347D6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EAACBCDB21D02E83007AEDFE /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		EAACBCDD21D034FC007AEDFE /* TrickDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickDetailDataSource.swift; sourceTree = "<group>"; };
 		EAACBCDF21D0365E007AEDFE /* TrickDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickDetailDelegate.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			children = (
 				EACF63DA21EE960800D7D836 /* View */,
 				EA37A3B021E696DE0061E44D /* LoginViewController.swift */,
+				EAA4EE4A2205E08F003347D6 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -813,6 +816,7 @@
 				EAF8CB8F21EFE0CE00684288 /* BaseCell.swift in Sources */,
 				EA7AAB3A219E2257000858EE /* Trick.swift in Sources */,
 				EA073E0321FA8AFD0046799C /* Color.swift in Sources */,
+				EAA4EE4B2205E08F003347D6 /* LoginViewModel.swift in Sources */,
 				EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */,
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,
 				EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */,

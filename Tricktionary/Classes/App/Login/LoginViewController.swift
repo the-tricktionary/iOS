@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import GoogleSignIn
 import Firebase
+import ReactiveSwift
+import ReactiveCocoa
 
 class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
     
@@ -18,8 +20,18 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
     fileprivate let contentView: UIView = UIView()
     fileprivate let loginView: LoginView = LoginView()
     fileprivate let registrationView: RegistrationView = RegistrationView()
+    let viewModel: LoginViewModel
     
     // MARK: Life cycles
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -47,6 +59,14 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
         loginView.registrationLabel.isUserInteractionEnabled = true
         let registrationGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showRegistration))
         loginView.registrationLabel.addGestureRecognizer(registrationGestureRecognizer)
+        
+        viewModel.loginEmail <~ loginView.emailTextField.textField.reactive.continuousTextValues
+        viewModel.loginPassword <~ loginView.passwordTextField.textField.reactive.continuousTextValues
+        
+        loginView.emailTextField.textField.reactive.continuousTextValues.observeValues { (value) in
+            self.loginView.emailTextField.warningFormat.isHidden = self.viewModel.isValidEmail(email: value)
+        }
+        
         
         registrationView.isHidden = true
         registrationView.signUpButton.isUserInteractionEnabled = true
@@ -88,19 +108,14 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
     
     // TODO: Alert if login failed, on success redirect
     @objc func loginTapped() {
-        Auth.auth().signIn(withEmail: loginView.emailTextField.textField.text ?? "",
-                           password: loginView.passwordTextField.textField.text ?? "",
-                           completion: { (user, error) in
-                            if let error = error {
-                                print("Error: \(error.localizedDescription)")
-                                let alert = UIAlertController(title: "Error",
-                                                              message: "Signing in failed",
-                                                              preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                                self.present(alert, animated: true)
-                                return
-                            }
-                            self.delegate?.toggleMenu()
+        viewModel.login(failed: { (error) in
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true)
+            return
+        }, completed: {
+            self.delegate?.toggleMenu()
         })
     }
     

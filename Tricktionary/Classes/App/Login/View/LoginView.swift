@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import GoogleSignIn
+import ReactiveSwift
 
 class LoginView: UIView {
     
