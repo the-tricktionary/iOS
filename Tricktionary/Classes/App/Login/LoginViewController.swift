@@ -67,6 +67,30 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
             self.loginView.emailTextField.warningFormat.isHidden = self.viewModel.isValidEmail(email: value)
         }
         
+        loginView.passwordTextField.textField.reactive.continuousTextValues.observeValues { (value) in
+            self.loginView.passwordTextField.warningFormat.isHidden = self.viewModel.isValidPassword(password: value)
+        }
+        
+        loginView.signInButton.reactive.isEnabled <~ viewModel.isLoginEnabled
+        
+        registrationView.emailTextField.textField.reactive.continuousTextValues.observeValues { (value) in
+            self.registrationView.emailTextField.warningFormat.isHidden = self.viewModel.isValidEmail(email: value)
+        }
+        
+        registrationView.passwordTextField.textField.reactive.continuousTextValues.observeValues { (value) in
+            self.registrationView.passwordTextField.warningFormat.isHidden = self.viewModel.isValidPassword(password: value)
+        }
+        
+        registrationView.repeatPasswordTextField.textField.reactive.continuousTextValues.observeValues { (value) in
+            self.registrationView.repeatPasswordTextField.warningFormat.isHidden = self.viewModel.isValidPassword(password: value)
+        }
+        
+        viewModel.registrationEmail <~ registrationView.emailTextField.textField.reactive.continuousTextValues
+        viewModel.registrationPassword <~ registrationView.passwordTextField.textField.reactive.continuousTextValues
+        viewModel.registrationPasswordCheck <~ registrationView.repeatPasswordTextField.textField.reactive.continuousTextValues
+
+        
+        registrationView.signUpButton.reactive.isEnabled <~ viewModel.isRegistrationEnabled
         
         registrationView.isHidden = true
         registrationView.signUpButton.isUserInteractionEnabled = true
@@ -129,19 +153,16 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
             self.present(alert, animated: true)
             return
         }
-        Auth.auth().createUser(withEmail: registrationView.emailTextField.textField.text!,
-                               password: registrationView.passwordTextField.textField.text!,
-                               completion: { (user, error) in
-                                if let _ = error {
-                                    let alert = UIAlertController(title: "Error",
-                                                                  message: "Signing Up failed",
-                                                                  preferredStyle: .alert)
-                                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                                    self.present(alert, animated: true)
-                                    return
-                                }
-                                self.delegate?.toggleMenu()
-        })
+        viewModel.register(failed: { (error) in
+            let alert = UIAlertController(title: "Error",
+                                          message: "Signing up failed",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+            return
+        }) {
+            self.delegate?.toggleMenu()
+        }
     }
     
     @objc func showRegistration() {

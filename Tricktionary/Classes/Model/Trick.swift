@@ -14,6 +14,7 @@ class Trick {
     // MARK: Variables
     
     var name: String
+    var level: Int
     var videos: Video
     var description: String
     var type: String
@@ -25,6 +26,7 @@ class Trick {
     
     init(_ data: [String : Any]) {
         self.data = data
+        level = data["level"] as! Int
         name = data["name"] as! String
         description = data["description"] as! String
         type = data["type"] as! String

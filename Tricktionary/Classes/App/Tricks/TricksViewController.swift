@@ -13,7 +13,7 @@ import FirebaseFirestore
 import ReactiveSwift
 import KJExpandableTableTree
 
-class TricksViewController: MenuItemViewController {
+class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
     
     // MARK: Variables
     
@@ -21,6 +21,8 @@ class TricksViewController: MenuItemViewController {
     fileprivate var viewModel: TricksViewModel
     fileprivate let tableDelegate: TricksDelegate = TricksDelegate()
     fileprivate let dataSource: TricksDataSource = TricksDataSource()
+    fileprivate var searchController: UISearchController!
+    fileprivate let searchResultViewController: SearchResultViewController = SearchResultViewController()
     
     var kjtreeInstance: KJTree = KJTree()
     
@@ -67,6 +69,7 @@ class TricksViewController: MenuItemViewController {
             }
         }
         
+        setupSearchController()
         setupViewConstraints()
     }
     
@@ -82,4 +85,40 @@ class TricksViewController: MenuItemViewController {
         }
     }
     
+    fileprivate func setupSearchController() {
+        searchResultViewController.viewModel = viewModel
+        searchResultViewController.viewController = self
+        searchController = UISearchController(searchResultsController: searchResultViewController)
+        searchController.delegate = self
+        searchController.searchResultsUpdater = searchResultViewController
+        searchController.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+        
+        searchController.loadViewIfNeeded()
+        
+        searchController.searchBar.delegate = searchResultViewController
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.placeholder = "Search trick"
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.barTintColor = navigationController?.navigationBar.barTintColor
+        searchController.searchBar.tintColor = self.view.tintColor
+        navigationItem.searchController = searchController
+    }
+    
+    // MARK: Public
+    
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        viewModel.filteredTricks = viewModel.trickList.value.tricksForFiltering.filter({( trick : Trick) -> Bool in
+            return trick.name.lowercased().contains(searchText.lowercased())
+        })
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
 }

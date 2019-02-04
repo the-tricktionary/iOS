@@ -17,6 +17,7 @@ class TricksViewModel {
     var isLoaded: MutableProperty<Bool> = MutableProperty<Bool>(false)
     
     var trickList: MutableProperty<TrickList> = MutableProperty<TrickList>(TrickList())
+    var filteredTricks: [Trick] = [Trick]()
     
     // MARK: Publics
     

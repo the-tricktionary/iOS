@@ -8,12 +8,13 @@
 
 import Foundation
 
-class TrickList: Codable {
+class TrickList {
     
     // MARK: Variables
     
     var Tree: [String : [String : [Parent]]] = ["Tree" : ["Parents" : []]]
     var parents: [Parent] = []
+    var tricksForFiltering: [Trick] = []
     
     // MARK: Public
     
@@ -24,6 +25,8 @@ class TrickList: Codable {
         if level == nil {
             print(data["name"])
         }
+        let trick: Trick = Trick(data)
+        tricksForFiltering.append(trick)
         addParent(id: level ?? 0)
         
         parents.forEach { (parent) in
