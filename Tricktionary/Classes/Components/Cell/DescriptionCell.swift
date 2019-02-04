@@ -35,10 +35,10 @@ class DescriptionCell: UITableViewCell {
     }
     
     fileprivate func setup() {
-        contentView.backgroundColor = UIColor.white
+        contentView.backgroundColor = Color.background
         
-        descriptionText.font = UIFont.systemFont(ofSize: 18)
-        descriptionText.textColor = UIColor.gray
+        descriptionText.font = UIFont.systemFont(ofSize: 16)
+        descriptionText.textColor = UIColor.black
         descriptionText.numberOfLines = 0
         
         selectionStyle = .none

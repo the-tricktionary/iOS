@@ -17,12 +17,25 @@ class SettingsDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 3
-        } else if section == 1 {
+        switch section {
+        case 0:
             return 2
+        case 1:
+            return 1
+        default:
+            return 0
         }
-        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Video settings"
+        case 1:
+            return "Tricktionary settings"
+        default:
+            return ""
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -30,43 +43,28 @@ class SettingsDataSource: NSObject, UITableViewDataSource {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                let cell = UITableViewCell()
-                cell.textLabel?.text = "Video settings"
-                cell.backgroundColor = Color.backgroundHeader
-                return cell
-            case 1:
                 let cell = SwitchCell()
-                cell.title.text = "Automatic full screen"
+                cell.textLabel?.text = "Automatic full screen"
                 cell.switchButton.setOn(!(UserDefaults.standard.value(forKey: PxSettings.fullscreen) as! Bool), animated: true)
                 cell.switchButton.addTarget(self, action: #selector(fullScreen), for: .touchUpInside)
                 return cell
-            case 2:
+            case 1:
                 let cell = SwitchCell()
-                cell.title.text = "Auto-Play Videos"
+                cell.textLabel?.text = "Auto-Play videos"
                 cell.switchButton.setOn(UserDefaults.standard.value(forKey: PxSettings.autoplay) as! Bool, animated: true)
                 cell.switchButton.addTarget(self, action: #selector(autoPlay), for: .touchUpInside)
                 return cell
             default:
                 return UITableViewCell()
             }
-        } else if indexPath.section == 1 {
-            switch indexPath.row {
-            case 0:
-                let cell = UITableViewCell()
-                cell.textLabel?.text = "Tricktionary settings"
-                cell.backgroundColor = Color.backgroundHeader
-                return cell
-            case 1:
-                let cell = SwitchCell()
-                cell.title.text = "Open prerequisites in new screen"
-                cell.switchButton.setOn(UserDefaults.standard.value(forKey: PxSettings.newScreen) as! Bool, animated: true)
-                cell.switchButton.addTarget(self, action: #selector(newScreen), for: .touchUpInside)
-                return cell
-            default:
-                return UITableViewCell()
-            }
+        } else {
+            let cell = SwitchCell()
+            cell.textLabel?.text = "Open prerequisites in new screen"
+            cell.switchButton.setOn(UserDefaults.standard.value(forKey: PxSettings.newScreen) as! Bool, animated: true)
+            cell.switchButton.addTarget(self, action: #selector(newScreen), for: .touchUpInside)
+            return cell
+            
         }
-        return UITableViewCell()
     }
     
     // MARK: User action

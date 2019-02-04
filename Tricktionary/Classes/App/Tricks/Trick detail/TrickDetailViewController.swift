@@ -41,14 +41,16 @@ class TrickDetailViewController: UIViewController {
         
         title = viewModel.trickName
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = Color.background
         
         dataSource.viewModel = viewModel
         delegate.viewController = self
         delegate.viewModel = viewModel
         
-        tableView.backgroundColor = UIColor.white
-        tableView.separatorStyle = .none
+        tableView.tableHeaderView = UIView()
+        tableView.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: 1)))
+        tableView.sectionHeaderHeight = 35
+        tableView.backgroundColor = Color.background
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 250
         tableView.dataSource = dataSource

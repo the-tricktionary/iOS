@@ -14,10 +14,18 @@ class TrickDetailDelegate: NSObject, UITableViewDelegate {
     var viewController: TrickDetailViewController!
     var viewModel: TrickDetailViewModel!
  
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 2 || indexPath.section == 3 {
+            return 67
+        }
+        return UITableView.automaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let trick = viewModel.trick {
             if trick.prerequisites.count > 0 {
-                if indexPath.row > 4 {
+                if indexPath.section == 3 {
                     let cell = tableView.cellForRow(at: indexPath) as! InformationCell
                     let newScreen = UserDefaults.standard.value(forKey: PxSettings.newScreen) as? Bool ?? false
                     if newScreen {

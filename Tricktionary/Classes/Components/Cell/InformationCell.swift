@@ -43,11 +43,11 @@ class InformationCell: UITableViewCell {
         contentView.backgroundColor = UIColor.gray
         view.backgroundColor = UIColor.white
         
-        title.font = UIFont.systemFont(ofSize: 18)
-        title.textColor = UIColor.gray
+        title.font = UIFont.systemFont(ofSize: 16)
+        title.textColor = UIColor.black
         
-        info.font = UIFont.systemFont(ofSize: 18)
-        info.textColor = UIColor.gray
+        info.font = UIFont.systemFont(ofSize: 16)
+        info.textColor = UIColor.black
         
         selectionStyle = .none
     }
@@ -58,11 +58,11 @@ class InformationCell: UITableViewCell {
             make.top.equalTo(contentView)
             make.leading.equalTo(contentView)
             make.trailing.equalTo(contentView)
-            make.bottom.equalTo(contentView).inset(0.5)
+            make.bottom.equalTo(contentView)
         }
         
         title.snp.makeConstraints { (make) in
-            make.left.equalTo(view).inset(10)
+            make.left.equalTo(view).inset(16)
             make.top.equalTo(view).inset(5)
             make.bottom.equalTo(view).inset(5)
             make.right.equalTo(info.snp.left)

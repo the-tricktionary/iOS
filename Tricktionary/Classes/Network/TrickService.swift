@@ -16,7 +16,7 @@ class TrickService {
 
     func getTricksByLevel(completion: @escaping ([String : Any]) -> Void, finish: @escaping () -> Void) {
         let firestore = Firestore.firestore()
-        let documentReference = firestore.collection("tricksSR") //.whereField("level", isEqualTo: level)
+        let documentReference = firestore.collection("tricksSR")
         documentReference.getDocuments { (snapshot, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Some error")

@@ -28,12 +28,21 @@ class SettingsViewController: MenuItemViewController {
         super.viewDidLoad()
         
         view.backgroundColor = Color.background
-        tableView.backgroundColor = Color.background
         
         navigationItem.title = "Settings"
         
         tableView.allowsSelection = false
-        tableView.separatorStyle = .none
+        tableView.alwaysBounceVertical = false
+        tableView.backgroundColor = .clear
+        tableView.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: 1)))
+        tableView.tableHeaderView = UIView()
+        
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableView.automaticDimension
+    
+        tableView.sectionHeaderHeight = 35
+        tableView.sectionFooterHeight = 35
+        
         tableView.delegate = tableDelegate
         tableView.dataSource = dataSource
         

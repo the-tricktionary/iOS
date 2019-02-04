@@ -44,7 +44,6 @@ class SwitchCell: UITableViewCell {
         view.backgroundColor = UIColor.white
         
         title.textColor = UIColor.gray
-        
         selectionStyle = .none
     }
     
@@ -54,7 +53,7 @@ class SwitchCell: UITableViewCell {
             make.top.equalTo(contentView)
             make.leading.equalTo(contentView)
             make.trailing.equalTo(contentView)
-            make.bottom.equalTo(contentView).inset(0.5)
+            make.bottom.equalTo(contentView)
         }
         
         title.snp.makeConstraints { (make) in
