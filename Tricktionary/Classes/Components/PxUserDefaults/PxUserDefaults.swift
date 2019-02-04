@@ -11,4 +11,6 @@ import Foundation
 struct PxSettings {
     static let fullscreen: String = "playsinline"
     static let autoplay: String = "autoplay"
+    
+    static let newScreen: String = "newScreen"
 }

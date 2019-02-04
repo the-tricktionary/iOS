@@ -19,9 +19,15 @@ class TrickDetailDelegate: NSObject, UITableViewDelegate {
             if trick.prerequisites.count > 0 {
                 if indexPath.row > 4 {
                     let cell = tableView.cellForRow(at: indexPath) as! InformationCell
-                    viewModel.trickName = cell.title.text!
-                    viewModel.getTrick()
-                    viewController.title = cell.title.text!
+                    let newScreen = UserDefaults.standard.value(forKey: PxSettings.newScreen) as? Bool ?? false
+                    if newScreen {
+                        let nextDetailViewController = TrickDetailViewController(viewModel: TrickDetailViewModel(trick: cell.title.text!))
+                        viewController.navigationController?.pushViewController(nextDetailViewController, animated: true)
+                    } else {
+                        viewModel.trickName = cell.title.text!
+                        viewModel.getTrick()
+                        viewController.title = cell.title.text!
+                    }
                 }
             }
         }

@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         FirebaseApp.configure()
         UserDefaults.standard.register(defaults: [PxSettings.fullscreen : true])
         UserDefaults.standard.register(defaults: [PxSettings.autoplay : false])
+        UserDefaults.standard.register(defaults: [PxSettings.newScreen : false])
         
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
