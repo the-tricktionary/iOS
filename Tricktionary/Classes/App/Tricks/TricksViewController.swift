@@ -48,6 +48,14 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
         navigationItem.title = "Tricks"
         view.backgroundColor = Color.background
         
+        let randomButton = UIBarButtonItem(image: UIImage(named: "random"),
+                                           landscapeImagePhone: nil,
+                                           style: .done,
+                                           target: self,
+                                           action: #selector(randomTapped))
+        
+        navigationItem.rightBarButtonItem = randomButton
+        
         tableView.backgroundColor = Color.background
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         dataSource.viewModel = viewModel
@@ -120,5 +128,15 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
+    }
+    
+    // MARK: User action
+    
+    @objc func randomTapped() {
+        let randomTrick = viewModel.trickList.value.tricksForFiltering.randomElement()
+        if let trick = randomTrick {
+            let trickDetailViewModel = TrickDetailViewModel(trick: trick.name)
+            navigationController?.pushViewController(TrickDetailViewController(viewModel: trickDetailViewModel), animated: true)
+        }
     }
 }
