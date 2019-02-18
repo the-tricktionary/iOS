@@ -9,12 +9,8 @@
 import Foundation
 import UIKit
 
-class TrickDetailDelegate: NSObject, UITableViewDelegate {
-    
-    var viewController: TrickDetailViewController!
-    var viewModel: TrickDetailViewModel!
+extension TrickDetailViewController: UITableViewDelegate {
  
-    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 2 || indexPath.section == 3 {
             return 67
@@ -30,11 +26,11 @@ class TrickDetailDelegate: NSObject, UITableViewDelegate {
                     let newScreen = UserDefaults.standard.value(forKey: PxSettings.newScreen) as? Bool ?? false
                     if newScreen {
                         let nextDetailViewController = TrickDetailViewController(viewModel: TrickDetailViewModel(trick: cell.title.text!))
-                        viewController.navigationController?.pushViewController(nextDetailViewController, animated: true)
+                        navigationController?.pushViewController(nextDetailViewController, animated: true)
                     } else {
                         viewModel.trickName = cell.title.text!
                         viewModel.getTrick()
-                        viewController.title = cell.title.text!
+                        title = cell.title.text!
                     }
                 }
             }

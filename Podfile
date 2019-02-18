@@ -13,6 +13,7 @@ target 'Tricktionary' do
 	pod 'GoogleSignIn'
 	pod 'SnapKit'
 	pod 'ReactiveCocoa'
+	pod 'RxSwift'
 	pod 'RxFirestoreExecutor'
 	pod 'YoutubePlayerView'
 	pod 'KJExpandableTableTree'

@@ -104,6 +104,7 @@ DEPENDENCIES:
   - KJExpandableTableTree
   - ReactiveCocoa
   - RxFirestoreExecutor
+  - RxSwift
   - SnapKit
   - YoutubePlayerView
 
@@ -166,6 +167,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   YoutubePlayerView: 510480ccdf03f2ffc888ee0b2bf2d1d8f8d9289f
 
-PODFILE CHECKSUM: 7b25c2a8817d8bfbe0a75c9b1172d2eaf62ca4d4
+PODFILE CHECKSUM: 5859cdd5bf77bfd886cca2b95e39d5e85c3b38d1
 
 COCOAPODS: 1.5.3

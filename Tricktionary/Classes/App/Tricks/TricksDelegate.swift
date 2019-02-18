@@ -9,10 +9,7 @@
 import Foundation
 import UIKit
 
-class TricksDelegate: NSObject, UITableViewDelegate {
-    
-    var viewModel: TricksViewModel!
-    var viewController: TricksViewController!
+extension TricksViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
@@ -20,13 +17,13 @@ class TricksDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let node = viewController.kjtreeInstance.tableView(tableView, didSelectRowAt: indexPath)
+        let node = kjtreeInstance.tableView(tableView, didSelectRowAt: indexPath)
         let indexTuples = node.index.components(separatedBy: ".")
         
         if indexTuples.count == 3 {
             let trickDetailViewModel = TrickDetailViewModel(trick: node.key)
             let trickDetalViewController = TrickDetailViewController(viewModel: trickDetailViewModel)
-            viewController.navigationController?.pushViewController(trickDetalViewController, animated: true)
+            navigationController?.pushViewController(trickDetalViewController, animated: true)
         }
     }
 }

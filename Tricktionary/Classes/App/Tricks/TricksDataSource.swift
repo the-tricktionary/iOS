@@ -9,19 +9,16 @@
 import Foundation
 import UIKit
 
-class TricksDataSource: NSObject, UITableViewDataSource {
-    
-    var viewModel: TricksViewModel!
-    var viewController: TricksViewController!
+extension TricksViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let total = viewController.kjtreeInstance.tableView(tableView, numberOfRowsInSection: section)
+        let total = kjtreeInstance.tableView(tableView, numberOfRowsInSection: section)
         return total
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let node = viewController.kjtreeInstance.cellIdentifierUsingTableView(tableView, cellForRowAt: indexPath)
+        let node = kjtreeInstance.cellIdentifierUsingTableView(tableView, cellForRowAt: indexPath)
         let indexTuples = node.index.components(separatedBy: ".")
         
         

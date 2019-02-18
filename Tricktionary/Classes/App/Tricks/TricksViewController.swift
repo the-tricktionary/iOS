@@ -19,8 +19,6 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
     
     let tableView: UITableView = UITableView()
     fileprivate var viewModel: TricksViewModel
-    fileprivate let tableDelegate: TricksDelegate = TricksDelegate()
-    fileprivate let dataSource: TricksDataSource = TricksDataSource()
     fileprivate var searchController: UISearchController!
     fileprivate let searchResultViewController: SearchResultViewController = SearchResultViewController()
     
@@ -56,14 +54,10 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
         
         navigationItem.rightBarButtonItem = randomButton
         
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.backgroundColor = Color.background
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
-        dataSource.viewModel = viewModel
-        tableDelegate.viewModel = viewModel
-        dataSource.viewController = self
-        tableDelegate.viewController = self
-        tableView.delegate = tableDelegate
-        tableView.dataSource = dataSource
         tableView.separatorStyle = .none
         tableView.register(TrickLevelCell.self, forCellReuseIdentifier: "TrickLevel")
         
@@ -108,8 +102,11 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "Search trick"
         searchController.searchBar.sizeToFit()
-        searchController.searchBar.barTintColor = navigationController?.navigationBar.barTintColor
-        searchController.searchBar.tintColor = self.view.tintColor
+        searchController.searchBar.tintColor = .white
+        for textField in searchController.searchBar.subviews.first!.subviews where textField is UITextField {
+            textField.subviews.first?.backgroundColor = .white
+            textField.subviews.first?.layer.cornerRadius = 10.5
+        }
         navigationItem.searchController = searchController
     }
     

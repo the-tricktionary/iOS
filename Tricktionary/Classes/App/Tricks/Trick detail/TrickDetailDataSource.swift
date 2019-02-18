@@ -9,11 +9,7 @@
 import Foundation
 import UIKit
 
-class TrickDetailDataSource: NSObject, UITableViewDataSource {
-    
-    // MARK: Variables
-    
-    var viewModel: TrickDetailViewModel!
+extension TrickDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if let _ = viewModel.trick {
@@ -91,38 +87,6 @@ class TrickDetailDataSource: NSObject, UITableViewDataSource {
                 }
             }
         }
-        
-//        if indexPath.row == 0 {
-//            let descriptionCell = DescriptionCell()
-//            descriptionCell.descriptionText.text = viewModel.trick!.description
-//            return descriptionCell
-//        } else if indexPath.row == 1 {
-//            let videoCell = VideoCell()
-//            videoCell.setVideo(url: viewModel.trick!.videos.youtube)
-//            return videoCell
-//        } else if indexPath.row == 2 {
-//            let infoCell = InformationCell()
-//            infoCell.title.text = "Level WJR:"
-//            infoCell.info.text = viewModel.trick!.levels.wjr.level
-//            return infoCell
-//        } else if indexPath.row == 3 {
-//            let infoCell = InformationCell()
-//            infoCell.title.text = "Level FISAC-IJRF:"
-//            infoCell.info.text = viewModel.trick!.levels.irsf.level
-//            return infoCell
-//        }
-//        if viewModel.trick!.prerequisites.count > 0 {
-//            if indexPath.row == 4 {
-//                let cell = UITableViewCell()
-//                cell.textLabel?.text = "Prerequisites"
-//                return cell
-//            }
-//            let infoCell = InformationCell()
-//            let prerequsite = viewModel.trick!.prerequisites[indexPath.row - 5]
-//            infoCell.title.text = prerequsite
-//            return infoCell
-//        }
-//
         return UITableViewCell()
     }
 }
