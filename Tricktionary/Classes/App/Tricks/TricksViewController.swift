@@ -74,7 +74,7 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
         setupSearchController()
         setupViewConstraints()
     }
-    
+
     // MARK: Privates
     
     fileprivate func setupViewConstraints() {

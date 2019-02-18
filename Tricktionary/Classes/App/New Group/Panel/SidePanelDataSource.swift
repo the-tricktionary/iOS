@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
-class SidePanelDataSource: NSObject, UITableViewDataSource {
+extension SidePanelViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2

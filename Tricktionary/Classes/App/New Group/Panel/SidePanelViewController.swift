@@ -20,8 +20,6 @@ class SidePanelViewController: UIViewController {
     // MARK: Variables
     
     var tableView: UITableView = UITableView()
-    var dataSource: SidePanelDataSource = SidePanelDataSource()
-    var tableDelegate: SidePanelDelegate = SidePanelDelegate()
     
     var delegate: SidePanelViewControllerDelegate?
     
@@ -37,13 +35,11 @@ class SidePanelViewController: UIViewController {
         
         view.backgroundColor = UIColor.red
         
-        tableDelegate.viewController = self
-        
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.red
-        tableView.dataSource = dataSource
-        tableView.delegate = tableDelegate
+        tableView.dataSource = self
+        tableView.delegate = self
         
         setupViewConstraints()
     }

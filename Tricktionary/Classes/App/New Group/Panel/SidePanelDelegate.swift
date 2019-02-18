@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class SidePanelDelegate: NSObject, UITableViewDelegate {
-    
-    var viewController: SidePanelViewController!
+extension SidePanelViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
@@ -31,7 +29,7 @@ class SidePanelDelegate: NSObject, UITableViewDelegate {
         if indexPath.section == 0 {
             if Auth.auth().currentUser == nil {
                 if indexPath.row == 0 {
-                    viewController.delegate?.didSelectMenuItem(viewController: LoginViewController(viewModel: LoginViewModel()))
+                    delegate?.didSelectMenuItem(viewController: LoginViewController(viewModel: LoginViewModel()))
                 }
             }
         }
@@ -40,15 +38,15 @@ class SidePanelDelegate: NSObject, UITableViewDelegate {
             // Loged in
             
             if indexPath.row == 1 {
-                viewController.delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
+                delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
             } else if indexPath.row == 2 {
-                viewController.delegate?.didSelectMenuItem(viewController: SpeedTimerViewController(viewModel: SpeedTimerViewModel()))
+                delegate?.didSelectMenuItem(viewController: SpeedTimerViewController(viewModel: SpeedTimerViewModel()))
             } else if indexPath.row == 3 {
                 // TODO: Speed data
             } else if indexPath.row == 4 {
                 // TODO: Submit
             } else if indexPath.row == 5 {
-                viewController.openInstagram()
+                openInstagram()
             } else if indexPath.row == 6 {
                 guard let url = URL(string: Constatnts.websiteUrl) else { return }
                 UIApplication.shared.open(url)
@@ -57,7 +55,7 @@ class SidePanelDelegate: NSObject, UITableViewDelegate {
             } else if indexPath.row == 8 {
                 // TODO: Writer
             } else if indexPath.row == 9 {
-                viewController.delegate?.didSelectMenuItem(viewController: SettingsViewController())
+                delegate?.didSelectMenuItem(viewController: SettingsViewController())
             } else if indexPath.row == 10 {
                 let auth = Auth.auth()
                 do {
@@ -65,21 +63,21 @@ class SidePanelDelegate: NSObject, UITableViewDelegate {
                 } catch {
                     print("Error: \(error.localizedDescription)") // TODO: Alert
                 }
-                viewController.delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
+                delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
             }
             
         } else {
             if indexPath.row == 1 {
-                viewController.delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
+                delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
             } else if indexPath.row == 2 {
-                viewController.delegate?.didSelectMenuItem(viewController: SpeedTimerViewController(viewModel: SpeedTimerViewModel()))
+                delegate?.didSelectMenuItem(viewController: SpeedTimerViewController(viewModel: SpeedTimerViewModel()))
             } else if indexPath.row == 3 {
-                viewController.openInstagram()
+                openInstagram()
             } else if indexPath.row == 4 {
                 guard let url = URL(string: Constatnts.websiteUrl) else { return }
                 UIApplication.shared.open(url)
             } else if indexPath.row == 5 {
-                viewController.delegate?.didSelectMenuItem(viewController: SettingsViewController())
+                delegate?.didSelectMenuItem(viewController: SettingsViewController())
             }
         }
     }

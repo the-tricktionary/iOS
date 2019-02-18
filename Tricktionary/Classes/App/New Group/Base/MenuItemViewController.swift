@@ -31,6 +31,15 @@ class MenuItemViewController: UIViewController {
                                          style: .plain,
                                          target: self, action: #selector(menuTapped))
         navigationItem.leftBarButtonItem = menuButton
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(menuTapped))
+        swipeRight.direction = .right
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(menuClose))
+        swipeLeft.direction = .left
+        
+        view.addGestureRecognizer(swipeRight)
+        view.addGestureRecognizer(swipeLeft)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -41,5 +50,9 @@ class MenuItemViewController: UIViewController {
     
     @objc func menuTapped() {
         delegate?.toggleMenu()
+    }
+    
+    @objc func menuClose() {
+        delegate?.closeMenu()
     }
 }
