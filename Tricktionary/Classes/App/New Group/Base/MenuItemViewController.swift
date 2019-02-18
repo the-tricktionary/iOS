@@ -40,6 +40,21 @@ class MenuItemViewController: UIViewController {
         
         view.addGestureRecognizer(swipeRight)
         view.addGestureRecognizer(swipeLeft)
+        
+        becomeFirstResponder()
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        get {
+            return true
+        }
+    }
+
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            delegate?.toggleMenu()
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
