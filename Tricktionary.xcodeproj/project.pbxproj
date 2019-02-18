@@ -13,9 +13,7 @@
 		EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */; };
 		EA073DF621FA792A0046799C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DF521FA792A0046799C /* SettingsViewController.swift */; };
 		EA073DF921FA83660046799C /* PxUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DF821FA83660046799C /* PxUserDefaults.swift */; };
-		EA073DFB21FA83FB0046799C /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DFA21FA83FB0046799C /* SettingsDelegate.swift */; };
 		EA073DFD21FA84080046799C /* SettingsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DFC21FA84080046799C /* SettingsDataSource.swift */; };
-		EA073DFF21FA84170046799C /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DFE21FA84170046799C /* SettingsViewModel.swift */; };
 		EA073E0121FA85570046799C /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073E0021FA85570046799C /* SwitchCell.swift */; };
 		EA073E0321FA8AFD0046799C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073E0221FA8AFD0046799C /* Color.swift */; };
 		EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D421EA78FA0086FC79 /* MenuCell.swift */; };
@@ -99,9 +97,7 @@
 		EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimerViewController.swift; sourceTree = "<group>"; };
 		EA073DF521FA792A0046799C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EA073DF821FA83660046799C /* PxUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PxUserDefaults.swift; sourceTree = "<group>"; };
-		EA073DFA21FA83FB0046799C /* SettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
 		EA073DFC21FA84080046799C /* SettingsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataSource.swift; sourceTree = "<group>"; };
-		EA073DFE21FA84170046799C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		EA073E0021FA85570046799C /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		EA073E0221FA8AFD0046799C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		EA1A48D421EA78FA0086FC79 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
@@ -231,9 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				EA073DF521FA792A0046799C /* SettingsViewController.swift */,
-				EA073DFA21FA83FB0046799C /* SettingsDelegate.swift */,
 				EA073DFC21FA84080046799C /* SettingsDataSource.swift */,
-				EA073DFE21FA84170046799C /* SettingsViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -793,7 +787,6 @@
 				EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */,
 				EAACBCE421D04C3E007AEDFE /* DescriptionCell.swift in Sources */,
 				EAD3D73E21F9180100F39A22 /* EventPicker.swift in Sources */,
-				EA073DFB21FA83FB0046799C /* SettingsDelegate.swift in Sources */,
 				EAD3D74021F9187500F39A22 /* SpeedEvents.swift in Sources */,
 				EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */,
 				EA8C1D5D219CE61D00F4D502 /* ViewController.swift in Sources */,
@@ -826,7 +819,6 @@
 				EA45C47A21F1A7D0009DC1A8 /* SpeedTimes.swift in Sources */,
 				EA85B515219EDFA200F975A2 /* TrickDetailViewModel.swift in Sources */,
 				EAA4EE4D2207AD08003347D6 /* SearchResultViewController.swift in Sources */,
-				EA073DFF21FA84170046799C /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,8 +14,6 @@ class SettingsViewController: MenuItemViewController {
     // MARK: Variables
     
     var tableView: UITableView = UITableView()
-    let tableDelegate: SettingsDelegate = SettingsDelegate()
-    let dataSource: SettingsDataSource = SettingsDataSource()
     
     // MARK: Life cycles
     
@@ -39,8 +37,7 @@ class SettingsViewController: MenuItemViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         
-        tableView.delegate = tableDelegate
-        tableView.dataSource = dataSource
+        tableView.dataSource = self
         
         setupViewConstraints()
     }

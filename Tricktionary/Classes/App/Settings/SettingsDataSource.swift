@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import ReactiveSwift
 
-class SettingsDataSource: NSObject, UITableViewDataSource {
+extension SettingsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
