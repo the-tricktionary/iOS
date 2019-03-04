@@ -42,7 +42,7 @@ extension SidePanelViewController: UITableViewDelegate {
             } else if indexPath.row == 2 {
                 delegate?.didSelectMenuItem(viewController: SpeedTimerViewController(viewModel: SpeedTimerViewModel()))
             } else if indexPath.row == 3 {
-                // TODO: Speed data
+                delegate?.didSelectMenuItem(viewController: SpeedDataViewController(viewModel: SpeedDataViewModel()))
             } else if indexPath.row == 4 {
                 // TODO: Submit
             } else if indexPath.row == 5 {

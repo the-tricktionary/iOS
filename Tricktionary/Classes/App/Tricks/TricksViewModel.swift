@@ -14,18 +14,19 @@ class TricksViewModel {
     
     // MARK: Variables
     
-    var isLoaded: MutableProperty<Bool> = MutableProperty<Bool>(false)
-    
     var trickList: MutableProperty<TrickList> = MutableProperty<TrickList>(TrickList())
     var filteredTricks: [Trick] = [Trick]()
     
     // MARK: Publics
     
-    func getTricks() {
-        TrickService().getTricksByLevel(completion: { (data) in
+    func getTricks(starting: @escaping () -> (), finish: @escaping () -> ()) {
+        
+        TrickManager.shared.getTricks(starting: {
+            starting()
+        }, completion: { (data) in
             self.trickList.value.addTrick(data: data)
         }) {
-            self.isLoaded.value = true
+            finish()
         }
     }
     

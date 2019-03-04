@@ -16,13 +16,17 @@ protocol MenuItemDelegate {
     func animateMenu(shouldExpand: Bool)
 }
 
-class MenuItemViewController: UIViewController {
+class MenuItemViewController: BaseViewController {
     
     // MARK: Variables
     
     var delegate: MenuItemDelegate?
     
     // MARK: Life cycles
+    
+    override func loadView() {
+        super.loadView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +46,7 @@ class MenuItemViewController: UIViewController {
         view.addGestureRecognizer(swipeLeft)
         
         becomeFirstResponder()
+        
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -50,7 +55,6 @@ class MenuItemViewController: UIViewController {
         }
     }
 
-    
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             delegate?.toggleMenu()

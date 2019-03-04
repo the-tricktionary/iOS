@@ -28,7 +28,6 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
     
     init(viewModel: TricksViewModel) {
         self.viewModel = viewModel
-        self.viewModel.getTricks()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -61,20 +60,21 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
         tableView.separatorStyle = .none
         tableView.register(TrickLevelCell.self, forCellReuseIdentifier: "TrickLevel")
         
-        viewModel.isLoaded.producer.startWithValues { (value) in
-            if value {
-                if let arrayOfParents = self.viewModel.getArrayOfParrents() {
-                    self.kjtreeInstance = KJTree(parents: arrayOfParents, childrenKey: "child", expandableKey: "Expanded", key: "Id")
-                }
-                self.kjtreeInstance.isInitiallyExpanded = false
-                self.tableView.reloadData()
+        self.viewModel.getTricks(starting: {
+            self.activityIndicatorView.startAnimating()
+        }) {
+            self.activityIndicatorView.stopAnimating()
+            if let arrayOfParents = self.viewModel.getArrayOfParrents() {
+                self.kjtreeInstance = KJTree(parents: arrayOfParents, childrenKey: "child", expandableKey: "Expanded", key: "Id")
             }
+            self.kjtreeInstance.isInitiallyExpanded = false
+            self.tableView.reloadData()
         }
         
         setupSearchController()
         setupViewConstraints()
     }
-
+    
     // MARK: Privates
     
     fileprivate func setupViewConstraints() {
@@ -105,7 +105,7 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
         searchController.searchBar.tintColor = .white
         for textField in searchController.searchBar.subviews.first!.subviews where textField is UITextField {
             textField.subviews.first?.backgroundColor = .white
-            textField.subviews.first?.layer.cornerRadius = 10.5
+            textField.subviews.first?.layer.cornerRadius = 10
         }
         navigationItem.searchController = searchController
     }

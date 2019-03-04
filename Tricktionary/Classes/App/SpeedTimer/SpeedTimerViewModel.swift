@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import FirebaseAuth
 
 class SpeedTimerViewModel {
     
@@ -17,12 +18,16 @@ class SpeedTimerViewModel {
     fileprivate let speedEvents: SpeedEvents = SpeedEvents()
     var times: [Int : Int]
     var events: [Int : String]
+    var speed: Speed = Speed(data: [String: Any]())
     
     // MARK: Life cycles
     
     init() {
         self.times = speedTimes.data
         self.events = speedEvents.data
+        if let user = Auth.auth().currentUser {
+            speed.uid = user.uid
+        }
     }
     
     // MARK: Public

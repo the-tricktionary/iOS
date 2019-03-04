@@ -9,21 +9,18 @@
 import Foundation
 import UIKit
 
-class TrickDetailViewController: UIViewController {
+class TrickDetailViewController: BaseViewController {
     
     // MARK: Variables
     
     let tableView: UITableView = UITableView()
     
     var viewModel: TrickDetailViewModel
-//    var dataSource: TrickDetailDataSource = TrickDetailDataSource()
-//    var delegate: TrickDetailDelegate = TrickDetailDelegate()
     
     // MARK: Life cycles
     
     init(viewModel: TrickDetailViewModel) {
         self.viewModel = viewModel
-        self.viewModel.getTrick()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -52,19 +49,16 @@ class TrickDetailViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        viewModel.loaded.producer.startWithValues { (value) in
-            if value {
-                self.tableView.reloadData()
-            }
-        }
-        
-        viewModel.loadedPrerequisites.producer.startWithValues { (value) in
-            if value {
-                self.tableView.reloadData()
-            }
-        }
-        
         setupViewConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.viewModel.getTrick(starting: {
+            self.activityIndicatorView.startAnimating()
+        }) {
+            self.activityIndicatorView.stopAnimating()
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: Private

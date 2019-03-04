@@ -29,7 +29,13 @@ extension TrickDetailViewController: UITableViewDelegate {
                         navigationController?.pushViewController(nextDetailViewController, animated: true)
                     } else {
                         viewModel.trickName = cell.title.text!
-                        viewModel.getTrick()
+                        // TODO: Activiti indicator
+                        viewModel.getTrick(starting: {
+                            print("Loading ...")
+                        }) {
+                            self.tableView.reloadData()
+                            print("Loaded")
+                        }
                         title = cell.title.text!
                     }
                 }

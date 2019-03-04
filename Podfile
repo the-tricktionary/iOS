@@ -17,6 +17,7 @@ target 'Tricktionary' do
 	pod 'RxFirestoreExecutor'
 	pod 'YoutubePlayerView'
 	pod 'KJExpandableTableTree'
+	pod 'SwiftChart'
 
   target 'TricktionaryTests' do
     inherit! :search_paths

@@ -29,6 +29,8 @@ class SpeedTimerViewController: MenuItemViewController {
     fileprivate var eventTime: Int = 0
     fileprivate var count: Int = 0
     
+    var jumpsPerSecond: Int = 0
+    
     fileprivate var timePickerDelegate: TimePicker = TimePicker()
     fileprivate var eventPickerDelegate: EventPicker = EventPicker()
     
@@ -192,6 +194,7 @@ class SpeedTimerViewController: MenuItemViewController {
         impact.impactOccurred()
         count += 1
         countLabel.text = "\(count)"
+        jumpsPerSecond += 1
         
     }
     
@@ -206,6 +209,8 @@ class SpeedTimerViewController: MenuItemViewController {
     @objc func tick() {
         eventTime += 1
         title = "\(timeFormatted(Int(eventTime)))"
+        viewModel.speed.graphData.append(Double(jumpsPerSecond))
+        jumpsPerSecond = 0
         if eventTime == usedTime {
             eventTime = 0
             timer?.invalidate()
@@ -217,6 +222,18 @@ class SpeedTimerViewController: MenuItemViewController {
             controllView.resetButton.isHidden = false
             controllView.eventTime.isEnabled = true
             controllView.eventType.isEnabled = true
+            viewModel.speed.avgJumps = Double(count) / Double(usedTime)
+            viewModel.speed.score = count
+            print(viewModel.speed.avgJumps)
+            var second = 1
+            viewModel.speed.graphData.forEach { (value) in
+                print("In \(second) second: \(value) jumps")
+                second += 1
+            }
+            viewModel.speed.duration = usedTime
+            viewModel.speed.created = Date()
+            viewModel.speed.maxJumps = viewModel.speed.graphData.max()!
+            SpeedService().saveSpeedEvent(speed: viewModel.speed)
         }
         if timeToSpeek == speekBy {
             speek("\(count)")

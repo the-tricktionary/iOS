@@ -24,7 +24,6 @@ class SettingsViewController: MenuItemViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = Color.background
         
         navigationItem.title = "Settings"
@@ -46,7 +45,7 @@ class SettingsViewController: MenuItemViewController {
     
     fileprivate func setupViewConstraints() {
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(view)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.bottom.equalTo(view)

@@ -40,8 +40,9 @@ class Trick {
         if let prerequisitesData = data["prerequisites"] as? [[String : Any]] {
             prerequisitesData.forEach { (prerequisite) in
                 if let id = prerequisite["id"] as? String {
-                    TrickService().getTrickNameById(id: id, completion: { (data) in
+                    TrickManager.shared.getTrickNameById(id: id, completion: { (data) in
                         self.prerequisites.append(data["name"] as! String)
+                    }, finish: {
                         finish()
                     })
                 }

@@ -27,13 +27,18 @@ class TrickDetailViewModel {
     
     // MARK: Public
     
-    func getTrick() {
-        TrickService().getTrickByName(name: trickName) { (trick) in
+    func getTrick(starting: @escaping () -> Void, finish: @escaping () -> Void) {
+        
+        TrickManager.shared.getTrickByName(name: trickName,
+                                           starting: {
+                                            starting()
+        }, completion: { (trick) in
             self.trick = Trick(trick)
             self.trick?.getPrerequisites(finish: {
-                self.loadedPrerequisites.value = true
+                finish()
             })
-            self.loaded.value = true
+        }) {
+            finish()
         }
     }
 }

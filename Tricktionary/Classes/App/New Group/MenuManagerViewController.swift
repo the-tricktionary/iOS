@@ -24,11 +24,12 @@ class MenuManagerViewController: UIViewController {
     var menuViewController: SidePanelViewController?
     var centerPanelExpandedOffset: CGFloat = 120
     
+    fileprivate var tapGestureRecognizer: UITapGestureRecognizer!
+    
     // MARK: Life cycle
     
     override func loadView() {
         super.loadView()
-        
     }
     
     override func viewDidLoad() {
@@ -42,6 +43,8 @@ class MenuManagerViewController: UIViewController {
         addChild(centerNavigationController)
         
         centerNavigationController.didMove(toParent: self)
+        
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewDidTapped))
     }
     
     // MARK: Private
@@ -67,6 +70,18 @@ class MenuManagerViewController: UIViewController {
             centerNavigationController.view.layer.shadowOpacity = 0.0
         }
     }
+    
+    fileprivate func setupCenterNavigationController(_ rootController: UIViewController) {
+        
+    }
+    
+    // MARK: User action
+    
+    @objc func viewDidTapped() {
+        if currentState == .expanded {
+            closeMenu()
+        }
+    }
 }
 
 // MARK: Extension
@@ -76,8 +91,10 @@ extension MenuManagerViewController: MenuItemDelegate {
         let notAlreadyExpanded = currentState == .collapsed
         if notAlreadyExpanded {
             addPanelViewController()
+            centerNavigationController.view.addGestureRecognizer(tapGestureRecognizer)
+        } else {
+            centerNavigationController.view.removeGestureRecognizer(tapGestureRecognizer!)
         }
-        
         animateMenu(shouldExpand: notAlreadyExpanded)
     }
     
@@ -86,7 +103,7 @@ extension MenuManagerViewController: MenuItemDelegate {
         guard expanded else {
             return
         }
-        
+        centerNavigationController.view.removeGestureRecognizer(tapGestureRecognizer!)
         animateMenu(shouldExpand: !expanded)
     }
     
@@ -125,8 +142,8 @@ extension MenuManagerViewController: SidePanelViewControllerDelegate {
     func didSelectMenuItem(viewController: UIViewController) {
         toggleMenu()
         let vc = viewController as! MenuItemViewController
+        vc.view.setNeedsLayout()
         vc.delegate = self
         centerViewController.navigationController?.pushViewController(vc, animated: false)
     }
-    
 }

@@ -23,7 +23,7 @@ class TrickList {
         let name = data["name"] as! String
         let level = data["level"] as? Int
         if level == nil {
-            print(data["name"])
+            print(data["name"] as! String)
         }
         let trick: Trick = Trick(data)
         tricksForFiltering.append(trick)
