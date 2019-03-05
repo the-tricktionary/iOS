@@ -23,8 +23,6 @@ class SpeedTimerViewController: MenuItemViewController {
     fileprivate let timePicker: UIPickerView = UIPickerView()
     fileprivate let eventPicker: UIPickerView = UIPickerView()
     fileprivate let toolBar: UIToolbar = UIToolbar()
-    fileprivate var speachUtil: SpeachUtil = SpeachUtil()
-    fileprivate let synth = AVSpeechSynthesizer()
     
     fileprivate var eventTime: Int = 0
     fileprivate var count: Int = 0
@@ -64,8 +62,6 @@ class SpeedTimerViewController: MenuItemViewController {
         super.viewDidLoad()
         navigationItem.title = "Speed Timer"
         view.backgroundColor = UIColor.white
-        
-        synth.delegate = self
         
         countLabel.textColor = UIColor.red
         countLabel.font = UIFont.boldSystemFont(ofSize: 38)
@@ -178,17 +174,6 @@ class SpeedTimerViewController: MenuItemViewController {
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
-    fileprivate func playBeginSpeech() {
-        let begin = "Single rope speed. One by \(usedTime)."
-        speek(begin)
-    }
-    
-    fileprivate func speek(_ text: String) {
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        synth.speak(utterance)
-    }
-    
     // MARK: User action
     
     @objc func click() {
@@ -258,7 +243,10 @@ class SpeedTimerViewController: MenuItemViewController {
         controllView.resetButton.isHidden = true
         controllView.stopButton.isHidden = false
         controllView.playButton.isHidden = true
-        playBeginSpeech()
+        
+        // TODO: Start timer after play start sound
+        clickButton.isUserInteractionEnabled = true
+        setupTimer()
     }
     
     @objc func stopTapped() {
@@ -272,17 +260,5 @@ class SpeedTimerViewController: MenuItemViewController {
         controllView.resetButton.isHidden = false
         controllView.eventTime.isEnabled = true
         controllView.eventType.isEnabled = true
-    }
-}
-
-// Extension speech
-
-extension SpeedTimerViewController: AVSpeechSynthesizerDelegate {
-    
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        if timer == nil && count == 0 {
-            clickButton.isUserInteractionEnabled = true
-            setupTimer()
-        }
     }
 }
