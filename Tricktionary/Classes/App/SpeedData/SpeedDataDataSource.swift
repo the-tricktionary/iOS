@@ -23,4 +23,16 @@ extension SpeedDataViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = speed.created?.description
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let speed = viewModel.speeds[indexPath.row]
+            viewModel.speeds.remove(at: indexPath.row)
+            SpeedManager.shared.deleteSpeedEvent(speed: speed) { // TODO: Haven`t permition
+                self.viewModel.speeds.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            }
+            tableView.reloadData()
+        }
+    }
 }

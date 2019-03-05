@@ -58,7 +58,7 @@
 		EAACBCE021D0365E007AEDFE /* TrickDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACBCDF21D0365E007AEDFE /* TrickDetailDelegate.swift */; };
 		EAACBCE221D04B3B007AEDFE /* InformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACBCE121D04B3B007AEDFE /* InformationCell.swift */; };
 		EAACBCE421D04C3E007AEDFE /* DescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACBCE321D04C3E007AEDFE /* DescriptionCell.swift */; };
-		EAB08154221EFFB20030AAF1 /* SpeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB08153221EFFB20030AAF1 /* SpeedService.swift */; };
+		EAB08154221EFFB20030AAF1 /* SpeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB08153221EFFB20030AAF1 /* SpeedManager.swift */; };
 		EAB08158221F3CFD0030AAF1 /* SpeedDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB08157221F3CFD0030AAF1 /* SpeedDataViewController.swift */; };
 		EAB1517D22209D720006B0FB /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1517C22209D720006B0FB /* Speed.swift */; };
 		EAB1517F2220A4270006B0FB /* SpeedDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1517E2220A4270006B0FB /* SpeedDataViewModel.swift */; };
@@ -161,7 +161,7 @@
 		EAACBCDF21D0365E007AEDFE /* TrickDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickDetailDelegate.swift; sourceTree = "<group>"; };
 		EAACBCE121D04B3B007AEDFE /* InformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationCell.swift; sourceTree = "<group>"; };
 		EAACBCE321D04C3E007AEDFE /* DescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCell.swift; sourceTree = "<group>"; };
-		EAB08153221EFFB20030AAF1 /* SpeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedService.swift; sourceTree = "<group>"; };
+		EAB08153221EFFB20030AAF1 /* SpeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedManager.swift; sourceTree = "<group>"; };
 		EAB08157221F3CFD0030AAF1 /* SpeedDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedDataViewController.swift; sourceTree = "<group>"; };
 		EAB1517C22209D720006B0FB /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
 		EAB1517E2220A4270006B0FB /* SpeedDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedDataViewModel.swift; sourceTree = "<group>"; };
@@ -458,7 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				EA6C93A9219EC91F00FF9BCC /* TrickManager.swift */,
-				EAB08153221EFFB20030AAF1 /* SpeedService.swift */,
+				EAB08153221EFFB20030AAF1 /* SpeedManager.swift */,
 				EA073DF721FA834B0046799C /* PxUserDefaults */,
 			);
 			path = Network;
@@ -842,7 +842,7 @@
 				EAB08158221F3CFD0030AAF1 /* SpeedDataViewController.swift in Sources */,
 				EA073E0121FA85570046799C /* SwitchCell.swift in Sources */,
 				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
-				EAB08154221EFFB20030AAF1 /* SpeedService.swift in Sources */,
+				EAB08154221EFFB20030AAF1 /* SpeedManager.swift in Sources */,
 				EA4F823322214FDD001CB1F4 /* SpeedDataDelegate.swift in Sources */,
 				EAACBCE221D04B3B007AEDFE /* InformationCell.swift in Sources */,
 				EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */,

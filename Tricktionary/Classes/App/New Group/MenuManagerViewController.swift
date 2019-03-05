@@ -38,11 +38,13 @@ class MenuManagerViewController: UIViewController {
         centerViewController = TricksViewController(viewModel: TricksViewModel())
         centerViewController.delegate = self
         
-        centerNavigationController = UINavigationController(rootViewController: centerViewController)
-        view.addSubview(centerNavigationController.view)
-        addChild(centerNavigationController)
+        setupCenterNavigationController(centerViewController)
         
-        centerNavigationController.didMove(toParent: self)
+//        centerNavigationController = UINavigationController(rootViewController: centerViewController)
+//        view.addSubview(centerNavigationController.view)
+//        addChild(centerNavigationController)
+//
+//        centerNavigationController.didMove(toParent: self)
         
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewDidTapped))
     }
@@ -50,6 +52,7 @@ class MenuManagerViewController: UIViewController {
     // MARK: Private
     
     fileprivate func addChildSidePanelController(_ sidePanelController: UIViewController) {
+        print("Adding side panel viewcontroller")
         view.insertSubview(sidePanelController.view, at: 0)
         
         addChild(sidePanelController)
@@ -72,6 +75,11 @@ class MenuManagerViewController: UIViewController {
     }
     
     fileprivate func setupCenterNavigationController(_ rootController: UIViewController) {
+        centerNavigationController = UINavigationController(rootViewController: rootController)
+        view.addSubview(centerNavigationController.view)
+        addChild(centerNavigationController)
+        
+        centerNavigationController.didMove(toParent: self)
         
     }
     
@@ -141,9 +149,11 @@ extension MenuManagerViewController: MenuItemDelegate {
 extension MenuManagerViewController: SidePanelViewControllerDelegate {
     func didSelectMenuItem(viewController: UIViewController) {
         toggleMenu()
+        
+        centerNavigationController.view.removeFromSuperview()
+        
         let vc = viewController as! MenuItemViewController
-        vc.view.setNeedsLayout()
         vc.delegate = self
-        centerViewController.navigationController?.pushViewController(vc, animated: false)
+        setupCenterNavigationController(vc)
     }
 }

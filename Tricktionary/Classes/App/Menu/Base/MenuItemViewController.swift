@@ -68,7 +68,6 @@ class MenuItemViewController: BaseViewController {
     // MARK: User aciton
     
     @objc func menuTapped() {
-        print("menu tapped")
         delegate?.toggleMenu()
     }
     

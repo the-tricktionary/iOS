@@ -40,7 +40,7 @@ class SpeedTimerViewController: MenuItemViewController {
     
     var timeToSpeek: Int = 1
     let speekBy: Int = 10
-    
+    var miliseconds: Int = 0
     // MARK: Life cycles
     
     init(viewModel: SpeedTimerViewModel) {
@@ -161,17 +161,20 @@ class SpeedTimerViewController: MenuItemViewController {
     }
     
     fileprivate func setupTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1,
+        timer = Timer.scheduledTimer(timeInterval: 0.1,
                                      target: self,
                                      selector: #selector(tick),
                                      userInfo: nil,
                                      repeats: true)
     }
     
-    fileprivate func timeFormatted(_ totalSeconds: Int) -> String {
+    fileprivate func timeFormatted(_ totalSeconds: Int, _ miliseconds: Int?) -> String {
         let seconds: Int = totalSeconds % 60
         let minutes: Int = (totalSeconds / 60) % 60
         //     let hours: Int = totalSeconds / 3600
+        if let miliseconds = miliseconds {
+            return String(format: "%02d:%02d:%02d", minutes, seconds, miliseconds)
+        }
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
@@ -185,8 +188,6 @@ class SpeedTimerViewController: MenuItemViewController {
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         synth.speak(utterance)
     }
-    
-    // MARK: Public
     
     // MARK: User action
     
@@ -207,14 +208,19 @@ class SpeedTimerViewController: MenuItemViewController {
     }
     
     @objc func tick() {
-        eventTime += 1
-        title = "\(timeFormatted(Int(eventTime)))"
-        viewModel.speed.graphData.append(Double(jumpsPerSecond))
-        jumpsPerSecond = 0
+        title = "\(timeFormatted(eventTime, miliseconds))"
+        if miliseconds == 10 {
+            eventTime += 1
+            viewModel.speed.graphData.append(Double(jumpsPerSecond))
+            jumpsPerSecond = 0
+            miliseconds = 0
+        }
+        miliseconds += 1
         if eventTime == usedTime {
-            eventTime = 0
             timer?.invalidate()
             timer = nil
+            eventTime = 0
+            miliseconds = 0
             clickButton.isUserInteractionEnabled = false
             timeToSpeek = 0
             navigationItem.title = "Speed Timer"
@@ -233,13 +239,8 @@ class SpeedTimerViewController: MenuItemViewController {
             viewModel.speed.duration = usedTime
             viewModel.speed.created = Date()
             viewModel.speed.maxJumps = viewModel.speed.graphData.max()!
-            SpeedService().saveSpeedEvent(speed: viewModel.speed)
+            SpeedManager.shared.saveSpeedEvent(speed: viewModel.speed)
         }
-        if timeToSpeek == speekBy {
-            speek("\(count)")
-            timeToSpeek = 0
-        }
-        timeToSpeek += 1
     }
     
     @objc func resetCount() {
