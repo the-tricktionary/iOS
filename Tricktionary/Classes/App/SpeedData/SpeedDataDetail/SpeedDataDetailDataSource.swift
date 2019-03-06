@@ -50,7 +50,7 @@ extension SpeedDataDetailViewController: UITableViewDataSource {
             cell.textLabel?.text = "Avg Jumps"
             cell.detailTextLabel?.text = "\(viewModel.speedData.avgJumps)"
         } else if indexPath.row == 10 {
-            cell = GraphCell(chartData: viewModel.getSpeedChartData())
+            cell = GraphCell(chartData: viewModel.speedData.graphData, duration: viewModel.speedData.duration)
         }
 
         return cell

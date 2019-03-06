@@ -28,6 +28,7 @@ class SpeedTimerViewController: MenuItemViewController {
     fileprivate var count: Int = 0
     
     var jumpsPerSecond: Int = 0
+    var maxJumps: Int = 0
     
     fileprivate var timePickerDelegate: TimePicker = TimePicker()
     fileprivate var eventPickerDelegate: EventPicker = EventPicker()
@@ -180,6 +181,7 @@ class SpeedTimerViewController: MenuItemViewController {
         impact.impactOccurred()
         count += 1
         countLabel.text = "\(count)"
+        viewModel.speed.graphData.append(Double(Date().timeIntervalSince1970 * 1000))
         jumpsPerSecond += 1
         
     }
@@ -196,7 +198,9 @@ class SpeedTimerViewController: MenuItemViewController {
         title = "\(timeFormatted(eventTime, miliseconds))"
         if miliseconds == 10 {
             eventTime += 1
-            viewModel.speed.graphData.append(Double(jumpsPerSecond))
+            if jumpsPerSecond > maxJumps {
+                maxJumps = jumpsPerSecond
+            }
             jumpsPerSecond = 0
             miliseconds = 0
         }
@@ -214,16 +218,12 @@ class SpeedTimerViewController: MenuItemViewController {
             controllView.eventTime.isEnabled = true
             controllView.eventType.isEnabled = true
             viewModel.speed.avgJumps = Double(count) / Double(usedTime)
+            viewModel.speed.name = "GRAF TEST 8"
             viewModel.speed.score = count
-            print(viewModel.speed.avgJumps)
-            var second = 1
-            viewModel.speed.graphData.forEach { (value) in
-                print("In \(second) second: \(value) jumps")
-                second += 1
-            }
             viewModel.speed.duration = usedTime
             viewModel.speed.created = Date()
-            viewModel.speed.maxJumps = viewModel.speed.graphData.max()!
+            viewModel.speed.maxJumps = Double(maxJumps)
+            viewModel.prepareGraphData()
             SpeedManager.shared.saveSpeedEvent(speed: viewModel.speed)
         }
     }
