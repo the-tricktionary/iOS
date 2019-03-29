@@ -7,6 +7,7 @@ target 'Tricktionary' do
 
   # Pods for Tricktionary
 
+	pod 'MMDrawerController'
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Auth'

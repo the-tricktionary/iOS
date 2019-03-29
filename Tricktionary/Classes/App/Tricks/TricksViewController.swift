@@ -12,8 +12,9 @@ import SnapKit
 import FirebaseFirestore
 import ReactiveSwift
 import KJExpandableTableTree
+import MMDrawerController
 
-class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
+class TricksViewController: BaseCenterViewController, UISearchControllerDelegate {
     
     // MARK: Variables
     
@@ -42,7 +43,8 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Tricks"
+        
+        title = "Tricks"
         view.backgroundColor = Color.background
         
         let randomButton = UIBarButtonItem(image: UIImage(named: "random"),

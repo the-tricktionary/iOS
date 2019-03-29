@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SpeedDataViewController: MenuItemViewController {
+class SpeedDataViewController: BaseCenterViewController {
     
     // MARK: Variables
     

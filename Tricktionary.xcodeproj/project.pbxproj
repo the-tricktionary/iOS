@@ -22,7 +22,6 @@
 		EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48DB21EAB8C10086FC79 /* Constants.swift */; };
 		EA26412121D9A68900631852 /* TrickList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26412021D9A68900631852 /* TrickList.swift */; };
 		EA2C6B1021ED38270090579F /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C6B0F21ED38270090579F /* UserCell.swift */; };
-		EA37A3A721E6902C0061E44D /* MenuManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3A621E6902C0061E44D /* MenuManagerViewController.swift */; };
 		EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3B021E696DE0061E44D /* LoginViewController.swift */; };
 		EA45C47A21F1A7D0009DC1A8 /* SpeedTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA45C47921F1A7D0009DC1A8 /* SpeedTimes.swift */; };
 		EA4F823122214F8C001CB1F4 /* SpeedDataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4F823022214F8C001CB1F4 /* SpeedDataDataSource.swift */; };
@@ -43,7 +42,6 @@
 		EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7F22D3219EDC5600C43599 /* TrickDetailViewController.swift */; };
 		EA85B515219EDFA200F975A2 /* TrickDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85B514219EDFA200F975A2 /* TrickDetailViewModel.swift */; };
 		EA8C1D5B219CE61D00F4D502 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D5A219CE61D00F4D502 /* AppDelegate.swift */; };
-		EA8C1D5D219CE61D00F4D502 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D5C219CE61D00F4D502 /* ViewController.swift */; };
 		EA8C1D60219CE61D00F4D502 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA8C1D5E219CE61D00F4D502 /* Main.storyboard */; };
 		EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D61219CE61D00F4D502 /* Tricktionary.xcdatamodeld */; };
 		EA8C1D65219CE61D00F4D502 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA8C1D64219CE61D00F4D502 /* Assets.xcassets */; };
@@ -62,10 +60,9 @@
 		EAB08158221F3CFD0030AAF1 /* SpeedDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB08157221F3CFD0030AAF1 /* SpeedDataViewController.swift */; };
 		EAB1517D22209D720006B0FB /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1517C22209D720006B0FB /* Speed.swift */; };
 		EAB1517F2220A4270006B0FB /* SpeedDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB1517E2220A4270006B0FB /* SpeedDataViewModel.swift */; };
+		EABCC85F224D8A8A00ED3B90 /* BaseCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCC85E224D8A8A00ED3B90 /* BaseCenterViewController.swift */; };
 		EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */; };
-		EACF594221E7E3380037FE2B /* MenuItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF594121E7E3380037FE2B /* MenuItemViewController.swift */; };
 		EACF594621E7EAF40037FE2B /* SidePanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF594521E7EAF40037FE2B /* SidePanelViewController.swift */; };
-		EACF594921E7ED000037FE2B /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF594821E7ED000037FE2B /* MenuItemView.swift */; };
 		EACF63DC21EE961B00D7D836 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63DB21EE961B00D7D836 /* LoginView.swift */; };
 		EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63DD21EE962A00D7D836 /* RegistrationView.swift */; };
 		EACF63E121EE967700D7D836 /* IconTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63E021EE967700D7D836 /* IconTextField.swift */; };
@@ -119,7 +116,6 @@
 		EA1A48DB21EAB8C10086FC79 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA26412021D9A68900631852 /* TrickList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickList.swift; sourceTree = "<group>"; };
 		EA2C6B0F21ED38270090579F /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
-		EA37A3A621E6902C0061E44D /* MenuManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManagerViewController.swift; sourceTree = "<group>"; };
 		EA37A3B021E696DE0061E44D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EA45C47921F1A7D0009DC1A8 /* SpeedTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimes.swift; sourceTree = "<group>"; };
 		EA4F823022214F8C001CB1F4 /* SpeedDataDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedDataDataSource.swift; sourceTree = "<group>"; };
@@ -141,7 +137,6 @@
 		EA85B514219EDFA200F975A2 /* TrickDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickDetailViewModel.swift; sourceTree = "<group>"; };
 		EA8C1D57219CE61D00F4D502 /* Tricktionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tricktionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA8C1D5A219CE61D00F4D502 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EA8C1D5C219CE61D00F4D502 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EA8C1D5F219CE61D00F4D502 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EA8C1D62219CE61D00F4D502 /* Tricktionary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tricktionary.xcdatamodel; sourceTree = "<group>"; };
 		EA8C1D64219CE61D00F4D502 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,10 +160,9 @@
 		EAB08157221F3CFD0030AAF1 /* SpeedDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedDataViewController.swift; sourceTree = "<group>"; };
 		EAB1517C22209D720006B0FB /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
 		EAB1517E2220A4270006B0FB /* SpeedDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedDataViewModel.swift; sourceTree = "<group>"; };
+		EABCC85E224D8A8A00ED3B90 /* BaseCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCenterViewController.swift; sourceTree = "<group>"; };
 		EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksViewController.swift; sourceTree = "<group>"; };
-		EACF594121E7E3380037FE2B /* MenuItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemViewController.swift; sourceTree = "<group>"; };
 		EACF594521E7EAF40037FE2B /* SidePanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelViewController.swift; sourceTree = "<group>"; };
-		EACF594821E7ED000037FE2B /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		EACF63DB21EE961B00D7D836 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		EACF63DD21EE962A00D7D836 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		EACF63E021EE967700D7D836 /* IconTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextField.swift; sourceTree = "<group>"; };
@@ -277,10 +271,7 @@
 		EA37A3A521E690160061E44D /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				EACF594721E7ECF10037FE2B /* View */,
 				EACF594421E7EAD00037FE2B /* Panel */,
-				EACF594321E7E6070037FE2B /* Base */,
-				EA37A3A621E6902C0061E44D /* MenuManagerViewController.swift */,
 			);
 			name = Menu;
 			path = "New Group";
@@ -387,7 +378,6 @@
 			children = (
 				EAC23ABA219D8E3B0086D9E2 /* Classes */,
 				EA8C1D5A219CE61D00F4D502 /* AppDelegate.swift */,
-				EA8C1D5C219CE61D00F4D502 /* ViewController.swift */,
 				EA8C1D5E219CE61D00F4D502 /* Main.storyboard */,
 				EA8C1D64219CE61D00F4D502 /* Assets.xcassets */,
 				EA8C1D66219CE61D00F4D502 /* LaunchScreen.storyboard */,
@@ -450,6 +440,7 @@
 				EA37A3A521E690160061E44D /* Menu */,
 				EAC23ABF219D8F750086D9E2 /* Tricks */,
 				EAF9F27B222DBAF200237EDF /* BaseViewController.swift */,
+				EABCC85E224D8A8A00ED3B90 /* BaseCenterViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -477,14 +468,6 @@
 			path = Tricks;
 			sourceTree = "<group>";
 		};
-		EACF594321E7E6070037FE2B /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				EACF594121E7E3380037FE2B /* MenuItemViewController.swift */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
 		EACF594421E7EAD00037FE2B /* Panel */ = {
 			isa = PBXGroup;
 			children = (
@@ -493,14 +476,6 @@
 				EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */,
 			);
 			path = Panel;
-			sourceTree = "<group>";
-		};
-		EACF594721E7ECF10037FE2B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				EACF594821E7ED000037FE2B /* MenuItemView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		EACF63DA21EE960800D7D836 /* View */ = {
@@ -757,6 +732,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KJExpandableTableTree/KJExpandableTableTree.framework",
+				"${BUILT_PRODUCTS_DIR}/MMDrawerController/MMDrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
@@ -781,6 +757,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KJExpandableTableTree.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMDrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
@@ -831,13 +808,11 @@
 				EACF63E121EE967700D7D836 /* IconTextField.swift in Sources */,
 				EA7AAB33219E2160000858EE /* TricksDelegate.swift in Sources */,
 				EAB1517D22209D720006B0FB /* Speed.swift in Sources */,
-				EACF594221E7E3380037FE2B /* MenuItemViewController.swift in Sources */,
 				EA6C93AA219EC91F00FF9BCC /* TrickManager.swift in Sources */,
 				EAF9F27C222DBAF200237EDF /* BaseViewController.swift in Sources */,
 				EA4F823122214F8C001CB1F4 /* SpeedDataDataSource.swift in Sources */,
 				EACF63E321EE96F500D7D836 /* GradientButton.swift in Sources */,
 				EA26412121D9A68900631852 /* TrickList.swift in Sources */,
-				EACF594921E7ED000037FE2B /* MenuItemView.swift in Sources */,
 				EAE6E1CC21F3DE560033D918 /* Picker.swift in Sources */,
 				EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */,
 				EACF594621E7EAF40037FE2B /* SidePanelViewController.swift in Sources */,
@@ -856,8 +831,6 @@
 				EA4F8238222161A2001CB1F4 /* SpeedDataDetailViewModel.swift in Sources */,
 				EAD3D74021F9187500F39A22 /* SpeedEvents.swift in Sources */,
 				EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */,
-				EA8C1D5D219CE61D00F4D502 /* ViewController.swift in Sources */,
-				EA37A3A721E6902C0061E44D /* MenuManagerViewController.swift in Sources */,
 				EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */,
 				EAACBCDC21D02E83007AEDFE /* VideoCell.swift in Sources */,
 				EAE6E1CE21F3E9C50033D918 /* SpeedTimerViewModel.swift in Sources */,
@@ -879,6 +852,7 @@
 				EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */,
 				EA073DF621FA792A0046799C /* SettingsViewController.swift in Sources */,
 				EAE6E1D121F3F1F20033D918 /* ControllView.swift in Sources */,
+				EABCC85F224D8A8A00ED3B90 /* BaseCenterViewController.swift in Sources */,
 				EA4F823C2221842E001CB1F4 /* GraphCell.swift in Sources */,
 				EAF8CB8F21EFE0CE00684288 /* BaseCell.swift in Sources */,
 				EA7AAB3A219E2257000858EE /* Trick.swift in Sources */,

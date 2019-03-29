@@ -11,7 +11,7 @@ import UIKit
 import ReactiveSwift
 import AVFoundation
 
-class SpeedTimerViewController: MenuItemViewController {
+class SpeedTimerViewController: BaseCenterViewController {
     
     // MARK: Variables
     

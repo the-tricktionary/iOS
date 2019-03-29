@@ -74,6 +74,11 @@ class GraphCell: BaseCell {
             
             let chartData = LineChartData(dataSet: dataSet)
             chart.data = chartData
+            
+            chart.setScaleEnabled(false)
+            chart.animate(xAxisDuration: 0.5)
+            chart.rightAxis.enabled = false
+            chart.legend.enabled = false
 //            chart.xLabels = [Double]()
 //            var step = 0
 //            for _ in 1...labelsX {

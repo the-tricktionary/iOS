@@ -10,12 +10,13 @@ import UIKit
 import CoreData
 import Firebase
 import GoogleSignIn
+import MMDrawerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
-
+    var centerContainer: MMDrawerController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,16 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
         
-        let navigationBar = UINavigationBar.appearance()
-        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationBar.tintColor = UIColor.white
-        navigationBar.barTintColor = Color.bar
-        navigationBar.isTranslucent = false
+        let leftNavigation = UINavigationController(rootViewController: SidePanelViewController())
+        let centerViewController = UINavigationController(rootViewController: TricksViewController(viewModel: TricksViewModel()))
         
+        centerContainer = MMDrawerController(center: centerViewController,
+                                                 leftDrawerViewController: leftNavigation)
+        
+        centerContainer?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.panningCenterView
+        centerContainer?.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.panningCenterView
+                
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = MenuManagerViewController()
-        
-        window?.makeKeyAndVisible()
+        window?.rootViewController = centerContainer
         
         return true
     }
@@ -131,8 +133,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 print("CHYBA PRIHLASENI: \(error.localizedDescription)")
                 return
             }
-            self.window?.rootViewController = MenuManagerViewController()
-            self.window?.makeKeyAndVisible()
+            let centerViewController = UINavigationController(rootViewController: TricksViewController(viewModel: TricksViewModel()))
+            
+            self.centerContainer?.setCenterView(centerViewController, withFullCloseAnimation: false, completion: { (_) in
+                
+            })
+            let leftNavigation = UINavigationController(rootViewController: SidePanelViewController())
+            self.centerContainer?.leftDrawerViewController = leftNavigation
+            self.window?.rootViewController = self.centerContainer
         }
     }
 }

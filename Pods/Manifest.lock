@@ -76,6 +76,18 @@ PODS:
   - GTMSessionFetcher/Core (1.2.1)
   - KJExpandableTableTree (1.1.2)
   - leveldb-library (1.20)
+  - MMDrawerController (0.6.0):
+    - MMDrawerController/Core (= 0.6.0)
+    - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
+    - MMDrawerController/MMDrawerVisualStates (= 0.6.0)
+    - MMDrawerController/Subclass (= 0.6.0)
+  - MMDrawerController/Core (0.6.0)
+  - MMDrawerController/MMDrawerBarButtonItem (0.6.0):
+    - MMDrawerController/Core
+  - MMDrawerController/MMDrawerVisualStates (0.6.0):
+    - MMDrawerController/Core
+  - MMDrawerController/Subclass (0.6.0):
+    - MMDrawerController/Core
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -107,6 +119,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - GoogleSignIn
   - KJExpandableTableTree
+  - MMDrawerController
   - ReactiveCocoa
   - RxFirestoreExecutor
   - RxSwift
@@ -133,6 +146,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - KJExpandableTableTree
     - leveldb-library
+    - MMDrawerController
     - nanopb
     - Protobuf
     - ReactiveCocoa
@@ -164,6 +178,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   KJExpandableTableTree: b6b20b330e1067a63efec2d4eca69faba64676ca
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   ReactiveCocoa: fbd26e9ba60e98417ee47433e59465a98ed9da0f
@@ -177,6 +192,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   YoutubePlayerView: 510480ccdf03f2ffc888ee0b2bf2d1d8f8d9289f
 
-PODFILE CHECKSUM: 333ca1683f2caf168dea6af3c92095b2c977f739
+PODFILE CHECKSUM: a8b7cb0d676842b6dbda574add894d48e19a1b8d
 
 COCOAPODS: 1.5.3

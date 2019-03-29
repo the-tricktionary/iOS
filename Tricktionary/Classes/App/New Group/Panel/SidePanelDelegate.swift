@@ -63,6 +63,7 @@ extension SidePanelViewController: UITableViewDelegate {
                 } catch {
                     print("Error: \(error.localizedDescription)") // TODO: Alert
                 }
+                tableView.reloadData()
                 delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
             }
             

@@ -13,7 +13,7 @@ import Firebase
 import ReactiveSwift
 import ReactiveCocoa
 
-class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
+class LoginViewController: BaseCenterViewController, GIDSignInUIDelegate {
     
     // MARK: Variables
     
@@ -139,7 +139,7 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
             self.present(alert, animated: true)
             return
         }, completed: {
-            self.delegate?.toggleMenu()
+//            self.delegate?.toggleMenu()
         })
     }
     
@@ -161,7 +161,7 @@ class LoginViewController: MenuItemViewController, GIDSignInUIDelegate {
             self.present(alert, animated: true)
             return
         }) {
-            self.delegate?.toggleMenu()
+//            self.delegate?.toggleMenu()
         }
     }
     

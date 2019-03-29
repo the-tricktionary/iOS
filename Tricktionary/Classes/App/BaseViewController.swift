@@ -8,13 +8,14 @@
 
 import Foundation
 import UIKit
+import MMDrawerController
 
 class BaseViewController: UIViewController {
     
     // MARK: Variables
     
     var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView(style: .gray)
-    
+    var centerContainer: MMDrawerController?
     // MARK: Life cycles
     
     override func loadView() {
@@ -24,6 +25,8 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        centerContainer = UIApplication.shared.keyWindow?.rootViewController as? MMDrawerController
+                
         view.addSubview(activityIndicatorView)
         activityIndicatorView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         activityIndicatorView.layer.zPosition = 999
@@ -38,5 +41,13 @@ class BaseViewController: UIViewController {
             make.size.equalTo(view)
             make.center.equalTo(view)
         }
+    }
+    
+    // MARK: User actions
+    
+    @objc func menuButtonTapped() {
+        centerContainer?.toggle(MMDrawerSide.left, animated: true, completion: { (_) in
+            
+        })
     }
 }
