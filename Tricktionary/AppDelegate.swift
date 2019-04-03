@@ -29,14 +29,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.delegate = self
         
         let leftNavigation = UINavigationController(rootViewController: SidePanelViewController())
+        let rightNavigation = UINavigationController(rootViewController: SidePanelViewController())
         let centerViewController = UINavigationController(rootViewController: TricksViewController(viewModel: TricksViewModel()))
         
-        centerContainer = MMDrawerController(center: centerViewController,
-                                                 leftDrawerViewController: leftNavigation)
+        centerContainer = MMDrawerController(center: centerViewController, leftDrawerViewController: leftNavigation)
         
         centerContainer?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.panningCenterView
         centerContainer?.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.panningCenterView
-                
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = centerContainer
         
