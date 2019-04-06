@@ -18,19 +18,37 @@ class SubmitViewController: BaseCenterViewController {
     let descriptionLabel: UILabel = UILabel()
     let videoPlayer: AVPlayerViewController = AVPlayerViewController()
     
-    let formView: SubmitFormView = SubmitFormView()
+    let trickNameTextField: UITextField = UITextField()
+    let trickDescriptionTextField: UITextField = UITextField()
+    let levelTextField: UITextField = UITextField()
+    let saveButton: GradientButton = GradientButton()
+    let asocTextField: UITextField = UITextField()
+    
+    let asocPicker: UIPickerView = UIPickerView()
+    
+    internal let scrollView: UIScrollView = UIScrollView()
+    internal let contentView: UIView = UIView()
     
     // MARK: Life cycle
     
     override func loadView() {
         super.loadView()
-        view.addSubview(descriptionLabel)
-        view.addSubview(videoPlayer.view)
-        view.addSubview(formView)
+        view.addSubview(scrollView)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(videoPlayer.view)
+        contentView.addSubview(trickNameTextField)
+        contentView.addSubview(trickDescriptionTextField)
+        contentView.addSubview(levelTextField)
+        contentView.addSubview(asocTextField)
+        contentView.addSubview(saveButton)
+        scrollView.addSubview(contentView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
         view.backgroundColor = Color.background
         
@@ -49,7 +67,46 @@ class SubmitViewController: BaseCenterViewController {
         
         descriptionLabel.text = description
         
-        formView.backgroundColor = Color.background
+        scrollView.isUserInteractionEnabled = true
+        contentView.isUserInteractionEnabled = true
+        
+        scrollView.isScrollEnabled = true
+        
+        trickNameTextField.placeholder = "Trick name"
+        trickNameTextField.delegate = self
+        trickNameTextField.isUserInteractionEnabled = true
+        
+        trickDescriptionTextField.placeholder = "Description (can add your insta name)"
+        trickDescriptionTextField.delegate = self
+        trickDescriptionTextField.isUserInteractionEnabled = true
+        
+        levelTextField.placeholder = "Level"
+        levelTextField.delegate = self
+        levelTextField.isUserInteractionEnabled = true
+        
+        asocPicker.backgroundColor = UIColor.orange.withAlphaComponent(0.5)
+        asocPicker.dataSource = self
+        asocPicker.delegate = self
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.red.withAlphaComponent(0.5)
+        toolBar.sizeToFit()
+        
+        let doneTimeButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(donePicker))
+        
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([spaceButton, doneTimeButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        asocTextField.isUserInteractionEnabled = true
+        asocTextField.placeholder = "FISAC"
+        asocTextField.inputView = asocPicker
+        asocTextField.inputAccessoryView = toolBar
+        
+        saveButton.setTitle("Save", for: .normal)
         
         initVideoPlayer()
         initFormView()
@@ -61,34 +118,77 @@ class SubmitViewController: BaseCenterViewController {
     // MARK: Privates
     
     fileprivate func setupViewConstraints() {
+        
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalTo(view)
+        }
+        
+        contentView.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(scrollView)
+            make.leading.trailing.equalTo(view)
+        }
+        
         descriptionLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(20)
-            make.leading.equalTo(view).inset(16)
-            make.trailing.equalTo(view).inset(16)
+            make.top.equalTo(contentView).offset(20)
+            make.leading.equalTo(contentView).inset(16)
+            make.trailing.equalTo(contentView).inset(16)
         }
         
         videoPlayer.view.snp.makeConstraints { (make) in
-            make.top.equalTo(view)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
+            make.top.equalTo(contentView)
+            make.leading.equalTo(contentView)
+            make.trailing.equalTo(contentView)
             make.height.equalTo(UIScreen.main.bounds.size.height / 2)
         }
         
-        formView.snp.makeConstraints { (make) in
+        let height = ((UIScreen.main.bounds.size.height - 200) / 2) / 5
+        
+        trickNameTextField.snp.makeConstraints { (make) in
             make.top.equalTo(videoPlayer.view.snp.bottom)
-            make.leading.trailing.equalTo(view)
-            make.bottom.equalTo(view)
+            make.leading.trailing.equalTo(contentView).inset(16)
+            make.height.equalTo(height)
+        }
+        
+        trickDescriptionTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(trickNameTextField.snp.bottom)
+            make.leading.trailing.equalTo(contentView).inset(16)
+            make.height.equalTo(height)
+        }
+        
+        levelTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(trickDescriptionTextField.snp.bottom)
+            make.leading.equalTo(contentView).inset(16)
+            make.width.equalTo(UIScreen.main.bounds.size.width / 2)
+            make.height.equalTo(height)
+        }
+        
+        asocTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(levelTextField)
+            make.leading.equalTo(levelTextField.snp.trailing)
+            make.trailing.equalTo(contentView).inset(16)
+            make.height.equalTo(height)
+        }
+        
+        saveButton.snp.makeConstraints { (make) in
+            make.top.equalTo(levelTextField.snp.bottom).offset(20)
+            make.leading.trailing.equalTo(contentView).inset(16)
+            make.height.equalTo(height)
+            make.bottom.equalTo(contentView)
         }
     }
     
     fileprivate func initVideoPlayer() {
         videoPlayer.view.isHidden = true
         videoPlayer.player = nil
-        videoPlayer.view.addGestureRecognizer(endEditingGesture!)
     }
     
     fileprivate func initFormView() {
-        formView.isHidden = true
+        trickDescriptionTextField.isHidden = true
+        trickNameTextField.isHidden = true
+        levelTextField.isHidden = true
+        asocTextField.isHidden = true
+        saveButton.isHidden = true
+        descriptionLabel.isHidden = false
     }
     
     fileprivate func initNavigationItems() {
@@ -104,14 +204,18 @@ class SubmitViewController: BaseCenterViewController {
     }
     
     fileprivate func setupFormView() {
-        formView.isHidden = false
+        trickDescriptionTextField.isHidden = false
+        trickNameTextField.isHidden = false
+        levelTextField.isHidden = false
+        asocTextField.isHidden = false
+        saveButton.isHidden = false
+        descriptionLabel.isHidden = true
     }
     
     fileprivate func setupVideoFormControll() {
         let canceButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped))
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
         
-        navigationItem.rightBarButtonItems = [canceButton, saveButton]
+        navigationItem.rightBarButtonItem = canceButton
     }
     
     // MARK: User action
@@ -120,6 +224,10 @@ class SubmitViewController: BaseCenterViewController {
         initVideoPlayer()
         initFormView()
         initNavigationItems()
+    }
+    
+    @objc func donePicker() {
+        asocTextField.endEditing(true)
     }
     
     @objc func addButtonTapped() {
@@ -150,6 +258,10 @@ class SubmitViewController: BaseCenterViewController {
                 imagePickerController.sourceType = .camera
                 imagePickerController.mediaTypes = ["public.movie"]
                 imagePickerController.showsCameraControls = true
+                imagePickerController.cameraCaptureMode = .video
+                imagePickerController.allowsEditing = true
+                imagePickerController.videoQuality = .typeIFrame1280x720
+                
                 
                 imagePickerController.delegate = self
                 imagePickerController.modalPresentationStyle = .fullScreen
@@ -168,6 +280,23 @@ class SubmitViewController: BaseCenterViewController {
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    @objc func keyboardWillShow(notification:NSNotification){
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+
+        scrollView.contentInset = contentInset
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification){
+        
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
     }
 }
 
@@ -188,5 +317,15 @@ extension SubmitViewController: UIImagePickerControllerDelegate, UINavigationCon
         }
         
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+// Exntension text field delegate
+
+extension SubmitViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return false
     }
 }

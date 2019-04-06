@@ -26,21 +26,21 @@ extension TricksViewController: UITableViewDataSource {
             
             // Parents
             
-            let cell = TrickLevelHeaderCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: TrickLevelHeaderCell.reuseIdentifier(), for: indexPath) as! TrickLevelHeaderCell
             cell.title.text = "Level \(node.key)"
             return cell
             
         } else if indexTuples.count == 2 {
-            let cell = TrickLevelCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: TrickLevelCell.reuseIdentifier(), for: indexPath) as! TrickLevelCell
             if indexTuples[1] != "0" {
                 cell.isTopBorderVisible(false)
             }
-            cell.title.textColor = UIColor.black
-            cell.title.font = UIFont.boldSystemFont(ofSize: 14)
+            cell.setupFont(bolt: true)
             cell.title.text = node.key.capitalized
             return cell
         } else if indexTuples.count == 3 {
-            let cell = TrickLevelCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: TrickLevelCell.reuseIdentifier(), for: indexPath) as! TrickLevelCell
+            cell.setupFont()
             cell.isTopBorderVisible(false)
             cell.title.text = node.key
             return cell

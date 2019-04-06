@@ -65,4 +65,10 @@ class TrickLevelHeaderCell: BaseCell {
             make.height.equalTo(view.snp.height)
         }
     }
+    
+    // MARK: Public
+    
+    class func reuseIdentifier() -> String {
+        return "cz.pixmo.tricktionary.TrickLevelHeaderCell"
+    }
 }
