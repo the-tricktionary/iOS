@@ -51,9 +51,6 @@ class TrickLevelCell: BaseCell {
         selectionStyle = .none
         isUserInteractionEnabled = true
         
-        title.textColor = UIColor.darkGray
-        title.font = UIFont.systemFont(ofSize: 14)
-        
         topBorder.backgroundColor = UIColor.white
         topBorder.isHidden = true
     }
@@ -86,5 +83,19 @@ class TrickLevelCell: BaseCell {
     
     func isTopBorderVisible(_ visible: Bool) {
         topBorder.isHidden = visible
+    }
+    
+    func setupFont(bolt: Bool = false) {
+        if bolt {
+            title.font = UIFont.boldSystemFont(ofSize: 14)
+            title.textColor = UIColor.black
+        } else {
+            title.font = UIFont.systemFont(ofSize: 14)
+            title.textColor = UIColor.darkGray
+        }
+    }
+    
+    class func reuseIdentifier() -> String {
+        return "cz.pixmo.tricktionary.TrickLevelCell"
     }
 }

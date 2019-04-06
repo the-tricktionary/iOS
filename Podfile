@@ -7,6 +7,7 @@ target 'Tricktionary' do
 
   # Pods for Tricktionary
 
+	pod 'MMDrawerController'
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Auth'
@@ -18,6 +19,7 @@ target 'Tricktionary' do
 	pod 'YoutubePlayerView'
 	pod 'KJExpandableTableTree'
 	pod 'SwiftChart'
+	pod 'Charts'
 
   target 'TricktionaryTests' do
     inherit! :search_paths

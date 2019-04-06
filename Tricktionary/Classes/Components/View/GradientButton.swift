@@ -15,7 +15,7 @@ class GradientButton: UIButton {
     
     required init() {
         super.init(frame: .zero)
-        backgroundColor = UIColor.red // TODO: Gradient
+        backgroundColor = Color.bar // TODO: Gradient
         setTitleStyle()
         setBorderStyle()
     }

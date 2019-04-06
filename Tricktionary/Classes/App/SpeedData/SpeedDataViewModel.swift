@@ -27,12 +27,5 @@ class SpeedDataViewModel {
         }) {
             finish()
         }
-        
-//        SpeedService().getSpeedData(completion: { (speed) in
-//            self.speeds.append(speed)
-//        }) {
-//            print("LOADED: \(self.speeds.count) SPEEDS")
-//            finish()
-//        }
     }
 }

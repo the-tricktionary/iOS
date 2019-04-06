@@ -12,8 +12,9 @@ import SnapKit
 import FirebaseFirestore
 import ReactiveSwift
 import KJExpandableTableTree
+import MMDrawerController
 
-class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
+class TricksViewController: BaseCenterViewController, UISearchControllerDelegate {
     
     // MARK: Variables
     
@@ -42,7 +43,8 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Tricks"
+        
+        title = "Tricks"
         view.backgroundColor = Color.background
         
         let randomButton = UIBarButtonItem(image: UIImage(named: "random"),
@@ -58,11 +60,14 @@ class TricksViewController: MenuItemViewController, UISearchControllerDelegate {
         tableView.backgroundColor = Color.background
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         tableView.separatorStyle = .none
-        tableView.register(TrickLevelCell.self, forCellReuseIdentifier: "TrickLevel")
+        tableView.register(TrickLevelCell.self, forCellReuseIdentifier: TrickLevelCell.reuseIdentifier())
+        tableView.register(TrickLevelHeaderCell.self, forCellReuseIdentifier: TrickLevelHeaderCell.reuseIdentifier())
         
         self.viewModel.getTricks(starting: {
+            [unowned self] in
             self.activityIndicatorView.startAnimating()
         }) {
+            [unowned self] in
             self.activityIndicatorView.stopAnimating()
             if let arrayOfParents = self.viewModel.getArrayOfParrents() {
                 self.kjtreeInstance = KJTree(parents: arrayOfParents, childrenKey: "child", expandableKey: "Expanded", key: "Id")
