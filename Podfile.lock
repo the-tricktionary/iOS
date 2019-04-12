@@ -19,6 +19,9 @@ PODS:
   - Firebase/Firestore (4.9.0):
     - Firebase/Core
     - FirebaseFirestore (= 0.10.1)
+  - Firebase/Storage (4.9.0):
+    - Firebase/Core
+    - FirebaseStorage (= 2.1.2)
   - FirebaseAnalytics (4.0.9):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
@@ -38,6 +41,10 @@ PODS:
     - Protobuf (~> 3.1)
   - FirebaseInstanceID (2.0.10):
     - FirebaseCore (~> 4.0)
+  - FirebaseStorage (2.1.2):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleSignIn (4.4.0):
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
@@ -117,6 +124,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - Firebase/Storage
   - GoogleSignIn
   - KJExpandableTableTree
   - MMDrawerController
@@ -137,6 +145,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseFirestore
     - FirebaseInstanceID
+    - FirebaseStorage
     - GoogleSignIn
     - GoogleToolboxForMac
     - gRPC
@@ -169,6 +178,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 3bd047463058fa6b5d312c97502c52e45401cdfb
   FirebaseFirestore: a6db7a47c6a47d26069892d7db39f7792f2f7f9a
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
+  FirebaseStorage: 181bb543d39ee3c53e0558de7ba86b1286a0427f
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   gRPC: 72b71666056dcb12235b5238f0ff5948fd60321a
@@ -192,6 +202,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   YoutubePlayerView: 510480ccdf03f2ffc888ee0b2bf2d1d8f8d9289f
 
-PODFILE CHECKSUM: a8b7cb0d676842b6dbda574add894d48e19a1b8d
+PODFILE CHECKSUM: dd8395c94e40290086e2e233cd243253675d09cd
 
 COCOAPODS: 1.5.3

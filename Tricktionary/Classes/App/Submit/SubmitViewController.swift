@@ -23,13 +23,25 @@ class SubmitViewController: BaseCenterViewController {
     let levelTextField: UITextField = UITextField()
     let saveButton: GradientButton = GradientButton()
     let asocTextField: UITextField = UITextField()
+    let typeTextField: UITextField = UITextField()
     
     let asocPicker: UIPickerView = UIPickerView()
+    let typePicker: UIPickerView = UIPickerView()
     
     internal let scrollView: UIScrollView = UIScrollView()
     internal let contentView: UIView = UIView()
+    internal var viewModel: SubmitViewModel
     
     // MARK: Life cycle
+    
+    init(viewModel: SubmitViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -40,6 +52,7 @@ class SubmitViewController: BaseCenterViewController {
         contentView.addSubview(trickDescriptionTextField)
         contentView.addSubview(levelTextField)
         contentView.addSubview(asocTextField)
+        contentView.addSubview(typeTextField)
         contentView.addSubview(saveButton)
         scrollView.addSubview(contentView)
     }
@@ -102,11 +115,16 @@ class SubmitViewController: BaseCenterViewController {
         toolBar.isUserInteractionEnabled = true
         
         asocTextField.isUserInteractionEnabled = true
-        asocTextField.placeholder = "FISAC"
+        asocTextField.placeholder = "Organisation"
         asocTextField.inputView = asocPicker
         asocTextField.inputAccessoryView = toolBar
         
+        typeTextField.isUserInteractionEnabled = false
+        typeTextField.placeholder = "Trick type"
+        
         saveButton.setTitle("Save", for: .normal)
+        saveButton.isUserInteractionEnabled = true
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         
         initVideoPlayer()
         initFormView()
@@ -158,13 +176,20 @@ class SubmitViewController: BaseCenterViewController {
         levelTextField.snp.makeConstraints { (make) in
             make.top.equalTo(trickDescriptionTextField.snp.bottom)
             make.leading.equalTo(contentView).inset(16)
-            make.width.equalTo(UIScreen.main.bounds.size.width / 2)
+            make.width.equalTo(UIScreen.main.bounds.size.width / 4)
             make.height.equalTo(height)
         }
         
         asocTextField.snp.makeConstraints { (make) in
             make.top.equalTo(levelTextField)
             make.leading.equalTo(levelTextField.snp.trailing)
+            make.trailing.equalTo(typeTextField.snp.leading)
+            make.height.equalTo(height)
+        }
+        
+        typeTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(levelTextField)
+            make.leading.equalTo(asocTextField.snp.trailing)
             make.trailing.equalTo(contentView).inset(16)
             make.height.equalTo(height)
         }
@@ -187,6 +212,7 @@ class SubmitViewController: BaseCenterViewController {
         trickNameTextField.isHidden = true
         levelTextField.isHidden = true
         asocTextField.isHidden = true
+        typeTextField.isHidden = true
         saveButton.isHidden = true
         descriptionLabel.isHidden = false
     }
@@ -208,6 +234,7 @@ class SubmitViewController: BaseCenterViewController {
         trickNameTextField.isHidden = false
         levelTextField.isHidden = false
         asocTextField.isHidden = false
+        typeTextField.isHidden = false
         saveButton.isHidden = false
         descriptionLabel.isHidden = true
     }
@@ -227,6 +254,8 @@ class SubmitViewController: BaseCenterViewController {
     }
     
     @objc func donePicker() {
+        asocTextField.text =  viewModel.organisations[asocPicker.selectedRow(inComponent: 0)]
+        typeTextField.text = viewModel.types[asocPicker.selectedRow(inComponent: 1)]
         asocTextField.endEditing(true)
     }
     
@@ -282,6 +311,12 @@ class SubmitViewController: BaseCenterViewController {
         self.present(actionSheet, animated: true, completion: nil)
     }
     
+    @objc func saveButtonTapped() {
+        viewModel.uploadVideo()
+    }
+    
+    // MARK: Keyboard
+    
     @objc func keyboardWillShow(notification:NSNotification){
         var userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
@@ -310,6 +345,7 @@ extension SubmitViewController: UIImagePickerControllerDelegate, UINavigationCon
         let mediaURL = info[UIImagePickerController.InfoKey.mediaURL.rawValue] as? NSURL
         
         if let media = mediaURL {
+            viewModel.videoURL = media.absoluteURL!
             setupVideoPlayer(with: media.absoluteURL!)
             setupVideoFormControll()
             setupFormView()

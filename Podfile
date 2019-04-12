@@ -11,6 +11,7 @@ target 'Tricktionary' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Auth'
+	pod 'Firebase/Storage'
 	pod 'GoogleSignIn'
 	pod 'SnapKit'
 	pod 'ReactiveCocoa'

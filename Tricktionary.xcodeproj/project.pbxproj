@@ -77,7 +77,10 @@
 		EAE6E1CC21F3DE560033D918 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6E1CB21F3DE560033D918 /* Picker.swift */; };
 		EAE6E1CE21F3E9C50033D918 /* SpeedTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6E1CD21F3E9C50033D918 /* SpeedTimerViewModel.swift */; };
 		EAE6E1D121F3F1F20033D918 /* ControllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6E1D021F3F1F20033D918 /* ControllView.swift */; };
+		EAEFA2E3225D3CCB00F0822C /* VideoMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEFA2E2225D3CCB00F0822C /* VideoMetadata.swift */; };
 		EAF8CB8F21EFE0CE00684288 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF8CB8E21EFE0CE00684288 /* BaseCell.swift */; };
+		EAF9B499225A7894001AB242 /* SubmitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF9B498225A7894001AB242 /* SubmitViewModel.swift */; };
+		EAF9B49B225A78D1001AB242 /* VideoStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF9B49A225A78D1001AB242 /* VideoStorageManager.swift */; };
 		EAF9F27C222DBAF200237EDF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF9F27B222DBAF200237EDF /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -181,7 +184,10 @@
 		EAE6E1CB21F3DE560033D918 /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
 		EAE6E1CD21F3E9C50033D918 /* SpeedTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimerViewModel.swift; sourceTree = "<group>"; };
 		EAE6E1D021F3F1F20033D918 /* ControllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllView.swift; sourceTree = "<group>"; };
+		EAEFA2E2225D3CCB00F0822C /* VideoMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMetadata.swift; sourceTree = "<group>"; };
 		EAF8CB8E21EFE0CE00684288 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		EAF9B498225A7894001AB242 /* SubmitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewModel.swift; sourceTree = "<group>"; };
+		EAF9B49A225A78D1001AB242 /* VideoStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorageManager.swift; sourceTree = "<group>"; };
 		EAF9F27B222DBAF200237EDF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TricktionaryTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -342,6 +348,7 @@
 				EA45C47921F1A7D0009DC1A8 /* SpeedTimes.swift */,
 				EAD3D73F21F9187500F39A22 /* SpeedEvents.swift */,
 				EAB1517C22209D720006B0FB /* Speed.swift */,
+				EAEFA2E2225D3CCB00F0822C /* VideoMetadata.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -455,6 +462,7 @@
 		EAC23ABC219D8E520086D9E2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				EAF9B49A225A78D1001AB242 /* VideoStorageManager.swift */,
 				EA6C93A9219EC91F00FF9BCC /* TrickManager.swift */,
 				EAB08153221EFFB20030AAF1 /* SpeedManager.swift */,
 				EA073DF721FA834B0046799C /* PxUserDefaults */,
@@ -481,6 +489,7 @@
 				EABA88652253ADB300D27F64 /* SubmitViewController.swift */,
 				EACAFF3422594B9200FF0202 /* AsociationPickerDataSource.swift */,
 				EACAFF3722594D2000FF0202 /* AsociationPickerDelegate.swift */,
+				EAF9B498225A7894001AB242 /* SubmitViewModel.swift */,
 			);
 			path = Submit;
 			sourceTree = "<group>";
@@ -840,6 +849,7 @@
 				EAB08154221EFFB20030AAF1 /* SpeedManager.swift in Sources */,
 				EA4F823322214FDD001CB1F4 /* SpeedDataDelegate.swift in Sources */,
 				EAACBCE221D04B3B007AEDFE /* InformationCell.swift in Sources */,
+				EAEFA2E3225D3CCB00F0822C /* VideoMetadata.swift in Sources */,
 				EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */,
 				EAD3D73A21F8FE9F00F39A22 /* SpeachUtil.swift in Sources */,
 				EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */,
@@ -863,6 +873,7 @@
 				EAACBCE021D0365E007AEDFE /* TrickDetailDelegate.swift in Sources */,
 				EA073DF921FA83660046799C /* PxUserDefaults.swift in Sources */,
 				EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */,
+				EAF9B49B225A78D1001AB242 /* VideoStorageManager.swift in Sources */,
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
 				EA638705222350FF00D23A9C /* DateTimeUtil.swift in Sources */,
 				EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */,
@@ -870,6 +881,7 @@
 				EA4F823E2222B9B7001CB1F4 /* SpeedDataDetailDelegate.swift in Sources */,
 				EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */,
 				EA073DF621FA792A0046799C /* SettingsViewController.swift in Sources */,
+				EAF9B499225A7894001AB242 /* SubmitViewModel.swift in Sources */,
 				EAE6E1D121F3F1F20033D918 /* ControllView.swift in Sources */,
 				EABCC85F224D8A8A00ED3B90 /* BaseCenterViewController.swift in Sources */,
 				EA4F823C2221842E001CB1F4 /* GraphCell.swift in Sources */,

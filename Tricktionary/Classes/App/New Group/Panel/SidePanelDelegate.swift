@@ -44,7 +44,7 @@ extension SidePanelViewController: UITableViewDelegate {
             } else if indexPath.row == 3 {
                 delegate?.didSelectMenuItem(viewController: SpeedDataViewController(viewModel: SpeedDataViewModel()))
             } else if indexPath.row == 4 {
-                delegate?.didSelectMenuItem(viewController: SubmitViewController())
+                delegate?.didSelectMenuItem(viewController: SubmitViewController(viewModel: SubmitViewModel()))
             } else if indexPath.row == 5 {
                 openInstagram()
             } else if indexPath.row == 6 {
