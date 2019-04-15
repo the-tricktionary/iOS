@@ -12,20 +12,14 @@ import UIKit
 extension SubmitViewController: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-            return viewModel.organisations.count
-        }
         return viewModel.types.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 {
-            return viewModel.organisations[row]
-        }
         return viewModel.types[row]
     }
 }

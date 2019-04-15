@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 import AVKit
+import ReactiveCocoa
 
 class SubmitViewController: BaseCenterViewController {
     
@@ -20,9 +21,7 @@ class SubmitViewController: BaseCenterViewController {
     
     let trickNameTextField: UITextField = UITextField()
     let trickDescriptionTextField: UITextField = UITextField()
-    let levelTextField: UITextField = UITextField()
     let saveButton: GradientButton = GradientButton()
-    let asocTextField: UITextField = UITextField()
     let typeTextField: UITextField = UITextField()
     
     let asocPicker: UIPickerView = UIPickerView()
@@ -50,8 +49,6 @@ class SubmitViewController: BaseCenterViewController {
         contentView.addSubview(videoPlayer.view)
         contentView.addSubview(trickNameTextField)
         contentView.addSubview(trickDescriptionTextField)
-        contentView.addSubview(levelTextField)
-        contentView.addSubview(asocTextField)
         contentView.addSubview(typeTextField)
         contentView.addSubview(saveButton)
         scrollView.addSubview(contentView)
@@ -62,6 +59,8 @@ class SubmitViewController: BaseCenterViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+        
+        activityIndicatorView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         
         view.backgroundColor = Color.background
         
@@ -88,14 +87,18 @@ class SubmitViewController: BaseCenterViewController {
         trickNameTextField.placeholder = "Trick name"
         trickNameTextField.delegate = self
         trickNameTextField.isUserInteractionEnabled = true
+        trickNameTextField.reactive.continuousTextValues.observeValues { (value) in
+            self.viewModel.metadata.trickName = value ?? ""
+            self.enableSave()
+        }
         
         trickDescriptionTextField.placeholder = "Description (can add your insta name)"
         trickDescriptionTextField.delegate = self
         trickDescriptionTextField.isUserInteractionEnabled = true
-        
-        levelTextField.placeholder = "Level"
-        levelTextField.delegate = self
-        levelTextField.isUserInteractionEnabled = true
+        trickDescriptionTextField.reactive.continuousTextValues.observeValues { (value) in
+            self.viewModel.metadata.desc = value ?? ""
+            self.enableSave()
+        }
         
         asocPicker.backgroundColor = UIColor.orange.withAlphaComponent(0.5)
         asocPicker.dataSource = self
@@ -114,13 +117,14 @@ class SubmitViewController: BaseCenterViewController {
         toolBar.setItems([spaceButton, doneTimeButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
-        asocTextField.isUserInteractionEnabled = true
-        asocTextField.placeholder = "Organisation"
-        asocTextField.inputView = asocPicker
-        asocTextField.inputAccessoryView = toolBar
-        
-        typeTextField.isUserInteractionEnabled = false
+        typeTextField.isUserInteractionEnabled = true
         typeTextField.placeholder = "Trick type"
+        typeTextField.inputView = asocPicker
+        typeTextField.inputAccessoryView = toolBar
+        typeTextField.reactive.continuousTextValues.observeValues { (value) in
+            self.viewModel.metadata.trickType = value ?? ""
+            self.enableSave()
+        }
         
         saveButton.setTitle("Save", for: .normal)
         saveButton.isUserInteractionEnabled = true
@@ -173,29 +177,15 @@ class SubmitViewController: BaseCenterViewController {
             make.height.equalTo(height)
         }
         
-        levelTextField.snp.makeConstraints { (make) in
+        typeTextField.snp.makeConstraints { (make) in
             make.top.equalTo(trickDescriptionTextField.snp.bottom)
             make.leading.equalTo(contentView).inset(16)
-            make.width.equalTo(UIScreen.main.bounds.size.width / 4)
-            make.height.equalTo(height)
-        }
-        
-        asocTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(levelTextField)
-            make.leading.equalTo(levelTextField.snp.trailing)
-            make.trailing.equalTo(typeTextField.snp.leading)
-            make.height.equalTo(height)
-        }
-        
-        typeTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(levelTextField)
-            make.leading.equalTo(asocTextField.snp.trailing)
             make.trailing.equalTo(contentView).inset(16)
             make.height.equalTo(height)
         }
         
         saveButton.snp.makeConstraints { (make) in
-            make.top.equalTo(levelTextField.snp.bottom).offset(20)
+            make.top.equalTo(typeTextField.snp.bottom).offset(20)
             make.leading.trailing.equalTo(contentView).inset(16)
             make.height.equalTo(height)
             make.bottom.equalTo(contentView)
@@ -210,8 +200,6 @@ class SubmitViewController: BaseCenterViewController {
     fileprivate func initFormView() {
         trickDescriptionTextField.isHidden = true
         trickNameTextField.isHidden = true
-        levelTextField.isHidden = true
-        asocTextField.isHidden = true
         typeTextField.isHidden = true
         saveButton.isHidden = true
         descriptionLabel.isHidden = false
@@ -232,10 +220,10 @@ class SubmitViewController: BaseCenterViewController {
     fileprivate func setupFormView() {
         trickDescriptionTextField.isHidden = false
         trickNameTextField.isHidden = false
-        levelTextField.isHidden = false
-        asocTextField.isHidden = false
         typeTextField.isHidden = false
         saveButton.isHidden = false
+        saveButton.isEnabled = false
+        saveButton.backgroundColor = UIColor.gray
         descriptionLabel.isHidden = true
     }
     
@@ -243,6 +231,15 @@ class SubmitViewController: BaseCenterViewController {
         let canceButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped))
         
         navigationItem.rightBarButtonItem = canceButton
+    }
+    
+    fileprivate func enableSave() {
+        saveButton.isEnabled = viewModel.metadata.isValid()
+        if saveButton.isEnabled {
+            saveButton.backgroundColor = Color.bar
+        } else {
+            saveButton.backgroundColor = UIColor.gray
+        }
     }
     
     // MARK: User action
@@ -254,9 +251,8 @@ class SubmitViewController: BaseCenterViewController {
     }
     
     @objc func donePicker() {
-        asocTextField.text =  viewModel.organisations[asocPicker.selectedRow(inComponent: 0)]
-        typeTextField.text = viewModel.types[asocPicker.selectedRow(inComponent: 1)]
-        asocTextField.endEditing(true)
+        typeTextField.text = viewModel.types[asocPicker.selectedRow(inComponent: 0)]
+        typeTextField.endEditing(true)
     }
     
     @objc func addButtonTapped() {
@@ -312,7 +308,16 @@ class SubmitViewController: BaseCenterViewController {
     }
     
     @objc func saveButtonTapped() {
-        viewModel.uploadVideo()
+        activityIndicatorView.startAnimating()
+        viewModel.uploadVideo(success: {
+            self.activityIndicatorView.stopAnimating()
+            self.initVideoPlayer()
+            self.initFormView()
+            self.initNavigationItems()
+        }) { (error) in
+            self.activityIndicatorView.stopAnimating()
+            print(error) // TODO: alert
+        }
     }
     
     // MARK: Keyboard
