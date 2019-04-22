@@ -12,7 +12,7 @@ import AVFoundation
 import AVKit
 import ReactiveCocoa
 
-class SubmitViewController: BaseCenterViewController {
+class SubmitViewController: BaseCenterViewController, UIPickerViewDelegate {
     
     // MARK: Variables
     
@@ -102,6 +102,7 @@ class SubmitViewController: BaseCenterViewController {
         
         asocPicker.backgroundColor = UIColor.orange.withAlphaComponent(0.5)
         asocPicker.dataSource = self
+        asocPicker.delegate = self
         
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
