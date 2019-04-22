@@ -102,7 +102,6 @@ class SubmitViewController: BaseCenterViewController {
         
         asocPicker.backgroundColor = UIColor.orange.withAlphaComponent(0.5)
         asocPicker.dataSource = self
-        asocPicker.delegate = self
         
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
@@ -316,7 +315,7 @@ class SubmitViewController: BaseCenterViewController {
             self.initNavigationItems()
         }) { (error) in
             self.activityIndicatorView.stopAnimating()
-            print(error) // TODO: alert
+            self.errorAlert(title: "Error", message: error)
         }
     }
     

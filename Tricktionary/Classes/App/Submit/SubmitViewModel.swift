@@ -34,7 +34,6 @@ class SubmitViewModel {
         metadata.name = "\(Int(Date().timeIntervalSince1970)).mp4"
         metadata.uid = user.uid
         metadata.email = user.email ?? "Unknown email"
-        
         VideoStorageManager.shared.uploadVideo(url: videoURL!, metadata: metadata.asDisctionary(), success: {
             success()
         }, failed: { (error) in

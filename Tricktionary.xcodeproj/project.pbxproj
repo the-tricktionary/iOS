@@ -64,7 +64,6 @@
 		EABCC85F224D8A8A00ED3B90 /* BaseCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCC85E224D8A8A00ED3B90 /* BaseCenterViewController.swift */; };
 		EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */; };
 		EACAFF3522594B9200FF0202 /* AsociationPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAFF3422594B9200FF0202 /* AsociationPickerDataSource.swift */; };
-		EACAFF3822594D2000FF0202 /* AsociationPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAFF3722594D2000FF0202 /* AsociationPickerDelegate.swift */; };
 		EACF594621E7EAF40037FE2B /* SidePanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF594521E7EAF40037FE2B /* SidePanelViewController.swift */; };
 		EACF63DC21EE961B00D7D836 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63DB21EE961B00D7D836 /* LoginView.swift */; };
 		EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63DD21EE962A00D7D836 /* RegistrationView.swift */; };
@@ -170,7 +169,6 @@
 		EABCC85E224D8A8A00ED3B90 /* BaseCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCenterViewController.swift; sourceTree = "<group>"; };
 		EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksViewController.swift; sourceTree = "<group>"; };
 		EACAFF3422594B9200FF0202 /* AsociationPickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsociationPickerDataSource.swift; sourceTree = "<group>"; };
-		EACAFF3722594D2000FF0202 /* AsociationPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsociationPickerDelegate.swift; sourceTree = "<group>"; };
 		EACF594521E7EAF40037FE2B /* SidePanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelViewController.swift; sourceTree = "<group>"; };
 		EACF63DB21EE961B00D7D836 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		EACF63DD21EE962A00D7D836 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -488,7 +486,6 @@
 			children = (
 				EABA88652253ADB300D27F64 /* SubmitViewController.swift */,
 				EACAFF3422594B9200FF0202 /* AsociationPickerDataSource.swift */,
-				EACAFF3722594D2000FF0202 /* AsociationPickerDelegate.swift */,
 				EAF9B498225A7894001AB242 /* SubmitViewModel.swift */,
 			);
 			path = Submit;
@@ -844,7 +841,6 @@
 				EACF594621E7EAF40037FE2B /* SidePanelViewController.swift in Sources */,
 				EAB08158221F3CFD0030AAF1 /* SpeedDataViewController.swift in Sources */,
 				EA073E0121FA85570046799C /* SwitchCell.swift in Sources */,
-				EACAFF3822594D2000FF0202 /* AsociationPickerDelegate.swift in Sources */,
 				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
 				EAB08154221EFFB20030AAF1 /* SpeedManager.swift in Sources */,
 				EA4F823322214FDD001CB1F4 /* SpeedDataDelegate.swift in Sources */,

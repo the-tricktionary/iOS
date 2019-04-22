@@ -18,8 +18,8 @@ class VideoMetadata {
     var desc: String = ""
     var trickType: String = ""
     
-    func asDisctionary() -> [String : Any] {
-        var dictionary = [String : Any]()
+    func asDisctionary() -> [String : String] {
+        var dictionary = [String : String]()
         
         dictionary["name"] = self.name
         dictionary["email"] = self.email
