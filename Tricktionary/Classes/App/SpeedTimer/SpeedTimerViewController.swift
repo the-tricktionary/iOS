@@ -165,6 +165,19 @@ class SpeedTimerViewController: BaseCenterViewController {
                                      repeats: true)
     }
     
+    fileprivate func resetTimer() {
+        eventTime = 0
+        miliseconds = 0
+        clickButton.isUserInteractionEnabled = false
+        timeToSpeek = 0
+        navigationItem.title = "Speed Timer"
+        controllView.stopButton.isHidden = true
+        controllView.resetButton.isHidden = false
+        controllView.eventTime.isEnabled = true
+        controllView.eventType.isEnabled = true
+    }
+    
+    // TODO: This is string component!
     fileprivate func timeFormatted(_ totalSeconds: Int, _ miliseconds: Int?) -> String {
         let seconds: Int = totalSeconds % 60
         let minutes: Int = (totalSeconds / 60) % 60
@@ -183,7 +196,6 @@ class SpeedTimerViewController: BaseCenterViewController {
         countLabel.text = "\(count)"
         viewModel.speed.graphData.append(Double(Date().timeIntervalSince1970 * 1000))
         jumpsPerSecond += 1
-        
     }
     
     @objc func doneTimePicker() {
@@ -208,15 +220,10 @@ class SpeedTimerViewController: BaseCenterViewController {
         if eventTime == usedTime {
             timer?.invalidate()
             timer = nil
-            eventTime = 0
-            miliseconds = 0
-            clickButton.isUserInteractionEnabled = false
-            timeToSpeek = 0
-            navigationItem.title = "Speed Timer"
-            controllView.stopButton.isHidden = true
-            controllView.resetButton.isHidden = false
-            controllView.eventTime.isEnabled = true
-            controllView.eventType.isEnabled = true
+            
+            resetTimer()
+            
+            // EDITOR VC FLOW START
             viewModel.speed.avgJumps = Double(count) / Double(usedTime)
             viewModel.speed.name = "GRAF TEST 8"
             viewModel.speed.score = count
@@ -225,6 +232,7 @@ class SpeedTimerViewController: BaseCenterViewController {
             viewModel.speed.maxJumps = Double(maxJumps)
             viewModel.prepareGraphData()
             SpeedManager.shared.saveSpeedEvent(speed: viewModel.speed)
+            // EDITOR VC FLOW END
         }
     }
     
@@ -243,9 +251,10 @@ class SpeedTimerViewController: BaseCenterViewController {
         controllView.resetButton.isHidden = true
         controllView.stopButton.isHidden = false
         controllView.playButton.isHidden = true
-        
-        // TODO: Start timer after play start sound
         clickButton.isUserInteractionEnabled = true
+        
+        // TODO: Play begin speach with start beep
+        // TODO: After speach ended, setupTimer()
         setupTimer()
     }
     
