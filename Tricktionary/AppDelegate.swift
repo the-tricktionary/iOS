@@ -29,15 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.delegate = self
         
         let leftNavigation = UINavigationController(rootViewController: SidePanelViewController())
-        let rightNavigation = UINavigationController(rootViewController: SidePanelViewController())
-        let centerViewController = UINavigationController(rootViewController: TricksViewController(viewModel: TricksViewModel()))
-        
-        centerContainer = MMDrawerController(center: centerViewController, leftDrawerViewController: leftNavigation)
-        
+        let centerViewController = UINavigationController(rootViewController: TabBarViewController())
+
+        centerContainer = MMDrawerController(center: TabBarViewController(), leftDrawerViewController: leftNavigation)
+
         centerContainer?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.panningCenterView
         centerContainer?.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.panningCenterView
-        
+//
         window = UIWindow(frame: UIScreen.main.bounds)
+
         window?.rootViewController = centerContainer
         
         return true
@@ -119,29 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let _ = error {
-            return
-        }
         
-        guard let authentication = user.authentication else { return }
-        
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                       accessToken: authentication.accessToken)
-        
-        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-            if let error = error {
-                print("CHYBA PRIHLASENI: \(error.localizedDescription)")
-                return
-            }
-            let centerViewController = UINavigationController(rootViewController: TricksViewController(viewModel: TricksViewModel()))
-            
-            self.centerContainer?.setCenterView(centerViewController, withFullCloseAnimation: false, completion: { (_) in
-                
-            })
-            let leftNavigation = UINavigationController(rootViewController: SidePanelViewController())
-            self.centerContainer?.leftDrawerViewController = leftNavigation
-            self.window?.rootViewController = self.centerContainer
-        }
     }
 }
 

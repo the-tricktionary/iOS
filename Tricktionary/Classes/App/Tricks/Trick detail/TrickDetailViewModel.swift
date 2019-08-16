@@ -9,14 +9,23 @@
 import Foundation
 import ReactiveSwift
 
-class TrickDetailViewModel {
-    
+protocol TrickDetailViewModelType {
+    var onLoad: (() -> Void)? { get set }
+    var onStartLoading: (() -> Void)? { get set }
+    func getTrick()
+    var trick: Trick? { get set }
+}
+
+class TrickDetailViewModel: TrickDetailViewModelType {
     
     // MARK: Variables
     
+    var onLoad: (() -> Void)?
+    var onStartLoading: (() -> Void)?
+    
     var trick: Trick?
     var trickName: String
-    var loaded: MutableProperty<Bool> = MutableProperty<Bool>(false)
+//    var loaded: MutableProperty<Bool> = MutableProperty<Bool>(false)
     var loadedPrerequisites: MutableProperty<Bool> = MutableProperty<Bool>(false)
     
     // MARK: Life cycles
@@ -27,18 +36,17 @@ class TrickDetailViewModel {
     
     // MARK: Public
     
-    func getTrick(starting: @escaping () -> Void, finish: @escaping () -> Void) {
-        
+    func getTrick() {
         TrickManager.shared.getTrickByName(name: trickName,
-                                           starting: {
-                                            starting()
+                                           starting: { [weak self] in
+                                            self?.onStartLoading?()
         }, completion: { (trick) in
             self.trick = Trick(trick)
-            self.trick?.getPrerequisites(finish: {
-                finish()
+            self.trick?.getPrerequisites(finish: { [weak self] in
+                self?.onLoad?()
             })
-        }) {
-            finish()
+        }) { [weak self] in
+            self?.onLoad?()
         }
     }
 }

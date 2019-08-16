@@ -27,7 +27,6 @@ class TimePicker: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        viewController.usedTime = viewModel.times[row]!
-        viewController.controllView.eventTime.text = viewModel.timeFormatted(row)
+        
     }
 }

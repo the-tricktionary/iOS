@@ -25,8 +25,16 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = Color.background
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.barTintColor = Color.bar
+        navigationController?.navigationBar.isTranslucent = true
+
+        
         centerContainer = UIApplication.shared.keyWindow?.rootViewController as? MMDrawerController
-                
+        
         view.addSubview(activityIndicatorView)
         activityIndicatorView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         activityIndicatorView.layer.zPosition = 999

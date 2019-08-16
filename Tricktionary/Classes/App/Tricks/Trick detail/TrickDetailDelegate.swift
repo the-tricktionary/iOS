@@ -23,21 +23,15 @@ extension TrickDetailViewController: UITableViewDelegate {
             if trick.prerequisites.count > 0 {
                 if indexPath.section == 3 {
                     let cell = tableView.cellForRow(at: indexPath) as! InformationCell
-                    let newScreen = UserDefaults.standard.value(forKey: PxSettings.newScreen) as? Bool ?? false
-                    if newScreen {
-                        let nextDetailViewController = TrickDetailViewController(viewModel: TrickDetailViewModel(trick: cell.title.text!))
-                        navigationController?.pushViewController(nextDetailViewController, animated: true)
-                    } else {
+//                    let newScreen = UserDefaults.standard.value(forKey: PxSettings.newScreen) as? Bool ?? false
+//                    if newScreen {
+//                        let nextDetailViewController = TrickDetailViewController(viewModel: TrickDetailViewModel(trick: cell.title.text!))
+//                        navigationController?.pushViewController(nextDetailViewController, animated: true)
+//                    } else {
                         viewModel.trickName = cell.title.text!
-                        // TODO: Activiti indicator
-                        viewModel.getTrick(starting: {
-                            print("Loading ...")
-                        }) {
-                            self.tableView.reloadData()
-                            print("Loaded")
-                        }
+                        viewModel.getTrick()
                         title = cell.title.text!
-                    }
+//                    }
                 }
             }
         }

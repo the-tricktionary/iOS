@@ -13,7 +13,7 @@ import Firebase
 import ReactiveSwift
 import ReactiveCocoa
 
-class LoginViewController: BaseCenterViewController, GIDSignInUIDelegate {
+class LoginViewController: BaseDrawerViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     // MARK: Variables
     
@@ -43,7 +43,10 @@ class LoginViewController: BaseCenterViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+        
         GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance()?.delegate = self
         
         view.backgroundColor = UIColor.white
         
@@ -139,7 +142,7 @@ class LoginViewController: BaseCenterViewController, GIDSignInUIDelegate {
             self.present(alert, animated: true)
             return
         }, completed: {
-//            self.delegate?.toggleMenu()
+            self.navigationController?.dismiss(animated: true, completion: nil)
         })
     }
     
@@ -179,5 +182,26 @@ class LoginViewController: BaseCenterViewController, GIDSignInUIDelegate {
         }
         loginView.isHidden = false
         registrationView.isHidden = true
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let _ = error {
+            return
+        }
+        
+        guard let authentication = user.authentication else { return }
+        
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        
+        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+            if let error = error {
+                print("CHYBA PRIHLASENI: \(error.localizedDescription)")
+                return
+            }
+            
+            self.onClose?()
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }
     }
 }

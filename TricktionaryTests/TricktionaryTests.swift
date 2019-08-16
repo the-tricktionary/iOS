@@ -10,25 +10,31 @@ import XCTest
 @testable import Tricktionary
 
 class TricktionaryTests: XCTestCase {
+    
+    var vm: TricksViewModelType!
 
     override func setUp() {
+        vm = TricksViewModel(dataProvider: TestProvider())
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        vm = nil
     }
 
-    func testExample() {
+    func testTricks() {
+        vm.getTricks()
+        XCTAssert(vm.trickList.value.parents.count == 0, "Bad parents count")
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+}
 
+class TestProvider: TricksDataProviderType {
+    func getTricks(starting: @escaping () -> (), completion: @escaping ([String : Any]) -> Void, finish: @escaping () -> Void) {
+        
+    }
+    
+    
 }

@@ -11,36 +11,28 @@ import UIKit
 import ReactiveSwift
 import AVFoundation
 
-class SpeedTimerViewController: BaseCenterViewController {
+class SpeedTimerViewController: BaseCenterViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return viewModel.events.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return viewModel.events[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        customSecondTextField.isHidden = !(row == 4)
+    }
     // MARK: Variables
     
-    fileprivate let clickButton: UIButton = UIButton()
-    fileprivate let countLabel: UILabel = UILabel()
-    fileprivate let timePickerTextField: UITextField = UITextField()
-    fileprivate let impact: UIImpactFeedbackGenerator = UIImpactFeedbackGenerator()
-    fileprivate var timer: Timer?
-    fileprivate let timePicker: UIPickerView = UIPickerView()
-    fileprivate let eventPicker: UIPickerView = UIPickerView()
-    fileprivate let toolBar: UIToolbar = UIToolbar()
+    fileprivate let eventPicker = UIPickerView()
+    private let customSecondTextField = UITextField()
     
-    fileprivate var eventTime: Int = 0
-    fileprivate var count: Int = 0
-    
-    var jumpsPerSecond: Int = 0
-    var maxJumps: Int = 0
-    
-    fileprivate var timePickerDelegate: TimePicker = TimePicker()
-    fileprivate var eventPickerDelegate: EventPicker = EventPicker()
-    
-    let controllView: ControllView = ControllView()
-    var usedTime: Int = 30
     var viewModel: SpeedTimerViewModel
-    
-    var timeToSpeek: Int = 1
-    let speekBy: Int = 10
-    var miliseconds: Int = 0
-    // MARK: Life cycles
     
     init(viewModel: SpeedTimerViewModel) {
         self.viewModel = viewModel
@@ -53,10 +45,8 @@ class SpeedTimerViewController: BaseCenterViewController {
     
     override func loadView() {
         super.loadView()
-        view.addSubview(clickButton)
-        view.addSubview(controllView)
-        view.addSubview(timePickerTextField)
-        clickButton.addSubview(countLabel)
+        view.addSubview(eventPicker)
+        view.addSubview(customSecondTextField)
     }
     
     override func viewDidLoad() {
@@ -64,69 +54,15 @@ class SpeedTimerViewController: BaseCenterViewController {
         navigationItem.title = "Speed Timer"
         view.backgroundColor = UIColor.white
         
-        countLabel.textColor = UIColor.red
-        countLabel.font = UIFont.boldSystemFont(ofSize: 38)
-        countLabel.textAlignment = .center
-        countLabel.text = "\(count)"
+        eventPicker.delegate = self
+        eventPicker.dataSource = self
         
-        clickButton.isUserInteractionEnabled = true
-        clickButton.addTarget(self, action: #selector(click), for: .touchDown)
-        
-        timePicker.backgroundColor = UIColor.orange.withAlphaComponent(0.5)
-        timePickerDelegate.viewModel = viewModel
-        timePickerDelegate.viewController = self
-        timePicker.dataSource = timePickerDelegate
-        timePicker.delegate = timePickerDelegate
-        
-        eventPicker.backgroundColor = UIColor.orange.withAlphaComponent(0.5)
-        eventPickerDelegate.viewModel = viewModel
-        eventPickerDelegate.viewController = self
-        eventPicker.dataSource = eventPickerDelegate
-        eventPicker.delegate = eventPickerDelegate
-        
-        let timeToolBar = UIToolbar()
-        timeToolBar.barStyle = UIBarStyle.default
-        timeToolBar.isTranslucent = true
-        timeToolBar.tintColor = UIColor.red.withAlphaComponent(0.5)
-        timeToolBar.sizeToFit()
-        
-        let eventToolBar = UIToolbar()
-        eventToolBar.barStyle = UIBarStyle.default
-        eventToolBar.isTranslucent = true
-        eventToolBar.tintColor = UIColor.red.withAlphaComponent(0.5)
-        eventToolBar.sizeToFit()
-        
-        let doneTimeButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneTimePicker))
-        let doneEventButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneEventPicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        
-        timeToolBar.setItems([spaceButton, doneTimeButton], animated: false)
-        timeToolBar.isUserInteractionEnabled = true
-        
-        eventToolBar.setItems([spaceButton, doneEventButton], animated: false)
-        eventToolBar.isUserInteractionEnabled = true
-        
-        controllView.eventType.inputView = eventPicker
-        controllView.eventType.inputAccessoryView = eventToolBar
-        
-        controllView.eventTime.inputView = timePicker
-        controllView.eventTime.inputAccessoryView = timeToolBar
-        
-        controllView.eventTime.text = "Speed time"
-        controllView.eventType.text = "Event type"
-        
-        if timer == nil {
-            controllView.stopButton.isHidden = true
-        }
-        
-        controllView.resetButton.isUserInteractionEnabled = true
-        controllView.resetButton.addTarget(self, action: #selector(resetCount), for: .touchDown)
-        
-        controllView.playButton.isUserInteractionEnabled = true
-        controllView.playButton.addTarget(self, action: #selector(playTapped), for: .touchDown)
-        
-        controllView.stopButton.isUserInteractionEnabled = true
-        controllView.stopButton.addTarget(self, action: #selector(stopTapped), for: .touchDown)
+        customSecondTextField.isHidden = true
+        customSecondTextField.placeholder = "Enter time in seconds"
+        customSecondTextField.keyboardType = .numberPad
+        customSecondTextField.layer.borderWidth = 1
+        customSecondTextField.layer.cornerRadius = 5
+        customSecondTextField.layer.borderColor = UIColor.gray.cgColor
         
         setupViewConstraints()
     }
@@ -135,47 +71,20 @@ class SpeedTimerViewController: BaseCenterViewController {
     
     fileprivate func setupViewConstraints() {
         
-        clickButton.snp.makeConstraints { (make) in
-            make.top.equalTo(view)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.bottom.equalTo(view)
+        customSecondTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.leading.trailing.equalTo(view).inset(40)
+            make.height.equalTo(40)
         }
         
-        countLabel.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
-            make.leading.equalTo(clickButton)
-            make.trailing.equalTo(clickButton)
-            make.centerY.equalTo(clickButton)
-        }
-        
-        controllView.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(10)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.height.equalTo(32)
+        let height = view.frame.height / 2.5
+        eventPicker.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(view)
+            make.top.equalTo(customSecondTextField.snp.bottom)
+            make.height.equalTo(height)
         }
     }
     
-    fileprivate func setupTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.1,
-                                     target: self,
-                                     selector: #selector(tick),
-                                     userInfo: nil,
-                                     repeats: true)
-    }
-    
-    fileprivate func resetTimer() {
-        eventTime = 0
-        miliseconds = 0
-        clickButton.isUserInteractionEnabled = false
-        timeToSpeek = 0
-        navigationItem.title = "Speed Timer"
-        controllView.stopButton.isHidden = true
-        controllView.resetButton.isHidden = false
-        controllView.eventTime.isEnabled = true
-        controllView.eventType.isEnabled = true
-    }
     
     // TODO: This is string component!
     fileprivate func timeFormatted(_ totalSeconds: Int, _ miliseconds: Int?) -> String {
@@ -186,88 +95,5 @@ class SpeedTimerViewController: BaseCenterViewController {
             return String(format: "%02d:%02d:%02d", minutes, seconds, miliseconds)
         }
         return String(format: "%02d:%02d", minutes, seconds)
-    }
-    
-    // MARK: User action
-    
-    @objc func click() {
-        impact.impactOccurred()
-        count += 1
-        countLabel.text = "\(count)"
-        viewModel.speed.graphData.append(Double(Date().timeIntervalSince1970 * 1000))
-        jumpsPerSecond += 1
-    }
-    
-    @objc func doneTimePicker() {
-        controllView.eventTime.endEditing(true)
-    }
-    
-    @objc func doneEventPicker() {
-        controllView.eventType.endEditing(true)
-    }
-    
-    @objc func tick() {
-        title = "\(timeFormatted(eventTime, miliseconds))"
-        if miliseconds == 10 {
-            eventTime += 1
-            if jumpsPerSecond > maxJumps {
-                maxJumps = jumpsPerSecond
-            }
-            jumpsPerSecond = 0
-            miliseconds = 0
-        }
-        miliseconds += 1
-        if eventTime == usedTime {
-            timer?.invalidate()
-            timer = nil
-            
-            resetTimer()
-            
-            // EDITOR VC FLOW START
-            viewModel.speed.avgJumps = Double(count) / Double(usedTime)
-            viewModel.speed.name = "GRAF TEST 8"
-            viewModel.speed.score = count
-            viewModel.speed.duration = usedTime
-            viewModel.speed.created = Date()
-            viewModel.speed.maxJumps = Double(maxJumps)
-            viewModel.prepareGraphData()
-            SpeedManager.shared.saveSpeedEvent(speed: viewModel.speed)
-            // EDITOR VC FLOW END
-        }
-    }
-    
-    @objc func resetCount() {
-        count = 0
-        countLabel.text = "\(count)"
-        controllView.playButton.isHidden = false
-        clickButton.isUserInteractionEnabled = true
-    }
-    
-    @objc func playTapped() {
-        resetCount()
-        clickButton.isUserInteractionEnabled = false
-        controllView.eventTime.isEnabled = false
-        controllView.eventType.isEnabled = false
-        controllView.resetButton.isHidden = true
-        controllView.stopButton.isHidden = false
-        controllView.playButton.isHidden = true
-        clickButton.isUserInteractionEnabled = true
-        
-        // TODO: Play begin speach with start beep
-        // TODO: After speach ended, setupTimer()
-        setupTimer()
-    }
-    
-    @objc func stopTapped() {
-        if timer != nil {
-            timer?.invalidate()
-            timer = nil
-        }
-        eventTime = 0
-        navigationItem.title = "Speed Timer"
-        controllView.stopButton.isHidden = true
-        controllView.resetButton.isHidden = false
-        controllView.eventTime.isEnabled = true
-        controllView.eventType.isEnabled = true
     }
 }

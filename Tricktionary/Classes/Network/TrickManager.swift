@@ -11,7 +11,13 @@ import FirebaseFirestore
 import ReactiveSwift
 import RxSwift
 
-class TrickManager {
+protocol TricksDataProviderType {
+    
+    func getTricks(starting: @escaping () -> (),completion: @escaping ([String : Any]) -> Void, finish: @escaping () -> Void)
+//    func getTrickByName()
+}
+
+class TrickManager: TricksDataProviderType {
     
     static var shared: TrickManager {
         get {

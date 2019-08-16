@@ -11,6 +11,8 @@ import UIKit
 import AVFoundation
 import AVKit
 import ReactiveCocoa
+import FirebaseAuth
+import SkeletonView
 
 class SubmitViewController: BaseCenterViewController, UIPickerViewDelegate {
     
@@ -26,6 +28,17 @@ class SubmitViewController: BaseCenterViewController, UIPickerViewDelegate {
     
     let asocPicker: UIPickerView = UIPickerView()
     let typePicker: UIPickerView = UIPickerView()
+    
+    private lazy var placeholder: UIView = {
+        let placeholder = UIView()
+        placeholder.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
+        self.view.addSubview(placeholder)
+        placeholder.layer.zPosition = 999
+        placeholder.snp.makeConstraints({ (make) in
+            make.edges.equalTo(self.view)
+        })
+        return placeholder
+    }()
     
     internal let scrollView: UIScrollView = UIScrollView()
     internal let contentView: UIView = UIView()
@@ -76,7 +89,7 @@ class SubmitViewController: BaseCenterViewController, UIPickerViewDelegate {
         description += "\u{2022} If you are able to record in slowmotion please do!\n\n"
         description += "\u{2022} Please keep your recording as stable as possible, or set up your camera\n\n"
         description += "\u{2022} Try to find a plain background that contrasts the color of your rope\n\n"
-        
+
         descriptionLabel.text = description
         
         scrollView.isUserInteractionEnabled = true
@@ -135,6 +148,18 @@ class SubmitViewController: BaseCenterViewController, UIPickerViewDelegate {
         initNavigationItems()
         
         setupViewConstraints()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if Auth.auth().currentUser == nil {
+            placeholder.isHidden = false
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        } else {
+            placeholder.isHidden = true
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+        
     }
     
     // MARK: Privates

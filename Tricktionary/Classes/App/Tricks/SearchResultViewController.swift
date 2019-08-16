@@ -51,9 +51,8 @@ class SearchResultViewController: UITableViewController, UISearchResultsUpdating
             selectedItem = viewModel.trickList.value.tricksForFiltering[indexPath.row]
         }
         dismiss(animated: true, completion: {
-            let trickDetailViewModel = TrickDetailViewModel(trick: selectedItem.name)
-            let trickDetalViewController = TrickDetailViewController(viewModel: trickDetailViewModel)
-            self.viewController.navigationController?.pushViewController(trickDetalViewController, animated: true)
+            let coord = TrickCoordinator(presenter: self.viewController.navigationController, trickName: selectedItem.name)
+            coord.start()
         })
     }
     

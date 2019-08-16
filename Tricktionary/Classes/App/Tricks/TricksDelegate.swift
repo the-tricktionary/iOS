@@ -12,18 +12,17 @@ import UIKit
 extension TricksViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 45
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let node = kjtreeInstance.tableView(tableView, didSelectRowAt: indexPath)
-        let indexTuples = node.index.components(separatedBy: ".")
-        
-        if indexTuples.count == 3 {
-            let trickDetailViewModel = TrickDetailViewModel(trick: node.key)
-            let trickDetalViewController = TrickDetailViewController(viewModel: trickDetailViewModel)
-            navigationController?.pushViewController(trickDetalViewController, animated: true)
-        }
+        let trick = viewModel.getTricks(viewModel.getTrickTypes()[indexPath.section])[indexPath.row] // - 1
+        let coord = TrickCoordinator(presenter: self.navigationController, trickName: trick.name)
+        coord.start()
     }
 }

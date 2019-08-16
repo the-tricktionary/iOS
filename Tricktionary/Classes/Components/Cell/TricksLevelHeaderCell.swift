@@ -33,14 +33,14 @@ class TrickLevelHeaderCell: BaseCell {
     // MARK: Privates
     
     fileprivate func setupSubviews() {
-        contentView.addSubview(view)
+        addSubview(view)
         view.addSubview(title)
     }
     
     fileprivate func setup() {
         contentView.backgroundColor = Color.background
         layerView = view
-        view.backgroundColor = Color.bar
+        view.backgroundColor = Color.levelHeader
         
         selectionStyle = .none
         

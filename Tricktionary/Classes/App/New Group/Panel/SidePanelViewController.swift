@@ -79,8 +79,11 @@ extension SidePanelViewController: SidePanelViewControllerDelegate {
     func didSelectMenuItem(viewController: UIViewController) {
         let navigationController = UINavigationController(rootViewController: viewController)
         let drawerController = UIApplication.shared.keyWindow?.rootViewController as? MMDrawerController
-        drawerController?.setCenterView(navigationController, withFullCloseAnimation: false, completion: { (_) in
-            
+        
+        drawerController?.centerViewController.present(navigationController, animated: true, completion: {
+            drawerController?.closeDrawer(animated: false, completion: { (_) in
+                
+            })
         })
     }
 }

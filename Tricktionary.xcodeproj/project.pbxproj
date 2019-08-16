@@ -16,13 +16,20 @@
 		EA073DFD21FA84080046799C /* SettingsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DFC21FA84080046799C /* SettingsDataSource.swift */; };
 		EA073E0121FA85570046799C /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073E0021FA85570046799C /* SwitchCell.swift */; };
 		EA073E0321FA8AFD0046799C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073E0221FA8AFD0046799C /* Color.swift */; };
+		EA16299422B1742C00BAE31E /* BaseDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16299322B1742C00BAE31E /* BaseDrawerViewController.swift */; };
 		EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D421EA78FA0086FC79 /* MenuCell.swift */; };
 		EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */; };
 		EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */; };
 		EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48DB21EAB8C10086FC79 /* Constants.swift */; };
+		EA1A999D22DE373100C6E888 /* TrickCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A999C22DE373100C6E888 /* TrickCoordinator.swift */; };
 		EA26412121D9A68900631852 /* TrickList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26412021D9A68900631852 /* TrickList.swift */; };
+		EA2C37E0227F6DC100F7ECEE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C37DF227F6DC100F7ECEE /* ProfileViewController.swift */; };
+		EA2C37E22283063500F7ECEE /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C37E12283063500F7ECEE /* ProfileViewModel.swift */; };
 		EA2C6B1021ED38270090579F /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C6B0F21ED38270090579F /* UserCell.swift */; };
 		EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA37A3B021E696DE0061E44D /* LoginViewController.swift */; };
+		EA3C728A2287584600324576 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3C72892287584600324576 /* TabBarViewController.swift */; };
+		EA3C728C2287843300324576 /* TypeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3C728B2287843300324576 /* TypeHeaderView.swift */; };
+		EA3C728E2288AB2A00324576 /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3C728D2288AB2A00324576 /* TableSection.swift */; };
 		EA45C47A21F1A7D0009DC1A8 /* SpeedTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA45C47921F1A7D0009DC1A8 /* SpeedTimes.swift */; };
 		EA4F823122214F8C001CB1F4 /* SpeedDataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4F823022214F8C001CB1F4 /* SpeedDataDataSource.swift */; };
 		EA4F823322214FDD001CB1F4 /* SpeedDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4F823222214FDD001CB1F4 /* SpeedDataDelegate.swift */; };
@@ -73,6 +80,7 @@
 		EAD3D73C21F916BE00F39A22 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3D73B21F916BE00F39A22 /* TimePicker.swift */; };
 		EAD3D73E21F9180100F39A22 /* EventPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3D73D21F9180100F39A22 /* EventPicker.swift */; };
 		EAD3D74021F9187500F39A22 /* SpeedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3D73F21F9187500F39A22 /* SpeedEvents.swift */; };
+		EAE566C722F4AADE0077EC5D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE566C622F4AADE0077EC5D /* UserManager.swift */; };
 		EAE6E1CC21F3DE560033D918 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6E1CB21F3DE560033D918 /* Picker.swift */; };
 		EAE6E1CE21F3E9C50033D918 /* SpeedTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6E1CD21F3E9C50033D918 /* SpeedTimerViewModel.swift */; };
 		EAE6E1D121F3F1F20033D918 /* ControllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6E1D021F3F1F20033D918 /* ControllView.swift */; };
@@ -115,13 +123,20 @@
 		EA073DFC21FA84080046799C /* SettingsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataSource.swift; sourceTree = "<group>"; };
 		EA073E0021FA85570046799C /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		EA073E0221FA8AFD0046799C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		EA16299322B1742C00BAE31E /* BaseDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDrawerViewController.swift; sourceTree = "<group>"; };
 		EA1A48D421EA78FA0086FC79 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDelegate.swift; sourceTree = "<group>"; };
 		EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDataSource.swift; sourceTree = "<group>"; };
 		EA1A48DB21EAB8C10086FC79 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EA1A999C22DE373100C6E888 /* TrickCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickCoordinator.swift; sourceTree = "<group>"; };
 		EA26412021D9A68900631852 /* TrickList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickList.swift; sourceTree = "<group>"; };
+		EA2C37DF227F6DC100F7ECEE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		EA2C37E12283063500F7ECEE /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		EA2C6B0F21ED38270090579F /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		EA37A3B021E696DE0061E44D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		EA3C72892287584600324576 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		EA3C728B2287843300324576 /* TypeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeHeaderView.swift; sourceTree = "<group>"; };
+		EA3C728D2288AB2A00324576 /* TableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
 		EA45C47921F1A7D0009DC1A8 /* SpeedTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimes.swift; sourceTree = "<group>"; };
 		EA4F823022214F8C001CB1F4 /* SpeedDataDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedDataDataSource.swift; sourceTree = "<group>"; };
 		EA4F823222214FDD001CB1F4 /* SpeedDataDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedDataDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +194,7 @@
 		EAD3D73D21F9180100F39A22 /* EventPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPicker.swift; sourceTree = "<group>"; };
 		EAD3D73F21F9187500F39A22 /* SpeedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedEvents.swift; sourceTree = "<group>"; };
 		EAD3D74521F922A400F39A22 /* beep.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = beep.m4a; sourceTree = "<group>"; };
+		EAE566C622F4AADE0077EC5D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		EAE6E1CB21F3DE560033D918 /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
 		EAE6E1CD21F3E9C50033D918 /* SpeedTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimerViewModel.swift; sourceTree = "<group>"; };
 		EAE6E1D021F3F1F20033D918 /* ControllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllView.swift; sourceTree = "<group>"; };
@@ -297,6 +313,14 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		EA3C72882287583100324576 /* Tab bar */ = {
+			isa = PBXGroup;
+			children = (
+				EA3C72892287584600324576 /* TabBarViewController.swift */,
+			);
+			path = "Tab bar";
+			sourceTree = "<group>";
+		};
 		EA4F82342221613D001CB1F4 /* SpeedDataDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,6 +341,7 @@
 				EA7AAB2D219E1CA2000858EE /* Cell */,
 				EA073E0221FA8AFD0046799C /* Color.swift */,
 				EA638704222350FF00D23A9C /* DateTimeUtil.swift */,
+				EAE566C622F4AADE0077EC5D /* UserManager.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -347,6 +372,7 @@
 				EAD3D73F21F9187500F39A22 /* SpeedEvents.swift */,
 				EAB1517C22209D720006B0FB /* Speed.swift */,
 				EAEFA2E2225D3CCB00F0822C /* VideoMetadata.swift */,
+				EA3C728D2288AB2A00324576 /* TableSection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -358,6 +384,7 @@
 				EA85B514219EDFA200F975A2 /* TrickDetailViewModel.swift */,
 				EAACBCDD21D034FC007AEDFE /* TrickDetailDataSource.swift */,
 				EAACBCDF21D0365E007AEDFE /* TrickDetailDelegate.swift */,
+				EA1A999C22DE373100C6E888 /* TrickCoordinator.swift */,
 			);
 			path = "Trick detail";
 			sourceTree = "<group>";
@@ -444,6 +471,9 @@
 		EAC23ABB219D8E490086D9E2 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				EA16299322B1742C00BAE31E /* BaseDrawerViewController.swift */,
+				EA3C72882287583100324576 /* Tab bar */,
+				EAED98FF227F6D610017766F /* Profile */,
 				EACAFF3622594C0000FF0202 /* Submit */,
 				EAB08156221F3CEA0030AAF1 /* SpeedData */,
 				EA073DF421FA79150046799C /* Settings */,
@@ -516,6 +546,7 @@
 				EACF63E021EE967700D7D836 /* IconTextField.swift */,
 				EACF63E221EE96F500D7D836 /* GradientButton.swift */,
 				EAE6E1CB21F3DE560033D918 /* Picker.swift */,
+				EA3C728B2287843300324576 /* TypeHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -542,6 +573,15 @@
 				EAE6E1D021F3F1F20033D918 /* ControllView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EAED98FF227F6D610017766F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				EA2C37DF227F6DC100F7ECEE /* ProfileViewController.swift */,
+				EA2C37E12283063500F7ECEE /* ProfileViewModel.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		EAF8CB8D21EFE0BB00684288 /* Base */ = {
@@ -762,6 +802,7 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftChart/SwiftChart.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -787,6 +828,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -834,6 +876,8 @@
 				EA6C93AA219EC91F00FF9BCC /* TrickManager.swift in Sources */,
 				EAF9F27C222DBAF200237EDF /* BaseViewController.swift in Sources */,
 				EA4F823122214F8C001CB1F4 /* SpeedDataDataSource.swift in Sources */,
+				EA2C37E0227F6DC100F7ECEE /* ProfileViewController.swift in Sources */,
+				EA2C37E22283063500F7ECEE /* ProfileViewModel.swift in Sources */,
 				EACF63E321EE96F500D7D836 /* GradientButton.swift in Sources */,
 				EA26412121D9A68900631852 /* TrickList.swift in Sources */,
 				EAE6E1CC21F3DE560033D918 /* Picker.swift in Sources */,
@@ -855,6 +899,7 @@
 				EA4F8238222161A2001CB1F4 /* SpeedDataDetailViewModel.swift in Sources */,
 				EAD3D74021F9187500F39A22 /* SpeedEvents.swift in Sources */,
 				EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */,
+				EA3C728C2287843300324576 /* TypeHeaderView.swift in Sources */,
 				EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */,
 				EAACBCDC21D02E83007AEDFE /* VideoCell.swift in Sources */,
 				EAE6E1CE21F3E9C50033D918 /* SpeedTimerViewModel.swift in Sources */,
@@ -873,19 +918,24 @@
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
 				EA638705222350FF00D23A9C /* DateTimeUtil.swift in Sources */,
 				EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */,
+				EAE566C722F4AADE0077EC5D /* UserManager.swift in Sources */,
 				EABA88662253ADB300D27F64 /* SubmitViewController.swift in Sources */,
 				EA4F823E2222B9B7001CB1F4 /* SpeedDataDetailDelegate.swift in Sources */,
+				EA1A999D22DE373100C6E888 /* TrickCoordinator.swift in Sources */,
 				EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */,
 				EA073DF621FA792A0046799C /* SettingsViewController.swift in Sources */,
 				EAF9B499225A7894001AB242 /* SubmitViewModel.swift in Sources */,
 				EAE6E1D121F3F1F20033D918 /* ControllView.swift in Sources */,
 				EABCC85F224D8A8A00ED3B90 /* BaseCenterViewController.swift in Sources */,
 				EA4F823C2221842E001CB1F4 /* GraphCell.swift in Sources */,
+				EA3C728E2288AB2A00324576 /* TableSection.swift in Sources */,
 				EAF8CB8F21EFE0CE00684288 /* BaseCell.swift in Sources */,
 				EA7AAB3A219E2257000858EE /* Trick.swift in Sources */,
 				EACAFF3522594B9200FF0202 /* AsociationPickerDataSource.swift in Sources */,
 				EA073E0321FA8AFD0046799C /* Color.swift in Sources */,
 				EAA4EE4B2205E08F003347D6 /* LoginViewModel.swift in Sources */,
+				EA3C728A2287584600324576 /* TabBarViewController.swift in Sources */,
+				EA16299422B1742C00BAE31E /* BaseDrawerViewController.swift in Sources */,
 				EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */,
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,
 				EA4F82362221615B001CB1F4 /* SpeedDataDetailViewController.swift in Sources */,

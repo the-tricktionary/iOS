@@ -114,6 +114,7 @@ PODS:
     - SwiftyJSON (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
+  - SkeletonView (1.5)
   - SnapKit (4.2.0)
   - SwiftChart (1.0.1)
   - SwiftyJSON (4.2.0)
@@ -131,6 +132,7 @@ DEPENDENCIES:
   - ReactiveCocoa
   - RxFirestoreExecutor
   - RxSwift
+  - SkeletonView
   - SnapKit
   - SwiftChart
   - YoutubePlayerView
@@ -164,6 +166,7 @@ SPEC REPOS:
     - RxAtomic
     - RxFirestoreExecutor
     - RxSwift
+    - SkeletonView
     - SnapKit
     - SwiftChart
     - SwiftyJSON
@@ -197,11 +200,12 @@ SPEC CHECKSUMS:
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxFirestoreExecutor: 1b8f32f0c5805b4948cd7e8a256f54ddc9a09780
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  SkeletonView: 6cbb80f82f8bdee3f9093e2fa03b84819b4bd826
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftChart: ba767a678d568a5ee22d419e146a0582865e1aff
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   YoutubePlayerView: 510480ccdf03f2ffc888ee0b2bf2d1d8f8d9289f
 
-PODFILE CHECKSUM: dd8395c94e40290086e2e233cd243253675d09cd
+PODFILE CHECKSUM: ffc801117a4e7ff0a1c6caab1f140f75a785475f
 
 COCOAPODS: 1.5.3

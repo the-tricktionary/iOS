@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SkeletonView
 
 class TrickDetailViewController: BaseViewController {
     
@@ -36,9 +37,12 @@ class TrickDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.viewModel.getTrick()
+        
         title = viewModel.trickName
         
         view.backgroundColor = Color.background
+        view.isSkeletonable = true
         
         tableView.tableHeaderView = UIView()
         tableView.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: 1)))
@@ -48,17 +52,9 @@ class TrickDetailViewController: BaseViewController {
         tableView.estimatedRowHeight = 250
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.isSkeletonable = true
         
         setupViewConstraints()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.viewModel.getTrick(starting: {
-            self.activityIndicatorView.startAnimating()
-        }) {
-            self.activityIndicatorView.stopAnimating()
-            self.tableView.reloadData()
-        }
     }
     
     // MARK: Private

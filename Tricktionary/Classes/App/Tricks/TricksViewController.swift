@@ -18,12 +18,11 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
     
     // MARK: Variables
     
-    let tableView: UITableView = UITableView()
-    fileprivate var viewModel: TricksViewModel
+    var tableView: UITableView = UITableView()
+    let sectionControll: UISegmentedControl = UISegmentedControl()
+    internal var viewModel: TricksViewModel
     fileprivate var searchController: UISearchController!
     fileprivate let searchResultViewController: SearchResultViewController = SearchResultViewController()
-    
-    var kjtreeInstance: KJTree = KJTree()
     
     // MARK: Life cycles
     
@@ -39,6 +38,7 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
     override func loadView() {
         super.loadView()
         view.addSubview(tableView)
+        tableView.addSubview(sectionControll)
     }
     
     override func viewDidLoad() {
@@ -47,34 +47,44 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
         title = "Tricks"
         view.backgroundColor = Color.background
         
-        let randomButton = UIBarButtonItem(image: UIImage(named: "random"),
-                                           landscapeImagePhone: nil,
-                                           style: .done,
-                                           target: self,
-                                           action: #selector(randomTapped))
+        sectionControll.insertSegment(withTitle: "Level 1", at: 0, animated: true)
+        sectionControll.insertSegment(withTitle: "Level 2", at: 1, animated: true)
+        sectionControll.insertSegment(withTitle: "Level 3", at: 2, animated: true)
+        sectionControll.insertSegment(withTitle: "Level 4", at: 3, animated: true)
+        sectionControll.insertSegment(withTitle: "Level 5", at: 4, animated: true)
         
-        navigationItem.rightBarButtonItem = randomButton
+        sectionControll.backgroundColor = Color.bar
+        sectionControll.tintColor = UIColor(red: 254/255, green: 197/255, blue: 0/255, alpha: 1.0)
+        sectionControll.sizeToFit()
+        sectionControll.contentMode = .scaleAspectFill
+        sectionControll.selectedSegmentIndex = 0
         
+        sectionControll.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
+        navigationController?.navigationBar.isTranslucent = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = Color.background
-        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
-        tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 45, left: 0, bottom: 16, right: 0)
         tableView.register(TrickLevelCell.self, forCellReuseIdentifier: TrickLevelCell.reuseIdentifier())
         tableView.register(TrickLevelHeaderCell.self, forCellReuseIdentifier: TrickLevelHeaderCell.reuseIdentifier())
+        tableView.sectionHeaderHeight = 44
+        tableView.tableFooterView = UIView()
         
-        self.viewModel.getTricks(starting: {
-            [unowned self] in
+        sectionControll.layer.zPosition = 800
+        
+        viewModel.onStartLoading = {
             self.activityIndicatorView.startAnimating()
-        }) {
-            [unowned self] in
+        }
+        
+        viewModel.onFinishLoading = {
             self.activityIndicatorView.stopAnimating()
-            if let arrayOfParents = self.viewModel.getArrayOfParrents() {
-                self.kjtreeInstance = KJTree(parents: arrayOfParents, childrenKey: "child", expandableKey: "Expanded", key: "Id")
-            }
-            self.kjtreeInstance.isInitiallyExpanded = false
+        }
+        
+        viewModel.tricks.producer.startWithValues { _ in
             self.tableView.reloadData()
         }
+        
+        self.viewModel.getTricks()
         
         setupSearchController()
         setupViewConstraints()
@@ -85,10 +95,16 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
     fileprivate func setupViewConstraints() {
         
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(view)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(-1)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.bottom.equalTo(view)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        sectionControll.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(view)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(45)
         }
     }
     
@@ -108,6 +124,7 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
         searchController.searchBar.placeholder = "Search trick"
         searchController.searchBar.sizeToFit()
         searchController.searchBar.tintColor = .white
+        
         for textField in searchController.searchBar.subviews.first!.subviews where textField is UITextField {
             textField.subviews.first?.backgroundColor = .white
             textField.subviews.first?.layer.cornerRadius = 10
@@ -131,14 +148,16 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
+
     
     // MARK: User action
     
-    @objc func randomTapped() {
-        let randomTrick = viewModel.trickList.value.tricksForFiltering.randomElement()
-        if let trick = randomTrick {
-            let trickDetailViewModel = TrickDetailViewModel(trick: trick.name)
-            navigationController?.pushViewController(TrickDetailViewController(viewModel: trickDetailViewModel), animated: true)
-        }
+    @objc func searchTapped() {
+        navigationItem.titleView = searchController.view
+    }
+    
+    @objc func segmentChanged() {
+        viewModel.selectedLevel = sectionControll.selectedSegmentIndex + 1
+        tableView.reloadData()
     }
 }

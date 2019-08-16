@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import YoutubePlayerView
 import AVFoundation
+import SkeletonView
 
 class VideoCell: UITableViewCell {
     
@@ -41,6 +42,7 @@ class VideoCell: UITableViewCell {
     }
     
     fileprivate func setup() {
+        view.isSkeletonable = true
         contentView.backgroundColor = UIColor.black
         view.backgroundColor = UIColor.black
         playerVars = [
@@ -53,7 +55,8 @@ class VideoCell: UITableViewCell {
         ]
         
         videoView.backgroundColor = UIColor.black
-
+        videoView.isSkeletonable = true
+        
         view.backgroundColor = UIColor.black
         selectionStyle = .none
     }

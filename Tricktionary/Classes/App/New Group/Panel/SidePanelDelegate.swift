@@ -28,57 +28,49 @@ extension SidePanelViewController: UITableViewDelegate {
         
         if indexPath.section == 0 {
             if Auth.auth().currentUser == nil {
-                if indexPath.row == 0 {
-                    delegate?.didSelectMenuItem(viewController: LoginViewController(viewModel: LoginViewModel()))
+                let loginVC = LoginViewController(viewModel: LoginViewModel())
+                loginVC.onClose = { [unowned self] in
+                    print("=== Closim ")
+                    self.tableView.reloadData()
                 }
+                delegate?.didSelectMenuItem(viewController: loginVC)
+            } else {
+                delegate?.didSelectMenuItem(viewController: ProfileViewController(viewModel: ProfileViewModel()))
             }
-        }
-        
-        if Auth.auth().currentUser != nil {
-            // Loged in
-            
-            if indexPath.row == 1 {
-                delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
-            } else if indexPath.row == 2 {
-                delegate?.didSelectMenuItem(viewController: SpeedTimerViewController(viewModel: SpeedTimerViewModel()))
-            } else if indexPath.row == 3 {
-                delegate?.didSelectMenuItem(viewController: SpeedDataViewController(viewModel: SpeedDataViewModel()))
-            } else if indexPath.row == 4 {
-                delegate?.didSelectMenuItem(viewController: SubmitViewController(viewModel: SubmitViewModel()))
-            } else if indexPath.row == 5 {
-                openInstagram()
-            } else if indexPath.row == 6 {
-                guard let url = URL(string: Constatnts.websiteUrl) else { return }
-                UIApplication.shared.open(url)
-            } else if indexPath.row == 7 {
-                // TODO: Contact
-            } else if indexPath.row == 8 {
-                // TODO: Writer
-            } else if indexPath.row == 9 {
-                delegate?.didSelectMenuItem(viewController: SettingsViewController())
-            } else if indexPath.row == 10 {
-                let auth = Auth.auth()
-                do {
-                    try auth.signOut()
-                } catch {
-                    print("Error: \(error.localizedDescription)") // TODO: Alert
+        } else if indexPath.section == 1 {
+            if Auth.auth().currentUser != nil {
+                // Loged in
+                if indexPath.row == 1 {
+                    openInstagram()
+                } else if indexPath.row == 2 {
+                    guard let url = URL(string: Constatnts.websiteUrl) else { return }
+                    UIApplication.shared.open(url)
+                } else if indexPath.row == 3 {
+                    // TODO: Contact
+                } else if indexPath.row == 4 {
+                    // TODO: Writer
+                } else if indexPath.row == 5 {
+                    let auth = Auth.auth()
+                    do {
+                        try auth.signOut()
+                    } catch {
+                        print("Error: \(error.localizedDescription)") // TODO: Alert
+                    }
+                    tableView.reloadData()
+                    centerContainer?.setCenterView(TabBarViewController(),
+                                                   withCloseAnimation: true,
+                                                   completion: { (_) in
+                                                    
+                    })
                 }
-                tableView.reloadData()
-                delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
-            }
-            
-        } else {
-            if indexPath.row == 1 {
-                delegate?.didSelectMenuItem(viewController: TricksViewController(viewModel: TricksViewModel()))
-            } else if indexPath.row == 2 {
-                delegate?.didSelectMenuItem(viewController: SpeedTimerViewController(viewModel: SpeedTimerViewModel()))
-            } else if indexPath.row == 3 {
-                openInstagram()
-            } else if indexPath.row == 4 {
-                guard let url = URL(string: Constatnts.websiteUrl) else { return }
-                UIApplication.shared.open(url)
-            } else if indexPath.row == 5 {
-                delegate?.didSelectMenuItem(viewController: SettingsViewController())
+                
+            } else {
+                if indexPath.row == 1 {
+                    openInstagram()
+                } else if indexPath.row == 2 {
+                    guard let url = URL(string: Constatnts.websiteUrl) else { return }
+                    UIApplication.shared.open(url)
+                }
             }
         }
     }

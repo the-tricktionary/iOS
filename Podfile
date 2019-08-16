@@ -21,6 +21,7 @@ target 'Tricktionary' do
 	pod 'KJExpandableTableTree'
 	pod 'SwiftChart'
 	pod 'Charts'
+	pod 'SkeletonView'
 
   target 'TricktionaryTests' do
     inherit! :search_paths

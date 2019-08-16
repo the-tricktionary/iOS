@@ -44,23 +44,25 @@ class TrickLevelCell: BaseCell {
         
         
         view.backgroundColor = UIColor.white
-
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.lightGray.cgColor
+        title.contentMode = .scaleAspectFill
+        title.textAlignment = .left
+        title.numberOfLines = 0
+//        view.layer.borderWidth = 1
+//        view.layer.borderColor = UIColor.lightGray.cgColor
         
         selectionStyle = .none
         isUserInteractionEnabled = true
         
-        topBorder.backgroundColor = UIColor.white
-        topBorder.isHidden = true
+//        topBorder.backgroundColor = UIColor.white
+//        topBorder.isHidden = true
     }
     
     fileprivate func setupViewConstraints() {
         
         view.snp.makeConstraints { (make) in
             make.top.equalTo(contentView)
-            make.leading.equalTo(contentView).inset(16)
-            make.trailing.equalTo(contentView).inset(16)
+            make.leading.equalTo(contentView)
+            make.trailing.equalTo(contentView)
             make.bottom.equalTo(contentView)
         }
         

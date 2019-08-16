@@ -10,23 +10,47 @@ import Foundation
 import FirebaseFirestore
 import ReactiveSwift
 
-class TricksViewModel {
+protocol TricksViewModelType {
+    var trickList: MutableProperty<TrickList> { get }
+    var tricks: MutableProperty<[Trick]> { get }
+    var filteredTricks: [Trick] { get }
+    var selectedLevel: Int { get set }
+    
+    func getTricks()
+}
+
+class TricksViewModel: TricksViewModelType {
     
     // MARK: Variables
     
     var trickList: MutableProperty<TrickList> = MutableProperty<TrickList>(TrickList())
+    var tricks: MutableProperty<[Trick]> = MutableProperty<[Trick]>([Trick]())
     var filteredTricks: [Trick] = [Trick]()
+    
+    var selectedLevel: Int = 1
+    
+    var onStartLoading: (() -> Void)?
+    var onFinishLoading: (() -> Void)?
+    
+    private let dataProvider: TricksDataProviderType
+    
+    // MARK: Initializer
+    
+    init(dataProvider: TricksDataProviderType) {
+        self.dataProvider = dataProvider
+    }
     
     // MARK: Publics
     
-    func getTricks(starting: @escaping () -> (), finish: @escaping () -> ()) {
+    func getTricks() {
         
-        TrickManager.shared.getTricks(starting: {
-            starting()
-        }, completion: { (data) in
-            self.trickList.value.addTrick(data: data)
-        }) {
-            finish()
+        dataProvider.getTricks(starting: { [weak self] in
+            self?.onStartLoading?()
+        }, completion: { [weak self] (data) in
+            self?.trickList.value.addTrick(data: data)
+            self?.tricks.value.append(Trick(data))
+        }) { [weak self] in
+            self?.onFinishLoading?()
         }
     }
     
@@ -48,4 +72,21 @@ class TricksViewModel {
         return arrayParents
     }
     
+    func getTrickTypes() -> [String] {
+        let levelTricks = tricks.value.filter { $0.level == self.selectedLevel }
+        var types = Set<String>()
+        levelTricks.forEach { (trick) in
+            types.insert(trick.type)
+        }
+        
+        return Array(types).sorted(by: { (trick1, trick2) -> Bool in
+            trick1 < trick2
+        })
+    }
+    
+    func getTricks(_ type: String) -> [Trick] {
+        return tricks.value.filter {
+            $0.level == self.selectedLevel && $0.type == type
+        }
+    }
 }

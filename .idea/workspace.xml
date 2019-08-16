@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e95d94d5-9f15-46e2-9cac-ea1de2a7cb62" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Tricktionary/Classes/App/Profile/ProfileViewController.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tricktionary/Classes/App/Profile/ProfileViewModel.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tricktionary/Classes/App/Tab bar/TabBarViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/marek.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/marek.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary.xcodeproj/xcuserdata/marek.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary.xcodeproj/xcuserdata/marek.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary/AppDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary/AppDelegate.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary/Classes/App/BaseCenterViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary/Classes/App/BaseCenterViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary/Classes/App/New Group/Panel/SidePanelDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary/Classes/App/New Group/Panel/SidePanelDelegate.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary/Classes/App/Tricks/TricksDataSource.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary/Classes/App/Tricks/TricksDataSource.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary/Classes/App/Tricks/TricksDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary/Classes/App/Tricks/TricksDelegate.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary/Classes/App/Tricks/TricksViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary/Classes/App/Tricks/TricksViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary/Classes/App/Tricks/TricksViewModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary/Classes/App/Tricks/TricksViewModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary/Classes/Components/Cell/TrickLevelCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary/Classes/Components/Cell/TrickLevelCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary/Classes/Components/Cell/TricksLevelHeaderCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary/Classes/Components/Cell/TricksLevelHeaderCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tricktionary/Classes/Components/Color.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tricktionary/Classes/Components/Color.swift" afterDir="false" />
+    </list>
+    <ignored path="$USER_HOME$/Library/Caches/AppCode2019.1/DerivedData/Tricktionary-awlkruliiuvshddjiidcpbqrypph/Build/Intermediates.noindex/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_D028C5B0-B784-4696-8EEA-BDED53D1B262" />
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Tricktionary/AppDelegate.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="137">
+              <caret line="111" column="34" lean-forward="true" selection-start-line="111" selection-start-column="34" selection-end-line="111" selection-end-column="34" />
+              <folding>
+                <element signature="e#152#164#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/ios.iml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/xcode.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="Tricktionary" type="1d218c8b:XcodeProjectNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="Tricktionary" type="1d218c8b:XcodeProjectNode" />
+              <item name="Tricktionary" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="Tricktionary" type="1d218c8b:XcodeProjectNode" />
+              <item name="Tricktionary" type="fcab9f18:XcodeViewNode" />
+              <item name="Classes" type="fcab9f18:XcodeViewNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Cidr.FilesView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="AppleRunConfiguration" factoryName="Application" nameIsGenerated="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Tricktionary" TARGET_NAME="Tricktionary" CONFIG_NAME="Debug" SCHEME_NAME="Unnamed" IS_LOCATION_SIMULATION_ALLOWED="true" LOCATION_SCENARIO_ID="com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier" LOCATION_SCENARIO_TYPE="1" APPLICATION_LANGUAGE="IDELaunchSchemeLanguageUseSystemLanguage" APPLICATION_REGION="" RUN_TARGET_PROJECT_NAME="Tricktionary" RUN_TARGET_NAME="Tricktionary" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <embedded_app_extension_list />
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e95d94d5-9f15-46e2-9cac-ea1de2a7cb62" name="Default Changelist" comment="" />
+      <created>1558807954448</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1558807954448</updated>
+      <workItem from="1558807959789" duration="502000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="502000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Designer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4976744" visible="true" weight="0.20457797" />
+      <window_info id="Structure" order="1" sideWeight="0.5023256" side_tool="true" weight="0.20457797" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" weight="0.32891566" />
+      <window_info anchor="bottom" id="Messages" weight="0.32891566" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.48192772" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Database" weight="0.3297568" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Tricktionary/AppDelegate.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="111" column="34" lean-forward="true" selection-start-line="111" selection-start-column="34" selection-end-line="111" selection-end-column="34" />
+          <folding>
+            <element signature="e#152#164#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

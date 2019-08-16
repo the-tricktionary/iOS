@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class SpeedDataViewController: BaseCenterViewController {
     
@@ -15,6 +16,16 @@ class SpeedDataViewController: BaseCenterViewController {
     
     internal var viewModel: SpeedDataViewModel
     internal var tableView: UITableView =  UITableView()
+    private lazy var loginPlaceholder: UIView = {
+        let placeholder = UIView()
+        placeholder.backgroundColor = .gray
+        placeholder.layer.zPosition = 999
+        self.view.addSubview(placeholder)
+        placeholder.snp.makeConstraints({ (make) in
+            make.edges.equalTo(self.view)
+        })
+        return placeholder
+    }()
     
     // MARK: Life cycle
     
@@ -43,14 +54,24 @@ class SpeedDataViewController: BaseCenterViewController {
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
         
-        viewModel.getSpeedData(starting: {
-            self.activityIndicatorView.startAnimating()
-        }) {
-            self.activityIndicatorView.stopAnimating()
-            self.tableView.reloadData()
-        }
-        
         setupViewConstraints()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if Auth.auth().currentUser == nil {
+            loginPlaceholder.isHidden = false
+        } else {
+            loginPlaceholder.isHidden = true
+            if viewModel.speeds.count == 0 {
+                viewModel.getSpeedData(starting: {
+                    self.activityIndicatorView.startAnimating()
+                }) {
+                    self.activityIndicatorView.stopAnimating()
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     // MARK: Privates
