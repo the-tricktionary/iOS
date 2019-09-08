@@ -11,8 +11,8 @@ import UIKit
 import SnapKit
 import FirebaseFirestore
 import ReactiveSwift
-import KJExpandableTableTree
 import MMDrawerController
+import SkeletonView
 
 class TricksViewController: BaseCenterViewController, UISearchControllerDelegate {
     
@@ -39,10 +39,13 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
         super.loadView()
         view.addSubview(tableView)
         tableView.addSubview(sectionControll)
+        view.subviews.forEach { $0.isSkeletonable = true }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        bind()
         
         title = "Tricks"
         view.backgroundColor = Color.background
@@ -52,37 +55,26 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
         sectionControll.insertSegment(withTitle: "Level 3", at: 2, animated: true)
         sectionControll.insertSegment(withTitle: "Level 4", at: 3, animated: true)
         sectionControll.insertSegment(withTitle: "Level 5", at: 4, animated: true)
-        
-        sectionControll.backgroundColor = Color.bar
-        sectionControll.tintColor = UIColor(red: 254/255, green: 197/255, blue: 0/255, alpha: 1.0)
+        sectionControll.backgroundColor = Color.background
+
+        sectionControll.tintColor = Color.bar
         sectionControll.sizeToFit()
         sectionControll.contentMode = .scaleAspectFill
         sectionControll.selectedSegmentIndex = 0
         
         sectionControll.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
-        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.isTranslucent = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = Color.background
-        tableView.contentInset = UIEdgeInsets(top: 45, left: 0, bottom: 16, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 16, right: 0)
         tableView.register(TrickLevelCell.self, forCellReuseIdentifier: TrickLevelCell.reuseIdentifier())
         tableView.register(TrickLevelHeaderCell.self, forCellReuseIdentifier: TrickLevelHeaderCell.reuseIdentifier())
         tableView.sectionHeaderHeight = 44
         tableView.tableFooterView = UIView()
         
         sectionControll.layer.zPosition = 800
-        
-        viewModel.onStartLoading = {
-            self.activityIndicatorView.startAnimating()
-        }
-        
-        viewModel.onFinishLoading = {
-            self.activityIndicatorView.stopAnimating()
-        }
-        
-        viewModel.tricks.producer.startWithValues { _ in
-            self.tableView.reloadData()
-        }
+        sectionControll.alpha = 1.0
         
         self.viewModel.getTricks()
         
@@ -91,19 +83,31 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
     }
     
     // MARK: Privates
+
+    private func bind() {
+        viewModel.onStartLoading = {
+            self.activityIndicatorView.startAnimating()
+        }
+
+        viewModel.onFinishLoading = {
+            self.activityIndicatorView.stopAnimating()
+        }
+
+        viewModel.tricks.producer.startWithValues { _ in
+            self.tableView.reloadData()
+        }
+    }
     
     fileprivate func setupViewConstraints() {
         
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(-1)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         sectionControll.snp.makeConstraints { (make) in
-            make.leading.trailing.equalTo(view)
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(-3)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(-3)
             make.height.equalTo(45)
         }
     }
@@ -123,12 +127,12 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "Search trick"
         searchController.searchBar.sizeToFit()
-        searchController.searchBar.tintColor = .white
-        
-        for textField in searchController.searchBar.subviews.first!.subviews where textField is UITextField {
-            textField.subviews.first?.backgroundColor = .white
-            textField.subviews.first?.layer.cornerRadius = 10
-        }
+//        searchController.searchBar.tintColor = .white
+
+//        for textField in searchController.searchBar.subviews.first!.subviews where textField is UITextField {
+//            textField.subviews.first?.backgroundColor = .white
+//            textField.subviews.first?.layer.cornerRadius = 10
+//        }
         navigationItem.searchController = searchController
     }
     

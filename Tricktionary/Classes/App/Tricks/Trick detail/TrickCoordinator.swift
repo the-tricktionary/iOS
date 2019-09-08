@@ -34,8 +34,4 @@ class TrickCoordinator {
         
         presenter?.pushViewController(vc, animated: true)
     }
-    
-    
-    
-    
 }

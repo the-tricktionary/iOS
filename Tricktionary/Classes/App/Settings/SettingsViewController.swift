@@ -24,7 +24,7 @@ class SettingsViewController: BaseCenterViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Color.background
+        view.backgroundColor = .white
         
         navigationItem.title = "Settings"
         

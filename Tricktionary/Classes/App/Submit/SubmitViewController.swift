@@ -75,7 +75,7 @@ class SubmitViewController: BaseCenterViewController, UIPickerViewDelegate {
         
         activityIndicatorView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         
-        view.backgroundColor = Color.background
+        view.backgroundColor = .white
         
         title = "Submit trick"
         

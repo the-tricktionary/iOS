@@ -65,6 +65,7 @@ class ProfileViewController: BaseDrawerViewController {
         
         title = "User profile"
         profilePhoto.isSkeletonable = true
+        userPreview.subviews.forEach { $0.isSkeletonable = true }
         
         setupViews()
         
@@ -100,18 +101,19 @@ class ProfileViewController: BaseDrawerViewController {
         stackView.addArrangedSubview(userName)
         stackView.addArrangedSubview(userEmail)
         stackView.addArrangedSubview(tricksTotal)
+        stackView.subviews.forEach { $0.isSkeletonable = true }
     }
     
     private func fillData() {
-        
+
+        self.userName.text = "hhhhhhhhhhhhhhhhhhhhh"
+        self.userEmail.text = "hhhhhhhhhhhhhhhhhhh"
+        self.tricksTotal.text = "hhhhhh"
+
         view.isSkeletonable = true
         view.showAnimatedSkeleton()
-        
-        
-        self.userName.text = "hhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
-        self.userEmail.text = "hhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
-        self.tricksTotal.text = "hhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
         stackView.showAnimatedSkeleton()
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             UIView.animate(withDuration: 2, animations: {
                 if let imageData = self.viewModel.getUserPhotoURL() {

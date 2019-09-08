@@ -27,10 +27,10 @@ class BaseViewController: UIViewController {
         
         view.backgroundColor = Color.background
         
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.barTintColor = Color.bar
-        navigationController?.navigationBar.isTranslucent = true
+//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.barTintColor = Color.background
+        navigationController?.navigationBar.isTranslucent = false
 
         
         centerContainer = UIApplication.shared.keyWindow?.rootViewController as? MMDrawerController

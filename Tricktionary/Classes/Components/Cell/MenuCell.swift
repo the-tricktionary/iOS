@@ -45,8 +45,8 @@ class MenuCell: UITableViewCell {
     
     fileprivate func setup() {
         
-        contentView.backgroundColor = UIColor.red
-        view.backgroundColor = UIColor.orange
+        contentView.backgroundColor = Color.background
+        view.backgroundColor = Color.bar
         selectionStyle = .none
         
         icon.tintColor = UIColor.white

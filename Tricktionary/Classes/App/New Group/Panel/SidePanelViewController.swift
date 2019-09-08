@@ -39,11 +39,11 @@ class SidePanelViewController: BaseViewController {
         navigationController?.navigationBar.isTranslucent = true
         
         delegate = self
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = Color.background
         
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor.red
+        tableView.backgroundColor = Color.background
         tableView.dataSource = self
         tableView.delegate = self
         

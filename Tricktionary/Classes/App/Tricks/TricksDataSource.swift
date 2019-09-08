@@ -8,25 +8,26 @@
 
 import Foundation
 import UIKit
+import SkeletonView
 
 extension TricksViewController: UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         let types = viewModel.getTrickTypes()
         return types.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let types = viewModel.getTrickTypes()
         return viewModel.getTricks(types[section]).count
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = TypeHeaderView()
         view.setTitleLabel(viewModel.getTrickTypes()[section])
         return view
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let trick = viewModel.getTricks(viewModel.getTrickTypes()[indexPath.section])[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: TrickLevelCell.reuseIdentifier(), for: indexPath) as! TrickLevelCell
@@ -34,6 +35,4 @@ extension TricksViewController: UITableViewDataSource {
             cell.isTopBorderVisible(false)
             return cell
     }
-    
-    
 }

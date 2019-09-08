@@ -32,10 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let centerViewController = UINavigationController(rootViewController: TabBarViewController())
 
         centerContainer = MMDrawerController(center: TabBarViewController(), leftDrawerViewController: leftNavigation)
-
-        centerContainer?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.panningCenterView
         centerContainer?.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.panningCenterView
-//
+        
         window = UIWindow(frame: UIScreen.main.bounds)
 
         window?.rootViewController = centerContainer

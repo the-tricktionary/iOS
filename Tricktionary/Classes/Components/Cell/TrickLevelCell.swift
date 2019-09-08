@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SkeletonView
 
 class TrickLevelCell: BaseCell {
     
@@ -37,6 +38,8 @@ class TrickLevelCell: BaseCell {
         contentView.addSubview(view)
         view.addSubview(title)
         contentView.addSubview(topBorder)
+
+        contentView.subviews.forEach { $0.isSkeletonable = true }
     }
     
     fileprivate func setup() {
@@ -47,14 +50,9 @@ class TrickLevelCell: BaseCell {
         title.contentMode = .scaleAspectFill
         title.textAlignment = .left
         title.numberOfLines = 0
-//        view.layer.borderWidth = 1
-//        view.layer.borderColor = UIColor.lightGray.cgColor
         
         selectionStyle = .none
         isUserInteractionEnabled = true
-        
-//        topBorder.backgroundColor = UIColor.white
-//        topBorder.isHidden = true
     }
     
     fileprivate func setupViewConstraints() {

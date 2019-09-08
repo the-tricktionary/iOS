@@ -40,9 +40,9 @@ class UserCell: UITableViewCell {
     
     fileprivate func setup() {
         
-        contentView.backgroundColor = UIColor.red
+        contentView.backgroundColor = Color.background
         
-        view.backgroundColor = UIColor.orange
+        view.backgroundColor = Color.bar
         selectionStyle = .none
         
         icon.tintColor = UIColor.white

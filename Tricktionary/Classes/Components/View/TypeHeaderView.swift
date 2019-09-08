@@ -42,9 +42,9 @@ class TypeHeaderView: UITableViewHeaderFooterView {
     
     private func setupViewsStyle() {
         backgroundView = UIView()
-        backgroundView?.backgroundColor = UIColor(red: 254/255, green: 197/255, blue: 0/255, alpha: 1.0)
+        backgroundView?.backgroundColor = Color.bar
         title.font = UIFont.boldSystemFont(ofSize: 16)
-        title.textColor = .black
+        title.textColor = .white
         title.textAlignment = .justified
     }
     
@@ -58,5 +58,8 @@ class TypeHeaderView: UITableViewHeaderFooterView {
             make.edges.equalTo(self)
         })
     }
-    
+
+    class func reuseIdentifier() -> String {
+        return "typeHeaderCell"
+    }
 }

@@ -16,12 +16,11 @@ target 'Tricktionary' do
 	pod 'SnapKit'
 	pod 'ReactiveCocoa'
 	pod 'RxSwift'
-	pod 'RxFirestoreExecutor'
 	pod 'YoutubePlayerView'
-	pod 'KJExpandableTableTree'
 	pod 'SwiftChart'
 	pod 'Charts'
 	pod 'SkeletonView'
+	pod 'ChameleonFramework'
 
   target 'TricktionaryTests' do
     inherit! :search_paths
