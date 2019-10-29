@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import MMDrawerController
+import ChameleonFramework
 
 public protocol SidePanelViewControllerDelegate {
     func didSelectMenuItem(viewController: UIViewController)
@@ -33,21 +34,18 @@ class SidePanelViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        
+
+        setupViewConstraints()
+
         delegate = self
-        view.backgroundColor = Color.background
+
+        view.backgroundColor = UIColor.flatRed()
         
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         tableView.separatorStyle = .none
-        tableView.backgroundColor = Color.background
+        tableView.backgroundColor = UIColor.flatRed()
         tableView.dataSource = self
         tableView.delegate = self
-        
-        setupViewConstraints()
     }
     
     // MARK: Privates
@@ -55,7 +53,7 @@ class SidePanelViewController: BaseViewController {
     fileprivate func setupViewConstraints() {
         
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(view)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
             make.bottom.equalTo(view)

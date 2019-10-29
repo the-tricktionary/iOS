@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MMDrawerController
+import FirebaseRemoteConfig
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
@@ -20,7 +21,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         tabBar.barTintColor = Color.background
         tabBar.isTranslucent = false
 
-        let tricksVM = TricksViewModel(dataProvider: TrickManager.shared)
+        let tricksVM = TricksViewModel(dataProvider: TrickManager.shared, remoteConfig: RemoteConfig.remoteConfig())
         let trVC = TricksViewController(viewModel: tricksVM)
         let tricksViewController = UINavigationController(rootViewController: trVC)
         tricksViewController.tabBarItem = UITabBarItem(title: "Tricks", image: UIImage(named: "tricktionary"), tag: 0)

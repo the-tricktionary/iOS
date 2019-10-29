@@ -27,16 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
-        
-        let leftNavigation = UINavigationController(rootViewController: SidePanelViewController())
-        let centerViewController = UINavigationController(rootViewController: TabBarViewController())
 
-        centerContainer = MMDrawerController(center: TabBarViewController(), leftDrawerViewController: leftNavigation)
-        centerContainer?.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.panningCenterView
+        TrickManager.shared.loadRemoteConfig()
         
-        window = UIWindow(frame: UIScreen.main.bounds)
+        let leftNavigation = SidePanelViewController()
+        //let centerViewController = UINavigationController(rootViewController: TabBarViewController())
 
-        window?.rootViewController = centerContainer
+        self.centerContainer = MMDrawerController(center: TabBarViewController(), leftDrawerViewController: leftNavigation)
+        self.centerContainer?.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.panningCenterView
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+
+        self.window?.rootViewController = self.centerContainer
         
         return true
     }

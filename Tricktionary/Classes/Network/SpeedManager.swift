@@ -61,6 +61,9 @@ class SpeedManager {
     
     func deleteSpeedEvent(speed: Speed, completed: @escaping () -> Void) {
         guard let _ = Auth.auth().currentUser?.uid else { return }
+        guard speed.created != nil else {
+            return
+        }
         var _ = firestore.collection("speed").document(speed.created!.description).delete() { error in
             if let error = error {
                 print("Error removing document: \(error)")

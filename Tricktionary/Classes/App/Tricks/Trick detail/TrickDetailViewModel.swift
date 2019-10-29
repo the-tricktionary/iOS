@@ -37,16 +37,16 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     // MARK: Public
     
     func getTrick() {
-        TrickManager.shared.getTrickByName(name: trickName,
-                                           starting: { [weak self] in
-                                            self?.onStartLoading?()
-        }, completion: { (trick) in
-            self.trick = Trick(trick)
-            self.trick?.getPrerequisites(finish: { [weak self] in
-                self?.onLoad?()
-            })
-        }) { [weak self] in
-            self?.onLoad?()
-        }
+//        TrickManager.shared.getTrickByName(name: trickName,
+//                                           starting: { [weak self] in
+//                                            self?.onStartLoading?()
+//        }, completion: { (trick) in
+//            self.trick = Trick(trick)
+////            self.trick?.getPrerequisites(finish: { [weak self] in
+////                self?.onLoad?()
+////            })
+//        }) { [weak self] in
+//            self?.onLoad?()
+//        }
     }
 }

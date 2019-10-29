@@ -23,9 +23,7 @@ extension TrickDetailViewController: UITableViewDataSource {
             return "Levels"
         }
         if section == 3 {
-            if let trick = viewModel.trick, trick.prerequisites.count > 0 {
-                return "Prerequisites"
-            }
+            // Prerequisites
             return ""
         }
         return ""
@@ -33,7 +31,7 @@ extension TrickDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if let trick = viewModel.trick {
+        if viewModel.trick != nil {
             switch section {
             case 0:
                 return 1
@@ -42,7 +40,7 @@ extension TrickDetailViewController: UITableViewDataSource {
             case 2:
                 return 2
             case 3:
-                return trick.prerequisites.count
+                return 0 // Prerequisites
             default:
                 return 0
             }
@@ -60,29 +58,31 @@ extension TrickDetailViewController: UITableViewDataSource {
                 return descriptionCell
             } else if indexPath.section == 1 {
                 let videoCell = VideoCell()
-                videoCell.setVideo(url: trick.videos.youtube)
+                if let video = trick.videos {
+                    videoCell.setVideo(url: video.youtube)
+                }
                 return videoCell
             } else if indexPath.section == 2 {
                 switch indexPath.row {
                 case 0:
                     let infoCell = InformationCell()
                     infoCell.title.text = "Level FISAC-IJRF:"
-                    infoCell.info.text = trick.levels.irsf.level
+                    infoCell.info.text = trick.levels?.irsf.level
                     return infoCell
                 case 1:
                     let infoCell = InformationCell()
                     infoCell.title.text = "Level WJR:"
-                    infoCell.info.text = trick.levels.wjr.level
+                    infoCell.info.text = trick.levels?.wjr.level
                     return infoCell
                 default:
                     return UITableViewCell()
                 }
             } else if indexPath.section == 3 {
-                if viewModel.trick!.prerequisites.count > 0 {
+                if viewModel.trick!.prerequisites?.count ?? 0 > 0 {
                     let infoCell = InformationCell()
                     infoCell.accessoryType = .disclosureIndicator
-                    let prerequsite = trick.prerequisites[indexPath.row]
-                    infoCell.title.text = prerequsite
+                    let prerequsite = trick.prerequisites?[indexPath.row]
+                    infoCell.title.text = prerequsite?.id
                     return infoCell
                 }
             }

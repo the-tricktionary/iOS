@@ -491,6 +491,10 @@ Apache License
 
 Copyright 2018 Google
 
+## FirebaseABTesting
+
+Copyright 2017 Google
+
 ## FirebaseAnalytics
 
 Copyright 2018 Google
@@ -508,6 +512,10 @@ Copyright 2018 Google
 Copyright 2018 Google
 
 ## FirebaseInstanceID
+
+Copyright 2018 Google
+
+## FirebaseRemoteConfig
 
 Copyright 2018 Google
 

@@ -27,7 +27,7 @@ class SearchResultViewController: UITableViewController, UISearchResultsUpdating
             return viewModel.filteredTricks.count
         }
         
-        return viewModel.trickList.value.tricksForFiltering.count
+        return viewModel.tricks.value.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -36,7 +36,7 @@ class SearchResultViewController: UITableViewController, UISearchResultsUpdating
         if viewController.isFiltering() {
             selected = viewModel.filteredTricks[indexPath.row]
         } else {
-            selected = viewModel.trickList.value.tricksForFiltering[indexPath.row]
+            selected = viewModel.tricks.value[indexPath.row]
         }
         cell.textLabel?.text = selected.name
         cell.detailTextLabel?.text = "Level \(selected.level) \(selected.type)"
@@ -48,7 +48,7 @@ class SearchResultViewController: UITableViewController, UISearchResultsUpdating
         if viewController.isFiltering() {
             selectedItem = viewModel.filteredTricks[indexPath.row]
         } else {
-            selectedItem = viewModel.trickList.value.tricksForFiltering[indexPath.row]
+            selectedItem = viewModel.tricks.value[indexPath.row]
         }
         dismiss(animated: true, completion: {
             let coord = TrickCoordinator(presenter: self.viewController.navigationController, trickName: selectedItem.name)

@@ -12,15 +12,18 @@ import UIKit
 extension TrickDetailViewController: UITableViewDelegate {
  
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            return 250
+        }
         if indexPath.section == 2 || indexPath.section == 3 {
             return 67
         }
-        return UITableView.automaticDimension
+        return 45
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let trick = viewModel.trick {
-            if trick.prerequisites.count > 0 {
+            if trick.prerequisites?.count ?? 0 > 0 {
                 if indexPath.section == 3 {
                     let cell = tableView.cellForRow(at: indexPath) as! InformationCell
 //                    let newScreen = UserDefaults.standard.value(forKey: PxSettings.newScreen) as? Bool ?? false

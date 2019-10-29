@@ -8,16 +8,73 @@
 
 import Foundation
 import FirebaseAuth
+import ReactiveCocoa
+import ReactiveSwift
 
-class ProfileViewModel {
-    
-    // MARK: Variables
-    
-    // MARK: Initializers
-    
+protocol ProfileViewModelType {
+    var profileInfo: MutableProperty<ProfileInfo> { get }
+    var tricksInfo: MutableProperty<[String]> { get }
+    var trickList: MutableProperty<[Trick]> { get }
+    var completedInLevel: MutableProperty<[(level: Int, tricks: Int)]> { get }
+    func loadData()
+
+    var onStartLoading: (() -> Void)? { get }
+    var onFinishLoading: (() -> Void)? { get }
+}
+
+class ProfileViewModel: ProfileViewModelType {
+    // MARK: - Variables
+    var profileInfo = MutableProperty<ProfileInfo>(ProfileInfo())
+    var tricksInfo = MutableProperty<[String]>([String]())
+    var trickList = MutableProperty<[Trick]>([Trick]())
+    var completedInLevel = MutableProperty<[(level: Int, tricks: Int)]>([])
+
+    var onFinishLoading: (() -> Void)?
+    var onStartLoading: (() -> Void)?
+
     // MARK: Public
+    func loadData() {
+        loadProfileInfo()
+        loadTricksInfo()
+        loadCompletedTricks()
+    }
     
-    func getUserPhotoURL() -> Data? {
+    // MARK: Private
+
+    private func loadProfileInfo() {
+        let user = getUser()
+
+        let info = ProfileInfo(photo: getUserPhotoURL(),
+                               name: user?.displayName ?? "",
+                               email: user?.email ?? "")
+        profileInfo.value = info
+    }
+
+    private func loadTricksInfo() {
+        TrickManager.shared.getChecklist(starting: {
+            self.onStartLoading?()
+        }, completion: { data in
+            guard let data = data else {
+                return
+            }
+            self.tricksInfo.value = data
+        }) {
+            self.onFinishLoading?()
+            self.loadCompletedTricks()
+        }
+    }
+
+    private func loadCompletedTricks() {
+//        tricksInfo.value.forEach { trickID in
+//            TrickManager.shared.getTrickNameById(id: trickID, completion: { data in
+//                self.trickList.value.append(Trick(data))
+//            }, finish: {
+//                self.countCompletedByLevel()
+//            })
+//        }
+    }
+
+    private func getUserPhotoURL() -> Data? {
         guard let user = Auth.auth().currentUser else {
             return nil
         }
@@ -35,14 +92,18 @@ class ProfileViewModel {
         return data
     }
     
-    func getUserInfo() -> [String : String?] {
-        guard let user = Auth.auth().currentUser else { return [String : String?]() }
-        
-        var userInfo: [String : String?] = [String : String?]()
-        
-        userInfo["name"] = user.displayName
-        userInfo["email"] = user.email
-        
-        return userInfo
+    private func getUser() -> User? {
+       return Auth.auth().currentUser
+    }
+
+    private func countCompletedByLevel() {
+        var levels = Set<Int>()
+        trickList.value.forEach { trick in
+            levels.insert(trick.level)
+        }
+        levels.forEach { level in
+            let tricks = trickList.value.filter { $0.level == level }
+            completedInLevel.value.append((level: level, tricks: tricks.count))
+        }
     }
 }

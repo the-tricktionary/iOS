@@ -12,7 +12,7 @@ import SnapKit
 import FirebaseFirestore
 import ReactiveSwift
 import MMDrawerController
-import SkeletonView
+import ChameleonFramework
 
 class TricksViewController: BaseCenterViewController, UISearchControllerDelegate {
     
@@ -23,6 +23,7 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
     internal var viewModel: TricksViewModel
     fileprivate var searchController: UISearchController!
     fileprivate let searchResultViewController: SearchResultViewController = SearchResultViewController()
+    private let disciplines = UISegmentedControl()
     
     // MARK: Life cycles
     
@@ -39,31 +40,30 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
         super.loadView()
         view.addSubview(tableView)
         tableView.addSubview(sectionControll)
-        view.subviews.forEach { $0.isSkeletonable = true }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         bind()
-        
-        title = "Tricks"
+
+        setupDisciplinePicker()
+        disciplines.selectedSegmentIndex = viewModel.selectedDiscipline
+        disciplines.addTarget(self, action: #selector(disciplineChanged), for: .valueChanged)
+        navigationItem.titleView = disciplines
+        navigationController?.view.backgroundColor = .white
+
         view.backgroundColor = Color.background
         
-        sectionControll.insertSegment(withTitle: "Level 1", at: 0, animated: true)
-        sectionControll.insertSegment(withTitle: "Level 2", at: 1, animated: true)
-        sectionControll.insertSegment(withTitle: "Level 3", at: 2, animated: true)
-        sectionControll.insertSegment(withTitle: "Level 4", at: 3, animated: true)
-        sectionControll.insertSegment(withTitle: "Level 5", at: 4, animated: true)
-        sectionControll.backgroundColor = Color.background
+        setupLevelPicker()
 
-        sectionControll.tintColor = Color.bar
+        sectionControll.tintColor = UIColor.flatRed()
         sectionControll.sizeToFit()
         sectionControll.contentMode = .scaleAspectFill
         sectionControll.selectedSegmentIndex = 0
-        
+        sectionControll.backgroundColor = .white
         sectionControll.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
-        navigationController?.navigationBar.isTranslucent = false
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = Color.background
@@ -90,12 +90,27 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
         }
 
         viewModel.onFinishLoading = {
+            self.setupLevelPicker()
             self.activityIndicatorView.stopAnimating()
+            self.tableView.reloadData()
         }
 
         viewModel.tricks.producer.startWithValues { _ in
             self.tableView.reloadData()
         }
+    }
+
+    private func setupLevelPicker() {
+        viewModel.levels.enumerated().forEach { index, level in
+            self.sectionControll.insertSegment(withTitle: "Level \(level)", at: index, animated: true)
+        }
+    }
+
+    private func setupDisciplinePicker() {
+        viewModel.disciplines.enumerated().forEach { (index, discipline) in
+            disciplines.insertSegment(withTitle: discipline.name, at: index, animated: true)
+        }
+        sectionControll.selectedSegmentIndex = 0
     }
     
     fileprivate func setupViewConstraints() {
@@ -113,27 +128,23 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
     }
     
     fileprivate func setupSearchController() {
-        searchResultViewController.viewModel = viewModel
-        searchResultViewController.viewController = self
-        searchController = UISearchController(searchResultsController: searchResultViewController)
-        searchController.delegate = self
-        searchController.searchResultsUpdater = searchResultViewController
-        searchController.dimsBackgroundDuringPresentation = true
-        definesPresentationContext = true
-        
-        searchController.loadViewIfNeeded()
-        
-        searchController.searchBar.delegate = searchResultViewController
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.placeholder = "Search trick"
-        searchController.searchBar.sizeToFit()
-//        searchController.searchBar.tintColor = .white
-
-//        for textField in searchController.searchBar.subviews.first!.subviews where textField is UITextField {
-//            textField.subviews.first?.backgroundColor = .white
-//            textField.subviews.first?.layer.cornerRadius = 10
-//        }
-        navigationItem.searchController = searchController
+//        searchResultViewController.viewModel = viewModel
+//        searchResultViewController.viewController = self
+//        searchController = UISearchController(searchResultsController: searchResultViewController)
+//        searchController.delegate = self
+//        searchController.searchResultsUpdater = searchResultViewController
+//        searchController.dimsBackgroundDuringPresentation = true
+//        searchController.view.backgroundColor = .white
+//        definesPresentationContext = false
+//
+//        searchController.loadViewIfNeeded()
+//
+//        searchController.searchBar.delegate = searchResultViewController
+//        searchController.hidesNavigationBarDuringPresentation = false
+//        searchController.searchBar.placeholder = "Search trick"
+//        searchController.searchBar.sizeToFit()
+//
+//        navigationItem.searchController = searchController
     }
     
     // MARK: Public
@@ -144,7 +155,7 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        viewModel.filteredTricks = viewModel.trickList.value.tricksForFiltering.filter({( trick : Trick) -> Bool in
+        viewModel.filteredTricks = viewModel.tricks.value.filter({( trick : Trick) -> Bool in
             return trick.name.lowercased().contains(searchText.lowercased())
         })
     }
@@ -163,5 +174,10 @@ class TricksViewController: BaseCenterViewController, UISearchControllerDelegate
     @objc func segmentChanged() {
         viewModel.selectedLevel = sectionControll.selectedSegmentIndex + 1
         tableView.reloadData()
+    }
+
+    @objc func disciplineChanged(sender: UISegmentedControl) {
+        sectionControll.removeAllSegments()
+        viewModel.selectedDiscipline = sender.selectedSegmentIndex
     }
 }

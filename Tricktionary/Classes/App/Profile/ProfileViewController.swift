@@ -8,16 +8,16 @@
 
 import Foundation
 import UIKit
-import SkeletonView
 
 class ProfileViewController: BaseDrawerViewController {
     
     // MARK: Variables
     
-    private var viewModel: ProfileViewModel
+    var viewModel: ProfileViewModelType
     
     private let scrollView: UIScrollView = UIScrollView()
     private let contentView: UIView = UIView()
+    private let tableView = UITableView()
     
     // User preview
     private let userPreview: UIView = UIView()
@@ -30,7 +30,7 @@ class ProfileViewController: BaseDrawerViewController {
     
     // MARK: Life cycles
 
-    init(viewModel: ProfileViewModel) {
+    init(viewModel: ProfileViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,35 +46,18 @@ class ProfileViewController: BaseDrawerViewController {
         userPreview.addSubview(profilePhoto)
         userPreview.addSubview(stackView)
         contentView.addSubview(userPreview)
-        
-        scrollView.subviews.forEach { view in
-            view.isSkeletonable = true
-        }
-        
-        contentView.subviews.forEach { view in
-            view.isSkeletonable = true
-        }
-        
-        userName.isSkeletonable = true
-        userEmail.isSkeletonable = true
-        tricksTotal.isSkeletonable = true
+        view.addSubview(tableView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "User profile"
-        profilePhoto.isSkeletonable = true
-        userPreview.subviews.forEach { $0.isSkeletonable = true }
         
         setupViews()
-        
+        bind()
         setupViewConstraints()
-        
-        view.subviews.forEach { view in
-            view.isSkeletonable = true
-        }
-        fillData()
+        viewModel.loadData()
     }
     
     // MARK: Private
@@ -95,44 +78,35 @@ class ProfileViewController: BaseDrawerViewController {
         tricksTotal.font = UIFont.systemFont(ofSize: 16)
         tricksTotal.numberOfLines = 1
         tricksTotal.sizeToFit()
-//        tricksTotal.text = "Completed tricks: \(10)"
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         stackView.addArrangedSubview(userName)
         stackView.addArrangedSubview(userEmail)
         stackView.addArrangedSubview(tricksTotal)
-        stackView.subviews.forEach { $0.isSkeletonable = true }
+
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
     }
     
-    private func fillData() {
-
-        self.userName.text = "hhhhhhhhhhhhhhhhhhhhh"
-        self.userEmail.text = "hhhhhhhhhhhhhhhhhhh"
-        self.tricksTotal.text = "hhhhhh"
-
-        view.isSkeletonable = true
-        view.showAnimatedSkeleton()
-        stackView.showAnimatedSkeleton()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            UIView.animate(withDuration: 2, animations: {
-                if let imageData = self.viewModel.getUserPhotoURL() {
-                    self.profilePhoto.image = UIImage(data: imageData)
-                } else {
-                    self.profilePhoto.image = UIImage(named: "signin")
-                }
-                
-                let userInfo = self.viewModel.getUserInfo()
-                
-                self.userName.text = userInfo["name"] ?? "Unknown"
-                self.userEmail.text = userInfo["email"] ?? "Unknown"
-                self.tricksTotal.text = "Completed tricks: \(10)"
-                self.view.hideSkeleton()
-                self.stackView.hideSkeleton()
-            })
+    private func bind() {
+        viewModel.profileInfo.producer.startWithValues { [weak self] info in
+            self?.userName.text = info.name
+            self?.userEmail.text = info.email
+            if let photo = info.photo {
+                self?.profilePhoto.image = UIImage(data: photo)
+            } else {
+                self?.profilePhoto.image = nil
+            }
         }
-        
-        
+
+        viewModel.tricksInfo.producer.startWithValues { tricks in
+            self.tricksTotal.text = "Completed tricks: \(tricks.count)"
+        }
+
+        viewModel.trickList.producer.startWithValues { tricks in
+            self.tableView.reloadData()
+        }
     }
     
     private func setupViewConstraints() {
@@ -163,6 +137,11 @@ class ProfileViewController: BaseDrawerViewController {
         stackView.snp.makeConstraints { (make) in
             make.top.bottom.trailing.equalTo(userPreview)
             make.leading.equalTo(profilePhoto.snp.trailing).offset(10)
+        }
+
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(contentView.snp.bottom)
+            make.leading.trailing.bottom.equalTo(view)
         }
     }
     
