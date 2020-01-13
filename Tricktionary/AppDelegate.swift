@@ -10,35 +10,28 @@ import UIKit
 import CoreData
 import Firebase
 import GoogleSignIn
-import MMDrawerController
+import LifetimeTracker
+import Swinject
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
-    var centerContainer: MMDrawerController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         FirebaseApp.configure()
-        UserDefaults.standard.register(defaults: [PxSettings.fullscreen : true])
-        UserDefaults.standard.register(defaults: [PxSettings.autoplay : false])
         UserDefaults.standard.register(defaults: [PxSettings.newScreen : false])
+
+        LifetimeTracker.setup(onUpdate: LifetimeTrackerDashboardIntegration(visibility: .visibleWithIssuesDetected, style: .circular).refreshUI)
         
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
 
         TrickManager.shared.loadRemoteConfig()
-        
-        let leftNavigation = SidePanelViewController()
-        //let centerViewController = UINavigationController(rootViewController: TabBarViewController())
-
-        self.centerContainer = MMDrawerController(center: TabBarViewController(), leftDrawerViewController: leftNavigation)
-        self.centerContainer?.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.panningCenterView
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        self.window?.rootViewController = self.centerContainer
+        self.window?.rootViewController = TabBarViewController()
         
         return true
     }

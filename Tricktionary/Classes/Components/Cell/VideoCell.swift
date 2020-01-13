@@ -10,14 +10,13 @@ import Foundation
 import UIKit
 import YoutubePlayerView
 import AVFoundation
-import SkeletonView
 
 class VideoCell: UITableViewCell {
     
     // MARK: Variables
+    static let identity = "VideoCell"
     
     let videoView: YoutubePlayerView = YoutubePlayerView()
-    fileprivate var playerVars: [String: Any]?
     fileprivate let view: UIView = UIView()
     
     
@@ -42,20 +41,10 @@ class VideoCell: UITableViewCell {
     }
     
     fileprivate func setup() {
-        view.isSkeletonable = true
         contentView.backgroundColor = UIColor.black
         view.backgroundColor = UIColor.black
-        playerVars = [
-            "controls": 1,
-            "modestbranding": 0,
-            "playsinline": UserDefaults.standard.value(forKey: PxSettings.fullscreen) as! Int,
-            "rel": 1,
-            "showinfo": 1,
-            "autoplay": UserDefaults.standard.value(forKey: PxSettings.autoplay) as! Int
-        ]
         
         videoView.backgroundColor = UIColor.black
-        videoView.isSkeletonable = true
         
         view.backgroundColor = UIColor.black
         selectionStyle = .none
@@ -81,7 +70,15 @@ class VideoCell: UITableViewCell {
     
     // MARK: Publics
     
-    func setVideo(url: String) {
+    func setVideo(url: String, fullScreen: Bool, autoPlay: Bool) {
+        let playerVars = [
+            "controls": 1,
+            "modestbranding": 0,
+            "playsinline": fullScreen ? 0 : 1,
+            "rel": 1,
+            "showinfo": 1,
+            "autoplay": autoPlay ? 1 :0
+        ]
         videoView.loadWithVideoId(url, with: playerVars)
         videoView.play()
     }

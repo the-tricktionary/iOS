@@ -100,12 +100,12 @@ class ProfileViewController: BaseDrawerViewController {
             }
         }
 
-        viewModel.tricksInfo.producer.startWithValues { tricks in
-            self.tricksTotal.text = "Completed tricks: \(tricks.count)"
+        viewModel.tricksInfo.producer.startWithValues { [weak self] tricks in
+            self?.tricksTotal.text = "Completed tricks: \(tricks.count)"
         }
 
-        viewModel.trickList.producer.startWithValues { tricks in
-            self.tableView.reloadData()
+        viewModel.trickList.producer.startWithValues { [weak self] tricks in
+            self?.tableView.reloadData()
         }
     }
     

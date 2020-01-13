@@ -20,9 +20,9 @@ extension TricksViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let trick = viewModel.getTricks(viewModel.getTrickTypes()[indexPath.section])[indexPath.row] // - 1
-        let coord = TrickCoordinator(presenter: self.navigationController, trickName: trick.name)
-        coord.start()
+        let trick = viewModel.sections.value[indexPath.section].rows[indexPath.row]
+        let vm = TrickDetailViewModel(trick: trick.name)
+        let vc = TrickDetailViewController(viewModel: vm)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

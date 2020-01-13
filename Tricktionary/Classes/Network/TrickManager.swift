@@ -41,12 +41,12 @@ enum Disciplines {
 
 protocol TricksDataProviderType {
     
-    func getTricks(discipline: Disciplines, starting: @escaping () -> (),completion: @escaping (Trick) -> Void, finish: @escaping () -> Void)
+    func getTricks(discipline: Disciplines, starting: @escaping () -> (),completion: @escaping (BaseTrick) -> Void, finish: @escaping () -> Void)
     func getChecklist(starting: @escaping () -> Void, completion: @escaping ([String]?) -> Void, finish: @escaping () -> Void)
 }
 
 class TrickManager: TricksDataProviderType {
-    func getTricks(discipline: Disciplines, starting: @escaping () -> (), completion: @escaping (Trick) -> Void, finish: @escaping () -> Void) {
+    func getTricks(discipline: Disciplines, starting: @escaping () -> (), completion: @escaping (BaseTrick) -> Void, finish: @escaping () -> Void) {
         starting()
         let firestore = Firestore.firestore()
         let documentReference = firestore.collection(discipline.identity)
@@ -65,7 +65,7 @@ class TrickManager: TricksDataProviderType {
                 data.removeValue(forKey: "i18n")
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                    let trick = try JSONDecoder().decode(Trick.self, from: jsonData)
+                    let trick = try JSONDecoder().decode(BaseTrick.self, from: jsonData)
                     completion(trick)
                 } catch {
                     print("Deserialize error: \(error.localizedDescription)")

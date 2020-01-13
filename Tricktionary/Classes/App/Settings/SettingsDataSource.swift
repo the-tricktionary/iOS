@@ -11,7 +11,7 @@ import UIKit
 import ReactiveSwift
 
 extension SettingsViewController: UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -45,13 +45,13 @@ extension SettingsViewController: UITableViewDataSource {
             case 0:
                 let cell = SwitchCell()
                 cell.textLabel?.text = "Automatic full screen"
-                cell.switchButton.setOn(!(UserDefaults.standard.value(forKey: PxSettings.fullscreen) as! Bool), animated: true)
+                cell.switchButton.setOn(fullscreen, animated: true)
                 cell.switchButton.addTarget(self, action: #selector(fullScreen), for: .touchUpInside)
                 return cell
             case 1:
                 let cell = SwitchCell()
                 cell.textLabel?.text = "Auto-Play videos"
-                cell.switchButton.setOn(UserDefaults.standard.value(forKey: PxSettings.autoplay) as! Bool, animated: true)
+                cell.switchButton.setOn(auto, animated: true)
                 cell.switchButton.addTarget(self, action: #selector(autoPlay), for: .touchUpInside)
                 return cell
             default:
@@ -70,25 +70,11 @@ extension SettingsViewController: UITableViewDataSource {
     // MARK: User action
     
     @objc func fullScreen() {
-        var state = UserDefaults.standard.value(forKey: PxSettings.fullscreen) as! Int
-        if state == 0 {
-            state = 1
-        } else {
-            state = 0
-        }
-        UserDefaults.standard.set(state, forKey: PxSettings.fullscreen)
-        UserDefaults.standard.synchronize()
+        fullscreen.toggle()
     }
     
     @objc func autoPlay() {
-        var state = UserDefaults.standard.value(forKey: PxSettings.autoplay) as! Int
-        if state == 0 {
-            state = 1
-        } else {
-            state = 0
-        }
-        UserDefaults.standard.set(state, forKey: PxSettings.autoplay)
-        UserDefaults.standard.synchronize()
+        auto.toggle()
     }
     
     @objc func newScreen() {
@@ -100,5 +86,25 @@ extension SettingsViewController: UITableViewDataSource {
         }
         UserDefaults.standard.set(state, forKey: PxSettings.newScreen)
         UserDefaults.standard.synchronize()
+        
+    }
+}
+
+@propertyWrapper
+struct Persistent<Value> {
+    private var key: String
+    private let defaultValue: Value
+
+    init(key: String, defaultValue: Value) {
+        self.key = key
+        self.defaultValue = defaultValue
+    }
+    var wrappedValue: Value {
+        get {
+            return (UserDefaults.standard.object(forKey: key) ?? defaultValue) as! Value
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: key)
+        }
     }
 }

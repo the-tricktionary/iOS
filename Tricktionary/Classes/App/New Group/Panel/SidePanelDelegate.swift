@@ -21,7 +21,7 @@ extension SidePanelViewController: UITableViewDelegate {
                 return 14
             }
         }
-        return 45
+        return 50
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -29,13 +29,12 @@ extension SidePanelViewController: UITableViewDelegate {
         if indexPath.section == 0 {
             if Auth.auth().currentUser == nil {
                 let loginVC = LoginViewController(viewModel: LoginViewModel())
-                loginVC.onClose = { [unowned self] in
-                    print("=== Closim ")
-                    self.tableView.reloadData()
+                loginVC.onClose = { [weak self] in
+                    self?.tableView.reloadData()
                 }
-                delegate?.didSelectMenuItem(viewController: loginVC)
+                navigationController?.present(loginVC, animated: true, completion: nil)
             } else {
-                delegate?.didSelectMenuItem(viewController: ProfileViewController(viewModel: ProfileViewModel()))
+                navigationController?.present(ProfileViewController(viewModel: ProfileViewModel()), animated: true, completion: nil)
             }
         } else if indexPath.section == 1 {
             if Auth.auth().currentUser != nil {
@@ -50,6 +49,8 @@ extension SidePanelViewController: UITableViewDelegate {
                 } else if indexPath.row == 4 {
                     // TODO: Writer
                 } else if indexPath.row == 5 {
+                    navigationController?.present(SettingsViewController(), animated: true, completion: nil)
+                } else if indexPath.row == 6 {
                     let auth = Auth.auth()
                     do {
                         try auth.signOut()
@@ -57,11 +58,6 @@ extension SidePanelViewController: UITableViewDelegate {
                         print("Error: \(error.localizedDescription)") // TODO: Alert
                     }
                     tableView.reloadData()
-                    centerContainer?.setCenterView(TabBarViewController(),
-                                                   withCloseAnimation: true,
-                                                   completion: { (_) in
-                                                    
-                    })
                 }
                 
             } else {
@@ -70,6 +66,8 @@ extension SidePanelViewController: UITableViewDelegate {
                 } else if indexPath.row == 2 {
                     guard let url = URL(string: Constatnts.websiteUrl) else { return }
                     UIApplication.shared.open(url)
+                } else if indexPath.row == 3 {
+                    navigationController?.present(SettingsViewController(), animated: true, completion: nil)
                 }
             }
         }

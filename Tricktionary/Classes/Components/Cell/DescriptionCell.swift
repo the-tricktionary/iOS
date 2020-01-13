@@ -40,9 +40,6 @@ class DescriptionCell: UITableViewCell {
         descriptionText.font = UIFont.systemFont(ofSize: 16)
         descriptionText.textColor = UIColor.black
         descriptionText.numberOfLines = 0
-        descriptionText.isSkeletonable = true
-        
-        isSkeletonable = true
         
         selectionStyle = .none
     }

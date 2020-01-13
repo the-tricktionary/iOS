@@ -35,7 +35,11 @@ class TrickDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        viewModel.onLoad = { [weak self] in
+            self?.tableView.reloadData()
+        }
+
         self.viewModel.getTrick()
         
         title = viewModel.trickName
@@ -47,6 +51,7 @@ class TrickDetailViewController: BaseViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        tableView.register(VideoCell.self, forCellReuseIdentifier: VideoCell.identity)
         
         setupViewConstraints()
     }

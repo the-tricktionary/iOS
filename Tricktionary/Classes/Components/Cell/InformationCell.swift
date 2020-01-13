@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SkeletonView
 
 class InformationCell: UITableViewCell {
     
@@ -41,18 +40,14 @@ class InformationCell: UITableViewCell {
     }
     
     fileprivate func setup() {
-        isSkeletonable = true
         contentView.backgroundColor = UIColor.gray
         view.backgroundColor = UIColor.white
-        view.isSkeletonable = true
         
         title.font = UIFont.systemFont(ofSize: 16)
         title.textColor = UIColor.black
-        title.isSkeletonable = true
         
         info.font = UIFont.systemFont(ofSize: 16)
         info.textColor = UIColor.black
-        info.isSkeletonable = true
         
         selectionStyle = .none
     }

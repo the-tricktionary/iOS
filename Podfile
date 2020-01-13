@@ -6,8 +6,6 @@ target 'Tricktionary' do
   use_frameworks!
 
   # Pods for Tricktionary
-
-	pod 'MMDrawerController'
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Auth'
@@ -20,8 +18,9 @@ target 'Tricktionary' do
 	pod 'YoutubePlayerView'
 	pod 'SwiftChart'
 	pod 'Charts'
-	pod 'SkeletonView'
 	pod 'ChameleonFramework'
+	pod 'LifetimeTracker'
+	pod 'Swinject'
 
   target 'TricktionaryTests' do
     inherit! :search_paths
@@ -31,6 +30,7 @@ target 'Tricktionary' do
   target 'TricktionaryUITests' do
     inherit! :search_paths
     # Pods for testing
+	pod 'SwiftMonkey'
   end
 
 end

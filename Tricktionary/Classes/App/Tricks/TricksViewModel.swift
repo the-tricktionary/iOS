@@ -11,24 +11,34 @@ import FirebaseFirestore
 import FirebaseRemoteConfig
 import ReactiveSwift
 
+struct TableSection {
+    var name: String
+    var rows: [BaseTrick]
+}
+
 protocol TricksViewModelType {
-    var tricks: MutableProperty<[Trick]> { get }
-    var filteredTricks: [Trick] { get }
+    var sections: MutableProperty<[TableSection]> { get }
     var selectedLevel: Int { get set }
     var levels: [Int] { get }
     var disciplines: [Disciplines] { get }
     var selectedDiscipline: Int { get set }
-    
-    func getTricks()
 }
 
 class TricksViewModel: TricksViewModelType {
     
     // MARK: Variables
-    var tricks: MutableProperty<[Trick]> = MutableProperty<[Trick]>([Trick]())
-    var filteredTricks: [Trick] = [Trick]()
-    
-    var selectedLevel: Int = 1
+    let sections = MutableProperty<[TableSection]>([TableSection]())
+    private let tricks: MutableProperty<[BaseTrick]> = MutableProperty<[BaseTrick]>([BaseTrick]())
+
+    var selectedLevel: Int = 1 {
+        didSet {
+            sections.value.removeAll()
+            if selectedLevel > levels.count {
+                selectedLevel = 1
+            }
+            self.makeContent(for: selectedLevel)
+        }
+    }
     var selectedDiscipline = 0 {
         didSet {
             self.getTricks()
@@ -76,36 +86,31 @@ class TricksViewModel: TricksViewModelType {
     // MARK: Publics
     
     func getTricks() {
-        print("Loading tricks from \(selectedDiscipline) discipline")
         tricks.value.removeAll()
         dataProvider.getTricks(discipline: disciplines[selectedDiscipline], starting: { [weak self] in
             self?.onStartLoading?()
         }, completion: { [weak self] (data) in
-            if self?.selectedDiscipline == 2 {
-                print("Trick: \(data.name)")
-            }
             self?.tricks.value.append(data)
         }) { [weak self] in
-            print("Loaded tricks: \(self?.tricks.value.count)")
+            self?.makeContent(for: self?.selectedLevel ?? 1)
             self?.onFinishLoading?()
         }
     }
 
-    func getTrickTypes() -> [String] {
-        let levelTricks = tricks.value.filter { $0.level == self.selectedLevel }
+    private func getTypes(levelTricks: [BaseTrick]) -> [String] {
         var types = Set<String>()
-        levelTricks.forEach { (trick) in
-            types.insert(trick.type)
-        }
+        levelTricks.forEach { types.insert($0.type) }
 
         return Array(types).sorted(by: { (trick1, trick2) -> Bool in
             trick1 < trick2
         })
     }
-    
-    func getTricks(_ type: String) -> [Trick] {
-        return tricks.value.filter {
-            $0.level == self.selectedLevel && $0.type == type
+
+    private func makeContent(for level: Int) {
+        let tricksForLevel = tricks.value.filter { $0.level == level }
+        let types = getTypes(levelTricks: tricksForLevel)
+        types.forEach { type in
+            sections.value.append(TableSection(name: type, rows: tricksForLevel.filter { $0.type == type }))
         }
     }
 }

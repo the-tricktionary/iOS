@@ -12,7 +12,12 @@ import UIKit
 class SettingsViewController: BaseCenterViewController {
     
     // MARK: Variables
-    
+    @Persistent(key: PxSettings.autoplay, defaultValue: false)
+    var auto: Bool
+
+    @Persistent(key: PxSettings.fullscreen, defaultValue: false)
+    var fullscreen: Bool
+
     var tableView: UITableView = UITableView()
     
     // MARK: Life cycles

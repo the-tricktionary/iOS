@@ -9,6 +9,12 @@
 import Foundation
 import Firebase
 
+struct BaseTrick: Codable {
+    var name: String
+    var level: Int
+    var type: String
+}
+
 class Trick: Codable {
     
     // MARK: Variables
@@ -37,4 +43,25 @@ struct LevelsFields: Codable {
 
 struct Prerequisites: Codable {
     var id: String
+}
+
+enum Type: String {
+    case basic, multiple, manipulation, power, release, impossible
+
+    var name: String {
+        switch self {
+        case .basic:
+            return "Basic"
+        case .multiple:
+            return "Multiple"
+        case .manipulation:
+            return "Manipulation"
+        case .power:
+            return "Power"
+        case .release:
+            return "Release"
+        case .impossible:
+            return "Impossible"
+        }
+    }
 }

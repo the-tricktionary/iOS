@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import MMDrawerController
 
 class BaseCenterViewController: BaseViewController {
     
@@ -16,10 +15,7 @@ class BaseCenterViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let menuButton = MMDrawerBarButtonItem(target: self, action: #selector(menuButtonTapped))
-        navigationItem.leftBarButtonItem = menuButton
-
+        //
     }
     
     // MARK: Public

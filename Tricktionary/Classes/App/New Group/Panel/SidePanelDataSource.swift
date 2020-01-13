@@ -24,9 +24,9 @@ extension SidePanelViewController: UITableViewDataSource {
         }
         
         if let _ = Auth.auth().currentUser {
-            return 6
+            return 7
         }
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,55 +56,75 @@ extension SidePanelViewController: UITableViewDataSource {
             
             if indexPath.row == 0 {
                 let headerCell = UITableViewCell()
-                headerCell.backgroundColor = UIColor.red
+                headerCell.backgroundColor = UIColor.clear
                 headerCell.selectionStyle = .none
                 return headerCell
             }
             
             if let _ = Auth.auth().currentUser {
                 if indexPath.row == 1 {
-                    let cell = MenuCell()
-                    cell.icon.image = UIImage(named: "instagram")
-                    cell.title.text = "Instagram"
-                    cell.itemDescription.text = "@jumpropetricktionary"
+                    let cell = UITableViewCell()
+                    cell.imageView?.image = UIImage(named: "instagram")
+                    cell.imageView?.tintColor = .black
+                    cell.textLabel?.text = "Instagram"
+                    cell.detailTextLabel?.text = "@jumpropetricktionary"
                     return cell
                 } else if indexPath.row == 2 {
-                    let cell = MenuCell()
-                    cell.icon.image = UIImage(named: "web")
-                    cell.title.text = "Web"
-                    cell.itemDescription.text = "the-tricktionary.com"
+                    let cell = UITableViewCell()
+                    cell.imageView?.image = UIImage(named: "web")
+                    cell.imageView?.tintColor = .black
+                    cell.textLabel?.text = "Web"
+                    cell.detailTextLabel?.text = "the-tricktionary.com"
                     return cell
                 } else if indexPath.row == 3 {
-                    let cell = MenuCell()
-                    cell.icon.image = UIImage(named: "contact")
-                    cell.title.text = "Contact"
-                    cell.itemDescription.text = "View your past feedback"
+                    let cell = UITableViewCell()
+                    cell.imageView?.image = UIImage(named: "contact")
+                    cell.imageView?.tintColor = .black
+                    cell.textLabel?.text = "Contact"
+                    cell.detailTextLabel?.text = "View your past feedback"
                     return cell
                 } else if indexPath.row == 4 {
-                    let cell = MenuCell()
-                    cell.icon.image = UIImage(named: "writer")
-                    cell.title.text = "Show Writer"
-                    cell.itemDescription.text = "Spread routines evenly"
+                    let cell = UITableViewCell()
+                    cell.imageView?.image = UIImage(named: "writer")
+                    cell.imageView?.tintColor = .black
+                    cell.textLabel?.text = "Show Writer"
+                    cell.detailTextLabel?.text = "Spread routines evenly"
                     return cell
                 } else if indexPath.row == 5 {
-                    let cell = MenuCell() // TODO: Sign out cell
-                    cell.removeDescription()
-                    cell.icon.image = UIImage(named: "signin")
-                    cell.title.text = "Sign out"
+                    let cell = UITableViewCell()
+                    cell.imageView?.image = UIImage(named: "settings")
+                    cell.imageView?.tintColor = .black
+                    cell.textLabel?.text = "Settings"
+                    cell.detailTextLabel?.text = "Settings"
+                    return cell
+                } else if indexPath.row == 6 {
+                    let cell = UITableViewCell()
+                    cell.imageView?.image = UIImage(named: "signin")
+                    cell.imageView?.tintColor = .black
+                    cell.textLabel?.text = "Sign out"
                     return cell
                 }
             } else {
                 if indexPath.row == 1 {
-                    let cell = MenuCell()
-                    cell.icon.image = UIImage(named: "instagram")
-                    cell.title.text = "Instagram"
-                    cell.itemDescription.text = "@jumpropetricktionary"
+                    let cell = UITableViewCell()
+                    cell.imageView?.image = UIImage(named: "instagram")
+                    cell.imageView?.tintColor = .black
+                    cell.textLabel?.text = "Instagram"
+                    cell.detailTextLabel?.text = "@jumpropetricktionary"
                     return cell
                 } else if indexPath.row == 2 {
-                    let cell = MenuCell()
-                    cell.icon.image = UIImage(named: "web")
-                    cell.title.text = "Web"
-                    cell.itemDescription.text = "the-tricktionary.com"
+                    let cell = UITableViewCell()
+                    cell.imageView?.image = UIImage(named: "web")
+                    cell.imageView?.tintColor = .black
+                    cell.textLabel?.text = "Web"
+                    cell.detailTextLabel?.text = "the-tricktionary.com"
+                    return cell
+                } else if indexPath.row == 3 {
+                    let cell = UITableViewCell()
+                    cell.imageView?.image = UIImage(named: "settings")
+                    cell.imageView?.tintColor = .black
+                    cell.textLabel?.text = "Settings"
+                    cell.detailTextLabel?.text = "Settings"
                     return cell
                 }
             }

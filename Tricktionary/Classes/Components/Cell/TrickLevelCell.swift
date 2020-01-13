@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SkeletonView
 
 class TrickLevelCell: BaseCell {
     
@@ -38,8 +37,6 @@ class TrickLevelCell: BaseCell {
         contentView.addSubview(view)
         view.addSubview(title)
         contentView.addSubview(topBorder)
-
-        contentView.subviews.forEach { $0.isSkeletonable = true }
     }
     
     fileprivate func setup() {

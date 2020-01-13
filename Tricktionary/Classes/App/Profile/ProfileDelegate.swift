@@ -16,7 +16,5 @@ extension ProfileViewController: UITableViewDelegate {
         guard let nc = self.navigationController, let trickName = cell?.textLabel?.text else {
             return
         }
-        let coord = TrickCoordinator(presenter: nc, trickName: trickName)
-        coord.start()
     }
 }

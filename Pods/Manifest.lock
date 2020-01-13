@@ -96,18 +96,7 @@ PODS:
     - gRPC-RxLibrary (= 1.17.0)
   - GTMSessionFetcher/Core (1.2.1)
   - leveldb-library (1.20)
-  - MMDrawerController (0.6.0):
-    - MMDrawerController/Core (= 0.6.0)
-    - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
-    - MMDrawerController/MMDrawerVisualStates (= 0.6.0)
-    - MMDrawerController/Subclass (= 0.6.0)
-  - MMDrawerController/Core (0.6.0)
-  - MMDrawerController/MMDrawerBarButtonItem (0.6.0):
-    - MMDrawerController/Core
-  - MMDrawerController/MMDrawerVisualStates (0.6.0):
-    - MMDrawerController/Core
-  - MMDrawerController/Subclass (0.6.0):
-    - MMDrawerController/Core
+  - LifetimeTracker (1.7.1)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -122,9 +111,10 @@ PODS:
   - RxAtomic (4.4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
-  - SkeletonView (1.5)
   - SnapKit (4.2.0)
   - SwiftChart (1.0.1)
+  - SwiftMonkey (2.1.1)
+  - Swinject (2.7.1)
   - YoutubePlayerView (1.0.1)
 
 DEPENDENCIES:
@@ -136,12 +126,13 @@ DEPENDENCIES:
   - Firebase/RemoteConfig
   - Firebase/Storage
   - GoogleSignIn
-  - MMDrawerController
+  - LifetimeTracker
   - ReactiveCocoa
   - RxSwift
-  - SkeletonView
   - SnapKit
   - SwiftChart
+  - SwiftMonkey
+  - Swinject
   - YoutubePlayerView
 
 SPEC REPOS:
@@ -164,7 +155,6 @@ SPEC REPOS:
     - gRPC-RxLibrary
     - GTMSessionFetcher
     - leveldb-library
-    - MMDrawerController
     - nanopb
     - Protobuf
     - ReactiveCocoa
@@ -172,13 +162,15 @@ SPEC REPOS:
     - Result
     - RxAtomic
     - RxSwift
-    - SkeletonView
     - SnapKit
     - SwiftChart
     - YoutubePlayerView
   trunk:
     - FirebaseABTesting
     - FirebaseRemoteConfig
+    - LifetimeTracker
+    - SwiftMonkey
+    - Swinject
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
@@ -201,7 +193,7 @@ SPEC CHECKSUMS:
   gRPC-RxLibrary: f2873a17e8133f66d8ce972f8805aa7a518ae974
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
-  MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
+  LifetimeTracker: 12f58bfab48593408fb4cab9d9050e319deb8299
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   ReactiveCocoa: fbd26e9ba60e98417ee47433e59465a98ed9da0f
@@ -209,11 +201,12 @@ SPEC CHECKSUMS:
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
-  SkeletonView: 6cbb80f82f8bdee3f9093e2fa03b84819b4bd826
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftChart: ba767a678d568a5ee22d419e146a0582865e1aff
+  SwiftMonkey: aea6f2707a4b7ab5277b4d2fd2f0723a083997b1
+  Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   YoutubePlayerView: 510480ccdf03f2ffc888ee0b2bf2d1d8f8d9289f
 
-PODFILE CHECKSUM: 26744ce05f6efb1bd6d6530f39196d5dbb526136
+PODFILE CHECKSUM: 05ee128774f86afbe72bfa933f8ea68b8bc1f110
 
 COCOAPODS: 1.8.3

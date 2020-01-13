@@ -39,17 +39,13 @@ class UserCell: UITableViewCell {
     }
     
     fileprivate func setup() {
-        
-        contentView.backgroundColor = UIColor.flatRed()
-        
-        view.backgroundColor = UIColor.flatRed()
         selectionStyle = .none
         
-        icon.tintColor = UIColor.white
+        icon.tintColor = UIColor.black
         icon.layer.cornerRadius = 30
         icon.clipsToBounds = true
         
-        title.textColor = UIColor.white
+        title.textColor = UIColor.black
         title.font = UIFont.boldSystemFont(ofSize: 16)
     }
     

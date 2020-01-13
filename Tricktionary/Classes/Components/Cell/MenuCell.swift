@@ -44,19 +44,16 @@ class MenuCell: UITableViewCell {
     }
     
     fileprivate func setup() {
-        
-        contentView.backgroundColor = Color.background
-        view.backgroundColor = Color.bar
         selectionStyle = .none
         
-        icon.tintColor = UIColor.white
+        icon.tintColor = UIColor.black
         
-        topBorder.backgroundColor = UIColor.red
+        topBorder.backgroundColor = UIColor.clear
         
-        title.textColor = UIColor.white
+        title.textColor = UIColor.black
         title.font = UIFont.boldSystemFont(ofSize: 16)
         
-        itemDescription.textColor = UIColor.white
+        itemDescription.textColor = UIColor.black
         itemDescription.font = UIFont.systemFont(ofSize: 12)
     }
     

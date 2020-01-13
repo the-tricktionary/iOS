@@ -10,8 +10,9 @@
 		118D877E232BE550001DFB1F /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D877D232BE550001DFB1F /* ProfileDataSource.swift */; };
 		118D8780232BE577001DFB1F /* ProfileDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D877F232BE577001DFB1F /* ProfileDelegate.swift */; };
 		11A892DE232960A3009BCA7B /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A892DD232960A3009BCA7B /* ProfileInfo.swift */; };
+		11ADF4F923CD0DF6009C522C /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11ADF4F823CD0DF6009C522C /* SelectionView.swift */; };
 		11AF9DF623527EAD00746773 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
-		11AF9DF723527EAD00746773 /* Pods_Tricktionary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		11AF9DF723527EAD00746773 /* Pods_Tricktionary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		21AE64B71C33C1370ACB4612 /* Pods_TricktionaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */; };
 		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
 		EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */; };
@@ -25,8 +26,6 @@
 		EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */; };
 		EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */; };
 		EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48DB21EAB8C10086FC79 /* Constants.swift */; };
-		EA1A999D22DE373100C6E888 /* TrickCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A999C22DE373100C6E888 /* TrickCoordinator.swift */; };
-		EA26412121D9A68900631852 /* TrickList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26412021D9A68900631852 /* TrickList.swift */; };
 		EA2C37E0227F6DC100F7ECEE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C37DF227F6DC100F7ECEE /* ProfileViewController.swift */; };
 		EA2C37E22283063500F7ECEE /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C37E12283063500F7ECEE /* ProfileViewModel.swift */; };
 		EA2C6B1021ED38270090579F /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C6B0F21ED38270090579F /* UserCell.swift */; };
@@ -61,7 +60,6 @@
 		EA8C1D7E219CE61D00F4D502 /* TricktionaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D7D219CE61D00F4D502 /* TricktionaryUITests.swift */; };
 		EA8C1D90219CEA8A00F4D502 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA8C1D8F219CEA8A00F4D502 /* GoogleService-Info.plist */; };
 		EAA4EE4B2205E08F003347D6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA4EE4A2205E08F003347D6 /* LoginViewModel.swift */; };
-		EAA4EE4D2207AD08003347D6 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA4EE4C2207AD08003347D6 /* SearchResultViewController.swift */; };
 		EAACBCDC21D02E83007AEDFE /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACBCDB21D02E83007AEDFE /* VideoCell.swift */; };
 		EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACBCDD21D034FC007AEDFE /* TrickDetailDataSource.swift */; };
 		EAACBCE021D0365E007AEDFE /* TrickDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACBCDF21D0365E007AEDFE /* TrickDetailDelegate.swift */; };
@@ -129,6 +127,7 @@
 		118D877D232BE550001DFB1F /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
 		118D877F232BE577001DFB1F /* ProfileDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDelegate.swift; sourceTree = "<group>"; };
 		11A892DD232960A3009BCA7B /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
+		11ADF4F823CD0DF6009C522C /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		11AF9DF5235277C400746773 /* Tricktionary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tricktionary.entitlements; sourceTree = "<group>"; };
 		43F91D7EECE300294FAA4D49 /* Pods-TricktionaryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TricktionaryUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,8 +147,6 @@
 		EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDelegate.swift; sourceTree = "<group>"; };
 		EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDataSource.swift; sourceTree = "<group>"; };
 		EA1A48DB21EAB8C10086FC79 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		EA1A999C22DE373100C6E888 /* TrickCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickCoordinator.swift; sourceTree = "<group>"; };
-		EA26412021D9A68900631852 /* TrickList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickList.swift; sourceTree = "<group>"; };
 		EA2C37DF227F6DC100F7ECEE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EA2C37E12283063500F7ECEE /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		EA2C6B0F21ED38270090579F /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -190,7 +187,6 @@
 		EA8C1D7F219CE61D00F4D502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA8C1D8F219CEA8A00F4D502 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EAA4EE4A2205E08F003347D6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		EAA4EE4C2207AD08003347D6 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		EAACBCDB21D02E83007AEDFE /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		EAACBCDD21D034FC007AEDFE /* TrickDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickDetailDataSource.swift; sourceTree = "<group>"; };
 		EAACBCDF21D0365E007AEDFE /* TrickDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickDetailDelegate.swift; sourceTree = "<group>"; };
@@ -260,6 +256,14 @@
 				4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		11ADF4F723CD0DE5009C522C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				11ADF4F823CD0DF6009C522C /* SelectionView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B483ECF58063B5C73552D01B /* Pods */ = {
@@ -383,7 +387,6 @@
 			isa = PBXGroup;
 			children = (
 				EA7AAB39219E2257000858EE /* Trick.swift */,
-				EA26412021D9A68900631852 /* TrickList.swift */,
 				EA45C47921F1A7D0009DC1A8 /* SpeedTimes.swift */,
 				EAD3D73F21F9187500F39A22 /* SpeedEvents.swift */,
 				EAB1517C22209D720006B0FB /* Speed.swift */,
@@ -400,7 +403,6 @@
 				EA85B514219EDFA200F975A2 /* TrickDetailViewModel.swift */,
 				EAACBCDD21D034FC007AEDFE /* TrickDetailDataSource.swift */,
 				EAACBCDF21D0365E007AEDFE /* TrickDetailDelegate.swift */,
-				EA1A999C22DE373100C6E888 /* TrickCoordinator.swift */,
 			);
 			path = "Trick detail";
 			sourceTree = "<group>";
@@ -518,12 +520,12 @@
 		EAC23ABF219D8F750086D9E2 /* Tricks */ = {
 			isa = PBXGroup;
 			children = (
+				11ADF4F723CD0DE5009C522C /* View */,
 				EA7F22D2219EDC3C00C43599 /* Trick detail */,
 				EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */,
 				EA7AAB30219E2138000858EE /* TricksDataSource.swift */,
 				EA7AAB32219E2160000858EE /* TricksDelegate.swift */,
 				EA7AAB36219E21FE000858EE /* TricksViewModel.swift */,
-				EAA4EE4C2207AD08003347D6 /* SearchResultViewController.swift */,
 			);
 			path = Tricks;
 			sourceTree = "<group>";
@@ -663,6 +665,7 @@
 				EA8C1D75219CE61D00F4D502 /* Sources */,
 				EA8C1D76219CE61D00F4D502 /* Frameworks */,
 				EA8C1D77219CE61D00F4D502 /* Resources */,
+				13BC251151528BAD4EF5FAAE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -746,6 +749,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		13BC251151528BAD4EF5FAAE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1C73EACFE03ADD48B2A83A50 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -850,7 +870,6 @@
 				EA2C37E0227F6DC100F7ECEE /* ProfileViewController.swift in Sources */,
 				EA2C37E22283063500F7ECEE /* ProfileViewModel.swift in Sources */,
 				EACF63E321EE96F500D7D836 /* GradientButton.swift in Sources */,
-				EA26412121D9A68900631852 /* TrickList.swift in Sources */,
 				EAE6E1CC21F3DE560033D918 /* Picker.swift in Sources */,
 				EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */,
 				EACF594621E7EAF40037FE2B /* SidePanelViewController.swift in Sources */,
@@ -892,7 +911,6 @@
 				EAE566C722F4AADE0077EC5D /* UserManager.swift in Sources */,
 				EABA88662253ADB300D27F64 /* SubmitViewController.swift in Sources */,
 				EA4F823E2222B9B7001CB1F4 /* SpeedDataDetailDelegate.swift in Sources */,
-				EA1A999D22DE373100C6E888 /* TrickCoordinator.swift in Sources */,
 				EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */,
 				EA073DF621FA792A0046799C /* SettingsViewController.swift in Sources */,
 				EAF9B499225A7894001AB242 /* SubmitViewModel.swift in Sources */,
@@ -909,12 +927,12 @@
 				EA16299422B1742C00BAE31E /* BaseDrawerViewController.swift in Sources */,
 				118D877E232BE550001DFB1F /* ProfileDataSource.swift in Sources */,
 				EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */,
+				11ADF4F923CD0DF6009C522C /* SelectionView.swift in Sources */,
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,
 				EA4F82362221615B001CB1F4 /* SpeedDataDetailViewController.swift in Sources */,
 				EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */,
 				EA45C47A21F1A7D0009DC1A8 /* SpeedTimes.swift in Sources */,
 				EA85B515219EDFA200F975A2 /* TrickDetailViewModel.swift in Sources */,
-				EAA4EE4D2207AD08003347D6 /* SearchResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1091,17 +1109,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tricktionary/Tricktionary.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HU9B955328;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = GS54YR7LSQ;
 				INFOPLIST_FILE = Tricktionary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cz.pixmo.tricktionary;
+				PRODUCT_BUNDLE_IDENTIFIER = "cz.pixmo.the-tricktionary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Tricktionary Dev";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1114,17 +1134,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tricktionary/Tricktionary.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HU9B955328;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = GS54YR7LSQ;
 				INFOPLIST_FILE = Tricktionary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cz.pixmo.tricktionary;
+				PRODUCT_BUNDLE_IDENTIFIER = "cz.pixmo.the-tricktionary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Tricktionary Dev";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

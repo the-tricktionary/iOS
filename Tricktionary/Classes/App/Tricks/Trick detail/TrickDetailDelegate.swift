@@ -26,15 +26,9 @@ extension TrickDetailViewController: UITableViewDelegate {
             if trick.prerequisites?.count ?? 0 > 0 {
                 if indexPath.section == 3 {
                     let cell = tableView.cellForRow(at: indexPath) as! InformationCell
-//                    let newScreen = UserDefaults.standard.value(forKey: PxSettings.newScreen) as? Bool ?? false
-//                    if newScreen {
-//                        let nextDetailViewController = TrickDetailViewController(viewModel: TrickDetailViewModel(trick: cell.title.text!))
-//                        navigationController?.pushViewController(nextDetailViewController, animated: true)
-//                    } else {
-                        viewModel.trickName = cell.title.text!
-                        viewModel.getTrick()
-                        title = cell.title.text!
-//                    }
+                    viewModel.trickName = cell.title.text!
+                    viewModel.getTrick()
+                    title = cell.title.text!
                 }
             }
         }

@@ -8,31 +8,28 @@
 
 import Foundation
 import UIKit
-import SkeletonView
 
 extension TricksViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        let types = viewModel.getTrickTypes()
-        return types.count
+        return viewModel.sections.value.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let types = viewModel.getTrickTypes()
-        return viewModel.getTricks(types[section]).count
+        return viewModel.sections.value[section].rows.count
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = TypeHeaderView()
-        view.setTitleLabel(viewModel.getTrickTypes()[section])
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! TypeHeaderView
+        view.setTitleLabel(viewModel.sections.value[section].name)
         return view
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let trick = viewModel.getTricks(viewModel.getTrickTypes()[indexPath.section])[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: TrickLevelCell.reuseIdentifier(), for: indexPath) as! TrickLevelCell
-            cell.title.text = trick.name
-            cell.isTopBorderVisible(false)
-            return cell
+        let trick = viewModel.sections.value[indexPath.section].rows[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: TrickLevelCell.reuseIdentifier(), for: indexPath) as! TrickLevelCell
+        cell.title.text = trick.name
+        cell.isTopBorderVisible(false)
+        return cell
     }
 }

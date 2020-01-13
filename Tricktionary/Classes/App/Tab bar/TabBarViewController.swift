@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import MMDrawerController
 import FirebaseRemoteConfig
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
@@ -22,8 +21,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         tabBar.isTranslucent = false
 
         let tricksVM = TricksViewModel(dataProvider: TrickManager.shared, remoteConfig: RemoteConfig.remoteConfig())
-        let trVC = TricksViewController(viewModel: tricksVM)
-        let tricksViewController = UINavigationController(rootViewController: trVC)
+        let tricksViewController = UINavigationController(rootViewController: TricksViewController(viewModel: tricksVM))
         tricksViewController.tabBarItem = UITabBarItem(title: "Tricks", image: UIImage(named: "tricktionary"), tag: 0)
 
         let speedsVM = SpeedTimerViewModel()
@@ -38,8 +36,9 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let informationController = UINavigationController(rootViewController: SubmitViewController(viewModel: submitVM))
         informationController.tabBarItem = UITabBarItem(title: "Submit", image: #imageLiteral(resourceName: "submit"), tag: 3)
 
-        let settingsController = UINavigationController(rootViewController: SettingsViewController())
-        settingsController.tabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "settings"), tag: 4)
+        let menuVC = SidePanelViewController()
+        let settingsController = UINavigationController(rootViewController: menuVC)
+        settingsController.tabBarItem = UITabBarItem(title: "More", image: #imageLiteral(resourceName: "settings"), tag: 4)
 
         let controllers: [UIViewController] = [tricksViewController, alarmController, speedDataVC, informationController,
                                                settingsController]

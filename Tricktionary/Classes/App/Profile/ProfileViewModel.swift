@@ -65,13 +65,7 @@ class ProfileViewModel: ProfileViewModelType {
     }
 
     private func loadCompletedTricks() {
-//        tricksInfo.value.forEach { trickID in
-//            TrickManager.shared.getTrickNameById(id: trickID, completion: { data in
-//                self.trickList.value.append(Trick(data))
-//            }, finish: {
-//                self.countCompletedByLevel()
-//            })
-//        }
+
     }
 
     private func getUserPhotoURL() -> Data? {

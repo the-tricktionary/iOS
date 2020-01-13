@@ -12,7 +12,6 @@ import AVFoundation
 import AVKit
 import ReactiveCocoa
 import FirebaseAuth
-import SkeletonView
 
 class SubmitViewController: BaseCenterViewController, UIPickerViewDelegate {
     
