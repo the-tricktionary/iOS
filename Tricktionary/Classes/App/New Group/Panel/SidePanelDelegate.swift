@@ -16,11 +16,6 @@ extension SidePanelViewController: UITableViewDelegate {
         if indexPath.section == 0 {
             return 70
         }
-        if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                return 14
-            }
-        }
         return 50
     }
     
@@ -39,18 +34,18 @@ extension SidePanelViewController: UITableViewDelegate {
         } else if indexPath.section == 1 {
             if Auth.auth().currentUser != nil {
                 // Loged in
-                if indexPath.row == 1 {
+                if indexPath.row == 0 {
                     openInstagram()
-                } else if indexPath.row == 2 {
+                } else if indexPath.row == 1 {
                     guard let url = URL(string: Constatnts.websiteUrl) else { return }
                     UIApplication.shared.open(url)
-                } else if indexPath.row == 3 {
+                } else if indexPath.row == 2 {
                     // TODO: Contact
-                } else if indexPath.row == 4 {
+                } else if indexPath.row == 3 {
                     // TODO: Writer
-                } else if indexPath.row == 5 {
+                } else if indexPath.row == 4 {
                     navigationController?.present(SettingsViewController(), animated: true, completion: nil)
-                } else if indexPath.row == 6 {
+                } else if indexPath.row == 5 {
                     let auth = Auth.auth()
                     do {
                         try auth.signOut()
@@ -61,12 +56,12 @@ extension SidePanelViewController: UITableViewDelegate {
                 }
                 
             } else {
-                if indexPath.row == 1 {
+                if indexPath.row == 0 {
                     openInstagram()
-                } else if indexPath.row == 2 {
+                } else if indexPath.row == 1 {
                     guard let url = URL(string: Constatnts.websiteUrl) else { return }
                     UIApplication.shared.open(url)
-                } else if indexPath.row == 3 {
+                } else if indexPath.row == 2 {
                     navigationController?.present(SettingsViewController(), animated: true, completion: nil)
                 }
             }
