@@ -14,6 +14,7 @@ import ReactiveSwift
 struct TableSection {
     var name: String
     var rows: [BaseTrick]
+    var collapsed: Bool
 }
 
 protocol TricksViewModelType {
@@ -22,6 +23,7 @@ protocol TricksViewModelType {
     var levels: [Int] { get }
     var disciplines: [Disciplines] { get }
     var selectedDiscipline: Int { get set }
+    func toggleSection(name: String)
 }
 
 class TricksViewModel: TricksViewModelType {
@@ -33,14 +35,18 @@ class TricksViewModel: TricksViewModelType {
     var selectedLevel: Int = 1 {
         didSet {
             sections.value.removeAll()
-            if selectedLevel > levels.count {
-                selectedLevel = 1
+            if selectedLevel > levels.max() ?? 0 {
+                selectedLevel = levels[0] // FAIL
             }
-            self.makeContent(for: selectedLevel)
+            self.makeContent()
         }
     }
     var selectedDiscipline = 0 {
         didSet {
+            sections.value.removeAll()
+            if self.selectedDiscipline > self.disciplines.count - 1 {
+                self.selectedDiscipline = 0
+            }
             self.getTricks()
         }
     }
@@ -92,8 +98,35 @@ class TricksViewModel: TricksViewModelType {
         }, completion: { [weak self] (data) in
             self?.tricks.value.append(data)
         }) { [weak self] in
-            self?.makeContent(for: self?.selectedLevel ?? 1)
+            print("LOADED \(self?.tricks.value.count)")
+            self?.selectMinLevel()
             self?.onFinishLoading?()
+        }
+    }
+
+    func toggleSection(name: String) {
+        for (index, section) in sections.value.enumerated() {
+            if section.name == name {
+                if section.collapsed {
+                    let tricksForLevel = self.tricks.value.filter { $0.level == selectedLevel }
+                    self.sections.value[index].rows = tricksForLevel.filter { $0.type == name }
+                    self.sections.value[index].collapsed = false
+                } else {
+                    self.sections.value[index].rows.removeAll()
+                    self.sections.value[index].collapsed = true
+                }
+            }
+        }
+    }
+
+    private func selectMinLevel() {
+        let levels = tricks.value.map { trick -> Int in
+            return trick.level
+        }
+        if let min = levels.min() {
+            selectedLevel = min
+        } else {
+            selectedLevel = 1
         }
     }
 
@@ -106,11 +139,11 @@ class TricksViewModel: TricksViewModelType {
         })
     }
 
-    private func makeContent(for level: Int) {
-        let tricksForLevel = tricks.value.filter { $0.level == level }
+    private func makeContent() {
+        let tricksForLevel = tricks.value.filter { $0.level == selectedLevel }
         let types = getTypes(levelTricks: tricksForLevel)
         types.forEach { type in
-            sections.value.append(TableSection(name: type, rows: tricksForLevel.filter { $0.type == type }))
+            sections.value.append(TableSection(name: type, rows: tricksForLevel.filter { $0.type == type }, collapsed: false))
         }
     }
 }

@@ -13,6 +13,7 @@ struct BaseTrick: Codable {
     var name: String
     var level: Int
     var type: String
+    var levels: Levels
 }
 
 class Trick: Codable {
@@ -33,8 +34,7 @@ struct Video: Codable {
 }
 
 struct Levels: Codable {
-    var irsf: LevelsFields
-    var wjr: LevelsFields
+    var ijru: LevelsFields
 }
 
 struct LevelsFields: Codable {

@@ -16,6 +16,8 @@ import ChameleonFramework
 class TricksViewController: BaseCenterViewController {
     
     // MARK: Variables
+    private lazy var levelButton = self.makeLevelButton()
+    private lazy var disciplinesButton = self.makeDisciplineButton()
     private let selectionView = SelectionView()
     var tableView: UITableView = UITableView()
     internal var viewModel: TricksViewModel
@@ -51,6 +53,9 @@ class TricksViewController: BaseCenterViewController {
 
         view.backgroundColor = Color.background
 
+        navigationItem.leftBarButtonItem = disciplinesButton
+        navigationItem.rightBarButtonItem = levelButton
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = Color.background
@@ -60,15 +65,12 @@ class TricksViewController: BaseCenterViewController {
         tableView.sectionHeaderHeight = 44
         tableView.tableFooterView = UIView()
 
-        selectionView.backgroundColor = .white
-        selectionView.customize(with: SelectionView.Content(left: viewModel.disciplines[viewModel.selectedDiscipline].name,
-                                                            right: "Level \(viewModel.selectedLevel)"))
-
         setupViewConstraints()
     }
 
     private func bind() {
         viewModel.sections.producer.startWithValues { [weak self] _ in
+            self?.levelButton.title = "Level \(self?.viewModel.selectedLevel ?? 1)"
             self?.tableView.reloadData()
         }
 
@@ -80,27 +82,43 @@ class TricksViewController: BaseCenterViewController {
             self?.activityIndicatorView.stopAnimating()
             self?.tableView.reloadData()
         }
-        selectionView.onRightTapped = { [weak self] in
-            self?.viewModel.selectedLevel += 1
-            self?.selectionView.customize(with: SelectionView.Content(left: self?.viewModel.disciplines[self?.viewModel.selectedDiscipline ?? 0].name ?? "",
-                                                                      right: "Level \(self?.viewModel.selectedLevel ?? 1)"))
-        }
     }
     
     fileprivate func setupViewConstraints() {
-        selectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            make.height.equalTo(45)
-        }
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(selectionView.snp.bottom)
-            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
     fileprivate func setupSearchController() {
 
+    }
+
+    private func makeLevelButton() -> UIBarButtonItem {
+        let levelButton = UIBarButtonItem(title: "Level \(viewModel.selectedLevel)",
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(changeLevelTapped))
+        levelButton.tintColor = UIColor.flatYellow()
+        return levelButton
+    }
+
+    private func makeDisciplineButton() -> UIBarButtonItem {
+        let disciplinesButton = UIBarButtonItem(title: viewModel.disciplines[viewModel.selectedDiscipline].name,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(changeDisciplineTapped))
+        disciplinesButton.tintColor = UIColor.flatYellow()
+        return disciplinesButton
+    }
+
+    @objc private func changeLevelTapped() {
+        viewModel.selectedLevel += 1
+        levelButton.title = "Level \(viewModel.selectedLevel)"
+    }
+
+    @objc private func changeDisciplineTapped() {
+        viewModel.selectedDiscipline += 1
+        disciplinesButton.title = viewModel.disciplines[viewModel.selectedDiscipline].name
     }
 }

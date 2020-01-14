@@ -20,8 +20,15 @@ extension TricksViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! TypeHeaderView
-        view.setTitleLabel(viewModel.sections.value[section].name)
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? TypeHeaderView else {
+            return nil
+        }
+        let section = viewModel.sections.value[section]
+        view.customize(with: section.name, collapsed: section.collapsed)
+        view.onTapped = { [weak self] sectionName in
+            self?.viewModel.toggleSection(name: sectionName)
+            print("Section: \(sectionName)")
+        }
         return view
     }
 

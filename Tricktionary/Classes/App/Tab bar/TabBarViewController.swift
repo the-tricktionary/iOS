@@ -16,8 +16,9 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         
         delegate = self
-        tabBar.tintColor = Color.bar
-        tabBar.barTintColor = Color.background
+        tabBar.tintColor = UIColor.flatOrange()
+        tabBar.unselectedItemTintColor = .white
+        tabBar.barTintColor = UIColor.flatRed()
         tabBar.isTranslucent = false
 
         let tricksVM = TricksViewModel(dataProvider: TrickManager.shared, remoteConfig: RemoteConfig.remoteConfig())
