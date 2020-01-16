@@ -18,6 +18,9 @@ class SettingsViewController: BaseCenterViewController {
     @Persistent(key: PxSettings.fullscreen, defaultValue: false)
     var fullscreen: Bool
 
+    @Persistent(key: PxSettings.levelsOnList, defaultValue: false)
+    var showLevels: Bool
+
     var tableView: UITableView = UITableView()
     
     // MARK: Life cycles

@@ -45,7 +45,11 @@ class TricksViewController: BaseCenterViewController {
         viewModel.getTricks()
         setupContent()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getTricks(silent: true)
+    }
     // MARK: Privates
 
     private func setupContent() {
@@ -64,6 +68,8 @@ class TricksViewController: BaseCenterViewController {
         tableView.register(TypeHeaderView.self, forHeaderFooterViewReuseIdentifier: "header")
         tableView.sectionHeaderHeight = 44
         tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         setupViewConstraints()
     }

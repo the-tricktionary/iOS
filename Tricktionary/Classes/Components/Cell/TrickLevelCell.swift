@@ -13,18 +13,16 @@ class TrickLevelCell: BaseCell {
     
     // MARK: Variables
     
-    fileprivate let view: UIView = UIView()
-    fileprivate let topBorder: UIView = UIView()
-    
-    let title: UILabel = UILabel()
+    private let view = UIView()
+    private let title = UILabel()
+    private lazy var descriptionLabel = LevelView()
+    private let accesoryView = UIImageView()
     
     // MARK: Life cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupSubviews()
-        setup()
-        setupViewConstraints()
+        setupContent()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,66 +31,106 @@ class TrickLevelCell: BaseCell {
     
     // MARK: Privates
     
-    fileprivate func setupSubviews() {
-        contentView.addSubview(view)
-        view.addSubview(title)
-        contentView.addSubview(topBorder)
-    }
-    
-    fileprivate func setup() {
-        contentView.backgroundColor = Color.background
-        
-        
+    private func setupContent() {
         view.backgroundColor = UIColor.white
         title.contentMode = .scaleAspectFill
         title.textAlignment = .left
         title.numberOfLines = 0
-        
+
         selectionStyle = .none
         isUserInteractionEnabled = true
-    }
-    
-    fileprivate func setupViewConstraints() {
-        
+
+        contentView.backgroundColor = Color.background
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.contentMode = .center
+
+        view.addSubview(stackView)
+        view.addSubview(accesoryView)
+        contentView.addSubview(view)
+
+        stackView.addArrangedSubview(title)
+        stackView.addArrangedSubview(descriptionLabel)
+
         view.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView)
-            make.leading.equalTo(contentView)
-            make.trailing.equalTo(contentView)
-            make.bottom.equalTo(contentView)
+            make.edges.equalTo(contentView)
         }
-        
-        title.snp.makeConstraints { (make) in
-            make.centerY.equalTo(view)
-            make.left.equalTo(view).inset(10)
-            make.right.equalTo(view)
-            make.height.equalTo(view.snp.height)
+
+        stackView.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().inset(10)
+            make.top.bottom.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().offset(-40)
         }
-        
-        topBorder.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView)
-            make.leading.equalTo(view).inset(1)
-            make.trailing.equalTo(view).inset(1)
-            make.height.equalTo(1)
+
+        accesoryView.snp.makeConstraints { (make) in
+            make.trailing.equalToSuperview().offset(-10)
+            make.leading.equalTo(stackView.snp.trailing)
+            make.width.equalTo(27)
+            make.height.equalTo(25)
+            make.centerY.equalToSuperview()
         }
+
     }
     
     // MARK: Public
-    
-    func isTopBorderVisible(_ visible: Bool) {
-        topBorder.isHidden = visible
-    }
-    
-    func setupFont(bolt: Bool = false) {
-        if bolt {
-            title.font = UIFont.boldSystemFont(ofSize: 14)
-            title.textColor = UIColor.black
-        } else {
-            title.font = UIFont.systemFont(ofSize: 14)
-            title.textColor = UIColor.darkGray
-        }
+
+    func customize(with model: Content) {
+        title.text = model.title
+        descriptionLabel.isHidden = model.description == nil
+        descriptionLabel.customize(with: model.description)
+        accesoryView.image = model.isDone ? UIImage(named: "done") : nil
     }
     
     class func reuseIdentifier() -> String {
         return "cz.pixmo.tricktionary.TrickLevelCell"
     }
 }
+
+class LevelView: UIView {
+    // MARK: - Variables
+    private let icon = UIImageView()
+    private let descriptionLabel = UILabel()
+
+    init() {
+        super.init(frame: .zero)
+        setupContent()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MAKR: - Content
+    private func setupContent() {
+        addSubview(icon)
+        addSubview(descriptionLabel)
+        icon.image = UIImage(named: "ijru")
+        descriptionLabel.font = UIFont(name: "Helvetica", size: 12)
+        descriptionLabel.textColor = .red
+
+        icon.snp.makeConstraints { (make) in
+            make.leading.top.bottom.equalToSuperview()
+            make.size.equalTo(16)
+        }
+
+        descriptionLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(icon.snp.trailing).offset(10)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+    }
+
+    func customize(with description: String?) {
+        descriptionLabel.text = description
+    }
+
+}
+
+extension TrickLevelCell {
+    struct Content {
+        var title: String
+        var description: String?
+        var isDone: Bool
+    }
+}
+

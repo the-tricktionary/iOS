@@ -13,7 +13,7 @@ struct BaseTrick: Codable {
     var name: String
     var level: Int
     var type: String
-    var levels: Levels
+    var levels: Levels?
 }
 
 class Trick: Codable {

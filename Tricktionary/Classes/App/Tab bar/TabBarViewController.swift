@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 import FirebaseRemoteConfig
 
+class Settings {
+    @Persistent(key: PxSettings.levelsOnList, defaultValue: false)
+    var showLevels: Bool
+}
+
+extension Settings: TricksListSettingsType {
+}
+
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
@@ -21,7 +29,9 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         tabBar.barTintColor = UIColor.flatRed()
         tabBar.isTranslucent = false
 
-        let tricksVM = TricksViewModel(dataProvider: TrickManager.shared, remoteConfig: RemoteConfig.remoteConfig())
+        let tricksVM = TricksViewModel(dataProvider: TrickManager.shared,
+                                       remoteConfig: RemoteConfig.remoteConfig(),
+                                       settings: Settings())
         let tricksViewController = UINavigationController(rootViewController: TricksViewController(viewModel: tricksVM))
         tricksViewController.tabBarItem = UITabBarItem(title: "Tricks", image: UIImage(named: "tricktionary"), tag: 0)
 

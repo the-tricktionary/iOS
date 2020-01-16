@@ -38,7 +38,7 @@ class TypeHeaderView: UITableViewHeaderFooterView {
 
     func customize(with titleLabel: String?, collapsed: Bool) {
         self.sectionName = titleLabel
-        title.text = titleLabel?.uppercased()
+        title.text = "\(titleLabel?.first?.uppercased() ?? "")" + "\(titleLabel?.dropFirst() ?? "")"
         accesoryView.image = collapsed ? UIImage(named: "collapsed") : UIImage(named: "expansed")
     }
     
