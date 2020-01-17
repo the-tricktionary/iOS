@@ -18,8 +18,14 @@ class SettingsViewController: BaseCenterViewController {
     @Persistent(key: PxSettings.fullscreen, defaultValue: false)
     var fullscreen: Bool
 
-    @Persistent(key: PxSettings.levelsOnList, defaultValue: false)
-    var showLevels: Bool
+    @Persistent(key: PxSettings.ijruLevels, defaultValue: false)
+    var showIjru: Bool
+
+    @Persistent(key: PxSettings.irsfLevels, defaultValue: false)
+    var showIrsf: Bool
+
+    @Persistent(key: PxSettings.wjrLevels, defaultValue: false)
+    var showWjr: Bool
 
     var tableView: UITableView = UITableView()
     

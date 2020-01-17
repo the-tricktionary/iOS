@@ -19,7 +19,8 @@ class BaseCenterViewController: BaseViewController {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
 
         tabBarController?.tabBar.barTintColor = UIColor.flatRed()
-        tabBarController?.tabBar.tintColor = .white
+        tabBarController?.tabBar.unselectedItemTintColor = .white
+        tabBarController?.tabBar.tintColor = UIColor.flatYellow()
     }
     
     // MARK: Public

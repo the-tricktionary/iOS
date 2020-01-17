@@ -35,6 +35,8 @@ struct Video: Codable {
 
 struct Levels: Codable {
     var ijru: LevelsFields
+    var irsf: LevelsFields
+    var wjr: LevelsFields
 }
 
 struct LevelsFields: Codable {

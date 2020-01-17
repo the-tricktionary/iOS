@@ -10,6 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseRemoteConfig
 import ReactiveSwift
+import FirebaseAuth
 
 struct TableSection {
     var name: String
@@ -18,7 +19,9 @@ struct TableSection {
 }
 
 protocol TricksListSettingsType {
-    var showLevels: Bool { get set }
+    var showIjru: Bool { get }
+    var showIrsf: Bool { get }
+    var showWjr: Bool { get }
 }
 
 protocol TricksViewModelType {
@@ -36,6 +39,8 @@ protocol TricksViewModelType {
 class TricksViewModel: TricksViewModelType {
     
     // MARK: Variables
+    private let checkList = MutableProperty<[String]>([String]())
+    private var allTricksId: [String : String] = [String : String]()
     let sections = MutableProperty<[TableSection]>([TableSection]())
     private let tricks: MutableProperty<[BaseTrick]> = MutableProperty<[BaseTrick]>([BaseTrick]())
 
@@ -71,14 +76,18 @@ class TricksViewModel: TricksViewModelType {
     
     private let dataProvider: TricksDataProviderType
     private let remoteConfig: RemoteConfig
+    private let auth: Auth
     var settings: TricksListSettingsType
     
     // MARK: Initializer
     
-    init(dataProvider: TricksDataProviderType, remoteConfig: RemoteConfig, settings: TricksListSettingsType) {
+    init(dataProvider: TricksDataProviderType,
+         remoteConfig: RemoteConfig,
+         settings: TricksListSettingsType, auth: Auth) {
         self.dataProvider = dataProvider
         self.remoteConfig = remoteConfig
         self.settings = settings
+        self.auth = auth
     }
     
     // MARK: Publics
@@ -89,14 +98,25 @@ class TricksViewModel: TricksViewModelType {
             makeContent()
             return
         }
-        tricks.value.removeAll()
-        dataProvider.getTricks(discipline: disciplines[selectedDiscipline], starting: { [weak self] in
-            self?.onStartLoading?()
-        }, completion: { [weak self] (data) in
-            self?.tricks.value.append(data)
-        }) { [weak self] in
-            self?.selectMinLevel()
-            self?.onFinishLoading?()
+        func getTrickList() {
+            tricks.value.removeAll()
+            dataProvider.getTricks(discipline: disciplines[selectedDiscipline], starting: { [weak self] in
+                self?.onStartLoading?()
+            }, completion: { [weak self] (data, id) in
+                self?.tricks.value.append(data)
+                self?.allTricksId[data.name] = id
+            }) { [weak self] in
+                print("Loaded: \(self?.tricks.value.count)")
+                self?.selectMinLevel()
+                self?.onFinishLoading?()
+            }
+        }
+        dataProvider.getChecklist(starting: {
+            //
+        }, completion: { list in
+            self.checkList.value = list ?? []
+        }) {
+            getTrickList()
         }
     }
 
@@ -107,8 +127,8 @@ class TricksViewModel: TricksViewModelType {
                     let tricksForLevel = self.tricks.value.filter { $0.level == selectedLevel }
                     self.sections.value[index].rows = tricksForLevel.filter { $0.type == name }
                         .map { TrickLevelCell.Content(title: $0.name,
-                                                      description: self.settings.showLevels ? $0.levels?.ijru.level : nil,
-                                                      isDone: false) }
+                                                      levels: makeLevels(trick: $0),
+                                                      isDone: self.isDone($0)) }
                     self.sections.value[index].collapsed = false
                 } else {
                     self.sections.value[index].rows.removeAll()
@@ -120,19 +140,41 @@ class TricksViewModel: TricksViewModelType {
 
     // MARK: - Privates
 
+    private func makeLevels(trick: BaseTrick) -> [Organization : String?] {
+        var levels = [Organization : String]()
+        if settings.showIjru {
+            levels[.ijru] = trick.levels?.ijru.level
+        }
+        if settings.showIrsf {
+            levels[.irsf] = trick.levels?.irsf.level
+        }
+        if settings.showWjr {
+            levels[.wjr] = trick.levels?.wjr.level
+        }
+        return levels
+    }
+
     private func makeContent() {
         let tricksForLevel = tricks.value.filter { $0.level == selectedLevel }
         let types = getTypes(levelTricks: tricksForLevel)
+        print("COMPLETED TRICKS")
+        checkList.value.forEach { (completed) in
+            print("COMPLETED: \(completed)")
+        }
         types.forEach { type in
             let rows = tricksForLevel.filter { $0.type == type }
                 .map { TrickLevelCell.Content(title: $0.name,
-                                              description: self.settings.showLevels ? $0.levels?.ijru.level : nil,
-                                              isDone: false) }
+                                              levels: makeLevels(trick: $0),
+                                              isDone: self.isDone($0)) }
             sections.value.append(TableSection(name: type, rows: rows, collapsed: false))
         }
     }
 
     // Helpers
+
+    private func isDone(_ trick: BaseTrick) -> Bool {
+        return checkList.value.contains(allTricksId[trick.name] ?? "") && auth.currentUser != nil
+    }
 
     private func getAllowedDisciplines() -> [Disciplines] {
         var allowedDisciplines: [Disciplines] = []

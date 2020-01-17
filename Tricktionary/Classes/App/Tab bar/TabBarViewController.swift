@@ -8,14 +8,22 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 import FirebaseRemoteConfig
 
 class Settings {
-    @Persistent(key: PxSettings.levelsOnList, defaultValue: false)
-    var showLevels: Bool
+    @Persistent(key: PxSettings.ijruLevels, defaultValue: false)
+    var showIjru: Bool
+
+    @Persistent(key: PxSettings.irsfLevels, defaultValue: false)
+    var showIrsf: Bool
+
+    @Persistent(key: PxSettings.wjrLevels, defaultValue: false)
+    var showWjr: Bool
 }
 
 extension Settings: TricksListSettingsType {
+
 }
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
@@ -24,14 +32,12 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         
         delegate = self
-        tabBar.tintColor = UIColor.flatOrange()
-        tabBar.unselectedItemTintColor = .white
-        tabBar.barTintColor = UIColor.flatRed()
         tabBar.isTranslucent = false
 
         let tricksVM = TricksViewModel(dataProvider: TrickManager.shared,
                                        remoteConfig: RemoteConfig.remoteConfig(),
-                                       settings: Settings())
+                                       settings: Settings(),
+                                       auth: Auth.auth())
         let tricksViewController = UINavigationController(rootViewController: TricksViewController(viewModel: tricksVM))
         tricksViewController.tabBarItem = UITabBarItem(title: "Tricks", image: UIImage(named: "tricktionary"), tag: 0)
 

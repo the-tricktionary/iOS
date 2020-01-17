@@ -15,7 +15,10 @@ class TrickLevelCell: BaseCell {
     
     private let view = UIView()
     private let title = UILabel()
-    private lazy var descriptionLabel = LevelView()
+    private let ijruLevel = LevelView()
+    private lazy var irsfLevel = LevelView()
+    private lazy var wjrLevel = LevelView()
+    private let levelsContainer = UIView()
     private let accesoryView = UIImageView()
     
     // MARK: Life cycle
@@ -50,7 +53,7 @@ class TrickLevelCell: BaseCell {
         contentView.addSubview(view)
 
         stackView.addArrangedSubview(title)
-        stackView.addArrangedSubview(descriptionLabel)
+        stackView.addArrangedSubview(levelsContainer)
 
         view.snp.makeConstraints { (make) in
             make.edges.equalTo(contentView)
@@ -76,8 +79,36 @@ class TrickLevelCell: BaseCell {
 
     func customize(with model: Content) {
         title.text = model.title
-        descriptionLabel.isHidden = model.description == nil
-        descriptionLabel.customize(with: model.description)
+        levelsContainer.subviews.forEach {
+            $0.snp.removeConstraints()
+            $0.removeFromSuperview()
+        }
+        model.levels.sorted(by: { (first, second) -> Bool in
+            return first.key.rawValue < second.key.rawValue
+        }).forEach { (organization, level) in
+            let view = LevelView()
+            view.customize(description: level, organization: organization)
+            levelsContainer.addSubview(view)
+        }
+        for (index, view) in levelsContainer.subviews.enumerated() {
+            guard let view = view as? LevelView else {
+                return
+            }
+            if index == 0 {
+                view.snp.makeConstraints { (make) in
+                    make.leading.equalToSuperview()
+                    make.centerY.equalToSuperview()
+                }
+            } else {
+                view.snp.makeConstraints { (make) in
+                    make.leading.equalTo(self.levelsContainer.subviews[index - 1].snp.trailing).offset(5)
+                    make.centerY.equalToSuperview()
+                    if index == 1 {
+                        make.centerX.equalToSuperview()
+                    }
+                }
+            }
+        }
         accesoryView.image = model.isDone ? UIImage(named: "done") : nil
     }
     
@@ -104,13 +135,14 @@ class LevelView: UIView {
     private func setupContent() {
         addSubview(icon)
         addSubview(descriptionLabel)
-        icon.image = UIImage(named: "ijru")
+        icon.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        descriptionLabel.setContentHuggingPriority(.required, for: .horizontal)
         descriptionLabel.font = UIFont(name: "Helvetica", size: 12)
         descriptionLabel.textColor = .red
-
+        icon.contentMode = .scaleAspectFit
         icon.snp.makeConstraints { (make) in
             make.leading.top.bottom.equalToSuperview()
-            make.size.equalTo(16)
+            make.height.equalTo(16)
         }
 
         descriptionLabel.snp.makeConstraints { (make) in
@@ -120,8 +152,25 @@ class LevelView: UIView {
         }
     }
 
-    func customize(with description: String?) {
+    func customize(description: String?, organization: Organization) {
         descriptionLabel.text = description
+        let image: String
+        let size: CGFloat
+        switch organization {
+        case .ijru:
+            image = "ijru"
+            size = 16.0
+        case .irsf:
+            image = "irsf"
+            size = 0.0
+        case .wjr:
+            image = "wjr"
+            size = 62.0
+        }
+        icon.image = UIImage(named: image)
+        icon.snp.makeConstraints { (make) in
+            make.width.equalTo(size)
+        }
     }
 
 }
@@ -129,8 +178,14 @@ class LevelView: UIView {
 extension TrickLevelCell {
     struct Content {
         var title: String
-        var description: String?
+        var levels: [Organization : String?]
         var isDone: Bool
     }
+}
+
+enum Organization: Int {
+    case ijru = 0
+    case irsf = 1
+    case wjr = 2
 }
 

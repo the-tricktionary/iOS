@@ -12,7 +12,9 @@ import UIKit
 extension TricksViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if viewModel.settings.showLevels {
+        if viewModel.settings.showIjru ||
+            viewModel.settings.showIrsf ||
+            viewModel.settings.showWjr {
             return 68
         }
         return 45

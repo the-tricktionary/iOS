@@ -11,7 +11,10 @@ import Foundation
 struct PxSettings {
     static let fullscreen: String = "playsinline"
     static let autoplay: String = "autoplay"
-    static let levelsOnList: String = "levelsonlist"
+
+    static let ijruLevels: String = "ijruLevels"
+    static let irsfLevels: String = "irsfLevels"
+    static let wjrLevels: String = "wjrLevels"
     
     static let newScreen: String = "newScreen"
 }
