@@ -63,7 +63,7 @@ class TrickLevelCell: BaseCell {
 
         stackView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview().inset(10)
             make.trailing.equalToSuperview().offset(-46)
         }
 
