@@ -39,6 +39,7 @@ class TrickLevelCell: BaseCell {
         title.contentMode = .scaleAspectFill
         title.textAlignment = .left
         title.numberOfLines = 0
+        title.adjustsFontSizeToFitWidth = true
 
         selectionStyle = .none
         isUserInteractionEnabled = true
@@ -47,6 +48,7 @@ class TrickLevelCell: BaseCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.contentMode = .center
+        stackView.spacing = 5
 
         view.addSubview(stackView)
         view.addSubview(accesoryView)
@@ -60,13 +62,13 @@ class TrickLevelCell: BaseCell {
         }
 
         stackView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().inset(10)
-            make.top.bottom.equalToSuperview().inset(10)
-            make.trailing.equalToSuperview().offset(-40)
+            make.leading.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().offset(-46)
         }
 
         accesoryView.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview().offset(-10)
+            make.trailing.equalToSuperview().offset(-16)
             make.leading.equalTo(stackView.snp.trailing)
             make.width.equalTo(27)
             make.height.equalTo(25)
@@ -101,10 +103,10 @@ class TrickLevelCell: BaseCell {
                 }
             } else {
                 view.snp.makeConstraints { (make) in
-                    make.leading.equalTo(self.levelsContainer.subviews[index - 1].snp.trailing).offset(5)
+                    make.leading.equalTo(self.levelsContainer.subviews[index - 1].snp.trailing).offset(20)
                     make.centerY.equalToSuperview()
                     if index == 1 {
-                        make.centerX.equalToSuperview()
+                        make.centerX.equalToSuperview().offset(-30)
                     }
                 }
             }
@@ -139,6 +141,7 @@ class LevelView: UIView {
         descriptionLabel.setContentHuggingPriority(.required, for: .horizontal)
         descriptionLabel.font = UIFont(name: "Helvetica", size: 12)
         descriptionLabel.textColor = .red
+        descriptionLabel.adjustsFontSizeToFitWidth = true
         icon.contentMode = .scaleAspectFit
         icon.snp.makeConstraints { (make) in
             make.leading.top.bottom.equalToSuperview()
@@ -162,7 +165,7 @@ class LevelView: UIView {
             size = 16.0
         case .irsf:
             image = "irsf"
-            size = 0.0
+            size = 62.0
         case .wjr:
             image = "wjr"
             size = 62.0

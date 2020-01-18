@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProfileViewController: BaseDrawerViewController {
+class ProfileViewController: BaseCenterViewController {
     
     // MARK: Variables
     

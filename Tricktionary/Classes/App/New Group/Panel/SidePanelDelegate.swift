@@ -24,8 +24,9 @@ extension SidePanelViewController: UITableViewDelegate {
         if indexPath.section == 0 {
             if Auth.auth().currentUser == nil {
                 let loginVC = LoginViewController(viewModel: LoginViewModel())
-                loginVC.onClose = { [weak self] in
+                loginVC.onClose = { [weak self, weak loginVC] in
                     self?.tableView.reloadData()
+                    loginVC?.dismiss(animated: true, completion: nil)
                 }
                 navigationController?.present(loginVC, animated: true, completion: nil)
             } else {

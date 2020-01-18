@@ -14,6 +14,7 @@ class TypeHeaderView: UITableViewHeaderFooterView {
     // MARK: Variables
     
     let title: UILabel = UILabel()
+    let count = UILabel()
     let accesoryView = UIImageView()
     var onTapped: ((String) -> Void)?
     private var sectionName: String?
@@ -36,16 +37,22 @@ class TypeHeaderView: UITableViewHeaderFooterView {
         title.text = titleLabel?.uppercased()
     }
 
-    func customize(with titleLabel: String?, collapsed: Bool) {
+    func customize(with titleLabel: String?, completed: Int?, from: Int, collapsed: Bool) {
         self.sectionName = titleLabel
         title.text = "\(titleLabel?.first?.uppercased() ?? "")" + "\(titleLabel?.dropFirst() ?? "")"
         accesoryView.image = collapsed ? UIImage(named: "collapsed") : UIImage(named: "expansed")
+        if let completed = completed {
+            count.text = "\(completed)/\(from)"
+        } else {
+            count.text = "\(from)"
+        }
     }
     
     // MARK: Privates
     
     private func setupSubViews() {
         addSubview(title)
+        addSubview(count)
         addSubview(accesoryView)
     }
     
@@ -55,6 +62,10 @@ class TypeHeaderView: UITableViewHeaderFooterView {
         title.font = UIFont.boldSystemFont(ofSize: 18)
         title.textColor = .white
         title.textAlignment = .justified
+
+        count.font = UIFont.systemFont(ofSize: 14)
+        count.textColor = .white
+        count.textAlignment = .right
 
         accesoryView.tintColor = .white
         accesoryView.image = UIImage(named: "expansed")
@@ -74,6 +85,12 @@ class TypeHeaderView: UITableViewHeaderFooterView {
             make.trailing.equalToSuperview().offset(-10)
             make.centerY.equalToSuperview()
             make.size.equalTo(30)
+        }
+
+        count.snp.makeConstraints { (make) in
+            make.leading.equalTo(title)
+            make.trailing.equalTo(accesoryView.snp.leading).offset(-6)
+            make.centerY.equalToSuperview()
         }
         
         backgroundView?.snp.makeConstraints({ (make) in

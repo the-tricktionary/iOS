@@ -13,7 +13,7 @@ import Firebase
 import ReactiveSwift
 import ReactiveCocoa
 
-class LoginViewController: BaseDrawerViewController, GIDSignInUIDelegate, GIDSignInDelegate {
+class LoginViewController: BaseCenterViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     // MARK: Variables
     
@@ -21,6 +21,7 @@ class LoginViewController: BaseDrawerViewController, GIDSignInUIDelegate, GIDSig
     fileprivate let loginView: LoginView = LoginView()
     fileprivate let registrationView: RegistrationView = RegistrationView()
     let viewModel: LoginViewModel
+    var onClose: (() -> Void)?
     
     // MARK: Life cycles
     
@@ -66,26 +67,26 @@ class LoginViewController: BaseDrawerViewController, GIDSignInUIDelegate, GIDSig
         viewModel.loginEmail <~ loginView.emailTextField.textField.reactive.continuousTextValues
         viewModel.loginPassword <~ loginView.passwordTextField.textField.reactive.continuousTextValues
         
-        loginView.emailTextField.textField.reactive.continuousTextValues.observeValues { (value) in
-            self.loginView.emailTextField.warningFormat.isHidden = self.viewModel.isValidEmail(email: value)
+        loginView.emailTextField.textField.reactive.continuousTextValues.observeValues { [weak self] (value) in
+            self?.loginView.emailTextField.warningFormat.isHidden = self?.viewModel.isValidEmail(email: value) ?? false
         }
         
-        loginView.passwordTextField.textField.reactive.continuousTextValues.observeValues { (value) in
-            self.loginView.passwordTextField.warningFormat.isHidden = self.viewModel.isValidPassword(password: value)
+        loginView.passwordTextField.textField.reactive.continuousTextValues.observeValues { [weak self] (value) in
+            self?.loginView.passwordTextField.warningFormat.isHidden = self?.viewModel.isValidPassword(password: value) ?? false
         }
         
         loginView.signInButton.reactive.isEnabled <~ viewModel.isLoginEnabled
         
-        registrationView.emailTextField.textField.reactive.continuousTextValues.observeValues { (value) in
-            self.registrationView.emailTextField.warningFormat.isHidden = self.viewModel.isValidEmail(email: value)
+        registrationView.emailTextField.textField.reactive.continuousTextValues.observeValues { [weak self] (value) in
+            self?.registrationView.emailTextField.warningFormat.isHidden = self?.viewModel.isValidEmail(email: value) ?? false
         }
         
-        registrationView.passwordTextField.textField.reactive.continuousTextValues.observeValues { (value) in
-            self.registrationView.passwordTextField.warningFormat.isHidden = self.viewModel.isValidPassword(password: value)
+        registrationView.passwordTextField.textField.reactive.continuousTextValues.observeValues { [weak self] (value) in
+            self?.registrationView.passwordTextField.warningFormat.isHidden = self?.viewModel.isValidPassword(password: value) ?? false
         }
         
-        registrationView.repeatPasswordTextField.textField.reactive.continuousTextValues.observeValues { (value) in
-            self.registrationView.repeatPasswordTextField.warningFormat.isHidden = self.viewModel.isValidPassword(password: value)
+        registrationView.repeatPasswordTextField.textField.reactive.continuousTextValues.observeValues { [weak self] (value) in
+            self?.registrationView.repeatPasswordTextField.warningFormat.isHidden = self?.viewModel.isValidPassword(password: value) ?? false
         }
         
         viewModel.registrationEmail <~ registrationView.emailTextField.textField.reactive.continuousTextValues
@@ -164,7 +165,6 @@ class LoginViewController: BaseDrawerViewController, GIDSignInUIDelegate, GIDSig
             self.present(alert, animated: true)
             return
         }) {
-//            self.delegate?.toggleMenu()
         }
     }
     
@@ -195,13 +195,10 @@ class LoginViewController: BaseDrawerViewController, GIDSignInUIDelegate, GIDSig
                                                        accessToken: authentication.accessToken)
         
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-            if let error = error {
-                print("CHYBA PRIHLASENI: \(error.localizedDescription)")
+            if let _ = error {
                 return
             }
-            
             self.onClose?()
-            self.navigationController?.dismiss(animated: true, completion: nil)
         }
     }
 }

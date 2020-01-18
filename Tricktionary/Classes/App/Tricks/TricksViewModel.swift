@@ -16,6 +16,7 @@ struct TableSection {
     var name: String
     var rows: [TrickLevelCell.Content]
     var collapsed: Bool
+    var tricks: Int
 }
 
 protocol TricksListSettingsType {
@@ -34,6 +35,7 @@ protocol TricksViewModelType {
     var selectedDiscipline: Int { get set }
     func toggleSection(name: String)
     var settings: TricksListSettingsType { get }
+    var isLogged: Bool { get }
 }
 
 class TricksViewModel: TricksViewModelType {
@@ -69,6 +71,10 @@ class TricksViewModel: TricksViewModelType {
 
     var disciplines: [Disciplines] {
         return getAllowedDisciplines()
+    }
+
+    var isLogged: Bool {
+        return auth.currentUser != nil
     }
     
     var onStartLoading: (() -> Void)?
@@ -130,6 +136,7 @@ class TricksViewModel: TricksViewModelType {
                                                       levels: makeLevels(trick: $0),
                                                       isDone: self.isDone($0)) }
                     self.sections.value[index].collapsed = false
+                    self.sections.value[index].tricks = self.sections.value[index].rows.count
                 } else {
                     self.sections.value[index].rows.removeAll()
                     self.sections.value[index].collapsed = true
@@ -166,7 +173,7 @@ class TricksViewModel: TricksViewModelType {
                 .map { TrickLevelCell.Content(title: $0.name,
                                               levels: makeLevels(trick: $0),
                                               isDone: self.isDone($0)) }
-            sections.value.append(TableSection(name: type, rows: rows, collapsed: false))
+            sections.value.append(TableSection(name: type, rows: rows, collapsed: false, tricks: rows.count))
         }
     }
 

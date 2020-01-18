@@ -16,9 +16,9 @@ import ChameleonFramework
 class TricksViewController: BaseCenterViewController {
     
     // MARK: Variables
+    private let searchBar = UISearchController()
     private lazy var levelButton = self.makeLevelButton()
     private lazy var disciplinesButton = self.makeDisciplineButton()
-    private let selectionView = SelectionView()
     var tableView: UITableView = UITableView()
     internal var viewModel: TricksViewModel
     
@@ -36,7 +36,6 @@ class TricksViewController: BaseCenterViewController {
     override func loadView() {
         super.loadView()
         view.addSubview(tableView)
-        view.addSubview(selectionView)
     }
     
     override func viewDidLoad() {

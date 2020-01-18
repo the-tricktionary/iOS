@@ -21,7 +21,6 @@
 		EA073DFD21FA84080046799C /* SettingsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DFC21FA84080046799C /* SettingsDataSource.swift */; };
 		EA073E0121FA85570046799C /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073E0021FA85570046799C /* SwitchCell.swift */; };
 		EA073E0321FA8AFD0046799C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073E0221FA8AFD0046799C /* Color.swift */; };
-		EA16299422B1742C00BAE31E /* BaseDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA16299322B1742C00BAE31E /* BaseDrawerViewController.swift */; };
 		EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D421EA78FA0086FC79 /* MenuCell.swift */; };
 		EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */; };
 		EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */; };
@@ -142,7 +141,6 @@
 		EA073DFC21FA84080046799C /* SettingsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataSource.swift; sourceTree = "<group>"; };
 		EA073E0021FA85570046799C /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		EA073E0221FA8AFD0046799C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		EA16299322B1742C00BAE31E /* BaseDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDrawerViewController.swift; sourceTree = "<group>"; };
 		EA1A48D421EA78FA0086FC79 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDelegate.swift; sourceTree = "<group>"; };
 		EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDataSource.swift; sourceTree = "<group>"; };
@@ -490,7 +488,6 @@
 		EAC23ABB219D8E490086D9E2 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				EA16299322B1742C00BAE31E /* BaseDrawerViewController.swift */,
 				EA3C72882287583100324576 /* Tab bar */,
 				EAED98FF227F6D610017766F /* Profile */,
 				EACAFF3622594C0000FF0202 /* Submit */,
@@ -924,7 +921,6 @@
 				EA073E0321FA8AFD0046799C /* Color.swift in Sources */,
 				EAA4EE4B2205E08F003347D6 /* LoginViewModel.swift in Sources */,
 				EA3C728A2287584600324576 /* TabBarViewController.swift in Sources */,
-				EA16299422B1742C00BAE31E /* BaseDrawerViewController.swift in Sources */,
 				118D877E232BE550001DFB1F /* ProfileDataSource.swift in Sources */,
 				EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */,
 				11ADF4F923CD0DF6009C522C /* SelectionView.swift in Sources */,

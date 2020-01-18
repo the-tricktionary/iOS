@@ -12,7 +12,7 @@ import Firebase
 import GoogleSignIn
 import ChameleonFramework
 
-class SidePanelViewController: BaseViewController {
+class SidePanelViewController: BaseCenterViewController {
     
     // MARK: Variables
     

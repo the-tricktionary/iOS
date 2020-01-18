@@ -15,10 +15,10 @@ class BaseCenterViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.barTintColor = UIColor.flatRed()
+        navigationController?.navigationBar.barTintColor = Color.red
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
 
-        tabBarController?.tabBar.barTintColor = UIColor.flatRed()
+        tabBarController?.tabBar.barTintColor = Color.red
         tabBarController?.tabBar.unselectedItemTintColor = .white
         tabBarController?.tabBar.tintColor = UIColor.flatYellow()
     }
