@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		114DB60B23D3CD9300AAEA45 /* TrickSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114DB60A23D3CD9300AAEA45 /* TrickSearchVC.swift */; };
 		118D877E232BE550001DFB1F /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D877D232BE550001DFB1F /* ProfileDataSource.swift */; };
 		118D8780232BE577001DFB1F /* ProfileDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D877F232BE577001DFB1F /* ProfileDelegate.swift */; };
 		11A892DE232960A3009BCA7B /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A892DD232960A3009BCA7B /* ProfileInfo.swift */; };
@@ -123,6 +124,7 @@
 
 /* Begin PBXFileReference section */
 		0E842B02D5F0CAD2F4D519AD /* Pods-TricktionaryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests.debug.xcconfig"; sourceTree = "<group>"; };
+		114DB60A23D3CD9300AAEA45 /* TrickSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickSearchVC.swift; sourceTree = "<group>"; };
 		118D877D232BE550001DFB1F /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
 		118D877F232BE577001DFB1F /* ProfileDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDelegate.swift; sourceTree = "<group>"; };
 		11A892DD232960A3009BCA7B /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
@@ -517,12 +519,13 @@
 		EAC23ABF219D8F750086D9E2 /* Tricks */ = {
 			isa = PBXGroup;
 			children = (
-				11ADF4F723CD0DE5009C522C /* View */,
 				EA7F22D2219EDC3C00C43599 /* Trick detail */,
-				EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */,
 				EA7AAB30219E2138000858EE /* TricksDataSource.swift */,
 				EA7AAB32219E2160000858EE /* TricksDelegate.swift */,
+				114DB60A23D3CD9300AAEA45 /* TrickSearchVC.swift */,
+				EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */,
 				EA7AAB36219E21FE000858EE /* TricksViewModel.swift */,
+				11ADF4F723CD0DE5009C522C /* View */,
 			);
 			path = Tricks;
 			sourceTree = "<group>";
@@ -884,6 +887,7 @@
 				EA4F823A222172F8001CB1F4 /* SpeedDataDetailDataSource.swift in Sources */,
 				EA4F8238222161A2001CB1F4 /* SpeedDataDetailViewModel.swift in Sources */,
 				EAD3D74021F9187500F39A22 /* SpeedEvents.swift in Sources */,
+				114DB60B23D3CD9300AAEA45 /* TrickSearchVC.swift in Sources */,
 				EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */,
 				EA3C728C2287843300324576 /* TypeHeaderView.swift in Sources */,
 				EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */,

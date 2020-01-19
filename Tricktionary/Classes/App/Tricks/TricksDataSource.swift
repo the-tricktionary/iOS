@@ -30,9 +30,8 @@ extension TricksViewController: UITableViewDataSource {
             return nil
         }
         let actualSection = viewModel.sections.value[section]
-        let completed = viewModel.isLogged ? actualSection.rows.filter { $0.isDone }.count : nil
         view.customize(with: actualSection.name,
-                       completed: completed,
+                       completed: actualSection.completed,
                        from: actualSection.tricks,
                        collapsed: actualSection.collapsed)
         view.onTapped = { [unowned self] sectionName in

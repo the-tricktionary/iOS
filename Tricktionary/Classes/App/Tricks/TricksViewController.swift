@@ -13,10 +13,11 @@ import FirebaseFirestore
 import ReactiveSwift
 import ChameleonFramework
 
-class TricksViewController: BaseCenterViewController {
-    
+class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
+
     // MARK: Variables
-    private let searchBar = UISearchController()
+    private lazy var searchController = self.makeSearchController()
+    private let searchResults = TrickSearchVC()
     private lazy var levelButton = self.makeLevelButton()
     private lazy var disciplinesButton = self.makeDisciplineButton()
     var tableView: UITableView = UITableView()
@@ -58,6 +59,8 @@ class TricksViewController: BaseCenterViewController {
 
         navigationItem.leftBarButtonItem = disciplinesButton
         navigationItem.rightBarButtonItem = levelButton
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.searchController = searchController
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -86,6 +89,11 @@ class TricksViewController: BaseCenterViewController {
         viewModel.onFinishLoading = { [weak self] in
             self?.activityIndicatorView.stopAnimating()
             self?.tableView.reloadData()
+        }
+        searchResults.onSelectTrick = { [weak self] trick in
+            let vm = TrickDetailViewModel(trick: trick)
+            let vc = TrickDetailViewController(viewModel: vm)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -117,6 +125,14 @@ class TricksViewController: BaseCenterViewController {
         return disciplinesButton
     }
 
+    private func makeSearchController() -> UISearchController {
+        let searchController = UISearchController(searchResultsController: searchResults)
+        searchController.searchBar.tintColor = .white
+        searchController.searchBar.searchTextField.tokenBackgroundColor = .white
+        searchController.searchResultsUpdater = self
+        return searchController
+    }
+
     @objc private func changeLevelTapped() {
         viewModel.selectedLevel += 1
         levelButton.title = "Level \(viewModel.selectedLevel)"
@@ -125,5 +141,10 @@ class TricksViewController: BaseCenterViewController {
     @objc private func changeDisciplineTapped() {
         viewModel.selectedDiscipline += 1
         disciplinesButton.title = viewModel.disciplines[viewModel.selectedDiscipline].name
+    }
+
+    // MARK: - Searching
+    func updateSearchResults(for searchController: UISearchController) {
+        searchResults.filteredTricks.value = viewModel.getFilteredTricks(substring: searchController.searchBar.text ?? "") ?? []
     }
 }

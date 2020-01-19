@@ -17,6 +17,7 @@ struct TableSection {
     var rows: [TrickLevelCell.Content]
     var collapsed: Bool
     var tricks: Int
+    var completed: Int?
 }
 
 protocol TricksListSettingsType {
@@ -34,12 +35,13 @@ protocol TricksViewModelType {
     var disciplines: [Disciplines] { get }
     var selectedDiscipline: Int { get set }
     func toggleSection(name: String)
+    func getFilteredTricks(substring: String) -> [BaseTrick]?
     var settings: TricksListSettingsType { get }
     var isLogged: Bool { get }
 }
 
 class TricksViewModel: TricksViewModelType {
-    
+
     // MARK: Variables
     private let checkList = MutableProperty<[String]>([String]())
     private var allTricksId: [String : String] = [String : String]()
@@ -137,12 +139,17 @@ class TricksViewModel: TricksViewModelType {
                                                       isDone: self.isDone($0)) }
                     self.sections.value[index].collapsed = false
                     self.sections.value[index].tricks = self.sections.value[index].rows.count
+                    self.sections.value[index].completed = isLogged ? self.sections.value[index].rows.filter{$0.isDone}.count : nil
                 } else {
                     self.sections.value[index].rows.removeAll()
                     self.sections.value[index].collapsed = true
                 }
             }
         }
+    }
+
+    func getFilteredTricks(substring: String) -> [BaseTrick]? {
+        return tricks.value.filter { $0.name.lowercased().contains(substring.lowercased()) }
     }
 
     // MARK: - Privates
@@ -169,11 +176,15 @@ class TricksViewModel: TricksViewModelType {
             print("COMPLETED: \(completed)")
         }
         types.forEach { type in
-            let rows = tricksForLevel.filter { $0.type == type }
+            let _rows = tricksForLevel.filter { $0.type == type }
                 .map { TrickLevelCell.Content(title: $0.name,
                                               levels: makeLevels(trick: $0),
                                               isDone: self.isDone($0)) }
-            sections.value.append(TableSection(name: type, rows: rows, collapsed: false, tricks: rows.count))
+            sections.value.append(TableSection(name: type,
+                                               rows: _rows,
+                                               collapsed: false,
+                                               tricks: _rows.count,
+                                               completed: isLogged ? _rows.filter{$0.isDone}.count : nil))
         }
     }
 
