@@ -14,6 +14,7 @@
 		11ADF4F923CD0DF6009C522C /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11ADF4F823CD0DF6009C522C /* SelectionView.swift */; };
 		11AF9DF623527EAD00746773 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
 		11AF9DF723527EAD00746773 /* Pods_Tricktionary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11E253BA23D486EB00FB6DFA /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E253B923D486EB00FB6DFA /* SearchCell.swift */; };
 		21AE64B71C33C1370ACB4612 /* Pods_TricktionaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */; };
 		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
 		EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */; };
@@ -130,6 +131,7 @@
 		11A892DD232960A3009BCA7B /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		11ADF4F823CD0DF6009C522C /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		11AF9DF5235277C400746773 /* Tricktionary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tricktionary.entitlements; sourceTree = "<group>"; };
+		11E253B923D486EB00FB6DFA /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		43F91D7EECE300294FAA4D49 /* Pods-TricktionaryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TricktionaryUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		816C0EF71CF545E72478D1B9 /* Pods-TricktionaryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				EA2C6B0F21ED38270090579F /* UserCell.swift */,
 				EA073E0021FA85570046799C /* SwitchCell.swift */,
 				EA4F823B2221842E001CB1F4 /* GraphCell.swift */,
+				11E253B923D486EB00FB6DFA /* SearchCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -905,6 +908,7 @@
 				EAACBCE021D0365E007AEDFE /* TrickDetailDelegate.swift in Sources */,
 				EA073DF921FA83660046799C /* PxUserDefaults.swift in Sources */,
 				EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */,
+				11E253BA23D486EB00FB6DFA /* SearchCell.swift in Sources */,
 				EAF9B49B225A78D1001AB242 /* VideoStorageManager.swift in Sources */,
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
 				EA638705222350FF00D23A9C /* DateTimeUtil.swift in Sources */,
@@ -1114,7 +1118,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = GS54YR7LSQ;
 				INFOPLIST_FILE = Tricktionary/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1139,7 +1143,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = GS54YR7LSQ;
 				INFOPLIST_FILE = Tricktionary/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

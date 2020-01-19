@@ -72,7 +72,6 @@ class TrickManager: TricksDataProviderType {
                     print("Deserialize error: \(error.localizedDescription)")
                 }
             })
-
             finish()
         }
     }

@@ -35,8 +35,9 @@ class TrickSearchVC: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.tableFooterView = UIView()
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(view)
+            make.edges.equalToSuperview()
         }
     }
 }
@@ -48,13 +49,22 @@ extension TrickSearchVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = filteredTricks.value[indexPath.row].name
+        let cell = SearchCell()
+        var levels = "IJRU: \(filteredTricks.value[indexPath.row].levels?.ijru.level ?? "-")"
+        levels += "\tIRSF: \(filteredTricks.value[indexPath.row].levels?.irsf.level ?? "-")"
+        levels += "\tWJR: \(filteredTricks.value[indexPath.row].levels?.wjr.level ?? "-")"
+        cell.customize(with: filteredTricks.value[indexPath.row].name,
+                       level: "Level \(filteredTricks.value[indexPath.row].level)",
+            levels: levels)
         return cell
     }
 }
 
 extension TrickSearchVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         onSelectTrick?(filteredTricks.value[indexPath.row].name)
     }
