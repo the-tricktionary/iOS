@@ -102,10 +102,6 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
-    fileprivate func setupSearchController() {
-
-    }
 
     private func makeLevelButton() -> UIBarButtonItem {
         let levelButton = UIBarButtonItem(title: "Level \(viewModel.selectedLevel)",
