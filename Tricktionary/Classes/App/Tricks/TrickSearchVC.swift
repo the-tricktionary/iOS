@@ -37,7 +37,7 @@ class TrickSearchVC: UIViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }

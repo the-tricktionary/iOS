@@ -51,9 +51,7 @@ class ProfileViewModel: ProfileViewModelType {
     }
 
     private func loadTricksInfo() {
-        TrickManager.shared.getChecklist(starting: {
-            self.onStartLoading?()
-        }, completion: { data in
+        TrickManager.shared.getChecklist(completion: { data in
             guard let data = data else {
                 return
             }

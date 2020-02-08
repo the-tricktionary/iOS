@@ -44,7 +44,16 @@ class LoginViewController: BaseCenterViewController, GIDSignInUIDelegate, GIDSig
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+        if #available(iOS 13.0, *) {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(close))
+        } else {
+            let closeButton = UIBarButtonItem(image: UIImage(named: "clear"),
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(close))
+            closeButton.tintColor = .white
+            navigationItem.leftBarButtonItem = closeButton
+        }
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance()?.delegate = self
@@ -200,5 +209,9 @@ class LoginViewController: BaseCenterViewController, GIDSignInUIDelegate, GIDSig
             }
             self.onClose?()
         }
+    }
+
+    @objc private func close() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

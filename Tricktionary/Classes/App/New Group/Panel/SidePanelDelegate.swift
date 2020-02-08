@@ -23,14 +23,16 @@ extension SidePanelViewController: UITableViewDelegate {
         
         if indexPath.section == 0 {
             if Auth.auth().currentUser == nil {
-                let loginVC = LoginViewController(viewModel: LoginViewModel())
-                loginVC.onClose = { [weak self, weak loginVC] in
+                let vc = LoginViewController(viewModel: LoginViewModel())
+                vc.onClose = { [weak self, weak vc] in
                     self?.tableView.reloadData()
-                    loginVC?.dismiss(animated: true, completion: nil)
+                    vc?.dismiss(animated: true, completion: nil)
                 }
+                let loginVC = UINavigationController(rootViewController: vc)
                 navigationController?.present(loginVC, animated: true, completion: nil)
             } else {
-                navigationController?.present(ProfileViewController(viewModel: ProfileViewModel()), animated: true, completion: nil)
+                let vc = UINavigationController(rootViewController: ProfileViewController(viewModel: ProfileViewModel()))
+                navigationController?.present(vc, animated: true, completion: nil)
             }
         } else if indexPath.section == 1 {
             if Auth.auth().currentUser != nil {
@@ -45,7 +47,8 @@ extension SidePanelViewController: UITableViewDelegate {
                 } else if indexPath.row == 3 {
                     // TODO: Writer
                 } else if indexPath.row == 4 {
-                    navigationController?.present(SettingsViewController(), animated: true, completion: nil)
+                    let nc = UINavigationController(rootViewController: SettingsViewController(viewModel: SettingsViewModel()))
+                    navigationController?.present(nc, animated: true, completion: nil)
                 } else if indexPath.row == 5 {
                     let auth = Auth.auth()
                     do {
@@ -63,7 +66,8 @@ extension SidePanelViewController: UITableViewDelegate {
                     guard let url = URL(string: Constatnts.websiteUrl) else { return }
                     UIApplication.shared.open(url)
                 } else if indexPath.row == 2 {
-                    navigationController?.present(SettingsViewController(), animated: true, completion: nil)
+                    let vc = UINavigationController(rootViewController: SettingsViewController(viewModel: SettingsViewModel()))
+                    navigationController?.present(vc, animated: true, completion: nil)
                 }
             }
         }

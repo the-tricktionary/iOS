@@ -12,25 +12,20 @@ import UIKit
 class SettingsViewController: BaseCenterViewController {
     
     // MARK: Variables
-    @Persistent(key: PxSettings.autoplay, defaultValue: false)
-    var auto: Bool
-
-    @Persistent(key: PxSettings.fullscreen, defaultValue: false)
-    var fullscreen: Bool
-
-    @Persistent(key: PxSettings.ijruLevels, defaultValue: false)
-    var showIjru: Bool
-
-    @Persistent(key: PxSettings.irsfLevels, defaultValue: false)
-    var showIrsf: Bool
-
-    @Persistent(key: PxSettings.wjrLevels, defaultValue: false)
-    var showWjr: Bool
-
     var tableView: UITableView = UITableView()
+    internal var vm: SettingsViewModelType
     
     // MARK: Life cycles
-    
+
+    init(viewModel: SettingsViewModelType) {
+        self.vm = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func loadView() {
         super.loadView()
         view.addSubview(tableView)
@@ -39,7 +34,18 @@ class SettingsViewController: BaseCenterViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+
+        if #available(iOS 13.0, *) {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(close))
+        } else {
+            let closeButton = UIBarButtonItem(image: UIImage(named: "clear"),
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(close))
+            closeButton.tintColor = .white
+            navigationItem.leftBarButtonItem = closeButton
+        }
+
         navigationItem.title = "Settings"
         
         tableView.allowsSelection = false
@@ -64,5 +70,9 @@ class SettingsViewController: BaseCenterViewController {
             make.trailing.equalTo(view)
             make.bottom.equalTo(view)
         }
+    }
+
+    @objc private func close() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -15,7 +15,7 @@ class SwitchCell: UITableViewCell {
     let title: UILabel = UILabel()
     let switchButton: UISwitch = UISwitch()
     let view: UIView = UIView()
-    let switched: MutableProperty<Bool> = MutableProperty<Bool>(false)
+    var onSwitch: ((Bool) -> Void)?
     
     
     // MARK: Life cycle
@@ -45,6 +45,8 @@ class SwitchCell: UITableViewCell {
         
         title.textColor = UIColor.gray
         selectionStyle = .none
+
+        switchButton.addTarget(self, action: #selector(switched), for: .valueChanged)
     }
     
     fileprivate func setupViewConstraints() {
@@ -69,5 +71,9 @@ class SwitchCell: UITableViewCell {
             make.top.equalTo(view).inset(5)
             make.bottom.equalTo(view).inset(5)
         }
+    }
+
+    @objc private func switched() {
+        onSwitch?(switchButton.isOn)
     }
 }

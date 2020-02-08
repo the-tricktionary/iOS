@@ -12,20 +12,6 @@ import FirebaseRemoteConfig
 import ReactiveSwift
 import FirebaseAuth
 
-struct TableSection {
-    var name: String
-    var rows: [TrickLevelCell.Content]
-    var collapsed: Bool
-    var tricks: Int
-    var completed: Int?
-}
-
-protocol TricksListSettingsType {
-    var showIjru: Bool { get }
-    var showIrsf: Bool { get }
-    var showWjr: Bool { get }
-}
-
 protocol TricksViewModelType {
     var onStartLoading: (() -> Void)? { get set }
     var onFinishLoading: (() -> Void)? { get set }
@@ -38,15 +24,19 @@ protocol TricksViewModelType {
     func getFilteredTricks(substring: String) -> [BaseTrick]?
     var settings: TricksListSettingsType { get }
     var isLogged: Bool { get }
+    var isPullToRefresh: Bool { get set }
 }
 
 class TricksViewModel: TricksViewModelType {
 
-    // MARK: Variables
+    // MARK: - Variables
+
     private let checkList = MutableProperty<[String]>([String]())
     private var allTricksId: [String : String] = [String : String]()
     let sections = MutableProperty<[TableSection]>([TableSection]())
     private let tricks: MutableProperty<[BaseTrick]> = MutableProperty<[BaseTrick]>([BaseTrick]())
+
+    var isPullToRefresh: Bool = false
 
     var selectedLevel: Int = 1 {
         didSet {
@@ -87,7 +77,7 @@ class TricksViewModel: TricksViewModelType {
     private let auth: Auth
     var settings: TricksListSettingsType
     
-    // MARK: Initializer
+    // MARK: - Initializer
     
     init(dataProvider: TricksDataProviderType,
          remoteConfig: RemoteConfig,
@@ -98,7 +88,7 @@ class TricksViewModel: TricksViewModelType {
         self.auth = auth
     }
     
-    // MARK: Publics
+    // MARK: - Publics
     
     func getTricks(silent: Bool = false) {
         if silent {
@@ -109,19 +99,18 @@ class TricksViewModel: TricksViewModelType {
         func getTrickList() {
             tricks.value.removeAll()
             dataProvider.getTricks(discipline: disciplines[selectedDiscipline], starting: { [weak self] in
-                self?.onStartLoading?()
+                if self?.isPullToRefresh == false {
+                    self?.onStartLoading?()
+                }
             }, completion: { [weak self] (data, id) in
                 self?.tricks.value.append(data)
                 self?.allTricksId[data.name] = id
             }) { [weak self] in
-                print("Loaded: \(self?.tricks.value.count)")
                 self?.selectMinLevel()
                 self?.onFinishLoading?()
             }
         }
-        dataProvider.getChecklist(starting: {
-            //
-        }, completion: { list in
+        dataProvider.getChecklist(completion: { list in
             self.checkList.value = list ?? []
         }) {
             getTrickList()
@@ -171,10 +160,6 @@ class TricksViewModel: TricksViewModelType {
     private func makeContent() {
         let tricksForLevel = tricks.value.filter { $0.level == selectedLevel }
         let types = getTypes(levelTricks: tricksForLevel)
-        print("COMPLETED TRICKS")
-        checkList.value.forEach { (completed) in
-            print("COMPLETED: \(completed)")
-        }
         types.forEach { type in
             let _rows = tricksForLevel.filter { $0.type == type }
                 .map { TrickLevelCell.Content(title: $0.name,
@@ -188,7 +173,7 @@ class TricksViewModel: TricksViewModelType {
         }
     }
 
-    // Helpers
+    // MARK: - Helpers
 
     private func isDone(_ trick: BaseTrick) -> Bool {
         return checkList.value.contains(allTricksId[trick.name] ?? "") && auth.currentUser != nil

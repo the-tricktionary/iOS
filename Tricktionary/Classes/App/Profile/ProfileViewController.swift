@@ -51,6 +51,17 @@ class ProfileViewController: BaseCenterViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if #available(iOS 13.0, *) {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(close))
+        } else {
+            let closeButton = UIBarButtonItem(image: UIImage(named: "clear"),
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(close))
+            closeButton.tintColor = .white
+            navigationItem.leftBarButtonItem = closeButton
+        }
         
         title = "User profile"
         
@@ -144,5 +155,8 @@ class ProfileViewController: BaseCenterViewController {
             make.leading.trailing.bottom.equalTo(view)
         }
     }
-    
+
+    @objc private func close() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

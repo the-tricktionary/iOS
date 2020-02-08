@@ -45,14 +45,18 @@ extension SettingsViewController: UITableViewDataSource {
             case 0:
                 let cell = SwitchCell()
                 cell.textLabel?.text = "Automatic full screen"
-                cell.switchButton.setOn(fullscreen, animated: true)
-                cell.switchButton.addTarget(self, action: #selector(fullScreen), for: .touchUpInside)
+                cell.switchButton.setOn(vm.fullscreen, animated: true)
+                cell.onSwitch = { [weak self] isOn in
+                    self?.vm.fullscreen = isOn
+                }
                 return cell
             case 1:
                 let cell = SwitchCell()
                 cell.textLabel?.text = "Auto-Play videos"
-                cell.switchButton.setOn(auto, animated: true)
-                cell.switchButton.addTarget(self, action: #selector(autoPlay), for: .touchUpInside)
+                cell.switchButton.setOn(vm.auto, animated: true)
+                cell.onSwitch = { [weak self] isOn in
+                    self?.vm.auto = isOn
+                }
                 return cell
             default:
                 return UITableViewCell()
@@ -62,47 +66,31 @@ extension SettingsViewController: UITableViewDataSource {
             case 0:
                 let cell = SwitchCell()
                 cell.textLabel?.text = "Show IJRU levels on trick list"
-                cell.switchButton.setOn(showIjru, animated: true)
-                cell.switchButton.addTarget(self, action: #selector(switchIjruLevels), for: .touchUpInside)
+                cell.switchButton.setOn(vm.showIjru, animated: true)
+                cell.onSwitch = { [weak self] isOn in
+                    self?.vm.showIjru = isOn
+                }
                 return cell
             case 1:
                 let cell = SwitchCell()
                 cell.textLabel?.text = "Show IRSF levels on trick list"
-                cell.switchButton.setOn(showIrsf, animated: true)
-                cell.switchButton.addTarget(self, action: #selector(switchIrsfLevels), for: .touchUpInside)
+                cell.switchButton.setOn(vm.showIrsf, animated: true)
+                cell.onSwitch = { [weak self] isOn in
+                    self?.vm.showIrsf = isOn
+                }
                 return cell
             case 2:
                 let cell = SwitchCell()
                 cell.textLabel?.text = "Show WJR levels on trick list"
-                cell.switchButton.setOn(showWjr, animated: true)
-                cell.switchButton.addTarget(self, action: #selector(switchWjrLevels), for: .touchUpInside)
+                cell.switchButton.setOn(vm.showWjr, animated: true)
+                cell.onSwitch = { [weak self] isOn in
+                    self?.vm.showWjr = isOn
+                }
                 return cell
             default:
                 return UITableViewCell()
             }
         }
-    }
-    
-    // MARK: User action
-    
-    @objc func fullScreen() {
-        fullscreen.toggle()
-    }
-    
-    @objc func autoPlay() {
-        auto.toggle()
-    }
-    
-    @objc func switchIjruLevels() {
-        showIjru.toggle()
-    }
-
-    @objc func switchIrsfLevels() {
-        showIrsf.toggle()
-    }
-
-    @objc func switchWjrLevels() {
-        showWjr.toggle()
     }
 }
 

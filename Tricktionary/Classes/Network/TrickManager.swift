@@ -42,12 +42,11 @@ enum Disciplines {
 protocol TricksDataProviderType {
     
     func getTricks(discipline: Disciplines, starting: @escaping () -> (),completion: @escaping (BaseTrick, String) -> Void, finish: @escaping () -> Void)
-    func getChecklist(starting: @escaping () -> Void, completion: @escaping ([String]?) -> Void, finish: @escaping () -> Void)
+    func getChecklist(completion: @escaping ([String]?) -> Void, finish: @escaping () -> Void)
 }
 
 class TrickManager: TricksDataProviderType {
     func getTricks(discipline: Disciplines, starting: @escaping () -> (), completion: @escaping (BaseTrick, String) -> Void, finish: @escaping () -> Void) {
-        starting()
         let firestore = Firestore.firestore()
         let documentReference = firestore.collection(discipline.identity)
         documentReference.getDocuments { (snapshot, error) in
@@ -68,7 +67,6 @@ class TrickManager: TricksDataProviderType {
                     let trick = try JSONDecoder().decode(BaseTrick.self, from: jsonData)
                     completion(trick, document.documentID)
                 } catch {
-                    print("ERROR WITH: \(data["name"])")
                     print("Deserialize error: \(error.localizedDescription)")
                 }
             })
@@ -76,8 +74,7 @@ class TrickManager: TricksDataProviderType {
         }
     }
 
-    func getChecklist(starting: @escaping () -> Void, completion: @escaping ([String]?) -> Void, finish: @escaping () -> Void) {
-        starting()
+    func getChecklist(completion: @escaping ([String]?) -> Void, finish: @escaping () -> Void) {
         guard let user = Auth.auth().currentUser else {
             completion(nil)
             finish()
