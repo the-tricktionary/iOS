@@ -20,11 +20,17 @@ class Settings {
 
     @Persistent(key: PxSettings.wjrLevels, defaultValue: false)
     var showWjr: Bool
+
+    @Persistent(key: PxSettings.autoplay, defaultValue: false)
+    var autoPlay: Bool
+
+    @Persistent(key: PxSettings.fullscreen, defaultValue: false)
+    var fullscreen: Bool
 }
 
-extension Settings: TricksListSettingsType {
+extension Settings: TricksListSettingsType {}
+extension Settings: TrickDetailSettingsType {}
 
-}
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     

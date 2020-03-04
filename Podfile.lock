@@ -114,6 +114,7 @@ PODS:
   - SnapKit (4.2.0)
   - SwiftChart (1.0.1)
   - SwiftMonkey (2.1.1)
+  - SwiftMonkeyPaws (2.1.1)
   - Swinject (2.7.1)
   - YoutubePlayerView (1.0.1)
 
@@ -132,6 +133,7 @@ DEPENDENCIES:
   - SnapKit
   - SwiftChart
   - SwiftMonkey
+  - SwiftMonkeyPaws
   - Swinject
   - YoutubePlayerView
 
@@ -170,6 +172,7 @@ SPEC REPOS:
     - FirebaseRemoteConfig
     - LifetimeTracker
     - SwiftMonkey
+    - SwiftMonkeyPaws
     - Swinject
 
 SPEC CHECKSUMS:
@@ -204,9 +207,10 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftChart: ba767a678d568a5ee22d419e146a0582865e1aff
   SwiftMonkey: aea6f2707a4b7ab5277b4d2fd2f0723a083997b1
+  SwiftMonkeyPaws: 655524bb402df5ac2be836f9f604aca1068fbde6
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   YoutubePlayerView: 510480ccdf03f2ffc888ee0b2bf2d1d8f8d9289f
 
-PODFILE CHECKSUM: 05ee128774f86afbe72bfa933f8ea68b8bc1f110
+PODFILE CHECKSUM: 81d9c07c3f09b15cd899beffc0b71b0c29f02e78
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.0

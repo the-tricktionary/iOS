@@ -16,7 +16,6 @@
 		11AF9DF723527EAD00746773 /* Pods_Tricktionary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11B3ED7523DCF27000ACE06C /* TricksTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B3ED7423DCF27000ACE06C /* TricksTableSection.swift */; };
 		11B3ED7723DCF28E00ACE06C /* TricksSettingsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B3ED7623DCF28E00ACE06C /* TricksSettingsType.swift */; };
-		11BBCC8F23E6165500487002 /* ClosableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BBCC8E23E6165500487002 /* ClosableVC.swift */; };
 		11E253BA23D486EB00FB6DFA /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E253B923D486EB00FB6DFA /* SearchCell.swift */; };
 		21AE64B71C33C1370ACB4612 /* Pods_TricktionaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */; };
 		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
@@ -136,7 +135,6 @@
 		11AF9DF5235277C400746773 /* Tricktionary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tricktionary.entitlements; sourceTree = "<group>"; };
 		11B3ED7423DCF27000ACE06C /* TricksTableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksTableSection.swift; sourceTree = "<group>"; };
 		11B3ED7623DCF28E00ACE06C /* TricksSettingsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksSettingsType.swift; sourceTree = "<group>"; };
-		11BBCC8E23E6165500487002 /* ClosableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosableVC.swift; sourceTree = "<group>"; };
 		11E253B923D486EB00FB6DFA /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		43F91D7EECE300294FAA4D49 /* Pods-TricktionaryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TricktionaryUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,7 +269,6 @@
 			children = (
 				11B3ED7423DCF27000ACE06C /* TricksTableSection.swift */,
 				11B3ED7623DCF28E00ACE06C /* TricksSettingsType.swift */,
-				11BBCC8E23E6165500487002 /* ClosableVC.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -678,6 +675,7 @@
 				EA8C1D76219CE61D00F4D502 /* Frameworks */,
 				EA8C1D77219CE61D00F4D502 /* Resources */,
 				13BC251151528BAD4EF5FAAE /* [CP] Embed Pods Frameworks */,
+				70C81E7E67C946268BF72519 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -813,6 +811,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tricktionary/Pods-Tricktionary-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		70C81E7E67C946268BF72519 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		84D5EC4D3E45DC9F2CDBD0F0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -894,7 +909,6 @@
 				EAEFA2E3225D3CCB00F0822C /* VideoMetadata.swift in Sources */,
 				EA8C1D63219CE61D00F4D502 /* Tricktionary.xcdatamodeld in Sources */,
 				EAD3D73A21F8FE9F00F39A22 /* SpeachUtil.swift in Sources */,
-				11BBCC8F23E6165500487002 /* ClosableVC.swift in Sources */,
 				EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */,
 				EAACBCE421D04C3E007AEDFE /* DescriptionCell.swift in Sources */,
 				EA4F823A222172F8001CB1F4 /* SpeedDataDetailDataSource.swift in Sources */,

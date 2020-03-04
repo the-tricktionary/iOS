@@ -12,11 +12,13 @@ import Firebase
 import GoogleSignIn
 import LifetimeTracker
 import Swinject
+import SwiftMonkeyPaws
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
+    private var paws: MonkeyPaws?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -33,7 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         self.window?.rootViewController = TabBarViewController()
-        
+
+        if let appWindow = window {
+            if CommandLine.arguments.contains("--MonkeyPaws") {
+                paws = MonkeyPaws(view: appWindow)
+            }
+        }
+
         return true
     }
 

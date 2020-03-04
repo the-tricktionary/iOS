@@ -14,21 +14,22 @@ protocol TrickDetailViewModelType {
     var onStartLoading: (() -> Void)? { get set }
     func getTrick()
     var trick: Trick? { get set }
-    var autoPlay: Bool { get }
-    var fullscreen: Bool { get }
+    var settings: TrickDetailSettingsType { get }
+}
+
+protocol TrickDetailSettingsType {
+    var autoPlay: Bool { get set }
+    var fullscreen: Bool { get set }
 }
 
 class TrickDetailViewModel: TrickDetailViewModelType {
     
     // MARK: Variables
-    @Persistent(key: PxSettings.autoplay, defaultValue: false)
-    var autoPlay: Bool
-
-    @Persistent(key: PxSettings.fullscreen, defaultValue: false)
-    var fullscreen: Bool
 
     var onLoad: (() -> Void)?
     var onStartLoading: (() -> Void)?
+
+    var settings: TrickDetailSettingsType
     
     var trick: Trick?
     var video: Video?
@@ -37,7 +38,8 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     
     // MARK: Life cycles
     
-    init(trick: String) {
+    init(trick: String, settings: TrickDetailSettingsType) {
+        self.settings = settings
         self.trickName = trick
     }
     

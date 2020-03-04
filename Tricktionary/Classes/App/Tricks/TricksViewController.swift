@@ -95,7 +95,7 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
             self?.tableView.reloadData()
         }
         searchResults.onSelectTrick = { [weak self] trick in
-            let vm = TrickDetailViewModel(trick: trick)
+            let vm = TrickDetailViewModel(trick: trick, settings: Settings())
             let vc = TrickDetailViewController(viewModel: vm)
             self?.navigationController?.pushViewController(vc, animated: true)
         }
