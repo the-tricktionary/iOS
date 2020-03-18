@@ -22,6 +22,7 @@ target 'Tricktionary' do
 	pod 'LifetimeTracker'
 	pod 'Swinject'
 	pod 'SwiftMonkeyPaws'
+	pod 'Kingfisher'
 
   target 'TricktionaryTests' do
     inherit! :search_paths

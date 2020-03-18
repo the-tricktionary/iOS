@@ -12,7 +12,7 @@ import UIKit
 extension TrickDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -24,12 +24,20 @@ extension TrickDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let videoCell = tableView.dequeueReusableCell(withIdentifier: VideoCell.identity, for: indexPath) as! VideoCell
-        if let video = viewModel.video {
-            videoCell.setVideo(url: video.youtube,
-                               fullScreen: viewModel.settings.fullscreen,
-                               autoPlay: viewModel.settings.autoPlay)
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TrickInfo", for: indexPath) as! TrickInfoCell
+            cell.customize(with: TrickInfoCell.Content(name: viewModel.trickName,
+                                                       level: viewModel.trick?.levels?.ijru.level ?? "",
+                                                       favorite: false, completed: viewModel.isDone))
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TrickDescription", for: indexPath) as! DescriptionCell
+            cell.descriptionText.text = viewModel.trick?.description
+            return cell
+        default:
+            return UITableViewCell()
         }
-        return videoCell
+
     }
 }

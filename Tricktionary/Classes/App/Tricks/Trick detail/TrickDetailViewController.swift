@@ -8,12 +8,15 @@
 
 import Foundation
 import UIKit
+import ReactiveSwift
+import Kingfisher
 
-class TrickDetailViewController: BaseViewController {
+class TrickDetailViewController: BaseCenterViewController {
     
     // MARK: Variables
     
     let tableView: UITableView = UITableView()
+    private let videoView = VideoView()
     
     var viewModel: TrickDetailViewModel
     
@@ -30,15 +33,14 @@ class TrickDetailViewController: BaseViewController {
     
     override func loadView() {
         super.loadView()
+        view.addSubview(videoView)
         view.addSubview(tableView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.onLoad = { [weak self] in
-            self?.tableView.reloadData()
-        }
+        bind()
 
         self.viewModel.getTrick()
         
@@ -47,20 +49,41 @@ class TrickDetailViewController: BaseViewController {
         view.backgroundColor = Color.background
 
         tableView.sectionHeaderHeight = 35
-        tableView.backgroundColor = Color.background
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-        tableView.register(VideoCell.self, forCellReuseIdentifier: VideoCell.identity)
+        tableView.register(TrickInfoCell.self, forCellReuseIdentifier: "TrickInfo")
+        tableView.register(DescriptionCell.self, forCellReuseIdentifier: "TrickDescription")
         
         setupViewConstraints()
     }
     
     // MARK: Private
+
+    private func bind() {
+        viewModel.onLoad = { [weak self] in
+            self?.tableView.reloadData()
+        }
+
+        viewModel.video.producer.startWithValues { [weak self] content in
+            guard let sSelf = self, let content = content else {
+                return
+            }
+            sSelf.videoView.customize(with: content)
+        }
+    }
     
     fileprivate func setupViewConstraints() {
+        videoView.snp.makeConstraints { (make) in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(211)
+        }
+
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(view)
+            make.top.equalTo(videoView.snp.bottom)
             make.trailing.equalTo(view)
             make.leading.equalTo(view)
             make.bottom.equalTo(view)

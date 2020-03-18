@@ -35,9 +35,9 @@ class DescriptionCell: UITableViewCell {
     }
     
     fileprivate func setup() {
-        contentView.backgroundColor = Color.background
+        contentView.backgroundColor = .white
         
-        descriptionText.font = UIFont.systemFont(ofSize: 16)
+        descriptionText.font = UIFont.systemFont(ofSize: 12)
         descriptionText.textColor = UIColor.black
         descriptionText.numberOfLines = 0
         
@@ -48,8 +48,8 @@ class DescriptionCell: UITableViewCell {
         
         descriptionText.snp.makeConstraints { (make) in
             make.top.equalTo(contentView).inset(5)
-            make.leading.equalTo(contentView).inset(10)
-            make.trailing.equalTo(contentView).inset(10)
+            make.leading.equalTo(contentView).inset(16)
+            make.trailing.equalTo(contentView).inset(16)
             make.bottom.equalTo(contentView).inset(5)
         }
     }

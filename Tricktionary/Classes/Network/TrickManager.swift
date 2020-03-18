@@ -123,7 +123,7 @@ class TrickManager: TricksDataProviderType {
         }
     }
     
-    func getTrickByName(name: String, starting: @escaping () -> (), completion: @escaping ([String : Any]) -> Void, finish: @escaping () -> Void) {
+    func getTrickByName(name: String, starting: @escaping () -> (), completion: @escaping (Trick) -> Void, finish: @escaping () -> Void) {
         starting()
         let firestore = Firestore.firestore()
         let documentReference = firestore.collection("tricksSR").whereField("name", isEqualTo: name)
@@ -137,7 +137,19 @@ class TrickManager: TricksDataProviderType {
             }
             
             snapshot.documents.forEach({ (document) in
-                completion(document.data())
+                var data = document.data()
+                data.removeValue(forKey: "prerequisites")
+                if data["prerequisites"] as? [String : Any] != nil {
+                    completion(Trick(data: data)!)
+                } else {
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                        let trick = try JSONDecoder().decode(Trick.self, from: jsonData)
+                        completion(trick)
+                    } catch {
+                        print("PICU")
+                    }
+                }
             })
             
             finish()

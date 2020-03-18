@@ -91,11 +91,11 @@ class ProfileViewModel: ProfileViewModelType {
     private func countCompletedByLevel() {
         var levels = Set<Int>()
         trickList.value.forEach { trick in
-            levels.insert(trick.level)
+//            levels.insert(trick.level)
         }
         levels.forEach { level in
-            let tricks = trickList.value.filter { $0.level == level }
-            completedInLevel.value.append((level: level, tricks: tricks.count))
+//            let tricks = trickList.value.filter { $0.level == level }
+//            completedInLevel.value.append((level: level, tricks: tricks.count))
         }
     }
 }
