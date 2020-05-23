@@ -169,6 +169,7 @@ open class YoutubePlayerView: UIView {
             }
             
             let htmlString = String(format: YoutubePlayerUtils.htmlString, url)
+            print("FRAME: \(htmlString)")
             webView.loadHTMLString(htmlString, baseURL: nil)
             
             if let loadingView = delegate?.playerViewPreferredInitialLoadingView(self) {

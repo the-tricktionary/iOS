@@ -14,32 +14,16 @@ struct BaseTrick: Codable {
     var level: Int
     var type: String
     var levels: Levels?
+    var id: String?
 }
 
 struct Trick: Codable {
+    var id: String?
     var name: String
     var videos: Video?
     var description: String
     var levels: Levels?
     var prerequisites: [Prerequisites]?
-
-    init?(data: [String : Any]) {
-        guard let _name = data["name"] as? String,
-            let _videos = Video(data: data["videos"] as? [String : Any]),
-              let _description = data["description"] as? String else {
-                fatalError("Error with deserialize trick")
-        }
-        self.name = _name
-        self.videos = _videos
-        self.description = _description
-
-        self.levels = data["levels"] as? Levels
-        if let prerequisites = data["prerequisites"] as? [String : Any] {
-            self.prerequisites == nil ?
-                self.prerequisites = [Prerequisites(id: prerequisites["id"] as? String ?? "")] :
-                self.prerequisites?.append(Prerequisites(id: prerequisites["id"] as? String ?? ""))
-        }
-    }
 }
 
 struct Video: Codable {

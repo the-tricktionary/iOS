@@ -10,27 +10,33 @@ import Foundation
 import UIKit
 
 extension TrickDetailViewController: UITableViewDelegate {
- 
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 1 {
-            return 250
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return 92
+        case 1:
+            return 68
+        default:
+            return 45
         }
-        if indexPath.section == 2 || indexPath.section == 3 {
-            return 67
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 && viewModel.preprequisites.value != nil {
+            return 45
         }
-        return 45
+        return 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let trick = viewModel.trick {
-            if trick.prerequisites?.count ?? 0 > 0 {
-                if indexPath.section == 3 {
-                    let cell = tableView.cellForRow(at: indexPath) as! InformationCell
-                    viewModel.trickName = cell.title.text!
-                    viewModel.getTrick()
-                    title = cell.title.text!
-                }
+        if indexPath.section == 1 {
+            guard let trick = viewModel.preprequisites.value?[indexPath.row] else {
+                return
             }
+            let vm = TrickDetailViewModel(trick: trick.name, settings: viewModel.settings, done: false)
+            let vc = TrickDetailViewController(viewModel: vm)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

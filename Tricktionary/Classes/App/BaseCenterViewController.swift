@@ -29,6 +29,10 @@ class BaseCenterViewController: BaseViewController {
             navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         }
 
+        let backButton = UIBarButtonItem(title: "Back", style: .done, target: nil, action: nil)
+        backButton.tintColor = UIColor.flatYellow()
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+
         tabBarController?.tabBar.barTintColor = Color.red
         tabBarController?.tabBar.unselectedItemTintColor = .white
         tabBarController?.tabBar.tintColor = UIColor.flatYellow()

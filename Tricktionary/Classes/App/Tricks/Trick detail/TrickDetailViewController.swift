@@ -18,11 +18,11 @@ class TrickDetailViewController: BaseCenterViewController {
     let tableView: UITableView = UITableView()
     private let videoView = VideoView()
     
-    var viewModel: TrickDetailViewModel
+    var viewModel: TrickDetailViewModelType
     
     // MARK: Life cycles
     
-    init(viewModel: TrickDetailViewModel) {
+    init(viewModel: TrickDetailViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -56,6 +56,7 @@ class TrickDetailViewController: BaseCenterViewController {
         tableView.tableFooterView = UIView()
         tableView.register(TrickInfoCell.self, forCellReuseIdentifier: "TrickInfo")
         tableView.register(DescriptionCell.self, forCellReuseIdentifier: "TrickDescription")
+        tableView.register(TrickLevelCell.self, forCellReuseIdentifier: "TrickPrerequisites")
         
         setupViewConstraints()
     }
@@ -72,6 +73,10 @@ class TrickDetailViewController: BaseCenterViewController {
                 return
             }
             sSelf.videoView.customize(with: content)
+        }
+
+        viewModel.preprequisites.producer.startWithValues { [weak self] trick in
+            self?.tableView.reloadData()
         }
     }
     

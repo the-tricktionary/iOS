@@ -44,7 +44,7 @@ class TrickLevelCell: BaseCell {
         selectionStyle = .none
         isUserInteractionEnabled = true
 
-        contentView.backgroundColor = Color.background
+        contentView.backgroundColor = .white
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.contentMode = .center
@@ -112,6 +112,19 @@ class TrickLevelCell: BaseCell {
             }
         }
         accesoryView.image = model.isDone ? UIImage(named: "done") : nil
+    }
+
+    func customizePrerequisite(with model: Content) {
+        view.snp.remakeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+        view.layer.masksToBounds = false
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.7
+        view.layer.shadowOffset = CGSize.zero
+        view.layer.shadowRadius = 1
+        self.customize(with: model)
     }
     
     class func reuseIdentifier() -> String {

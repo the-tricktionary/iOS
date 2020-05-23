@@ -13,12 +13,13 @@ class TrickInfoCell: UITableViewCell {
 
     // MARK: - Variables
     // public
-
+    var doneTapped: ((String?) -> Void)?
     // private
     private let name = UILabel()
     private let level = UILabel()
     private let favorite = UIButton()
     private let completed = UIButton()
+    private var id: String?
 
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -42,6 +43,7 @@ class TrickInfoCell: UITableViewCell {
         favorite.setImage(UIImage(named: "favorite"), for: .normal)
 
         completed.setImage(UIImage(named: "done"), for: .normal)
+        completed.addTarget(self, action: #selector(didDoneTap), for: .touchUpInside)
 
         contentView.addSubview(name)
         contentView.addSubview(level)
@@ -79,6 +81,7 @@ class TrickInfoCell: UITableViewCell {
     }
 
     func customize(with content: Content) {
+        self.id = content.id
         self.name.text = content.name
         let ijruImage = NSTextAttachment()
         ijruImage.image = UIImage(named: "ijru")
@@ -95,10 +98,15 @@ class TrickInfoCell: UITableViewCell {
         self.favorite.setImage(content.favorite ? UIImage(named: "favorite") : UIImage(named: "favorite-outline"), for: .normal)
         self.completed.setImage(content.completed ? UIImage(named: "done") : UIImage(named: "done-outline"), for: .normal)
     }
+
+    @objc private func didDoneTap() {
+        doneTapped?(id)
+    }
 }
 
 extension TrickInfoCell {
     struct Content {
+        var id: String?
         var name: String
         var level: String
         var favorite: Bool

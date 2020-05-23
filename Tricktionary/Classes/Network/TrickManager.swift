@@ -64,7 +64,8 @@ class TrickManager: TricksDataProviderType {
                 data.removeValue(forKey: "i18n")
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                    let trick = try JSONDecoder().decode(BaseTrick.self, from: jsonData)
+                    var trick = try JSONDecoder().decode(BaseTrick.self, from: jsonData)
+                    trick.id = document.documentID
                     completion(trick, document.documentID)
                 } catch {
                     print("Deserialize error: \(error.localizedDescription)")
@@ -138,25 +139,42 @@ class TrickManager: TricksDataProviderType {
             
             snapshot.documents.forEach({ (document) in
                 var data = document.data()
-                data.removeValue(forKey: "prerequisites")
-                if data["prerequisites"] as? [String : Any] != nil {
-                    completion(Trick(data: data)!)
-                } else {
-                    do {
-                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                        let trick = try JSONDecoder().decode(Trick.self, from: jsonData)
-                        completion(trick)
-                    } catch {
-                        print("PICU")
+                if var prer = data["prerequisites"] as? [[String : Any]] {
+                    data.removeValue(forKey: "prerequisites")
+                    for (index, _) in prer.enumerated() {
+                        prer[index].removeValue(forKey: "ref")
                     }
+                    data["prerequisites"] = prer
                 }
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                    var trick = try JSONDecoder().decode(Trick.self, from: jsonData)
+                    trick.id = document.documentID
+                    completion(trick)
+                } catch {
+                    print("PICU")
+                }
+
             })
             
             finish()
         }
     }
 
-    func getTrickNameById(id: String, completion: @escaping ([String : Any]) -> Void, finish: @escaping () -> Void) {
+    func markTrickAsDone(isDone: Bool, id: String) {
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+
+        let firestore = Firestore.firestore()
+        if !isDone {
+            firestore.collection("checklist").document(user.uid).updateData([
+                "SR" : FieldValue.delete()
+            ])
+        }
+    }
+
+    func getTrickById(id: String, completion: @escaping (Trick) -> Void, finish: @escaping () -> Void) {
         let firestore = Firestore.firestore()
         let documentReference = firestore.collection("tricksSR").document(id)
         documentReference.getDocument { (snapshot, error) in
@@ -167,8 +185,19 @@ class TrickManager: TricksDataProviderType {
             guard let snapshot = snapshot else {
                 return
             }
+            guard var data = snapshot.data() else {
+                return
+            }
+            data.removeValue(forKey: "prerequisites")
+            print("### MAM: \(data["name"])")
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                let trick = try JSONDecoder().decode(Trick.self, from: jsonData)
+                completion(trick)
+            } catch {
+                print("PICU")
+            }
             
-            completion(snapshot.data()!)
             finish()
         }
     }

@@ -80,6 +80,7 @@ class VideoCell: UITableViewCell {
             "autoplay": autoPlay ? 1 :0
         ]
         videoView.loadWithVideoId(url, with: playerVars)
+        
         videoView.play()
     }
 }

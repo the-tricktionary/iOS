@@ -19,6 +19,7 @@
 		11B3ED7523DCF27000ACE06C /* TricksTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B3ED7423DCF27000ACE06C /* TricksTableSection.swift */; };
 		11B3ED7723DCF28E00ACE06C /* TricksSettingsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B3ED7623DCF28E00ACE06C /* TricksSettingsType.swift */; };
 		11E253BA23D486EB00FB6DFA /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E253B923D486EB00FB6DFA /* SearchCell.swift */; };
+		11EF715F242EBD0C0005B6B8 /* PrerequisiteHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EF715E242EBD0C0005B6B8 /* PrerequisiteHeaderView.swift */; };
 		21AE64B71C33C1370ACB4612 /* Pods_TricktionaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */; };
 		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
 		EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */; };
@@ -140,6 +141,7 @@
 		11B3ED7423DCF27000ACE06C /* TricksTableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksTableSection.swift; sourceTree = "<group>"; };
 		11B3ED7623DCF28E00ACE06C /* TricksSettingsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksSettingsType.swift; sourceTree = "<group>"; };
 		11E253B923D486EB00FB6DFA /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		11EF715E242EBD0C0005B6B8 /* PrerequisiteHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrerequisiteHeaderView.swift; sourceTree = "<group>"; };
 		43F91D7EECE300294FAA4D49 /* Pods-TricktionaryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TricktionaryUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		816C0EF71CF545E72478D1B9 /* Pods-TricktionaryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			children = (
 				11A6D258241037E90016C55B /* VideoView.swift */,
 				11813DF22422AC69001F53E8 /* TrickInfoCell.swift */,
+				11EF715E242EBD0C0005B6B8 /* PrerequisiteHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -953,6 +956,7 @@
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
 				EA638705222350FF00D23A9C /* DateTimeUtil.swift in Sources */,
 				EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */,
+				11EF715F242EBD0C0005B6B8 /* PrerequisiteHeaderView.swift in Sources */,
 				EAE566C722F4AADE0077EC5D /* UserManager.swift in Sources */,
 				EABA88662253ADB300D27F64 /* SubmitViewController.swift in Sources */,
 				EA4F823E2222B9B7001CB1F4 /* SpeedDataDetailDelegate.swift in Sources */,

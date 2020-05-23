@@ -45,6 +45,8 @@ class VideoView: UIView, YoutubePlayerViewDelegate {
 
     private func setupButton() {
         placeholder.isUserInteractionEnabled = true
+        placeholder.contentMode = .scaleToFill
+        
         playButton.setImage(UIImage(named: "video-play"), for: .normal)
         playButton.addTarget(self, action: #selector(switchVideo), for: .touchUpInside)
         playButton.isEnabled = false
@@ -57,7 +59,7 @@ class VideoView: UIView, YoutubePlayerViewDelegate {
 
         playButton.snp.makeConstraints { (make) in
             make.centerX.centerY.equalToSuperview()
-            make.size.equalTo(50)
+            make.size.equalTo(70)
         }
 
         playerView.snp.makeConstraints { (make) in

@@ -12,10 +12,17 @@ import ReactiveSwift
 protocol TrickDetailViewModelType {
     var onLoad: (() -> Void)? { get set }
     var onStartLoading: (() -> Void)? { get set }
+
     var isDone: Bool { get }
-    func getTrick()
     var trick: Trick? { get set }
+    var preprequisites: MutableProperty<[Trick]?> { get }
+    var video: MutableProperty<VideoView.Content?> { get }
     var settings: TrickDetailSettingsType { get }
+
+    var trickName: String { get set }
+    func markTrickAsDone(_ id: String?)
+    func getTrick()
+
 }
 
 protocol TrickDetailSettingsType {
@@ -34,6 +41,7 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     var settings: TrickDetailSettingsType
     
     var trick: Trick?
+    var preprequisites: MutableProperty<[Trick]?> = MutableProperty<[Trick]?>(nil)
     var video: MutableProperty<VideoView.Content?> = MutableProperty<VideoView.Content?>(nil)
     var trickName: String
     var loadedPrerequisites: MutableProperty<Bool> = MutableProperty<Bool>(false)
@@ -44,7 +52,8 @@ class TrickDetailViewModel: TrickDetailViewModelType {
         return "https://img.youtube.com/vi/\(id)/0.jpg"
     }
 
-    private var dataTask: URLSessionDataTask?
+    private var trickId: String?
+    
     // MARK: Life cycles
     
     init(trick: String, settings: TrickDetailSettingsType, done: Bool) {
@@ -61,11 +70,34 @@ class TrickDetailViewModel: TrickDetailViewModelType {
                                             self?.onStartLoading?()
         }, completion: { (trick) in
             self.trick = trick
+            if let prerequisites = trick.prerequisites {
+                self.loadPrerequisites(with: prerequisites)
+            }
             self.video.value = self.makeVideoContent(with: trick.videos!)
             self.thumbnail.value = self.thumbnailURL(trick.videos!.youtube)
             self.onLoad?()
         }) { [weak self] in
             self?.onLoad?()
+        }
+    }
+
+    func markTrickAsDone(_ id: String?) {
+        isDone.toggle()
+        TrickManager.shared.markTrickAsDone(isDone: isDone, id: id ?? "")
+        print("### TRICK ID: \(id) \(self.isDone ? "IS DONE" : "IS NOT DONE")")
+    }
+
+    private func loadPrerequisites(with ids: [Prerequisites]) {
+        ids.forEach { prerequisite in
+            TrickManager.shared.getTrickById(id: prerequisite.id, completion: { trick in
+                if self.preprequisites.value == nil {
+                    self.preprequisites.value = [trick]
+                } else {
+                    self.preprequisites.value?.append(trick)
+                }
+            }) {
+                //
+            }
         }
     }
 

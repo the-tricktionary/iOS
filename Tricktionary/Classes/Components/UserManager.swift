@@ -12,11 +12,10 @@ import ReactiveSwift
 
 public protocol UserManagerType {
     var isLogged: Bool { get }
-    
 }
 
 class UserManager: UserManagerType {
-    
+
     var isLogged: Bool {
         return Auth.auth().currentUser != nil
     }
