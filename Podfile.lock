@@ -95,9 +95,9 @@ PODS:
     - gRPC-Core (= 1.17.0)
     - gRPC-RxLibrary (= 1.17.0)
   - GTMSessionFetcher/Core (1.2.1)
-  - Kingfisher (5.12.0):
-    - Kingfisher/Core (= 5.12.0)
-  - Kingfisher/Core (5.12.0)
+  - Kingfisher (5.14.0):
+    - Kingfisher/Core (= 5.14.0)
+  - Kingfisher/Core (5.14.0)
   - leveldb-library (1.20)
   - LifetimeTracker (1.7.1)
   - nanopb (0.3.901):
@@ -130,7 +130,7 @@ DEPENDENCIES:
   - Firebase/RemoteConfig
   - Firebase/Storage
   - GoogleSignIn
-  - Kingfisher
+  - Kingfisher (~> 5.14.0)
   - LifetimeTracker
   - ReactiveCocoa
   - RxSwift
@@ -200,7 +200,7 @@ SPEC CHECKSUMS:
   gRPC-ProtoRPC: 94e90774dd0dc089dece93ec22384d8383988f3f
   gRPC-RxLibrary: f2873a17e8133f66d8ce972f8805aa7a518ae974
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
-  Kingfisher: dc6e0f53bb5b12c3e75bedb0e01bbd7a640eea69
+  Kingfisher: 7b64389a43139c903ec434788344c288217c792d
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   LifetimeTracker: 12f58bfab48593408fb4cab9d9050e319deb8299
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -217,6 +217,6 @@ SPEC CHECKSUMS:
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   YoutubePlayerView: 510480ccdf03f2ffc888ee0b2bf2d1d8f8d9289f
 
-PODFILE CHECKSUM: 467ecae9e84de360f22aa127f139acd80c4652e4
+PODFILE CHECKSUM: 3a2d23ecb658f1875ce31e3461decb4ecd690284
 
-COCOAPODS: 1.9.0
+COCOAPODS: 1.9.1

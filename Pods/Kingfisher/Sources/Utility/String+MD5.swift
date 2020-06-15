@@ -25,7 +25,6 @@
 //  THE SOFTWARE.
 
 import Foundation
-import CommonCrypto
 
 extension String: KingfisherCompatibleValue { }
 extension KingfisherWrapper where Base == String {

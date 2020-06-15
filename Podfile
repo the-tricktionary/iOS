@@ -22,7 +22,7 @@ target 'Tricktionary' do
 	pod 'LifetimeTracker'
 	pod 'Swinject'
 	pod 'SwiftMonkeyPaws'
-	pod 'Kingfisher'
+	pod 'Kingfisher', '~> 5.14.0'
 
   target 'TricktionaryTests' do
     inherit! :search_paths

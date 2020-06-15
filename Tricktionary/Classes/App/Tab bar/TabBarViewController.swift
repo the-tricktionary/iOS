@@ -40,11 +40,8 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         delegate = self
         tabBar.isTranslucent = false
 
-        let tricksVM = TricksViewModel(dataProvider: TrickManager.shared,
-                                       remoteConfig: RemoteConfig.remoteConfig(),
-                                       settings: Settings(),
-                                       auth: Auth.auth())
-        let tricksViewController = UINavigationController(rootViewController: TricksViewController(viewModel: tricksVM))
+        let tricksVC = ViewControllerFactory.makeTrickListVC()
+        let tricksViewController = UINavigationController(rootViewController: tricksVC)
         tricksViewController.tabBarItem = UITabBarItem(title: "Tricks", image: UIImage(named: "tricktionary"), tag: 0)
 
         let speedsVM = SpeedTimerViewModel()

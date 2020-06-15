@@ -12,6 +12,7 @@
 		11813DF32422AC69001F53E8 /* TrickInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11813DF22422AC69001F53E8 /* TrickInfoCell.swift */; };
 		118D877E232BE550001DFB1F /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D877D232BE550001DFB1F /* ProfileDataSource.swift */; };
 		118D8780232BE577001DFB1F /* ProfileDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D877F232BE577001DFB1F /* ProfileDelegate.swift */; };
+		11A59719247935AD006F4F3E /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A59718247935AD006F4F3E /* ViewControllerFactory.swift */; };
 		11A6D259241037E90016C55B /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A6D258241037E90016C55B /* VideoView.swift */; };
 		11A892DE232960A3009BCA7B /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A892DD232960A3009BCA7B /* ProfileInfo.swift */; };
 		11AF9DF623527EAD00746773 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
@@ -135,6 +136,7 @@
 		11813DF22422AC69001F53E8 /* TrickInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickInfoCell.swift; sourceTree = "<group>"; };
 		118D877D232BE550001DFB1F /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
 		118D877F232BE577001DFB1F /* ProfileDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDelegate.swift; sourceTree = "<group>"; };
+		11A59718247935AD006F4F3E /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		11A6D258241037E90016C55B /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		11A892DD232960A3009BCA7B /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		11AF9DF5235277C400746773 /* Tricktionary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tricktionary.entitlements; sourceTree = "<group>"; };
@@ -270,6 +272,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		11A597172479358B006F4F3E /* ViewControllersFlow */ = {
+			isa = PBXGroup;
+			children = (
+				11A59718247935AD006F4F3E /* ViewControllerFactory.swift */,
+			);
+			path = ViewControllersFlow;
+			sourceTree = "<group>";
+		};
 		11A6D257241037DC0016C55B /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +389,7 @@
 		EA7AAB2C219E1C9B000858EE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				11A597172479358B006F4F3E /* ViewControllersFlow */,
 				EAD3D74121F9214700F39A22 /* Sound */,
 				EACF63DF21EE966200D7D836 /* View */,
 				EA1A48DA21EAB88A0086FC79 /* Constants */,
@@ -954,6 +965,7 @@
 				11E253BA23D486EB00FB6DFA /* SearchCell.swift in Sources */,
 				EAF9B49B225A78D1001AB242 /* VideoStorageManager.swift in Sources */,
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
+				11A59719247935AD006F4F3E /* ViewControllerFactory.swift in Sources */,
 				EA638705222350FF00D23A9C /* DateTimeUtil.swift in Sources */,
 				EAACBCDE21D034FC007AEDFE /* TrickDetailDataSource.swift in Sources */,
 				11EF715F242EBD0C0005B6B8 /* PrerequisiteHeaderView.swift in Sources */,
