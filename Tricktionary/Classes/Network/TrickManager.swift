@@ -7,12 +7,13 @@
 //
 
 import Foundation
-import FirebaseFirestore
+import Firebase
 import ReactiveSwift
 import RxSwift
 import FirebaseAuth
 import FirebaseRemoteConfig
 import CodableFirebase
+import Combine
 
 enum Disciplines {
     case singleRope, wheels, doubleDutch
@@ -41,53 +42,62 @@ enum Disciplines {
 }
 
 protocol TricksDataProviderType {
-    
-    func getTricks(discipline: Disciplines, starting: @escaping () -> (),completion: @escaping (BaseTrick, String) -> Void, finish: @escaping () -> Void)
-    func getChecklist(completion: @escaping ([String]?) -> Void, finish: @escaping () -> Void)
+    //, starting: @escaping () -> (),completion: @escaping (BaseTrick, String) -> Void, finish: @escaping () -> Void
+    func getTricks(discipline: Disciplines) -> AnyPublisher<[BaseTrick], Error>
+    func getChecklist() -> AnyPublisher<[String], Error>
 }
 
 class TrickManager: TricksDataProviderType {
-    func getTricks(discipline: Disciplines, starting: @escaping () -> (), completion: @escaping (BaseTrick, String) -> Void, finish: @escaping () -> Void) {
+    func getTricks(discipline: Disciplines) -> AnyPublisher<[BaseTrick], Error> {
         let firestore = Firestore.firestore()
         let documentReference = firestore.collection(discipline.identity)
+        let publisher = PassthroughSubject<[BaseTrick], Error>()
         documentReference.getDocuments { (snapshot, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Some error")
             }
-
+            
             guard let snapshot = snapshot, snapshot.isEmpty == false else {
+                publisher.send(completion: .failure(NSError(domain: "Error", code: 1, userInfo: nil) as Error))
                 return
             }
-
+            var list: [BaseTrick] = []
             snapshot.documents.forEach({ (document) in
                 let data = document.data()
-                let trick = BaseTrick(data: data)
-                completion(trick, document.documentID)
+                var trick = BaseTrick(data: data)
+                trick.id = document.documentID
+                list.append(trick)
+//                completion(trick, document.documentID)
             })
-            finish()
+            publisher.send(list)
+//            finish()
         }
+        return publisher.eraseToAnyPublisher()
     }
 
-    func getChecklist(completion: @escaping ([String]?) -> Void, finish: @escaping () -> Void) {
+    func getChecklist() -> AnyPublisher<[String], Error> {
+        let publisher = CurrentValueSubject<[String], Error>([])
         guard let user = Auth.auth().currentUser else {
-            completion(nil)
-            finish()
-            return
+            return publisher.eraseToAnyPublisher()
         }
         let firestore = Firestore.firestore()
         let reference = firestore.collection("checklist").document(user.uid)
+        
         reference.getDocument { snapshot, error in
             if error != nil {
                 print(error?.localizedDescription ?? "Some error")
             }
 
             guard let snapshot = snapshot else {
-                finish()
-                return
+                publisher.send(completion: .failure(NSError(domain: "Error", code: 0, userInfo: nil) as Error))
+                return //NSError(domain: "Error", code: 0, userInfo: nil) as Error
             }
-            completion(snapshot.data()?["SR"] as? [String])
-            finish()
+            publisher.send((snapshot.data()?["SR"] as? [String]) ?? [])
+//            return Just<[String]>((snapshot.data()?["SR"] as? [String]) ?? []).eraseToAnyPublisher()
+//            completion(snapshot.data()?["SR"] as? [String])
+//            finish()
         }
+        return publisher.eraseToAnyPublisher()
     }
 
     

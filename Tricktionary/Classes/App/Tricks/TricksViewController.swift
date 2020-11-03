@@ -51,7 +51,7 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getTricks(silent: true)
+//        viewModel.getTricks(silent: true)
     }
     // MARK: - Privates
 
@@ -105,7 +105,9 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
     
     private func setupDataSource() {
         diffableDataSource = DiffableDataSource(tableView: tableView) { (tableView, indexPath, trick) -> UITableViewCell? in
-            let cell = TrickLevelCell() // TODO: Deque reusable
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TrickLevelCell.reuseIdentifier(), for: indexPath) as? TrickLevelCell else {
+                return nil
+            }
             cell.customize(with: trick)
             return cell
         }

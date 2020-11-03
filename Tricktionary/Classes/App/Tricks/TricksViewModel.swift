@@ -31,6 +31,7 @@ class TricksViewModel: TricksViewModelType {
 
     // MARK: - Variables
 
+    private var cancelable = Set<AnyCancellable>()
     private let checkList = MutableProperty<[String]>([String]())
     private var allTricksId: [String : String] = [String : String]()
     let sections = CurrentValueSubject<[TableSection], Never>([])
@@ -95,23 +96,29 @@ class TricksViewModel: TricksViewModelType {
             makeContent()
             return
         }
-        func getTrickList() {
-            tricks.value.removeAll()
-            dataProvider.getTricks(discipline: disciplines[selectedDiscipline], starting: { [weak self] in
-                self?.loading.send(true)
-            }, completion: { [weak self] (data, id) in
-                self?.tricks.value.append(data)
-                self?.allTricksId[data.name] = id
-            }) { [weak self] in
-                self?.selectMinLevel()
-                self?.loading.send(false)
+
+        tricks.value.removeAll()
+        let trickList = dataProvider.getTricks(discipline: disciplines[selectedDiscipline])
+        let checkList = dataProvider.getChecklist()
+        Publishers.Zip(checkList, trickList)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                print(completion)
+            switch completion {
+            case .failure(let error):
+                print("### Error \(error.localizedDescription)")
+            default:
+                break
             }
-        }
-        dataProvider.getChecklist(completion: { list in
-            self.checkList.value = list ?? []
-        }) {
-            getTrickList()
-        }
+        } receiveValue: { (checklist, trickList) in
+            self.checkList.value = checklist
+            self.tricks.value.append(contentsOf: trickList)
+            self.allTricksId = trickList.reduce(into: [String: String]()) {
+                $0[$1.name] = $1.id
+            }
+            self.loading.send(false)
+            self.selectMinLevel()
+        }.store(in: &cancelable)
     }
 
     func toggleSection(name: String) {
