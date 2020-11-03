@@ -55,7 +55,7 @@ class GraphCell: BaseCell {
             data.forEach { (pair) in
                 values.append(ChartDataEntry(x: pair.x, y: pair.y))
             }
-            let dataSet = LineChartDataSet(values: values, label: nil)
+            let dataSet = LineChartDataSet(entries: values, label: nil)
             dataSet.fillFormatter = DefaultFillFormatter { _,_  -> CGFloat in
                 return CGFloat(self.chart.leftAxis.axisMinimum)
             }

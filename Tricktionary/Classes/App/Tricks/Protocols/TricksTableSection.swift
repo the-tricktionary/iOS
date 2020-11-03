@@ -15,3 +15,12 @@ struct TableSection {
     var tricks: Int
     var completed: Int?
 }
+
+extension TableSection: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(rows)
+        hasher.combine(tricks)
+        hasher.combine(completed)
+    }
+}

@@ -24,6 +24,8 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
     var tableView: UITableView = UITableView()
     internal var viewModel: TricksViewModel
     
+    private var diffableDataSource: DiffableDataSource?
+    
     // MARK: - Life cycles
     
     init(viewModel: TricksViewModel) {
@@ -65,7 +67,6 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
         navigationItem.searchController = searchController
 
         tableView.delegate = self
-        tableView.dataSource = self
         tableView.backgroundColor = Color.background
         tableView.register(TrickLevelCell.self, forCellReuseIdentifier: TrickLevelCell.reuseIdentifier())
         tableView.register(TrickLevelHeaderCell.self, forCellReuseIdentifier: TrickLevelHeaderCell.reuseIdentifier())
@@ -75,30 +76,50 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-
+        
+        setupDataSource()
         setupViewConstraints()
     }
 
     private func bind() {
-        viewModel.sections.producer.startWithValues { [weak self] _ in
-            self?.levelButton.title = "Level \(self?.viewModel.selectedLevel ?? 1)"
-            self?.tableView.reloadData()
-        }
+        viewModel.sections.sink { [weak self] sections in
+            self?.makeSnapshotAndApply(sections)
+        }.store(in: &disposable)
 
-        viewModel.onStartLoading = { [weak self] in
-            self?.activityIndicatorView.startAnimating()
-        }
-
-        viewModel.onFinishLoading = { [weak self] in
-            self?.activityIndicatorView.stopAnimating()
-            self?.tableView.refreshControl?.endRefreshing()
-            self?.tableView.reloadData()
-        }
+        viewModel.loading.sink { [weak self] loading in
+            if loading {
+                self?.activityIndicatorView.startAnimating()
+            } else {
+                self?.activityIndicatorView.stopAnimating()
+                self?.tableView.refreshControl?.endRefreshing()
+                self?.tableView.reloadData()
+            }
+        }.store(in: &disposable)
+    
         searchResults.onSelectTrick = { [weak self] trick in
             let vm = TrickDetailViewModel(trick: trick, settings: Settings(), done: false)
             let vc = TrickDetailViewController(viewModel: vm)
             self?.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    private func setupDataSource() {
+        diffableDataSource = DiffableDataSource(tableView: tableView) { (tableView, indexPath, trick) -> UITableViewCell? in
+            let cell = TrickLevelCell() // TODO: Deque reusable
+            cell.customize(with: trick)
+            return cell
+        }
+        diffableDataSource?.defaultRowAnimation = .fade
+    }
+    
+    private func makeSnapshotAndApply(_ sections: [TableSection]) {
+        var snapshot = NSDiffableDataSourceSnapshot<TableSection, TrickLevelCell.Content>()
+        sections.forEach { section in
+            snapshot.appendSections([section])
+            snapshot.appendItems(section.rows, toSection: section)
+        }
+        levelButton.title = "Level \(viewModel.selectedLevel)"
+        diffableDataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     fileprivate func setupViewConstraints() {

@@ -8,6 +8,7 @@ target 'Tricktionary' do
   # Pods for Tricktionary
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
+	pod 'CodableFirebase'
 	pod 'Firebase/Auth'
 	pod 'Firebase/RemoteConfig'
 	pod 'Firebase/Storage'

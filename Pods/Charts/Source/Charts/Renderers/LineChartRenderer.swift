@@ -12,11 +12,6 @@
 import Foundation
 import CoreGraphics
 
-#if !os(OSX)
-    import UIKit
-#endif
-
-
 open class LineChartRenderer: LineRadarRenderer
 {
     // TODO: Currently, this nesting isn't necessary for LineCharts. However, it will make it much easier to add a custom rotor
@@ -122,10 +117,8 @@ open class LineChartRenderer: LineRadarRenderer
             // Take an extra point from the left, and an extra from the right.
             // That's because we need 4 points for a cubic bezier (cubic=4), otherwise we get lines moving and doing weird stuff on the edges of the chart.
             // So in the starting `prev` and `cur`, go -2, -1
-            // And in the `lastIndex`, add +1
             
             let firstIndex = _xBounds.min + 1
-            let lastIndex = _xBounds.min + _xBounds.range
             
             var prevPrev: ChartDataEntry! = nil
             var prev: ChartDataEntry! = dataSet.entryForIndex(max(firstIndex - 2, 0))
@@ -138,7 +131,7 @@ open class LineChartRenderer: LineRadarRenderer
             // let the spline start
             cubicPath.move(to: CGPoint(x: CGFloat(cur.x), y: CGFloat(cur.y * phaseY)), transform: valueToPixelMatrix)
             
-            for j in stride(from: firstIndex, through: lastIndex, by: 1)
+            for j in _xBounds.dropFirst()  // same as firstIndex
             {
                 prevPrev = prev
                 prev = cur
@@ -321,8 +314,8 @@ open class LineChartRenderer: LineRadarRenderer
                 // Allocate once in correct size
                 _lineSegments = [CGPoint](repeating: CGPoint(), count: pointsPerEntryPair)
             }
-            
-        for j in stride(from: _xBounds.min, through: _xBounds.range + _xBounds.min, by: 1)
+
+        for j in _xBounds.dropLast()
         {
             var e: ChartDataEntry! = dataSet.entryForIndex(j)
             
@@ -333,6 +326,9 @@ open class LineChartRenderer: LineRadarRenderer
             
             if j < _xBounds.max
             {
+                // TODO: remove the check.
+                // With the new XBounds iterator, j is always smaller than _xBounds.max
+                // Keeping this check for a while, if xBounds have no further breaking changes, it should be safe to remove the check
                 e = dataSet.entryForIndex(j + 1)
                 
                 if e == nil { break }
@@ -358,14 +354,21 @@ open class LineChartRenderer: LineRadarRenderer
                 _lineSegments[i] = _lineSegments[i].applying(valueToPixelMatrix)
             }
             
-            if (!viewPortHandler.isInBoundsRight(_lineSegments[0].x))
+            if !viewPortHandler.isInBoundsRight(_lineSegments[0].x)
             {
                 break
             }
             
+            // Determine the start and end coordinates of the line, and make sure they differ.
+            guard
+                let firstCoordinate = _lineSegments.first,
+                let lastCoordinate = _lineSegments.last,
+                firstCoordinate != lastCoordinate else { continue }
+            
             // make sure the lines don't do shitty things outside bounds
-            if !viewPortHandler.isInBoundsLeft(_lineSegments[1].x)
-                || (!viewPortHandler.isInBoundsTop(_lineSegments[0].y) && !viewPortHandler.isInBoundsBottom(_lineSegments[1].y))
+            if !viewPortHandler.isInBoundsLeft(lastCoordinate.x) ||
+                !viewPortHandler.isInBoundsTop(max(firstCoordinate.y, lastCoordinate.y)) ||
+                !viewPortHandler.isInBoundsBottom(min(firstCoordinate.y, lastCoordinate.y))
             {
                 continue
             }
@@ -450,7 +453,7 @@ open class LineChartRenderer: LineRadarRenderer
 
         if isDrawingValuesAllowed(dataProvider: dataProvider)
         {
-            var dataSets = lineData.dataSets
+            let dataSets = lineData.dataSets
             
             let phaseY = animator.phaseY
             
@@ -458,12 +461,10 @@ open class LineChartRenderer: LineRadarRenderer
             
             for i in 0 ..< dataSets.count
             {
-                guard let dataSet = dataSets[i] as? ILineChartDataSet else { continue }
-                
-                if !shouldDrawValues(forDataSet: dataSet)
-                {
-                    continue
-                }
+                guard let
+                    dataSet = dataSets[i] as? ILineChartDataSet,
+                    shouldDrawValues(forDataSet: dataSet)
+                    else { continue }
                 
                 let valueFont = dataSet.valueFont
                 
@@ -483,7 +484,7 @@ open class LineChartRenderer: LineRadarRenderer
                 }
                 
                 _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
-                
+
                 for j in _xBounds
                 {
                     guard let e = dataSet.entryForIndex(j) else { break }
@@ -608,6 +609,14 @@ open class LineChartRenderer: LineRadarRenderer
                     continue
                 }
                 
+                
+                // Skip Circles and Accessibility if not enabled,
+                // reduces CPU significantly if not needed
+                if !dataSet.isDrawCirclesEnabled
+                {
+                    continue
+                }
+                
                 // Accessibility element geometry
                 let scaleFactor: CGFloat = 3
                 let accessibilityRect = CGRect(x: pt.x - (scaleFactor * circleRadius),
@@ -626,11 +635,6 @@ open class LineChartRenderer: LineRadarRenderer
                     }
 
                     accessibilityOrderedElements[i].append(element)
-                }
-
-                if !dataSet.isDrawCirclesEnabled
-                {
-                    continue
                 }
 
                 context.setFillColor(dataSet.getCircleColor(atIndex: j)!.cgColor)
@@ -718,8 +722,8 @@ open class LineChartRenderer: LineRadarRenderer
                 context.setLineDash(phase: 0.0, lengths: [])
             }
             
-            let x = high.x // get the x-position
-            let y = high.y * Double(animator.phaseY)
+            let x = e.x // get the x-position
+            let y = e.y * Double(animator.phaseY)
             
             if x > chartXMax * animator.phaseX
             {

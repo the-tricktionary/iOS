@@ -12,6 +12,7 @@ import ReactiveSwift
 import RxSwift
 import FirebaseAuth
 import FirebaseRemoteConfig
+import CodableFirebase
 
 enum Disciplines {
     case singleRope, wheels, doubleDutch
@@ -59,17 +60,9 @@ class TrickManager: TricksDataProviderType {
             }
 
             snapshot.documents.forEach({ (document) in
-                var data = document.data()
-                data.removeValue(forKey: "prerequisites")
-                data.removeValue(forKey: "i18n")
-                do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                    var trick = try JSONDecoder().decode(BaseTrick.self, from: jsonData)
-                    trick.id = document.documentID
-                    completion(trick, document.documentID)
-                } catch {
-                    print("Deserialize error: \(error.localizedDescription)")
-                }
+                let data = document.data()
+                let trick = BaseTrick(data: data)
+                completion(trick, document.documentID)
             })
             finish()
         }
@@ -170,7 +163,13 @@ class TrickManager: TricksDataProviderType {
         if !isDone {
             firestore.collection("checklist").document(user.uid).updateData([
                 "SR" : FieldValue.delete()
-            ])
+            ]) { error in
+                if error == nil {
+                    print("Trick \(id) marked as \(isDone ? "done" : "not done")")
+                } else {
+                    print("Trick marking error \(error?.localizedDescription)")
+                }
+            }
         }
     }
 

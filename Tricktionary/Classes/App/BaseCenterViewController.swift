@@ -8,10 +8,18 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class BaseCenterViewController: BaseViewController {
     
     // MARK: Variables
+    
+    var disposable = Set<AnyCancellable>()
+    
+    deinit {
+        print("Cancel all of cancelables")
+        disposable.forEach { $0.cancel() }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

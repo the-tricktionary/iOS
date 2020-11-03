@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
+import FirebaseCore
 import GoogleSignIn
 import LifetimeTracker
 import Swinject
@@ -70,9 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                                                 annotation: [:])
+        return GIDSignIn.sharedInstance().handle(url)
     }
 
     // MARK: - Core Data stack

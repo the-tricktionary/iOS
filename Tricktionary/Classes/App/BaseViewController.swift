@@ -14,7 +14,7 @@ class BaseViewController: UIViewController, LifetimeTrackable {
     
     // MARK: Variables
     
-    var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView(style: .gray)
+    var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
 
     class var lifetimeConfiguration: LifetimeConfiguration {
         return LifetimeConfiguration(maxCount: 1, groupName: "VC")

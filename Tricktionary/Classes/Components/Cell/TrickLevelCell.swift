@@ -192,10 +192,16 @@ class LevelView: UIView {
 }
 
 extension TrickLevelCell {
-    struct Content {
+    struct Content: Hashable {
         var title: String
         var levels: [Organization : String?]
         var isDone: Bool
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(title)
+            hasher.combine(levels)
+            hasher.combine(isDone)
+        }
     }
 }
 

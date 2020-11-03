@@ -34,4 +34,19 @@ extension TricksViewController: UITableViewDelegate {
         let vc = TrickDetailViewController(viewModel: vm)
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? TypeHeaderView else {
+            return nil
+        }
+        let actualSection = viewModel.sections.value[section]
+        view.customize(with: actualSection.name,
+                       completed: actualSection.completed,
+                       from: actualSection.tricks,
+                       collapsed: actualSection.collapsed)
+        view.onTapped = { [unowned self] sectionName in
+            self.viewModel.toggleSection(name: sectionName)
+        }
+        return view
+    }
 }

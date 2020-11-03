@@ -8,6 +8,7 @@
 
 import Foundation
 import ReactiveSwift
+import Combine
 
 protocol TrickDetailViewModelType {
     var onLoad: (() -> Void)? { get set }
@@ -16,7 +17,7 @@ protocol TrickDetailViewModelType {
     var isDone: Bool { get }
     var trick: Trick? { get set }
     var preprequisites: MutableProperty<[Trick]?> { get }
-    var video: MutableProperty<VideoView.Content?> { get }
+    var video: CurrentValueSubject<VideoView.Content?, Never> { get }
     var settings: TrickDetailSettingsType { get }
 
     var trickName: String { get set }
@@ -42,7 +43,7 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     
     var trick: Trick?
     var preprequisites: MutableProperty<[Trick]?> = MutableProperty<[Trick]?>(nil)
-    var video: MutableProperty<VideoView.Content?> = MutableProperty<VideoView.Content?>(nil)
+    var video = CurrentValueSubject<VideoView.Content?, Never>(nil)
     var trickName: String
     var loadedPrerequisites: MutableProperty<Bool> = MutableProperty<Bool>(false)
 
@@ -73,7 +74,7 @@ class TrickDetailViewModel: TrickDetailViewModelType {
             if let prerequisites = trick.prerequisites {
                 self.loadPrerequisites(with: prerequisites)
             }
-            self.video.value = self.makeVideoContent(with: trick.videos!)
+            self.video.send(self.makeVideoContent(with: trick.videos!)) // TODO: Force unwrapping remove!
             self.thumbnail.value = self.thumbnailURL(trick.videos!.youtube)
             self.onLoad?()
         }) { [weak self] in

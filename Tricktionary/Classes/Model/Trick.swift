@@ -8,13 +8,38 @@
 
 import Foundation
 import Firebase
+import CodableFirebase
 
 struct BaseTrick: Codable {
+    let Id = UUID()
     var name: String
     var level: Int
     var type: String
     var levels: Levels?
     var id: String?
+    
+    init(data: [String : Any]) {
+        guard let name = data["name"] as? String, let level = data["level"] as? Int, let type = data["type"] as? String else {
+            fatalError("Deserialization error. Data missing")
+        }
+        
+        self.name = name
+        self.level = level
+        self.type = type
+        if let levelsData = data["levels"] as? [String : Any] {
+            self.levels = Levels(levelsData)
+        }
+    }
+}
+
+extension BaseTrick: Hashable {
+    static func == (lhs: BaseTrick, rhs: BaseTrick) -> Bool {
+        lhs.Id == rhs.Id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+      hasher.combine(Id)
+    }
 }
 
 struct Trick: Codable {
@@ -41,6 +66,24 @@ struct Levels: Codable {
     var ijru: LevelsFields
     var irsf: LevelsFields
     var wjr: LevelsFields
+    
+    init?(_ levelsData: [String : Any]) {
+        if let ijru = levelsData["ijru"] as? [String : Any] {
+            self.ijru = LevelsFields(level: ijru["level"] as? String)
+        } else {
+            self.ijru = LevelsFields(level: nil)
+        }
+        if let irsf = levelsData["irsf"] as? [String : Any] {
+            self.irsf = LevelsFields(level: irsf["level"] as? String)
+        } else {
+            self.irsf = LevelsFields(level: nil)
+        }
+        if let wjr = levelsData["wjr"] as? [String : Any] {
+            self.wjr = LevelsFields(level: wjr["level"] as? String)
+        } else {
+            self.wjr = LevelsFields(level: nil)
+        }
+    }
 }
 
 struct LevelsFields: Codable {

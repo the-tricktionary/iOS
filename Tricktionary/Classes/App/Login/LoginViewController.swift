@@ -13,7 +13,7 @@ import Firebase
 import ReactiveSwift
 import ReactiveCocoa
 
-class LoginViewController: BaseCenterViewController, GIDSignInUIDelegate, GIDSignInDelegate {
+class LoginViewController: BaseCenterViewController, GIDSignInDelegate {
     
     // MARK: Variables
     
@@ -55,7 +55,7 @@ class LoginViewController: BaseCenterViewController, GIDSignInUIDelegate, GIDSig
             navigationItem.leftBarButtonItem = closeButton
         }
         
-        GIDSignIn.sharedInstance().uiDelegate = self
+//        GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance()?.delegate = self
         
         view.backgroundColor = UIColor.white

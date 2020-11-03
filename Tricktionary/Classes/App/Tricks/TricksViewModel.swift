@@ -11,11 +11,11 @@ import FirebaseFirestore
 import FirebaseRemoteConfig
 import ReactiveSwift
 import FirebaseAuth
+import Combine
 
 protocol TricksViewModelType {
-    var onStartLoading: (() -> Void)? { get set }
-    var onFinishLoading: (() -> Void)? { get set }
-    var sections: MutableProperty<[TableSection]> { get }
+    var loading: CurrentValueSubject<Bool, Never> { get }
+    var sections: CurrentValueSubject<[TableSection], Never> { get }
     var selectedLevel: Int { get set }
     var levels: [Int] { get }
     var disciplines: [Disciplines] { get }
@@ -33,8 +33,9 @@ class TricksViewModel: TricksViewModelType {
 
     private let checkList = MutableProperty<[String]>([String]())
     private var allTricksId: [String : String] = [String : String]()
-    let sections = MutableProperty<[TableSection]>([TableSection]())
+    let sections = CurrentValueSubject<[TableSection], Never>([])
     private let tricks: MutableProperty<[BaseTrick]> = MutableProperty<[BaseTrick]>([BaseTrick]())
+    var loading = CurrentValueSubject<Bool, Never>(true)
 
     var isPullToRefresh: Bool = false
 
@@ -69,9 +70,6 @@ class TricksViewModel: TricksViewModelType {
         return auth.currentUser != nil
     }
     
-    var onStartLoading: (() -> Void)?
-    var onFinishLoading: (() -> Void)?
-    
     private let dataProvider: TricksDataProviderType
     private let remoteConfig: RemoteConfig
     private let auth: Auth
@@ -81,7 +79,8 @@ class TricksViewModel: TricksViewModelType {
     
     init(dataProvider: TricksDataProviderType,
          remoteConfig: RemoteConfig,
-         settings: TricksListSettingsType, auth: Auth) {
+         settings: TricksListSettingsType,
+         auth: Auth) {
         self.dataProvider = dataProvider
         self.remoteConfig = remoteConfig
         self.settings = settings
@@ -99,15 +98,13 @@ class TricksViewModel: TricksViewModelType {
         func getTrickList() {
             tricks.value.removeAll()
             dataProvider.getTricks(discipline: disciplines[selectedDiscipline], starting: { [weak self] in
-                if self?.isPullToRefresh == false {
-                    self?.onStartLoading?()
-                }
+                self?.loading.send(true)
             }, completion: { [weak self] (data, id) in
                 self?.tricks.value.append(data)
                 self?.allTricksId[data.name] = id
             }) { [weak self] in
                 self?.selectMinLevel()
-                self?.onFinishLoading?()
+                self?.loading.send(false)
             }
         }
         dataProvider.getChecklist(completion: { list in

@@ -67,13 +67,13 @@ class TrickDetailViewController: BaseCenterViewController {
         viewModel.onLoad = { [weak self] in
             self?.tableView.reloadData()
         }
-
-        viewModel.video.producer.startWithValues { [weak self] content in
+        
+        viewModel.video.sink { [weak self] content in
             guard let sSelf = self, let content = content else {
                 return
             }
             sSelf.videoView.customize(with: content)
-        }
+        }.store(in: &disposable)
 
         viewModel.preprequisites.producer.startWithValues { [weak self] trick in
             self?.tableView.reloadData()
