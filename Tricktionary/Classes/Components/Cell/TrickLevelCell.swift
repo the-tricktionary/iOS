@@ -60,21 +60,19 @@ class TrickLevelCell: BaseCell {
         view.snp.makeConstraints { (make) in
             make.edges.equalTo(contentView)
         }
-
-        stackView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview().inset(10)
-            make.trailing.equalToSuperview().offset(-46)
-        }
-
+        
         accesoryView.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().offset(-16)
-            make.leading.equalTo(stackView.snp.trailing)
             make.width.equalTo(27)
             make.height.equalTo(25)
             make.centerY.equalToSuperview()
         }
 
+        stackView.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview().inset(10)
+            make.trailing.equalTo(accesoryView.snp.leading).offset(-10)
+        }
     }
     
     // MARK: Public
