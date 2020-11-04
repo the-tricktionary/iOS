@@ -55,8 +55,8 @@ class LoginViewController: BaseCenterViewController, GIDSignInDelegate {
             navigationItem.leftBarButtonItem = closeButton
         }
         
-//        GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance()?.delegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
         
         view.backgroundColor = UIColor.white
         
