@@ -9,7 +9,6 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseRemoteConfig
-import ReactiveSwift
 import FirebaseAuth
 import Combine
 
@@ -32,10 +31,10 @@ class TricksViewModel: TricksViewModelType {
     // MARK: - Variables
 
     private var cancelable = Set<AnyCancellable>()
-    private let checkList = MutableProperty<[String]>([String]())
+    private var checkList: [String] = []
     private var allTricksId: [String : String] = [String : String]()
     let sections = CurrentValueSubject<[TableSection], Never>([])
-    private let tricks: MutableProperty<[BaseTrick]> = MutableProperty<[BaseTrick]>([BaseTrick]())
+    private let tricks = CurrentValueSubject<[BaseTrick], Never>([])
     var loading = CurrentValueSubject<Bool, Never>(true)
 
     var isPullToRefresh: Bool = false
@@ -96,7 +95,6 @@ class TricksViewModel: TricksViewModelType {
             makeContent()
             return
         }
-
         tricks.value.removeAll()
         let trickList = dataProvider.getTricks(discipline: disciplines[selectedDiscipline])
         let checkList = dataProvider.getChecklist()
@@ -111,7 +109,7 @@ class TricksViewModel: TricksViewModelType {
                 break
             }
         } receiveValue: { (checklist, trickList) in
-            self.checkList.value = checklist
+            self.checkList = checklist
             self.tricks.value.append(contentsOf: trickList)
             self.allTricksId = trickList.reduce(into: [String: String]()) {
                 $0[$1.name] = $1.id
@@ -180,7 +178,7 @@ class TricksViewModel: TricksViewModelType {
     // MARK: - Helpers
 
     private func isDone(_ trick: BaseTrick) -> Bool {
-        return checkList.value.contains(allTricksId[trick.name] ?? "") && auth.currentUser != nil
+        return checkList.contains(allTricksId[trick.name] ?? "") && auth.currentUser != nil
     }
 
     private func getAllowedDisciplines() -> [Disciplines] {

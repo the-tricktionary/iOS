@@ -8,11 +8,8 @@
 
 import Foundation
 import Firebase
-import ReactiveSwift
-import RxSwift
 import FirebaseAuth
 import FirebaseRemoteConfig
-import CodableFirebase
 import Combine
 
 enum Disciplines {
@@ -42,7 +39,6 @@ enum Disciplines {
 }
 
 protocol TricksDataProviderType {
-    //, starting: @escaping () -> (),completion: @escaping (BaseTrick, String) -> Void, finish: @escaping () -> Void
     func getTricks(discipline: Disciplines) -> AnyPublisher<[BaseTrick], Error>
     func getChecklist() -> AnyPublisher<[String], Error>
 }
@@ -67,35 +63,32 @@ class TrickManager: TricksDataProviderType {
                 var trick = BaseTrick(data: data)
                 trick.id = document.documentID
                 list.append(trick)
-//                completion(trick, document.documentID)
             })
             publisher.send(list)
-//            finish()
         }
         return publisher.eraseToAnyPublisher()
     }
 
     func getChecklist() -> AnyPublisher<[String], Error> {
-        let publisher = CurrentValueSubject<[String], Error>([])
+        let publisher = PassthroughSubject<[String], Error>()
         guard let user = Auth.auth().currentUser else {
+            publisher.send([])
             return publisher.eraseToAnyPublisher()
         }
         let firestore = Firestore.firestore()
         let reference = firestore.collection("checklist").document(user.uid)
         
         reference.getDocument { snapshot, error in
-            if error != nil {
-                print(error?.localizedDescription ?? "Some error")
+            if let error = error {
+                publisher.send(completion: .failure(error))
+                print(error.localizedDescription)
             }
 
             guard let snapshot = snapshot else {
                 publisher.send(completion: .failure(NSError(domain: "Error", code: 0, userInfo: nil) as Error))
-                return //NSError(domain: "Error", code: 0, userInfo: nil) as Error
+                return
             }
             publisher.send((snapshot.data()?["SR"] as? [String]) ?? [])
-//            return Just<[String]>((snapshot.data()?["SR"] as? [String]) ?? []).eraseToAnyPublisher()
-//            completion(snapshot.data()?["SR"] as? [String])
-//            finish()
         }
         return publisher.eraseToAnyPublisher()
     }

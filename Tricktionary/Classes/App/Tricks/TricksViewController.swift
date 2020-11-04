@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 import SnapKit
-import FirebaseFirestore
-import ReactiveSwift
-import ChameleonFramework
 
 class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
 
@@ -51,7 +48,7 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        viewModel.getTricks(silent: true)
+        viewModel.getTricks(silent: true)
     }
     // MARK: - Privates
 
