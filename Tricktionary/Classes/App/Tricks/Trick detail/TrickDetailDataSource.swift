@@ -23,7 +23,7 @@ extension TrickDetailViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 1 && viewModel.preprequisites.value != nil {
+        if section == 1 && !viewModel.preprequisites.value.isEmpty {
             let header = PrerequisiteHeaderView()
             header.customize(title: "Requirements", collapsed: true)
             return header
