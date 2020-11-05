@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import ReactiveSwift
 import Kingfisher
 
 class TrickDetailViewController: BaseCenterViewController {
@@ -75,9 +74,9 @@ class TrickDetailViewController: BaseCenterViewController {
             sSelf.videoView.customize(with: content)
         }.store(in: &disposable)
 
-        viewModel.preprequisites.producer.startWithValues { [weak self] trick in
+        viewModel.preprequisites.sink { [weak self] _ in
             self?.tableView.reloadData()
-        }
+        }.store(in: &disposable)
     }
     
     fileprivate func setupViewConstraints() {

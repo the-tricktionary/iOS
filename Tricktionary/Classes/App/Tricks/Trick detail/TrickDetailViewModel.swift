@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ReactiveSwift
 import Combine
 
 protocol TrickDetailViewModelType {
@@ -16,7 +15,7 @@ protocol TrickDetailViewModelType {
 
     var isDone: Bool { get }
     var trick: Trick? { get set }
-    var preprequisites: MutableProperty<[Trick]?> { get }
+    var preprequisites: CurrentValueSubject<[Trick]?, Never> { get }
     var video: CurrentValueSubject<VideoView.Content?, Never> { get }
     var settings: TrickDetailSettingsType { get }
 
@@ -42,12 +41,11 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     var settings: TrickDetailSettingsType
     
     var trick: Trick?
-    var preprequisites: MutableProperty<[Trick]?> = MutableProperty<[Trick]?>(nil)
+    var preprequisites = CurrentValueSubject<[Trick]?, Never>(nil)
     var video = CurrentValueSubject<VideoView.Content?, Never>(nil)
     var trickName: String
-    var loadedPrerequisites: MutableProperty<Bool> = MutableProperty<Bool>(false)
 
-    var thumbnail: MutableProperty<String> = MutableProperty<String>("")
+    var thumbnail = PassthroughSubject<String, Never>()
 
     private var thumbnailURL: ((String) -> String) = { id in
         return "https://img.youtube.com/vi/\(id)/0.jpg"
@@ -75,7 +73,7 @@ class TrickDetailViewModel: TrickDetailViewModelType {
                 self.loadPrerequisites(with: prerequisites)
             }
             self.video.send(self.makeVideoContent(with: trick.videos!)) // TODO: Force unwrapping remove!
-            self.thumbnail.value = self.thumbnailURL(trick.videos!.youtube)
+            self.thumbnail.send(self.thumbnailURL(trick.videos!.youtube))
             self.onLoad?()
         }) { [weak self] in
             self?.onLoad?()
@@ -85,7 +83,6 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     func markTrickAsDone(_ id: String?) {
         isDone.toggle()
         TrickManager.shared.markTrickAsDone(isDone: isDone, id: id ?? "")
-        print("### TRICK ID: \(id) \(self.isDone ? "IS DONE" : "IS NOT DONE")")
     }
 
     private func loadPrerequisites(with ids: [Prerequisites]) {
