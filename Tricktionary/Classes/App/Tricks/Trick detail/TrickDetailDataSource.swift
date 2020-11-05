@@ -17,7 +17,7 @@ extension TrickDetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 {
-            return viewModel.preprequisites.value?.count ?? 0
+            return viewModel.preprequisites.value.count
         }
         return 1
     }
@@ -44,9 +44,7 @@ extension TrickDetailViewController: UITableViewDataSource {
             }
             return cell
         case 1:
-            guard let trick = viewModel.preprequisites.value?[indexPath.row] else {
-                return UITableViewCell()
-            }
+            let trick = viewModel.preprequisites.value[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "TrickPrerequisites", for: indexPath) as! TrickLevelCell
             cell.customizePrerequisite(with: TrickLevelCell.Content(title: trick.name,
                                                                     levels: [.ijru : trick.levels?.ijru.level ?? ""],

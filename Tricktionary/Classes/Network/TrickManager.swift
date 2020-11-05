@@ -43,7 +43,12 @@ protocol TricksDataProviderType {
     func getChecklist() -> AnyPublisher<[String], Error>
 }
 
-class TrickManager: TricksDataProviderType {
+protocol TrickDetailDataProviderType {
+    func getTrickByName(name: String) -> AnyPublisher<Trick, Error>
+    func getPrerequisites(ids: [Prerequisites]) -> AnyPublisher<Trick, Error>
+}
+
+class TrickManager: TricksDataProviderType, TrickDetailDataProviderType {
     func getTricks(discipline: Disciplines) -> AnyPublisher<[BaseTrick], Error> {
         let firestore = Firestore.firestore()
         let documentReference = firestore.collection(discipline.identity)
@@ -120,9 +125,9 @@ class TrickManager: TricksDataProviderType {
         }
     }
     
-    func getTrickByName(name: String, starting: @escaping () -> (), completion: @escaping (Trick) -> Void, finish: @escaping () -> Void) {
-        starting()
+    func getTrickByName(name: String) -> AnyPublisher<Trick, Error> {
         let firestore = Firestore.firestore()
+        let publisher = PassthroughSubject<Trick, Error>()
         let documentReference = firestore.collection("tricksSR").whereField("name", isEqualTo: name)
         documentReference.getDocuments { (snapshot, error) in
             if error != nil {
@@ -130,6 +135,7 @@ class TrickManager: TricksDataProviderType {
             }
             
             guard let snapshot = snapshot, snapshot.isEmpty == false else {
+                publisher.send(completion: .failure(NSError(domain: "Error", code: 1, userInfo: nil) as Error))
                 return
             }
             
@@ -146,15 +152,49 @@ class TrickManager: TricksDataProviderType {
                     let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
                     var trick = try JSONDecoder().decode(Trick.self, from: jsonData)
                     trick.id = document.documentID
-                    completion(trick)
+                    publisher.send(trick)
                 } catch {
-                    print("PICU")
+                    publisher.send(completion: .failure(error))
                 }
 
             })
-            
-            finish()
         }
+        return publisher.eraseToAnyPublisher()
+    }
+    
+    func getPrerequisites(ids: [Prerequisites]) -> AnyPublisher<Trick, Error> {
+        Publishers.MergeMany(ids.map { self.getTrickById(id: $0.id) })
+            .eraseToAnyPublisher()
+    }
+    
+    private func getTrickById(id: String) -> AnyPublisher<Trick, Error> {
+        let firestore = Firestore.firestore()
+        let publisher = PassthroughSubject<Trick, Error>()
+        let documentReference = firestore.collection("tricksSR").document(id)
+        documentReference.getDocument { (snapshot, error) in
+            if error != nil {
+                publisher.send(completion: .failure(NSError(domain: "Error", code: 0, userInfo: nil) as Error))
+                print(error?.localizedDescription ?? "Some error")
+            }
+            
+            guard let snapshot = snapshot else {
+                publisher.send(completion: .failure(NSError(domain: "Error", code: 0, userInfo: nil) as Error))
+                return
+            }
+            guard var data = snapshot.data() else {
+                publisher.send(completion: .failure(NSError(domain: "Error", code: 0, userInfo: nil) as Error))
+                return
+            }
+            data.removeValue(forKey: "prerequisites")
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                let trick = try JSONDecoder().decode(Trick.self, from: jsonData)
+                publisher.send(trick)
+            } catch {
+                publisher.send(completion: .failure(error))
+            }
+        }
+        return publisher.eraseToAnyPublisher()
     }
 
     func markTrickAsDone(isDone: Bool, id: String) {
@@ -173,34 +213,6 @@ class TrickManager: TricksDataProviderType {
                     print("Trick marking error \(error?.localizedDescription)")
                 }
             }
-        }
-    }
-
-    func getTrickById(id: String, completion: @escaping (Trick) -> Void, finish: @escaping () -> Void) {
-        let firestore = Firestore.firestore()
-        let documentReference = firestore.collection("tricksSR").document(id)
-        documentReference.getDocument { (snapshot, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "Some error")
-            }
-            
-            guard let snapshot = snapshot else {
-                return
-            }
-            guard var data = snapshot.data() else {
-                return
-            }
-            data.removeValue(forKey: "prerequisites")
-            print("### MAM: \(data["name"])")
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                let trick = try JSONDecoder().decode(Trick.self, from: jsonData)
-                completion(trick)
-            } catch {
-                print("PICU")
-            }
-            
-            finish()
         }
     }
 }

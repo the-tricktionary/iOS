@@ -23,7 +23,7 @@ extension TrickDetailViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 && viewModel.preprequisites.value != nil {
+        if section == 1 && !viewModel.preprequisites.value.isEmpty {
             return 45
         }
         return 0
@@ -31,10 +31,8 @@ extension TrickDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            guard let trick = viewModel.preprequisites.value?[indexPath.row] else {
-                return
-            }
-            let vm = TrickDetailViewModel(trick: trick.name, settings: viewModel.settings, done: false)
+            let trick = viewModel.preprequisites.value[indexPath.row]
+            let vm = TrickDetailViewModel(trick: trick.name, dataProvider: TrickManager.shared, settings: viewModel.settings, done: false)
             let vc = TrickDetailViewController(viewModel: vm)
             self.navigationController?.pushViewController(vc, animated: true)
         }

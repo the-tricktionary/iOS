@@ -15,7 +15,7 @@ protocol TrickDetailViewModelType {
 
     var isDone: Bool { get }
     var trick: Trick? { get set }
-    var preprequisites: CurrentValueSubject<[Trick]?, Never> { get }
+    var preprequisites: CurrentValueSubject<[Trick], Never> { get }
     var video: CurrentValueSubject<VideoView.Content?, Never> { get }
     var settings: TrickDetailSettingsType { get }
 
@@ -41,7 +41,7 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     var settings: TrickDetailSettingsType
     
     var trick: Trick?
-    var preprequisites = CurrentValueSubject<[Trick]?, Never>(nil)
+    var preprequisites = CurrentValueSubject<[Trick], Never>([])
     var video = CurrentValueSubject<VideoView.Content?, Never>(nil)
     var trickName: String
 
@@ -52,32 +52,41 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     }
 
     private var trickId: String?
+    private var dataProvider: TrickDetailDataProviderType
+    private var cancelable = Set<AnyCancellable>()
     
     // MARK: Life cycles
     
-    init(trick: String, settings: TrickDetailSettingsType, done: Bool) {
-        self.isDone = done
-        self.settings = settings
+    init(trick: String, dataProvider: TrickDetailDataProviderType, settings: TrickDetailSettingsType, done: Bool) {
         self.trickName = trick
+        self.dataProvider = dataProvider
+        self.settings = settings
+        self.isDone = done
     }
     
     // MARK: Public
     
     func getTrick() {
-        TrickManager.shared.getTrickByName(name: trickName,
-                                           starting: { [weak self] in
-                                            self?.onStartLoading?()
-        }, completion: { (trick) in
-            self.trick = trick
-            if let prerequisites = trick.prerequisites {
-                self.loadPrerequisites(with: prerequisites)
-            }
-            self.video.send(self.makeVideoContent(with: trick.videos!)) // TODO: Force unwrapping remove!
-            self.thumbnail.send(self.thumbnailURL(trick.videos!.youtube))
-            self.onLoad?()
-        }) { [weak self] in
-            self?.onLoad?()
-        }
+        dataProvider.getTrickByName(name: trickName)
+            .receive(on: DispatchQueue.main)
+            .sink { (completion) in
+                switch completion {
+                case .finished:
+                    self.onLoad?()
+                case .failure(let error):
+                    print("Error \(error.localizedDescription)")
+                }
+            } receiveValue: { trick in
+                self.trick = trick
+                if let prerequisites = trick.prerequisites {
+                    self.loadPrerequisites(with: prerequisites)
+                }
+                if let video = trick.videos {
+                    self.video.send(self.makeVideoContent(with: video))
+                    self.thumbnail.send(self.thumbnailURL(video.youtube))
+                }
+                self.onLoad?()
+            }.store(in: &cancelable)
     }
 
     func markTrickAsDone(_ id: String?) {
@@ -86,17 +95,18 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     }
 
     private func loadPrerequisites(with ids: [Prerequisites]) {
-        ids.forEach { prerequisite in
-            TrickManager.shared.getTrickById(id: prerequisite.id, completion: { trick in
-                if self.preprequisites.value == nil {
-                    self.preprequisites.value = [trick]
-                } else {
-                    self.preprequisites.value?.append(trick)
+        dataProvider.getPrerequisites(ids: ids)
+            .receive(on: DispatchQueue.main)
+            .sink { (completion) in
+                switch completion {
+                case .failure(let error):
+                    print("### Error \(error.localizedDescription)")
+                default:
+                    break
                 }
-            }) {
-                //
-            }
-        }
+            } receiveValue: { trick in
+                self.preprequisites.value.append(trick)
+            }.store(in: &cancelable)
     }
 
     private func makeVideoContent(with video: Video) -> VideoView.Content {
