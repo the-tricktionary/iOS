@@ -18,7 +18,8 @@ class ViewControllerFactory {
         let vm = TricksViewModel(dataProvider: TrickManager.shared,
                                  remoteConfig: Self.remoteConfig,
                                  settings: Settings(),
-                                 auth: Self.authentication)
+                                 auth: Self.authentication,
+                                 tricksManager: TricksContentManager())
         let vc = TricksViewController(viewModel: vm)
         return vc
     }

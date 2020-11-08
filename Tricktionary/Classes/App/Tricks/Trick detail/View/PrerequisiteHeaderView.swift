@@ -29,13 +29,10 @@ class PrerequisiteHeaderView: UIView {
 
     // MARK: - Content
     private func setupContent() {
-        view.layer.masksToBounds = false
-        view.layer.shadowColor = UIColor.gray.cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-        view.layer.shadowOpacity = 0.2
-        view.layer.shadowRadius = 6.0
-
         addSubview(view)
+        
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = UIColor.lightGray.cgColor
 
         view.addSubview(title)
         view.addSubview(accessoryImageView)

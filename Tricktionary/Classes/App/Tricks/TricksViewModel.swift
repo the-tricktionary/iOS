@@ -12,6 +12,10 @@ import FirebaseRemoteConfig
 import FirebaseAuth
 import Combine
 
+class TricksContentManager {
+    var completedTricks: [String] = []
+}
+
 protocol TricksViewModelType {
     var loading: CurrentValueSubject<Bool, Never> { get }
     var sections: CurrentValueSubject<[TableSection], Never> { get }
@@ -19,11 +23,13 @@ protocol TricksViewModelType {
     var levels: [Int] { get }
     var disciplines: [Disciplines] { get }
     var selectedDiscipline: Int { get set }
-    func toggleSection(name: String)
-    func getFilteredTricks(substring: String) -> [BaseTrick]?
     var settings: TricksListSettingsType { get }
     var isLogged: Bool { get }
     var isPullToRefresh: Bool { get set }
+    var tricksManager: TricksContentManager { get }
+    
+    func toggleSection(name: String)
+    func getFilteredTricks(substring: String) -> [BaseTrick]?
 }
 
 class TricksViewModel: TricksViewModelType {
@@ -31,7 +37,6 @@ class TricksViewModel: TricksViewModelType {
     // MARK: - Variables
 
     private var cancelable = Set<AnyCancellable>()
-    private var checkList: [String] = []
     private var allTricksId: [String : String] = [String : String]()
     let sections = CurrentValueSubject<[TableSection], Never>([])
     private let tricks = CurrentValueSubject<[BaseTrick], Never>([])
@@ -69,6 +74,7 @@ class TricksViewModel: TricksViewModelType {
     var isLogged: Bool {
         return auth.currentUser != nil
     }
+    var tricksManager: TricksContentManager
     
     private let dataProvider: TricksDataProviderType
     private let remoteConfig: RemoteConfig
@@ -80,11 +86,13 @@ class TricksViewModel: TricksViewModelType {
     init(dataProvider: TricksDataProviderType,
          remoteConfig: RemoteConfig,
          settings: TricksListSettingsType,
-         auth: Auth) {
+         auth: Auth,
+         tricksManager: TricksContentManager) {
         self.dataProvider = dataProvider
         self.remoteConfig = remoteConfig
         self.settings = settings
         self.auth = auth
+        self.tricksManager = tricksManager
     }
     
     // MARK: - Publics
@@ -109,7 +117,8 @@ class TricksViewModel: TricksViewModelType {
                 break
             }
         } receiveValue: { (checklist, trickList) in
-            self.checkList = checklist
+            print("### Checklist \(checklist.count)")
+            self.tricksManager.completedTricks = checklist
             self.tricks.value.append(contentsOf: trickList)
             self.allTricksId = trickList.reduce(into: [String: String]()) {
                 $0[$1.name] = $1.id
@@ -144,7 +153,6 @@ class TricksViewModel: TricksViewModelType {
     }
 
     // MARK: - Privates
-
     private func makeLevels(trick: BaseTrick) -> [Organization : String?] {
         var levels = [Organization : String]()
         if settings.showIjru {
@@ -178,7 +186,7 @@ class TricksViewModel: TricksViewModelType {
     // MARK: - Helpers
 
     private func isDone(_ trick: BaseTrick) -> Bool {
-        return checkList.contains(allTricksId[trick.name] ?? "") && auth.currentUser != nil
+        return tricksManager.completedTricks.contains(allTricksId[trick.name] ?? "") && auth.currentUser != nil
     }
 
     private func getAllowedDisciplines() -> [Disciplines] {

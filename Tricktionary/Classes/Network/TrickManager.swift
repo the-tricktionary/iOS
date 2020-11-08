@@ -197,23 +197,24 @@ class TrickManager: TricksDataProviderType, TrickDetailDataProviderType {
         return publisher.eraseToAnyPublisher()
     }
 
-    func markTrickAsDone(isDone: Bool, id: String) {
+    func markTrickAsDone(ids: [String]) -> AnyPublisher<Bool, Error> {
+        let publisher = PassthroughSubject<Bool, Error>()
         guard let user = Auth.auth().currentUser else {
-            return
+            publisher.send(false)
+            return publisher.eraseToAnyPublisher()
         }
 
         let firestore = Firestore.firestore()
-        if !isDone {
-            firestore.collection("checklist").document(user.uid).updateData([
-                "SR" : FieldValue.delete()
-            ]) { error in
-                if error == nil {
-                    print("Trick \(id) marked as \(isDone ? "done" : "not done")")
-                } else {
-                    print("Trick marking error \(error?.localizedDescription)")
-                }
+        let data: [String: [String]] = ["SR": ids]
+        firestore.collection("checklist").document(user.uid).setData(data) { error in
+            if let error = error {
+                print("Error writing document: \(error)")
+            } else {
+                publisher.send(true)
+                print("Document successfully written!")
             }
         }
+        return publisher.eraseToAnyPublisher()
     }
 }
 

@@ -13,14 +13,15 @@ protocol TrickDetailViewModelType {
     var onLoad: (() -> Void)? { get set }
     var onStartLoading: (() -> Void)? { get set }
 
-    var isDone: Bool { get }
+    var isDone: Bool { get set }
     var trick: Trick? { get set }
     var preprequisites: CurrentValueSubject<[Trick], Never> { get }
     var video: CurrentValueSubject<VideoView.Content?, Never> { get }
     var settings: TrickDetailSettingsType { get }
+    var tricksManager: TricksContentManager { get }
 
     var trickName: String { get set }
-    func markTrickAsDone(_ id: String?)
+    func markTrickAsDone(_ id: String, done: Bool)
     func getTrick()
 
 }
@@ -54,14 +55,20 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     private var trickId: String?
     private var dataProvider: TrickDetailDataProviderType
     private var cancelable = Set<AnyCancellable>()
+    let tricksManager: TricksContentManager
     
     // MARK: Life cycles
     
-    init(trick: String, dataProvider: TrickDetailDataProviderType, settings: TrickDetailSettingsType, done: Bool) {
+    init(trick: String,
+         dataProvider: TrickDetailDataProviderType,
+         settings: TrickDetailSettingsType,
+         done: Bool,
+         tricksManager: TricksContentManager) {
         self.trickName = trick
         self.dataProvider = dataProvider
         self.settings = settings
         self.isDone = done
+        self.tricksManager = tricksManager
     }
     
     // MARK: Public
@@ -89,9 +96,27 @@ class TrickDetailViewModel: TrickDetailViewModelType {
             }.store(in: &cancelable)
     }
 
-    func markTrickAsDone(_ id: String?) {
-        isDone.toggle()
-        TrickManager.shared.markTrickAsDone(isDone: isDone, id: id ?? "")
+    func markTrickAsDone(_ id: String, done: Bool) {
+        var ids = tricksManager.completedTricks
+        if done {
+            ids.append(id)
+        } else {
+            ids.removeAll { trickId in
+                trickId == id
+            }
+        }
+        TrickManager.shared.markTrickAsDone(ids: ids)
+            .receive(on: DispatchQueue.main)
+            .sink { (completion) in
+                //
+            } receiveValue: { success in
+                if success {
+                    self.isDone = done
+                    self.tricksManager.completedTricks = ids
+                    self.onLoad?()
+                }
+            }
+            .store(in: &cancelable)
     }
 
     private func loadPrerequisites(with ids: [Prerequisites]) {

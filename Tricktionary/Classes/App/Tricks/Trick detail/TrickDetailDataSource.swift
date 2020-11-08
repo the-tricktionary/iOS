@@ -40,7 +40,8 @@ extension TrickDetailViewController: UITableViewDataSource {
                                                        level: viewModel.trick?.levels?.ijru.level ?? "",
                                                        favorite: false, completed: viewModel.isDone))
             cell.doneTapped = { [weak self] id in
-                self?.viewModel.markTrickAsDone(id)
+                self?.viewModel.isDone.toggle()
+                self?.viewModel.markTrickAsDone(id ?? "", done: self?.viewModel.isDone ?? false)
             }
             return cell
         case 1:

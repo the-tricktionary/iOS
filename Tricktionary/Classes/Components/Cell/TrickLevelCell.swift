@@ -117,12 +117,32 @@ class TrickLevelCell: BaseCell {
             make.top.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(16)
         }
-        view.layer.masksToBounds = false
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.7
-        view.layer.shadowOffset = CGSize.zero
-        view.layer.shadowRadius = 1
+        makeBorders(to: view)
         self.customize(with: model)
+    }
+    
+    private func makeBorders(to view: UIView) {
+        let bottomCorner = UIView()
+        let leftCorner = UIView()
+        let rightCorner = UIView()
+        [bottomCorner, leftCorner, rightCorner].forEach {
+            $0.backgroundColor = .lightGray
+            view.addSubview($0)
+        }
+        bottomCorner.snp.makeConstraints { (make) in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(0.5)
+        }
+        
+        leftCorner.snp.makeConstraints { (make) in
+            make.top.bottom.leading.equalToSuperview()
+            make.width.equalTo(0.5)
+        }
+        
+        rightCorner.snp.makeConstraints { (make) in
+            make.top.bottom.trailing.equalToSuperview()
+            make.width.equalTo(0.5)
+        }
     }
     
     class func reuseIdentifier() -> String {

@@ -94,9 +94,16 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
         }.store(in: &disposable)
     
         searchResults.onSelectTrick = { [weak self] trick in
-            let vm = TrickDetailViewModel(trick: trick, dataProvider: TrickManager.shared, settings: Settings(), done: false)
+            guard let self = self else {
+                return
+            }
+            let vm = TrickDetailViewModel(trick: trick,
+                                          dataProvider: TrickManager.shared,
+                                          settings: Settings(),
+                                          done: false,
+                                          tricksManager: self.viewModel.tricksManager)
             let vc = TrickDetailViewController(viewModel: vm)
-            self?.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
