@@ -22,9 +22,6 @@ PODS:
   - GTMSessionFetcher/Core (1.4.0)
   - GTMSessionFetcher/Full (1.4.0):
     - GTMSessionFetcher/Core (= 1.4.0)
-  - Kingfisher (5.14.1):
-    - Kingfisher/Core (= 5.14.1)
-  - Kingfisher/Core (5.14.1)
   - LifetimeTracker (1.7.1)
   - ReactiveCocoa (11.0.0):
     - ReactiveSwift (~> 6.2)
@@ -41,7 +38,6 @@ DEPENDENCIES:
   - ChameleonFramework
   - Charts
   - GoogleSignIn
-  - Kingfisher (~> 5.14.0)
   - LifetimeTracker
   - ReactiveCocoa
   - RxSwift
@@ -60,7 +56,6 @@ SPEC REPOS:
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
-    - Kingfisher
     - LifetimeTracker
     - ReactiveCocoa
     - ReactiveSwift
@@ -79,7 +74,6 @@ SPEC CHECKSUMS:
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
-  Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
   LifetimeTracker: 12f58bfab48593408fb4cab9d9050e319deb8299
   ReactiveCocoa: 189fcea9c5af7e394dd8a4cfc1c6f77af9ff3598
   ReactiveSwift: 7937f26ec18d555e2a99352bd0a8b2817d1f042d
@@ -91,6 +85,6 @@ SPEC CHECKSUMS:
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   YoutubePlayerView: 3870fc10f2db3f54156697757f44d304203bdc7e
 
-PODFILE CHECKSUM: acec34d5e3db58130791fb5bb65282f5e04a1366
+PODFILE CHECKSUM: 83cf77b6f09c690e3eae92bacb5346f39266b9af
 
 COCOAPODS: 1.9.3
