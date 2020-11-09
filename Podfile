@@ -6,12 +6,6 @@ target 'Tricktionary' do
   use_frameworks!
 
   # Pods for Tricktionary
-	pod 'Firebase/Core'
-	pod 'Firebase/Firestore'
-	pod 'CodableFirebase'
-	pod 'Firebase/Auth'
-	pod 'Firebase/RemoteConfig'
-	pod 'Firebase/Storage'
 	pod 'GoogleSignIn'
 	pod 'SnapKit'
 	pod 'ReactiveCocoa'
@@ -34,11 +28,6 @@ target 'Tricktionary' do
     inherit! :search_paths
     # Pods for testing
 	pod 'SwiftMonkeyPaws'
-	pod 'Firebase/Core'
-	pod 'Firebase/Firestore'
-	pod 'Firebase/Auth'
-	pod 'Firebase/RemoteConfig'
-	pod 'Firebase/Storage'
 	pod 'GoogleSignIn'
 	pod 'SnapKit'
 	pod 'ReactiveCocoa'

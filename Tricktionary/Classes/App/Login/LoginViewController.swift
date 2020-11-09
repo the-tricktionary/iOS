@@ -203,8 +203,9 @@ class LoginViewController: BaseCenterViewController, GIDSignInDelegate {
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
         
-        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-            if let _ = error {
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            if let error = error {
+                print("Error while sign in with google \(error.localizedDescription)")
                 return
             }
             self.onClose?()

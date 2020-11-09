@@ -8,7 +8,6 @@
 
 import Foundation
 import Firebase
-import CodableFirebase
 
 struct BaseTrick: Codable {
     let Id = UUID()

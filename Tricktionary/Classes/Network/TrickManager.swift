@@ -120,7 +120,11 @@ class TrickManager: TricksDataProviderType, TrickDetailDataProviderType {
                 print("Error: \(error.localizedDescription)")
             }
             if status == .success {
-                remoteConfig.activateFetched()
+                remoteConfig.activate { (_, error) in
+                    if let error = error {
+                        print("Error while activating fetched config \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
