@@ -117,7 +117,6 @@ class TricksViewModel: TricksViewModelType {
                 break
             }
         } receiveValue: { (checklist, trickList) in
-            print("### Checklist \(checklist.count)")
             self.tricksManager.completedTricks = checklist
             self.tricks.value.append(contentsOf: trickList)
             self.allTricksId = trickList.reduce(into: [String: String]()) {
@@ -150,6 +149,13 @@ class TricksViewModel: TricksViewModelType {
 
     func getFilteredTricks(substring: String) -> [BaseTrick]? {
         return tricks.value.filter { $0.name.lowercased().contains(substring.lowercased()) }
+    }
+    
+    func done(trickName: String) -> Bool {
+        guard let trickId = tricks.value.filter { $0.name == trickName }.first?.id else {
+            return false
+        }
+        return tricksManager.completedTricks.contains(trickId)
     }
 
     // MARK: - Privates

@@ -15,7 +15,7 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
     // MARK: - Variables
     private lazy var searchController = self.makeSearchController()
     private let refreshControl = UIRefreshControl()
-    private let searchResults = TrickSearchVC()
+    private let searchResults: TrickSearchVC = TrickSearchVC()
     private lazy var levelButton = self.makeLevelButton()
     private lazy var disciplinesButton = self.makeDisciplineButton()
     var tableView: UITableView = UITableView()
@@ -80,6 +80,7 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
 
     private func bind() {
         viewModel.sections.sink { [weak self] sections in
+            self?.searchResults.completed = self?.viewModel.tricksManager.completedTricks ?? []
             self?.makeSnapshotAndApply(sections)
         }.store(in: &disposable)
 
@@ -97,12 +98,8 @@ class TricksViewController: BaseCenterViewController, UISearchResultsUpdating {
             guard let self = self else {
                 return
             }
-            let vm = TrickDetailViewModel(trick: trick,
-                                          dataProvider: TrickManager.shared,
-                                          settings: Settings(),
-                                          done: false,
-                                          tricksManager: self.viewModel.tricksManager)
-            let vc = TrickDetailViewController(viewModel: vm)
+            
+            let vc = ViewControllerFactory.makeTrickDetailVC(trick: trick, done: self.viewModel.done(trickName: trick))
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

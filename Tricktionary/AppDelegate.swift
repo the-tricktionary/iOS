@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
     private var paws: MonkeyPaws?
+    var resolver: Resolver?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -34,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         TrickManager.shared.loadRemoteConfig()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        registerDependencies()
 
         self.window?.rootViewController = TabBarViewController()
 
@@ -44,6 +46,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
 
         return true
+    }
+    
+    func registerDependencies() {
+        let container = Container()
+        container.register(TricksDataProviderType.self) { _ in
+            TrickManager.shared
+        }
+        container.register(TricksContentManager.self) { _ in
+            TricksContentManager()
+        }.inObjectScope(.container)
+        
+        resolver = container.synchronize()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -18,9 +18,10 @@ class TrickSearchVC: UIViewController {
 
     var filteredTricks: MutableProperty<[BaseTrick]> = MutableProperty<[BaseTrick]>([BaseTrick]())
     var onSelectTrick: ((String) -> Void)?
+    var completed: [String] = []
 
     // MARK: - Life cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupContent()
@@ -37,6 +38,7 @@ class TrickSearchVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        tableView.register(TrickLevelCell.self, forCellReuseIdentifier: TrickLevelCell.reuseIdentifier())
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -50,13 +52,13 @@ extension TrickSearchVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = SearchCell()
-        var levels = "IJRU: \(filteredTricks.value[indexPath.row].levels?.ijru.level ?? "-")"
-        levels += "\tIRSF: \(filteredTricks.value[indexPath.row].levels?.irsf.level ?? "-")"
-        levels += "\tWJR: \(filteredTricks.value[indexPath.row].levels?.wjr.level ?? "-")"
-        cell.customize(with: filteredTricks.value[indexPath.row].name,
-                       level: "Level \(filteredTricks.value[indexPath.row].level)",
-            levels: levels)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TrickLevelCell.reuseIdentifier(), for: indexPath) as? TrickLevelCell else {
+            return UITableViewCell()
+        }
+        let trick = filteredTricks.value[indexPath.row]
+        cell.customize(with: TrickLevelCell.Content(title: trick.name, levels: [
+            .ijru: trick.levels?.ijru.level ?? ""
+        ], isDone: completed.contains(trick.id ?? "")))
         return cell
     }
 }
