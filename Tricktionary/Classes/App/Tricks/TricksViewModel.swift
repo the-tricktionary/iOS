@@ -177,7 +177,8 @@ class TricksViewModel: TricksViewModelType {
         let types = getTypes(levelTricks: tricksForLevel)
         
         sections.value = types.reduce([TableSection]()) { (result: [TableSection], type: String) -> [TableSection] in
-            let rows = tricksForLevel.filter { $0.type == type }
+            let rows = tricksForLevel
+                .filter { $0.type == type }
                 .map {
                     TrickLevelCell.Content(title: $0.name,
                                            levels: makeLevels(trick: $0),
