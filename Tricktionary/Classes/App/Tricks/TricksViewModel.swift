@@ -99,7 +99,6 @@ class TricksViewModel: TricksViewModelType {
     
     func getTricks(silent: Bool = false) {
         if silent {
-            sections.value.removeAll()
             makeContent()
             return
         }
@@ -176,16 +175,19 @@ class TricksViewModel: TricksViewModelType {
     private func makeContent() {
         let tricksForLevel = tricks.value.filter { $0.level == selectedLevel }
         let types = getTypes(levelTricks: tricksForLevel)
-        types.forEach { type in
-            let _rows = tricksForLevel.filter { $0.type == type }
-                .map { TrickLevelCell.Content(title: $0.name,
-                                              levels: makeLevels(trick: $0),
-                                              isDone: self.isDone($0)) }
-            sections.value.append(TableSection(name: type,
-                                               rows: _rows,
-                                               collapsed: false,
-                                               tricks: _rows.count,
-                                               completed: isLogged ? _rows.filter{$0.isDone}.count : nil))
+        
+        sections.value = types.reduce([TableSection]()) { (result: [TableSection], type: String) -> [TableSection] in
+            let rows = tricksForLevel.filter { $0.type == type }
+                .map {
+                    TrickLevelCell.Content(title: $0.name,
+                                           levels: makeLevels(trick: $0),
+                                           isDone: isDone($0))
+                }
+            return result + [TableSection(name: type,
+                                   rows: rows,
+                                   collapsed: false,
+                                   tricks: rows.count,
+                                   completed: isLogged ? rows.filter { $0.isDone }.count : nil)]
         }
     }
 
