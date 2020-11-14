@@ -7,10 +7,7 @@
 //
 
 import XCTest
-@testable import Tricktionary
 
 class TricktionaryTests: XCTestCase {
     
-
-
 }

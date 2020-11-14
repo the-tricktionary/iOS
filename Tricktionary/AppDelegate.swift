@@ -51,8 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func registerDependencies() {
         let container = Container()
         container.register(TricksDataProviderType.self) { _ in
-            TrickManager.shared
-        }
+            TrickManager()
+        }.inObjectScope(.container)
+        container.register(TrickDetailDataProviderType.self) { _ in
+            TrickManager()
+        }.inObjectScope(.container)
         container.register(TricksContentManager.self) { _ in
             TricksContentManager()
         }.inObjectScope(.container)

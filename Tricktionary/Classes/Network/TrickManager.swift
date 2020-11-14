@@ -64,8 +64,7 @@ class TrickManager: TricksDataProviderType, TrickDetailDataProviderType {
             }
             var list: [BaseTrick] = []
             snapshot.documents.forEach({ (document) in
-                let data = document.data()
-                var trick = BaseTrick(data: data)
+                var trick = BaseTrick(data: document.data())
                 trick.id = document.documentID
                 list.append(trick)
             })
@@ -145,6 +144,8 @@ class TrickManager: TricksDataProviderType, TrickDetailDataProviderType {
             
             snapshot.documents.forEach({ (document) in
                 var data = document.data()
+                print("### DATA: \(data)")
+                print("### Document ID \(document.documentID)")
                 if var prer = data["prerequisites"] as? [[String : Any]] {
                     data.removeValue(forKey: "prerequisites")
                     for (index, _) in prer.enumerated() {

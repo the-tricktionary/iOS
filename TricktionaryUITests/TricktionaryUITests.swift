@@ -11,13 +11,4 @@ import SwiftMonkey
 
 class TricktionaryUITests: XCTestCase {
 
-    func testExample() {
-        let app = XCUIApplication()
-        app.launchArguments = ["--MonkeyPaws"]
-        app.launch()
-        let monkey = Monkey(frame: app.frame)
-        monkey.addDefaultUIAutomationActions()
-        monkey.monkeyAround()
-    }
-
 }

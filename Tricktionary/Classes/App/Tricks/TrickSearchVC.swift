@@ -11,7 +11,7 @@ import UIKit
 import ReactiveSwift
 import Combine
 
-class TrickSearchVC: UIViewController {
+class TrickSearchVC: BaseCenterViewController {
 
     // MARK: - Variables
     private let tableView = UITableView()
@@ -19,6 +19,7 @@ class TrickSearchVC: UIViewController {
     var filteredTricks: MutableProperty<[BaseTrick]> = MutableProperty<[BaseTrick]>([BaseTrick]())
     var onSelectTrick: ((String) -> Void)?
     var completed: [String] = []
+    private var keyboardCancelable = Set<AnyCancellable>()
 
     // MARK: - Life cycle
     
@@ -29,6 +30,7 @@ class TrickSearchVC: UIViewController {
 
     // MARK: - Content
     private func setupContent() {
+        bind()
         view.addSubview(tableView)
 
         filteredTricks.producer.startWithValues { [weak self] _ in
@@ -42,6 +44,13 @@ class TrickSearchVC: UIViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    private func bind() {
+        keyboardHeight.sink { [unowned self] bottom in
+            self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottom, right: 0)
+            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+        }.store(in: &keyboardCancelable)
     }
 }
 

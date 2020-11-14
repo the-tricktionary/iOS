@@ -15,10 +15,12 @@ class BaseCenterViewController: BaseViewController {
     // MARK: Variables
     
     var disposable = Set<AnyCancellable>()
+    var keyboardHeight = CurrentValueSubject<CGFloat, Never>(0)
     
     deinit {
         print("Cancel all of cancelables")
         disposable.forEach { $0.cancel() }
+        unregisterObservers()
     }
     
     override func viewDidLoad() {
@@ -44,6 +46,16 @@ class BaseCenterViewController: BaseViewController {
         tabBarController?.tabBar.barTintColor = Color.red
         tabBarController?.tabBar.unselectedItemTintColor = .white
         tabBarController?.tabBar.tintColor = UIColor.flatYellow()
+        registerObservers()
+    }
+    
+    private func registerObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    private func unregisterObservers() {
+        
     }
     
     // MARK: Public
@@ -53,5 +65,21 @@ class BaseCenterViewController: BaseViewController {
         let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
         alert.addAction(alertAction)
         present(alert, animated: true)
+    }
+    
+    // MARK: - Selectors
+    @objc private func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            keyboardHeight.send(0)
+        } else {
+            keyboardHeight.send(keyboardViewEndFrame.height - view.safeAreaInsets.bottom)
+        }
     }
 }

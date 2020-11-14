@@ -525,11 +525,11 @@
 		EAC23ABA219D8E3B0086D9E2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				EAD3D73821F8FE8E00F39A22 /* Utils */,
 				EAC23ABB219D8E490086D9E2 /* App */,
+				EA7AAB2C219E1C9B000858EE /* Components */,
 				EA7AAB38219E2232000858EE /* Model */,
 				EAC23ABC219D8E520086D9E2 /* Network */,
-				EA7AAB2C219E1C9B000858EE /* Components */,
+				EAD3D73821F8FE8E00F39A22 /* Utils */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -537,17 +537,17 @@
 		EAC23ABB219D8E490086D9E2 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				EA3C72882287583100324576 /* Tab bar */,
-				EAED98FF227F6D610017766F /* Profile */,
-				EACAFF3622594C0000FF0202 /* Submit */,
-				EAB08156221F3CEA0030AAF1 /* SpeedData */,
-				EA073DF421FA79150046799C /* Settings */,
-				EA01954721F1239D00A86011 /* SpeedTimer */,
+				EABCC85E224D8A8A00ED3B90 /* BaseCenterViewController.swift */,
+				EAF9F27B222DBAF200237EDF /* BaseViewController.swift */,
 				EA37A3AF21E696CF0061E44D /* Login */,
 				EA37A3A521E690160061E44D /* Menu */,
+				EAED98FF227F6D610017766F /* Profile */,
+				EA073DF421FA79150046799C /* Settings */,
+				EAB08156221F3CEA0030AAF1 /* SpeedData */,
+				EA01954721F1239D00A86011 /* SpeedTimer */,
+				EACAFF3622594C0000FF0202 /* Submit */,
+				EA3C72882287583100324576 /* Tab bar */,
 				EAC23ABF219D8F750086D9E2 /* Tricks */,
-				EAF9F27B222DBAF200237EDF /* BaseViewController.swift */,
-				EABCC85E224D8A8A00ED3B90 /* BaseCenterViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -700,6 +700,8 @@
 				EA8C1D6A219CE61D00F4D502 /* Sources */,
 				EA8C1D6B219CE61D00F4D502 /* Frameworks */,
 				EA8C1D6C219CE61D00F4D502 /* Resources */,
+				0D348A4A559030A999155D8E /* [CP] Embed Pods Frameworks */,
+				346DA2AF21F4B90F275C6868 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -808,6 +810,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0D348A4A559030A999155D8E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		13BC251151528BAD4EF5FAAE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -841,6 +860,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		346DA2AF21F4B90F275C6868 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6A3BADD057D69E8A3A53BBF5 /* [CP] Copy Pods Resources */ = {
@@ -1121,7 +1157,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1176,7 +1212,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

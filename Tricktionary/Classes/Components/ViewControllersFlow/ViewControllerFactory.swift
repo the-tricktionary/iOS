@@ -34,7 +34,7 @@ class ViewControllerFactory {
     
     static func makeTrickDetailVC(trick: String, done: Bool) -> TrickDetailViewController {
         let vm = TrickDetailViewModel(trick: trick,
-                                      dataProvider: TrickManager.shared,
+                                      dataProvider: Self.resolver.resolve(TrickDetailDataProviderType.self)!,
                                       settings: Settings(),
                                       done: done,
                                       tricksManager: Self.resolver.resolve(TricksContentManager.self)!)

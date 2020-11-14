@@ -21,6 +21,18 @@ target 'Tricktionary' do
   target 'TricktionaryTests' do
     inherit! :search_paths
     # Pods for testing
+	pod 'SwiftMonkey'
+	pod 'SwiftMonkeyPaws'
+	pod 'GoogleSignIn'
+	pod 'SnapKit'
+	pod 'ReactiveCocoa'
+	pod 'RxSwift'
+	pod 'YoutubePlayerView'
+	pod 'SwiftChart'
+	pod 'Charts'
+	pod 'ChameleonFramework'
+	pod 'LifetimeTracker'
+	pod 'Swinject'
   end
 
   target 'TricktionaryUITests' do
