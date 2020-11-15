@@ -11,19 +11,24 @@ import FirebaseAuth
 import Combine
 
 class TricksContentManager {
+    
+    // MARK: - Variables
+    // public
     var completedTricks: [String] = []
     
+    // private
     private let userManager: UserManagerType
     private let chcecklistDataProvider: ChecklistDataProviderType
     private var cancelables = Set<AnyCancellable>()
     
-    
+    // MARK: - Initializer
     init(userManager: UserManagerType, checklistDataProvider: ChecklistDataProviderType) {
         self.userManager = userManager
         self.chcecklistDataProvider = checklistDataProvider
         bind()
     }
     
+    // MARK: - Privates
     private func bind() {
         userManager.userStateDidChange.sink { [unowned self] logged in
             if logged {
