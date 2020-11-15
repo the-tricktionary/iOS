@@ -31,12 +31,19 @@ class ProfileViewModel: ProfileViewModelType {
 
     var onFinishLoading: (() -> Void)?
     var onStartLoading: (() -> Void)?
+    
+    private let trickManager: TricksContentManager
+    
+    init(trickManager: TricksContentManager) {
+        self.trickManager = trickManager
+    }
 
     // MARK: Public
     func loadData() {
         loadProfileInfo()
         loadTricksInfo()
         loadCompletedTricks()
+        tricksInfo.value = trickManager.completedTricks
     }
     
     // MARK: Private

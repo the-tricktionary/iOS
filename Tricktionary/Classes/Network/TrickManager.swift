@@ -144,8 +144,6 @@ class TrickManager: TricksDataProviderType, TrickDetailDataProviderType {
             
             snapshot.documents.forEach({ (document) in
                 var data = document.data()
-                print("### DATA: \(data)")
-                print("### Document ID \(document.documentID)")
                 if var prer = data["prerequisites"] as? [[String : Any]] {
                     data.removeValue(forKey: "prerequisites")
                     for (index, _) in prer.enumerated() {

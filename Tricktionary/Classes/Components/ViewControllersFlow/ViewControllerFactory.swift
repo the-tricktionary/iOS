@@ -41,4 +41,10 @@ class ViewControllerFactory {
         let vc = TrickDetailViewController(viewModel: vm)
         return vc
     }
+    
+    static func makeProfileVC() -> ProfileViewController {
+        let vm = ProfileViewModel(trickManager: Self.resolver.resolve(TricksContentManager.self)!)
+        let vc = ProfileViewController(viewModel: vm)
+        return vc
+    }
 }

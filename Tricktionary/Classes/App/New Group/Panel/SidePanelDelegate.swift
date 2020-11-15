@@ -31,7 +31,7 @@ extension SidePanelViewController: UITableViewDelegate {
                 let loginVC = UINavigationController(rootViewController: vc)
                 navigationController?.present(loginVC, animated: true, completion: nil)
             } else {
-                let vc = UINavigationController(rootViewController: ProfileViewController(viewModel: ProfileViewModel()))
+                let vc = UINavigationController(rootViewController: ViewControllerFactory.makeProfileVC())
                 navigationController?.present(vc, animated: true, completion: nil)
             }
         } else if indexPath.section == 1 {
