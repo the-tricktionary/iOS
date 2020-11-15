@@ -26,7 +26,7 @@ class ViewControllerFactory {
         let vm = TricksViewModel(dataProvider: Self.resolver.resolve(TricksDataProviderType.self)!,
                                  remoteConfig: Self.remoteConfig,
                                  settings: Settings(),
-                                 auth: Self.authentication,
+                                 userManager: Self.resolver.resolve(UserManagerType.self)!,
                                  tricksManager: Self.resolver.resolve(TricksContentManager.self)!)
         let vc = TricksViewController(viewModel: vm)
         return vc

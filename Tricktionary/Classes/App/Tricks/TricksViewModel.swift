@@ -12,10 +12,6 @@ import FirebaseRemoteConfig
 import FirebaseAuth
 import Combine
 
-class TricksContentManager {
-    var completedTricks: [String] = []
-}
-
 protocol TricksViewModelType {
     var loading: CurrentValueSubject<Bool, Never> { get }
     var sections: CurrentValueSubject<[TableSection], Never> { get }
@@ -24,7 +20,6 @@ protocol TricksViewModelType {
     var disciplines: [Disciplines] { get }
     var selectedDiscipline: Int { get set }
     var settings: TricksListSettingsType { get }
-    var isLogged: Bool { get }
     var isPullToRefresh: Bool { get set }
     var tricksManager: TricksContentManager { get }
     
@@ -71,14 +66,11 @@ class TricksViewModel: TricksViewModelType {
         return getAllowedDisciplines()
     }
 
-    var isLogged: Bool {
-        return auth.currentUser != nil
-    }
     var tricksManager: TricksContentManager
     
     private let dataProvider: TricksDataProviderType
     private let remoteConfig: RemoteConfig
-    private let auth: Auth
+    private let userManager: UserManagerType
     var settings: TricksListSettingsType
     
     // MARK: - Initializer
@@ -86,12 +78,12 @@ class TricksViewModel: TricksViewModelType {
     init(dataProvider: TricksDataProviderType,
          remoteConfig: RemoteConfig,
          settings: TricksListSettingsType,
-         auth: Auth,
+         userManager: UserManagerType,
          tricksManager: TricksContentManager) {
         self.dataProvider = dataProvider
         self.remoteConfig = remoteConfig
         self.settings = settings
-        self.auth = auth
+        self.userManager = userManager
         self.tricksManager = tricksManager
     }
     
@@ -103,9 +95,7 @@ class TricksViewModel: TricksViewModelType {
             return
         }
         tricks.value.removeAll()
-        let trickList = dataProvider.getTricks(discipline: disciplines[selectedDiscipline])
-        let checkList = dataProvider.getChecklist()
-        Publishers.Zip(checkList, trickList)
+        dataProvider.getTricks(discipline: disciplines[selectedDiscipline])
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 print(completion)
@@ -115,8 +105,7 @@ class TricksViewModel: TricksViewModelType {
             default:
                 break
             }
-        } receiveValue: { (checklist, trickList) in
-            self.tricksManager.completedTricks = checklist
+        } receiveValue: { trickList in
             self.tricks.value.append(contentsOf: trickList)
             self.allTricksId = trickList.reduce(into: [String: String]()) {
                 $0[$1.name] = $1.id
@@ -137,7 +126,7 @@ class TricksViewModel: TricksViewModelType {
                                                       isDone: self.isDone($0)) }
                     self.sections.value[index].collapsed = false
                     self.sections.value[index].tricks = self.sections.value[index].rows.count
-                    self.sections.value[index].completed = isLogged ? self.sections.value[index].rows.filter{$0.isDone}.count : nil
+                    self.sections.value[index].completed = self.userManager.logged ? self.sections.value[index].rows.filter{$0.isDone}.count : nil
                 } else {
                     self.sections.value[index].rows.removeAll()
                     self.sections.value[index].collapsed = true
@@ -188,14 +177,14 @@ class TricksViewModel: TricksViewModelType {
                                    rows: rows,
                                    collapsed: false,
                                    tricks: rows.count,
-                                   completed: isLogged ? rows.filter { $0.isDone }.count : nil)]
+                                   completed: self.userManager.logged ? rows.filter { $0.isDone }.count : nil)]
         }
     }
 
     // MARK: - Helpers
 
     private func isDone(_ trick: BaseTrick) -> Bool {
-        return tricksManager.completedTricks.contains(allTricksId[trick.name] ?? "") && auth.currentUser != nil
+        return tricksManager.completedTricks.contains(allTricksId[trick.name] ?? "") && userManager.logged
     }
 
     private func getAllowedDisciplines() -> [Disciplines] {

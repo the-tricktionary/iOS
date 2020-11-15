@@ -8,19 +8,38 @@
 
 import Foundation
 import FirebaseAuth
-import ReactiveSwift
+import Combine
 
 public protocol UserManagerType {
-    var isLogged: Bool { get }
+    var userStateDidChange: PassthroughSubject<Bool, Never> { get }
+    var userName: String? { get }
+    var userId: String? { get }
+    var logged: Bool { get }
 }
 
 class UserManager: UserManagerType {
-
-    var isLogged: Bool {
-        return Auth.auth().currentUser != nil
+    
+    // MARK: - Variables
+    var userStateDidChange = PassthroughSubject<Bool, Never>()
+    var logged: Bool {
+        Auth.auth().currentUser != nil
+    }
+    var userId: String? {
+        Auth.auth().currentUser?.uid
+    }
+    var userName: String? {
+        Auth.auth().currentUser?.displayName
     }
     
-    public static var shared: UserManager {
-        return UserManager()
+    // MARK: - Initializer
+    init() {
+        bind()
+    }
+    
+    // MARK: - Privates
+    private func bind() {
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            self.userStateDidChange.send(user != nil)
+        }
     }
 }

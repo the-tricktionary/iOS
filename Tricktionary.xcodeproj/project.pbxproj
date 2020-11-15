@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1119BF702561D512004D1D89 /* TricksContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119BF6F2561D512004D1D89 /* TricksContentManager.swift */; };
 		114DB60B23D3CD9300AAEA45 /* TrickSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114DB60A23D3CD9300AAEA45 /* TrickSearchVC.swift */; };
 		114E58D723E9DE8300D63C80 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E58D623E9DE8300D63C80 /* SettingsViewModel.swift */; };
 		11813DF32422AC69001F53E8 /* TrickInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11813DF22422AC69001F53E8 /* TrickInfoCell.swift */; };
@@ -136,6 +137,7 @@
 
 /* Begin PBXFileReference section */
 		0E842B02D5F0CAD2F4D519AD /* Pods-TricktionaryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1119BF6F2561D512004D1D89 /* TricksContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksContentManager.swift; sourceTree = "<group>"; };
 		114DB60A23D3CD9300AAEA45 /* TrickSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickSearchVC.swift; sourceTree = "<group>"; };
 		114E58D623E9DE8300D63C80 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		11813DF22422AC69001F53E8 /* TrickInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickInfoCell.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 				EA073E0221FA8AFD0046799C /* Color.swift */,
 				EA638704222350FF00D23A9C /* DateTimeUtil.swift */,
 				EAE566C622F4AADE0077EC5D /* UserManager.swift */,
+				1119BF6F2561D512004D1D89 /* TricksContentManager.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1048,6 +1051,7 @@
 				118D877E232BE550001DFB1F /* ProfileDataSource.swift in Sources */,
 				EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */,
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,
+				1119BF702561D512004D1D89 /* TricksContentManager.swift in Sources */,
 				EA4F82362221615B001CB1F4 /* SpeedDataDetailViewController.swift in Sources */,
 				EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */,
 				EA45C47A21F1A7D0009DC1A8 /* SpeedTimes.swift in Sources */,

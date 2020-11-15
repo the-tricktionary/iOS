@@ -48,7 +48,11 @@ protocol TrickDetailDataProviderType {
     func getPrerequisites(ids: [Prerequisites]) -> AnyPublisher<Trick, Error>
 }
 
-class TrickManager: TricksDataProviderType, TrickDetailDataProviderType {
+protocol ChecklistDataProviderType {
+    func getChecklist() -> AnyPublisher<[String], Error>
+}
+
+class TrickManager: TricksDataProviderType, TrickDetailDataProviderType, ChecklistDataProviderType {
     func getTricks(discipline: Disciplines) -> AnyPublisher<[BaseTrick], Error> {
         let firestore = Firestore.firestore()
         let documentReference = firestore.collection(discipline.identity)

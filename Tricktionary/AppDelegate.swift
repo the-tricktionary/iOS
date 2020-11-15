@@ -34,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         TrickManager.shared.loadRemoteConfig()
 
+        let _ = UserManager()
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         registerDependencies()
 
@@ -53,11 +55,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         container.register(TricksDataProviderType.self) { _ in
             TrickManager()
         }.inObjectScope(.container)
-        container.register(TrickDetailDataProviderType.self) { _ in
-            TrickManager()
-        }.inObjectScope(.container)
-        container.register(TricksContentManager.self) { _ in
-            TricksContentManager()
+        container.register(TrickDetailDataProviderType.self) { _ in TrickManager() }.inObjectScope(.container)
+        container.register(UserManagerType.self) { _ in UserManager() }.inObjectScope(.container)
+        container.register(TricksContentManager.self) { resolver in
+            TricksContentManager(userManager: resolver.resolve(UserManagerType.self)!,
+                                 checklistDataProvider: TrickManager.shared)
         }.inObjectScope(.container)
         
         resolver = container.synchronize()
