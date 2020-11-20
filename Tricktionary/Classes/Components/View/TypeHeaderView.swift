@@ -40,7 +40,11 @@ class TypeHeaderView: UITableViewHeaderFooterView {
     func customize(with titleLabel: String?, completed: Int?, from: Int, collapsed: Bool) {
         self.sectionName = titleLabel
         title.text = "\(titleLabel?.first?.uppercased() ?? "")" + "\(titleLabel?.dropFirst() ?? "")"
-        accesoryView.image = collapsed ? UIImage(named: "collapsed") : UIImage(named: "expansed")
+        UIView.transition(with: accesoryView,
+                          duration: 1.0,
+                          options: .curveEaseIn,
+                          animations: { self.accesoryView.image = collapsed ? UIImage(named: "collapsed") : UIImage(named: "expansed") },
+                          completion: nil)
         if let completed = completed {
             count.text = "\(completed)/\(from)"
         } else {
