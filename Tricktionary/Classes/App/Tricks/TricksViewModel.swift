@@ -59,24 +59,24 @@ class TricksViewModel: TricksViewModelType {
     }
 
     var levels: [Int] {
-        return getLevels()
+        getLevels()
     }
 
     var disciplines: [Disciplines] {
-        return getAllowedDisciplines()
+        remoteConfig.disciplines
     }
 
     var tricksManager: TricksContentManager
     
     private let dataProvider: TricksDataProviderType
-    private let remoteConfig: RemoteConfig
+    private let remoteConfig: RemoteConfigType
     private let userManager: UserManagerType
     var settings: TricksListSettingsType
     
     // MARK: - Initializer
     
     init(dataProvider: TricksDataProviderType,
-         remoteConfig: RemoteConfig,
+         remoteConfig: RemoteConfigType,
          settings: TricksListSettingsType,
          userManager: UserManagerType,
          tricksManager: TricksContentManager) {
@@ -185,20 +185,6 @@ class TricksViewModel: TricksViewModelType {
 
     private func isDone(_ trick: BaseTrick) -> Bool {
         return tricksManager.completedTricks.contains(allTricksId[trick.name] ?? "") && userManager.logged
-    }
-
-    private func getAllowedDisciplines() -> [Disciplines] {
-        var allowedDisciplines: [Disciplines] = []
-        if remoteConfig.configValue(forKey: "singlerope").boolValue {
-            allowedDisciplines.append(.singleRope)
-        }
-        if remoteConfig.configValue(forKey: "wheels").boolValue {
-            allowedDisciplines.append(.wheels)
-        }
-        if remoteConfig.configValue(forKey: "doubledutch").boolValue {
-            allowedDisciplines.append(.doubleDutch)
-        }
-        return allowedDisciplines
     }
 
     private func getLevels() -> [Int] {

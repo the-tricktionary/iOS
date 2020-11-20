@@ -61,6 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             TricksContentManager(userManager: resolver.resolve(UserManagerType.self)!,
                                  checklistDataProvider: TrickManager.shared)
         }.inObjectScope(.container)
+        container.register(RemoteConfigType.self) { _ in
+            TRRemoteConfig()
+        }.inObjectScope(.container)
         
         resolver = container.synchronize()
     }

@@ -41,12 +41,11 @@ class PrerequisiteHeaderView: UIView {
 
         view.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.centerX.equalToSuperview()
             make.top.bottom.equalToSuperview()
         }
 
         title.snp.makeConstraints { (make) in
-            make.centerY.equalTo(view)
+            make.top.bottom.equalToSuperview()
             make.leading.equalTo(view).inset(16)
             make.trailing.equalTo(view).inset(41)
         }
@@ -60,6 +59,6 @@ class PrerequisiteHeaderView: UIView {
 
     func customize(title: String?, collapsed: Bool) {
         self.title.text = title
-        accessoryImageView.image = collapsed ? UIImage(named: "collapsed") : UIImage(named: "expanded")
+        accessoryImageView.image = collapsed ? UIImage(named: "collapsed") : UIImage(named: "expansed")
     }
 }
