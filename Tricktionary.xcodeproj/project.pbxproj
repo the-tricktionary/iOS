@@ -37,8 +37,8 @@
 		EA073E0121FA85570046799C /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073E0021FA85570046799C /* SwitchCell.swift */; };
 		EA073E0321FA8AFD0046799C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073E0221FA8AFD0046799C /* Color.swift */; };
 		EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D421EA78FA0086FC79 /* MenuCell.swift */; };
-		EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */; };
-		EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */; };
+		EA1A48D721EA8BEE0086FC79 /* MenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D621EA8BEE0086FC79 /* MenuDelegate.swift */; };
+		EA1A48D921EA8BFC0086FC79 /* MenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48D821EA8BFC0086FC79 /* MenuDataSource.swift */; };
 		EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1A48DB21EAB8C10086FC79 /* Constants.swift */; };
 		EA2C37E0227F6DC100F7ECEE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C37DF227F6DC100F7ECEE /* ProfileViewController.swift */; };
 		EA2C37E22283063500F7ECEE /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C37E12283063500F7ECEE /* ProfileViewModel.swift */; };
@@ -87,7 +87,7 @@
 		EABCC85F224D8A8A00ED3B90 /* BaseCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABCC85E224D8A8A00ED3B90 /* BaseCenterViewController.swift */; };
 		EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */; };
 		EACAFF3522594B9200FF0202 /* AsociationPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAFF3422594B9200FF0202 /* AsociationPickerDataSource.swift */; };
-		EACF594621E7EAF40037FE2B /* SidePanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF594521E7EAF40037FE2B /* SidePanelViewController.swift */; };
+		EACF594621E7EAF40037FE2B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF594521E7EAF40037FE2B /* MenuViewController.swift */; };
 		EACF63DC21EE961B00D7D836 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63DB21EE961B00D7D836 /* LoginView.swift */; };
 		EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63DD21EE962A00D7D836 /* RegistrationView.swift */; };
 		EACF63E121EE967700D7D836 /* IconTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF63E021EE967700D7D836 /* IconTextField.swift */; };
@@ -167,8 +167,8 @@
 		EA073E0021FA85570046799C /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		EA073E0221FA8AFD0046799C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		EA1A48D421EA78FA0086FC79 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
-		EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDelegate.swift; sourceTree = "<group>"; };
-		EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelDataSource.swift; sourceTree = "<group>"; };
+		EA1A48D621EA8BEE0086FC79 /* MenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuDelegate.swift; path = Panel/MenuDelegate.swift; sourceTree = "<group>"; };
+		EA1A48D821EA8BFC0086FC79 /* MenuDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuDataSource.swift; path = Panel/MenuDataSource.swift; sourceTree = "<group>"; };
 		EA1A48DB21EAB8C10086FC79 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA2C37DF227F6DC100F7ECEE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EA2C37E12283063500F7ECEE /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 		EABCC85E224D8A8A00ED3B90 /* BaseCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCenterViewController.swift; sourceTree = "<group>"; };
 		EAC23ABD219D8F700086D9E2 /* TricksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksViewController.swift; sourceTree = "<group>"; };
 		EACAFF3422594B9200FF0202 /* AsociationPickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsociationPickerDataSource.swift; sourceTree = "<group>"; };
-		EACF594521E7EAF40037FE2B /* SidePanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelViewController.swift; sourceTree = "<group>"; };
+		EACF594521E7EAF40037FE2B /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		EACF63DB21EE961B00D7D836 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		EACF63DD21EE962A00D7D836 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		EACF63E021EE967700D7D836 /* IconTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextField.swift; sourceTree = "<group>"; };
@@ -365,7 +365,9 @@
 		EA37A3A521E690160061E44D /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				EACF594421E7EAD00037FE2B /* Panel */,
+				EACF594521E7EAF40037FE2B /* MenuViewController.swift */,
+				EA1A48D621EA8BEE0086FC79 /* MenuDelegate.swift */,
+				EA1A48D821EA8BFC0086FC79 /* MenuDataSource.swift */,
 			);
 			name = Menu;
 			path = "New Group";
@@ -591,16 +593,6 @@
 				EAF9B498225A7894001AB242 /* SubmitViewModel.swift */,
 			);
 			path = Submit;
-			sourceTree = "<group>";
-		};
-		EACF594421E7EAD00037FE2B /* Panel */ = {
-			isa = PBXGroup;
-			children = (
-				EACF594521E7EAF40037FE2B /* SidePanelViewController.swift */,
-				EA1A48D621EA8BEE0086FC79 /* SidePanelDelegate.swift */,
-				EA1A48D821EA8BFC0086FC79 /* SidePanelDataSource.swift */,
-			);
-			path = Panel;
 			sourceTree = "<group>";
 		};
 		EACF63DA21EE960800D7D836 /* View */ = {
@@ -991,7 +983,7 @@
 				EACF63E321EE96F500D7D836 /* GradientButton.swift in Sources */,
 				EAE6E1CC21F3DE560033D918 /* Picker.swift in Sources */,
 				EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */,
-				EACF594621E7EAF40037FE2B /* SidePanelViewController.swift in Sources */,
+				EACF594621E7EAF40037FE2B /* MenuViewController.swift in Sources */,
 				EAB08158221F3CFD0030AAF1 /* SpeedDataViewController.swift in Sources */,
 				EA073E0121FA85570046799C /* SwitchCell.swift in Sources */,
 				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
@@ -1025,7 +1017,7 @@
 				EAACBCE021D0365E007AEDFE /* TrickDetailDelegate.swift in Sources */,
 				114E58D723E9DE8300D63C80 /* SettingsViewModel.swift in Sources */,
 				EA073DF921FA83660046799C /* PxUserDefaults.swift in Sources */,
-				EA1A48D921EA8BFC0086FC79 /* SidePanelDataSource.swift in Sources */,
+				EA1A48D921EA8BFC0086FC79 /* MenuDataSource.swift in Sources */,
 				11E253BA23D486EB00FB6DFA /* SearchCell.swift in Sources */,
 				EAF9B49B225A78D1001AB242 /* VideoStorageManager.swift in Sources */,
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
@@ -1057,7 +1049,7 @@
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,
 				1119BF702561D512004D1D89 /* TricksContentManager.swift in Sources */,
 				EA4F82362221615B001CB1F4 /* SpeedDataDetailViewController.swift in Sources */,
-				EA1A48D721EA8BEE0086FC79 /* SidePanelDelegate.swift in Sources */,
+				EA1A48D721EA8BEE0086FC79 /* MenuDelegate.swift in Sources */,
 				EA45C47A21F1A7D0009DC1A8 /* SpeedTimes.swift in Sources */,
 				EA85B515219EDFA200F975A2 /* TrickDetailViewModel.swift in Sources */,
 			);

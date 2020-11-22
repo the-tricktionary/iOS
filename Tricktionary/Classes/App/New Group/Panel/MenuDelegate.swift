@@ -1,5 +1,5 @@
 //
-//  SidePanelDelegate.swift
+//  MenuDelegate.swift
 //  Tricktionary
 //
 //  Created by Marek  Šťovíček on 12/01/2019.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-extension SidePanelViewController: UITableViewDelegate {
+extension MenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {

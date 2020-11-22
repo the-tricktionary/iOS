@@ -56,7 +56,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let informationController = UINavigationController(rootViewController: SubmitViewController(viewModel: submitVM))
         informationController.tabBarItem = UITabBarItem(title: "Submit", image: #imageLiteral(resourceName: "submit"), tag: 3)
 
-        let menuVC = SidePanelViewController()
+        let menuVC = MenuViewController()
         let settingsController = UINavigationController(rootViewController: menuVC)
         settingsController.tabBarItem = UITabBarItem(title: "More", image: #imageLiteral(resourceName: "settings"), tag: 4)
 

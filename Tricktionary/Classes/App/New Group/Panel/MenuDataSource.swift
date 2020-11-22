@@ -1,5 +1,5 @@
 //
-//  SidePanelDataSource.swift
+//  MenuDataSource.swift
 //  Tricktionary
 //
 //  Created by Marek  Šťovíček on 12/01/2019.
@@ -12,7 +12,7 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 
-extension SidePanelViewController: UITableViewDataSource {
+extension MenuViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
