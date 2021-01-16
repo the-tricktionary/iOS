@@ -48,10 +48,12 @@ class SpeedDataViewController: BaseCenterViewController {
         view.backgroundColor = Color.background
         title = "Speed data"
         
+        tableView.register(SpeedListCell.self, forCellReuseIdentifier: SpeedListCell.reuseIdentifier())
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = UIView()
         tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         
         setupViewConstraints()

@@ -58,7 +58,8 @@ class TrickLevelCell: BaseCell {
         stackView.addArrangedSubview(levelsContainer)
 
         view.snp.makeConstraints { (make) in
-            make.edges.equalTo(contentView)
+            make.leading.trailing.equalTo(self.contentView.readableArea)
+            make.top.bottom.equalTo(contentView.safeAreaLayoutGuide)
         }
         
         accesoryView.snp.makeConstraints { (make) in

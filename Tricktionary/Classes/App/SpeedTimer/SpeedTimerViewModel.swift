@@ -9,31 +9,37 @@
 import Foundation
 import AVFoundation
 import FirebaseAuth
-
-enum EventType {
-    case srsr
-}
+import Combine
 
 protocol SpeedTimerVMType {
-    var sections: [EventType] { get }
+    var sections: PassthroughSubject<[SpeedTableSection], Never> { get }
+    func loadEvents()
 }
 
 class SpeedTimerViewModel: SpeedTimerVMType {
 
-    var sections: [EventType] = []
+    var sections = PassthroughSubject<[SpeedTableSection], Never>()
     
     // MARK: Variables
-
+    private let dataProvider: SpeedTimerDataProviderType
+    private var cancelable = Set<AnyCancellable>()
     
     // MARK: Public
 
     // MARK: - Initializer
-    init() {
-        sections = loadEvents()
+    init(dataProvider: SpeedTimerDataProviderType) {
+        self.dataProvider = dataProvider
     }
 
-    private func loadEvents() -> [EventType] {
-        return []
+    func loadEvents() {
+        dataProvider.fetchEvents().sink { (completion) in
+            //
+        } receiveValue: { (events) in
+            var allEvents = [SpeedEvent(name: "Only clicker", periods: 0, checkpoints: 0)]
+            allEvents.append(contentsOf: events)
+            let section = SpeedTableSection(rows: allEvents)
+            self.sections.send([section])
+        }.store(in: &cancelable)
     }
     
 //    func timeFormatted(_ field: Int) -> String {

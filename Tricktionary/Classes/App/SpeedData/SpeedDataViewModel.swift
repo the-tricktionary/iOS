@@ -19,7 +19,6 @@ class SpeedDataViewModel {
     // MARK: Public
     
     func getSpeedData(starting: @escaping () -> Void, finish: @escaping () -> Void) {
-        
         SpeedManager.shared.getSpeedData(starting: {
             starting()
         }, completion: { (speed) in

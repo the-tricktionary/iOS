@@ -13,11 +13,15 @@ class ControllView: UIView {
     
     // MARK: Variables
     
-    let playButton: UIButton = UIButton()
-    let stopButton: UIButton = UIButton()
-    let resetButton: UIButton = UIButton()
-    let eventTime: UITextField = UITextField()
-    let eventType: UITextField = UITextField()
+    // private
+    private let playButton: UIButton = UIButton()
+    private let stopButton: UIButton = UIButton()
+    private let resetButton: UIButton = UIButton()
+    private let eventTime: UITextField = UITextField()
+    private let eventType: UITextField = UITextField()
+    
+    // public
+    
     
     // MARK: Life cycles
     

@@ -24,6 +24,7 @@ class Speed: Codable {
     var duration: Int = 0
     var uid: String = ""
     var graphData: [Double] = [Double]()
+    var speedId: String = ""
     
     init(data: [String: Any]) {
         name = data["name"] as? String
@@ -37,14 +38,12 @@ class Speed: Codable {
         score = data["score"] as? Int ?? 0
         duration = data["duration"] as? Int ?? 0
         graphData = data["graphData"] as? [Double] ?? [Double]()
+        uid = data["uid"] as? String ?? ""
     }
     
     func getDictionary() -> [String: Any] {
-        var dic: [String: Any] = [String: Any]()
-        let mirror: Mirror = Mirror(reflecting: self)
-        mirror.children.forEach { (name, value) in
-            dic[name!] = value
+        Mirror(reflecting: self).children.reduce(into: [:]) { (result, data) in
+            result[data.label ?? ""] = data.value
         }
-        return dic
     }
 }

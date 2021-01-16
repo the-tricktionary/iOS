@@ -45,7 +45,7 @@ class TrickDetailViewController: BaseCenterViewController {
         
         title = viewModel.trickName
         
-        view.backgroundColor = Color.background
+        view.backgroundColor = .white
 
         tableView.sectionHeaderHeight = 35
         tableView.backgroundColor = .white
@@ -82,14 +82,13 @@ class TrickDetailViewController: BaseCenterViewController {
     fileprivate func setupViewConstraints() {
         videoView.snp.makeConstraints { (make) in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalTo(view.readableArea)
             make.height.equalTo(211)
         }
 
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(videoView.snp.bottom)
-            make.trailing.equalTo(view)
-            make.leading.equalTo(view)
+            make.leading.trailing.equalTo(self.view.readableArea)
             make.bottom.equalTo(view)
         }
     }

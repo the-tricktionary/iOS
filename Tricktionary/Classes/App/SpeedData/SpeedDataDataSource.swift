@@ -16,11 +16,15 @@ extension SpeedDataViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SpeedListCell.reuseIdentifier(),
+                                                       for: indexPath) as? SpeedListCell else {
+            return UITableViewCell()
+        }
         let speed = viewModel.speeds[indexPath.row]
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        cell.selectionStyle = .none
-        cell.textLabel?.text = speed.name ?? "No named event"
-        cell.detailTextLabel?.text = speed.created?.description
+        cell.customize(SpeedListCell.Content(name: speed.name ?? "No name",
+                                             score: speed.score,
+                                             misses: speed.misses,
+                                             noMissScore: speed.noMissScore))
         return cell
     }
     
@@ -29,7 +33,6 @@ extension SpeedDataViewController: UITableViewDataSource {
             let speed = viewModel.speeds[indexPath.row]
             viewModel.speeds.remove(at: indexPath.row)
             SpeedManager.shared.deleteSpeedEvent(speed: speed) { // TODO: Haven`t permition
-                self.viewModel.speeds.remove(at: indexPath.row)
                 self.tableView.reloadData()
             }
             tableView.reloadData()

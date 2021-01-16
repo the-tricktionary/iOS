@@ -44,7 +44,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let tricksViewController = UINavigationController(rootViewController: tricksVC)
         tricksViewController.tabBarItem = UITabBarItem(title: "Tricks", image: UIImage(named: "tricktionary"), tag: 0)
 
-        let speedsVM = SpeedTimerViewModel()
+        let speedsVM = SpeedTimerViewModel(dataProvider: SpeedManager())
         let alarmController = UINavigationController(rootViewController: SpeedTimerViewController(viewModel: speedsVM))
         alarmController.tabBarItem = UITabBarItem(title: "Speed", image: UIImage(named: "timer"), tag: 1)
         

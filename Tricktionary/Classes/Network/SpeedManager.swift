@@ -10,8 +10,13 @@ import Foundation
 import FirebaseFirestore
 import ReactiveSwift
 import FirebaseAuth
+import Combine
 
-class SpeedManager {
+protocol SpeedTimerDataProviderType {
+    func fetchEvents() -> AnyPublisher<[SpeedEvent], Error>
+}
+
+class SpeedManager: SpeedTimerDataProviderType {
     
     static var shared: SpeedManager {
         get {
@@ -19,11 +24,38 @@ class SpeedManager {
         }
     }
     
+    func fetchEvents() -> AnyPublisher<[SpeedEvent], Error> {
+        let publisher = CurrentValueSubject<[SpeedEvent], Error>([])
+        let firestore = Firestore.firestore()
+        let documentReference = firestore.collection("speedEvents")
+        
+        documentReference.getDocuments { (snapshot, error) in
+            if let error = error {
+                publisher.send(completion: .failure(error))
+            }
+            
+            guard let snapshot = snapshot else {
+                publisher.send(completion: .failure(NSError(domain: "Speed events fetch error", code: 0, userInfo: nil)))
+                return
+            }
+            
+            let events = snapshot.documents.map { document -> SpeedEvent? in
+                let data = document.data()
+                let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
+                let event = try? JSONDecoder().decode(SpeedEvent.self, from: jsonData ?? Data())
+                return event
+            }.compactMap { $0 }
+            
+            publisher.send(events)
+        }
+        
+        return publisher.eraseToAnyPublisher()
+    }
+    
     fileprivate let firestore = Firestore.firestore()
     
     func getSpeedData(starting: @escaping () -> Void, completion: @escaping (Speed) -> Void, finish: @escaping () -> Void) {
         starting()
-//        let firestore = Firestore.firestore()
         let user = Auth.auth().currentUser
         if let id = user?.uid {
             let documentReference = firestore.collection("speed").whereField("uid", isEqualTo: id)
@@ -39,6 +71,7 @@ class SpeedManager {
                 snapshot.documents.forEach({ (document) in
                     let dictionary = document.data()
                     let speed = Speed(data: dictionary)
+                    speed.speedId = document.documentID
                     completion(speed)
                 })
                 finish()
@@ -61,15 +94,12 @@ class SpeedManager {
     
     func deleteSpeedEvent(speed: Speed, completed: @escaping () -> Void) {
         guard let _ = Auth.auth().currentUser?.uid else { return }
-        guard speed.created != nil else {
-            return
-        }
-        var _ = firestore.collection("speed").document(speed.created!.description).delete() { error in
+        var _ = firestore.collection("speed").document(speed.speedId).delete() { error in
             if let error = error {
-                print("Error removing document: \(error)")
+                print("Deleting speed event error \(error.localizedDescription)")
             } else {
-                print("Document successfully removed!")
                 completed()
+                print("Deleting speed event \(speed.speedId) completed")
             }
         }
     }
