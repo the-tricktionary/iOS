@@ -12,7 +12,7 @@ import FirebaseRemoteConfig
 import FirebaseAuth
 import Combine
 
-protocol TricksViewModelType {
+protocol TricksViewModelType: ObservableObject {
     var loading: CurrentValueSubject<Bool, Never> { get }
     var sections: CurrentValueSubject<[TableSection], Never> { get }
     var selectedLevel: Int { get set }
@@ -27,7 +27,7 @@ protocol TricksViewModelType {
     func getFilteredTricks(substring: String) -> [BaseTrick]?
 }
 
-class TricksViewModel: TricksViewModelType {
+class TricksViewModel: TricksViewModelType, ObservableObject {
 
     // MARK: - Variables
 
@@ -35,6 +35,8 @@ class TricksViewModel: TricksViewModelType {
     private var allTricksId: [String : String] = [String : String]()
     let sections = CurrentValueSubject<[TableSection], Never>([])
     private let tricks = CurrentValueSubject<[BaseTrick], Never>([])
+    @Published var uiTricks: [BaseTrick] = []
+    @Published var uiSections: [TableSection] = []
     var loading = CurrentValueSubject<Bool, Never>(true)
 
     var isPullToRefresh: Bool = false
@@ -107,6 +109,7 @@ class TricksViewModel: TricksViewModelType {
             }
         } receiveValue: { trickList in
             self.tricks.value.append(contentsOf: trickList)
+            self.uiTricks = trickList
             self.allTricksId = trickList.reduce(into: [String: String]()) {
                 $0[$1.name] = $1.id
             }
@@ -133,6 +136,7 @@ class TricksViewModel: TricksViewModelType {
                 }
             }
         }
+        uiSections = sections.value
     }
 
     func getFilteredTricks(substring: String) -> [BaseTrick]? {
@@ -179,6 +183,7 @@ class TricksViewModel: TricksViewModelType {
                                    tricks: rows.count,
                                    completed: self.userManager.logged ? rows.filter { $0.isDone }.count : nil)]
         }
+        uiSections = sections.value
     }
 
     // MARK: - Helpers

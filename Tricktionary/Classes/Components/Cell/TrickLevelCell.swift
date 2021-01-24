@@ -211,7 +211,8 @@ class LevelView: UIView {
 }
 
 extension TrickLevelCell {
-    struct Content: Hashable {
+    struct Content: Hashable, Identifiable {
+        var id = UUID()
         var title: String
         var levels: [Organization : String?]
         var isDone: Bool

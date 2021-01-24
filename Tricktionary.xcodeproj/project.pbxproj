@@ -13,6 +13,10 @@
 		114E58D723E9DE8300D63C80 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E58D623E9DE8300D63C80 /* SettingsViewModel.swift */; };
 		115FEACD25AE0B190065384D /* SpeedEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115FEACC25AE0B190065384D /* SpeedEventCell.swift */; };
 		115FEAD225AE13F40065384D /* SpeedListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115FEAD125AE13F40065384D /* SpeedListCell.swift */; };
+		117D20FD25BB664200F8C0B0 /* TrickListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117D20FC25BB664200F8C0B0 /* TrickListView.swift */; };
+		117D210225BB7FB700F8C0B0 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117D210125BB7FB700F8C0B0 /* TabBarView.swift */; };
+		117D210825BCA86F00F8C0B0 /* TrickCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117D210725BCA86F00F8C0B0 /* TrickCellView.swift */; };
+		117D210E25BCB55300F8C0B0 /* LevelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117D210D25BCB55300F8C0B0 /* LevelHeaderView.swift */; };
 		11813DF32422AC69001F53E8 /* TrickInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11813DF22422AC69001F53E8 /* TrickInfoCell.swift */; };
 		118AA55825685D0200CF7464 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118AA55725685D0200CF7464 /* RemoteConfig.swift */; };
 		118D877E232BE550001DFB1F /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D877D232BE550001DFB1F /* ProfileDataSource.swift */; };
@@ -149,6 +153,10 @@
 		114E58D623E9DE8300D63C80 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		115FEACC25AE0B190065384D /* SpeedEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedEventCell.swift; sourceTree = "<group>"; };
 		115FEAD125AE13F40065384D /* SpeedListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedListCell.swift; sourceTree = "<group>"; };
+		117D20FC25BB664200F8C0B0 /* TrickListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickListView.swift; sourceTree = "<group>"; };
+		117D210125BB7FB700F8C0B0 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		117D210725BCA86F00F8C0B0 /* TrickCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickCellView.swift; sourceTree = "<group>"; };
+		117D210D25BCB55300F8C0B0 /* LevelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelHeaderView.swift; sourceTree = "<group>"; };
 		11813DF22422AC69001F53E8 /* TrickInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickInfoCell.swift; sourceTree = "<group>"; };
 		118AA55725685D0200CF7464 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		118D877D232BE550001DFB1F /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
@@ -304,6 +312,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		117D20FB25BB663000F8C0B0 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				117D20FC25BB664200F8C0B0 /* TrickListView.swift */,
+				117D210725BCA86F00F8C0B0 /* TrickCellView.swift */,
+				117D210D25BCB55300F8C0B0 /* LevelHeaderView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		117D210025BB7FAB00F8C0B0 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				117D210125BB7FB700F8C0B0 /* TabBarView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		11A597172479358B006F4F3E /* ViewControllersFlow */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +432,7 @@
 		EA3C72882287583100324576 /* Tab bar */ = {
 			isa = PBXGroup;
 			children = (
+				117D210025BB7FAB00F8C0B0 /* SwiftUI */,
 				EA3C72892287584600324576 /* TabBarViewController.swift */,
 			);
 			path = "Tab bar";
@@ -595,6 +622,7 @@
 		EAC23ABF219D8F750086D9E2 /* Tricks */ = {
 			isa = PBXGroup;
 			children = (
+				117D20FB25BB663000F8C0B0 /* SwiftUI */,
 				11B3ED7323DCF24A00ACE06C /* Protocols */,
 				EA7F22D2219EDC3C00C43599 /* Trick detail */,
 				EA7AAB30219E2138000858EE /* TricksDataSource.swift */,
@@ -1008,6 +1036,7 @@
 				EA7AAB2F219E1CD7000858EE /* TrickLevelCell.swift in Sources */,
 				EACF594621E7EAF40037FE2B /* MenuViewController.swift in Sources */,
 				EAB08158221F3CFD0030AAF1 /* SpeedDataViewController.swift in Sources */,
+				117D210E25BCB55300F8C0B0 /* LevelHeaderView.swift in Sources */,
 				EA073E0121FA85570046799C /* SwitchCell.swift in Sources */,
 				EAC23ABE219D8F700086D9E2 /* TricksViewController.swift in Sources */,
 				11F7CB3325ACD3290089E5AB /* SpeedTimerDataSource.swift in Sources */,
@@ -1022,11 +1051,13 @@
 				EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */,
 				115FEACD25AE0B190065384D /* SpeedEventCell.swift in Sources */,
 				EAACBCE421D04C3E007AEDFE /* DescriptionCell.swift in Sources */,
+				117D20FD25BB664200F8C0B0 /* TrickListView.swift in Sources */,
 				EA4F823A222172F8001CB1F4 /* SpeedDataDetailDataSource.swift in Sources */,
 				EA4F8238222161A2001CB1F4 /* SpeedDataDetailViewModel.swift in Sources */,
 				EAD3D74021F9187500F39A22 /* SpeedEvents.swift in Sources */,
 				114DB60B23D3CD9300AAEA45 /* TrickSearchVC.swift in Sources */,
 				11297F5525B0BEDA0009D0B7 /* SpeedTimerDelegate.swift in Sources */,
+				117D210225BB7FB700F8C0B0 /* TabBarView.swift in Sources */,
 				EA1A48DC21EAB8C10086FC79 /* Constants.swift in Sources */,
 				EA3C728C2287843300324576 /* TypeHeaderView.swift in Sources */,
 				EA37A3B121E696DE0061E44D /* LoginViewController.swift in Sources */,
@@ -1035,6 +1066,7 @@
 				EA073DFD21FA84080046799C /* SettingsDataSource.swift in Sources */,
 				11A892DE232960A3009BCA7B /* ProfileInfo.swift in Sources */,
 				EA2C6B1021ED38270090579F /* UserCell.swift in Sources */,
+				117D210825BCA86F00F8C0B0 /* TrickCellView.swift in Sources */,
 				EA7AAB37219E21FE000858EE /* TricksViewModel.swift in Sources */,
 				EACF63DC21EE961B00D7D836 /* LoginView.swift in Sources */,
 				EA7AAB31219E2138000858EE /* TricksDataSource.swift in Sources */,

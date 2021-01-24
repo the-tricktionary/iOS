@@ -115,7 +115,8 @@ class TrickManager: TricksDataProviderType, TrickDetailDataProviderType, Checkli
         remoteConfig.setDefaults([
             "singlerope": true as NSObject,
             "wheels": false as NSObject,
-            "doubledutch": false as NSObject
+            "doubledutch": false as NSObject,
+            "ios_swiftUI": true as NSObject
         ])
 
         remoteConfig.fetch(withExpirationDuration: 0) { (status, error) in

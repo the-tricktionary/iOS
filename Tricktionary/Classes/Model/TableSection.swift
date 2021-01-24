@@ -8,22 +8,23 @@
 
 import Foundation
 
-
-class Section {
-    
-    // MARK: Variables
-    
-    var name: String
-    var items: [Any]
-    var collapsed: Bool
-    
-    // MARK: Initializers
-    
-    init(name: String, items: [Any], collapsed: Bool = false) {
-        self.name = name
-        self.items = items
-        self.collapsed = collapsed
-    }
-    
-    
-}
+//
+//class Section: Identifiable {
+//    
+//    // MARK: Variables
+//    var id = UUID()
+//    
+//    var name: String
+//    var items: [Any]
+//    var collapsed: Bool
+//    
+//    // MARK: Initializers
+//    
+//    init(name: String, items: [Any], collapsed: Bool = false) {
+//        self.name = name
+//        self.items = items
+//        self.collapsed = collapsed
+//    }
+//    
+//    
+//}

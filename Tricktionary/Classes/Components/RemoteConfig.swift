@@ -11,6 +11,7 @@ import FirebaseRemoteConfig
 
 protocol RemoteConfigType {
     var disciplines: [Disciplines] { get }
+    var isSwiftUIEnabled: Bool { get }
     func fetchRemoteConfig()
 }
 
@@ -27,6 +28,10 @@ class TRRemoteConfig: RemoteConfigType {
     // public
     var disciplines: [Disciplines] {
         self.getDisciplines()
+    }
+    
+    var isSwiftUIEnabled: Bool {
+        remoteConfig.configValue(forKey: "ios_swiftUI").boolValue
     }
     
     // MARK: - Publics

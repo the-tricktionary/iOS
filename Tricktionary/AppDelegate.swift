@@ -14,6 +14,7 @@ import GoogleSignIn
 import LifetimeTracker
 import Swinject
 import SwiftMonkeyPaws
+import SwiftUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -36,10 +37,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
         let _ = UserManager()
         
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.backgroundColor = Color.red
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        
+        UITabBar.appearance().barTintColor = Color.red
+        UITabBar.appearance().unselectedItemTintColor = .white
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         registerDependencies()
 
-        self.window?.rootViewController = TabBarViewController()
+        let usingSwiftUI = resolver?.resolve(RemoteConfigType.self)?.isSwiftUIEnabled == true
+        self.window?.rootViewController = usingSwiftUI ? UIHostingController(rootView: TabBarView()) : TabBarViewController()
 
         if let appWindow = window {
             if CommandLine.arguments.contains("--MonkeyPaws") {
