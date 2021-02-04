@@ -42,8 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.backgroundColor = Color.red
+        
         UINavigationBar.appearance().standardAppearance = navBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().isTranslucent = true
         
         UITabBar.appearance().barTintColor = Color.red
         UITabBar.appearance().unselectedItemTintColor = .white
@@ -158,4 +160,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
     }
 }
-

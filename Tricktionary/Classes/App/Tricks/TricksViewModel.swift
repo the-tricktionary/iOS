@@ -12,7 +12,7 @@ import FirebaseRemoteConfig
 import FirebaseAuth
 import Combine
 
-protocol TricksViewModelType: ObservableObject {
+protocol TricksViewModelType {
     var loading: CurrentValueSubject<Bool, Never> { get }
     var sections: CurrentValueSubject<[TableSection], Never> { get }
     var selectedLevel: Int { get set }
@@ -22,9 +22,13 @@ protocol TricksViewModelType: ObservableObject {
     var settings: TricksListSettingsType { get }
     var isPullToRefresh: Bool { get set }
     var tricksManager: TricksContentManager { get }
+    var uiTricks: [BaseTrick] { get }
+    var uiSections: [TableSection] { get }
+    var searchText: String { get set }
     
     func toggleSection(name: String)
     func getFilteredTricks(substring: String) -> [BaseTrick]?
+    func getTricks(silent: Bool)
 }
 
 class TricksViewModel: TricksViewModelType, ObservableObject {
@@ -37,6 +41,7 @@ class TricksViewModel: TricksViewModelType, ObservableObject {
     private let tricks = CurrentValueSubject<[BaseTrick], Never>([])
     @Published var uiTricks: [BaseTrick] = []
     @Published var uiSections: [TableSection] = []
+    @Published var searchText: String = ""
     var loading = CurrentValueSubject<Bool, Never>(true)
 
     var isPullToRefresh: Bool = false
@@ -87,6 +92,8 @@ class TricksViewModel: TricksViewModelType, ObservableObject {
         self.settings = settings
         self.userManager = userManager
         self.tricksManager = tricksManager
+        
+        bind()
     }
     
     // MARK: - Publics
@@ -184,6 +191,26 @@ class TricksViewModel: TricksViewModelType, ObservableObject {
                                    completed: self.userManager.logged ? rows.filter { $0.isDone }.count : nil)]
         }
         uiSections = sections.value
+    }
+    
+    private func makeFilteredContent(tricks: [BaseTrick]?) {
+        uiSections = [TableSection(name: "Searched",
+                                   rows: tricks?.map {
+                                    TrickLevelCell.Content(title: $0.name, levels: self.makeLevels(trick: $0), isDone: isDone($0))
+                                   } ?? [],
+                                   collapsed: false,
+                                   tricks: tricks?.count ?? 0)]
+    }
+    
+    private func bind() {
+        $searchText.sink { substring in
+            guard substring.isEmpty == false else {
+                self.makeContent()
+                return
+            }
+            let filtered = self.getFilteredTricks(substring: substring)
+            self.makeFilteredContent(tricks: filtered)
+        }.store(in: &cancelable)
     }
 
     // MARK: - Helpers

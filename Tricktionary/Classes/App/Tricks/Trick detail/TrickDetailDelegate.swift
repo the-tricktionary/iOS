@@ -32,10 +32,8 @@ extension TrickDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let trick = viewModel.preprequisites.value[indexPath.row]
-            let vm = TrickDetailViewModel(trick: trick.name,
-                                          dataProvider: TrickManager.shared,
+            let vm = TrickDetailViewModel(dataProvider: TrickManager.shared,
                                           settings: viewModel.settings,
-                                          done: false,
                                           tricksManager: viewModel.tricksManager)
             let vc = TrickDetailViewController(viewModel: vm)
             self.navigationController?.pushViewController(vc, animated: true)

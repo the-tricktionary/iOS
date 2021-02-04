@@ -41,9 +41,9 @@ class TrickDetailViewController: BaseCenterViewController {
 
         bind()
 
-        self.viewModel.getTrick()
+        self.viewModel.getTrick(by: "") // TODO: 
         
-        title = viewModel.trickName
+        title = "trick name"//viewModel.trickName TODO: 
         
         view.backgroundColor = .white
 

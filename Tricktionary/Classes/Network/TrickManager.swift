@@ -46,6 +46,7 @@ protocol TricksDataProviderType {
 protocol TrickDetailDataProviderType {
     func getTrickByName(name: String) -> AnyPublisher<Trick, Error>
     func getPrerequisites(ids: [Prerequisites]) -> AnyPublisher<Trick, Error>
+    func getTrickById(_ id: String) -> AnyPublisher<Trick, Error>
 }
 
 protocol ChecklistDataProviderType {
@@ -157,8 +158,7 @@ class TrickManager: TricksDataProviderType, TrickDetailDataProviderType, Checkli
                     data["prerequisites"] = prer
                 }
                 do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                    var trick = try JSONDecoder().decode(Trick.self, from: jsonData)
+                    var trick = Trick(data)
                     trick.id = document.documentID
                     publisher.send(trick)
                 } catch {
@@ -171,11 +171,11 @@ class TrickManager: TricksDataProviderType, TrickDetailDataProviderType, Checkli
     }
     
     func getPrerequisites(ids: [Prerequisites]) -> AnyPublisher<Trick, Error> {
-        Publishers.MergeMany(ids.map { self.getTrickById(id: $0.id) })
+        Publishers.MergeMany(ids.map { self.getTrickById($0.id) })
             .eraseToAnyPublisher()
     }
     
-    private func getTrickById(id: String) -> AnyPublisher<Trick, Error> {
+    func getTrickById(_ id: String) -> AnyPublisher<Trick, Error> {
         let firestore = Firestore.firestore()
         let publisher = PassthroughSubject<Trick, Error>()
         let documentReference = firestore.collection("tricksSR").document(id)

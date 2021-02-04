@@ -20,9 +20,8 @@ protocol TrickDetailViewModelType {
     var settings: TrickDetailSettingsType { get }
     var tricksManager: TricksContentManager { get }
 
-    var trickName: String { get set }
     func markTrickAsDone(_ id: String, done: Bool)
-    func getTrick()
+    func getTrick(by name: String)
 
 }
 
@@ -31,25 +30,28 @@ protocol TrickDetailSettingsType {
     var fullscreen: Bool { get set }
 }
 
-class TrickDetailViewModel: TrickDetailViewModelType {
+class TrickDetailViewModel: TrickDetailViewModelType, ObservableObject {
     
     // MARK: Variables
+    // published
+    @Published var isDone: Bool = false
+    @Published var uiTrick: Trick?
+    @Published var uiPreprequisites: [Trick]?
+    @Published var videoThumbnail: URL?
 
     var onLoad: (() -> Void)?
     var onStartLoading: (() -> Void)?
-    var isDone: Bool
 
     var settings: TrickDetailSettingsType
     
     var trick: Trick?
     var preprequisites = CurrentValueSubject<[Trick], Never>([])
     var video = CurrentValueSubject<VideoView.Content?, Never>(nil)
-    var trickName: String
 
     var thumbnail = PassthroughSubject<String, Never>()
 
     private var thumbnailURL: ((String) -> String) = { id in
-        return "https://img.youtube.com/vi/\(id)/0.jpg"
+        "https://img.youtube.com/vi/\(id)/0.jpg"
     }
 
     private var trickId: String?
@@ -59,22 +61,18 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     
     // MARK: Life cycles
     
-    init(trick: String,
-         dataProvider: TrickDetailDataProviderType,
+    init(dataProvider: TrickDetailDataProviderType,
          settings: TrickDetailSettingsType,
-         done: Bool,
          tricksManager: TricksContentManager) {
-        self.trickName = trick
         self.dataProvider = dataProvider
         self.settings = settings
-        self.isDone = done
         self.tricksManager = tricksManager
     }
     
     // MARK: Public
     
-    func getTrick() {
-        dataProvider.getTrickByName(name: trickName)
+    func getTrick(by name: String) {
+        dataProvider.getTrickByName(name: name)
             .receive(on: DispatchQueue.main)
             .sink { (completion) in
                 switch completion {
@@ -85,11 +83,14 @@ class TrickDetailViewModel: TrickDetailViewModelType {
                 }
             } receiveValue: { trick in
                 self.trick = trick
+                self.uiTrick = trick
+                self.isDone = self.tricksManager.completedTricks.contains(trick.id ?? "")
                 if let prerequisites = trick.prerequisites {
                     self.loadPrerequisites(with: prerequisites)
                 }
                 if let video = trick.videos {
                     self.video.send(self.makeVideoContent(with: video))
+                    self.videoThumbnail = URL(string: self.thumbnailURL(video.youtube))
                     self.thumbnail.send(self.thumbnailURL(video.youtube))
                 }
                 self.onLoad?()
@@ -120,18 +121,16 @@ class TrickDetailViewModel: TrickDetailViewModelType {
     }
 
     private func loadPrerequisites(with ids: [Prerequisites]) {
-        dataProvider.getPrerequisites(ids: ids)
+        Publishers.MergeMany(ids.map {dataProvider.getTrickById($0.id)})
             .receive(on: DispatchQueue.main)
             .sink { (completion) in
-                switch completion {
-                case .failure(let error):
-                    print("### Error \(error.localizedDescription)")
-                default:
-                    break
-                }
-            } receiveValue: { trick in
+                //
+            } receiveValue: { (trick) in
                 self.preprequisites.value.append(trick)
-            }.store(in: &cancelable)
+                self.uiPreprequisites = nil
+                self.uiPreprequisites = self.preprequisites.value
+            }
+            .store(in: &cancelable)
     }
 
     private func makeVideoContent(with video: Video) -> VideoView.Content {

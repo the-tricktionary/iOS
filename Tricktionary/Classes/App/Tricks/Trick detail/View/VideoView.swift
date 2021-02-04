@@ -9,6 +9,8 @@
 import Foundation
 import YoutubePlayerView
 import UIKit
+import WebKit
+import SwiftUI
 
 class VideoView: UIView, YoutubePlayerViewDelegate {
 

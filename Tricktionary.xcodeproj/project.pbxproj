@@ -11,6 +11,7 @@
 		11297F5525B0BEDA0009D0B7 /* SpeedTimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11297F5425B0BEDA0009D0B7 /* SpeedTimerDelegate.swift */; };
 		114DB60B23D3CD9300AAEA45 /* TrickSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114DB60A23D3CD9300AAEA45 /* TrickSearchVC.swift */; };
 		114E58D723E9DE8300D63C80 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E58D623E9DE8300D63C80 /* SettingsViewModel.swift */; };
+		115775DC25BF6A5B0050D2E4 /* TrickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115775DB25BF6A5B0050D2E4 /* TrickView.swift */; };
 		115FEACD25AE0B190065384D /* SpeedEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115FEACC25AE0B190065384D /* SpeedEventCell.swift */; };
 		115FEAD225AE13F40065384D /* SpeedListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115FEAD125AE13F40065384D /* SpeedListCell.swift */; };
 		117D20FD25BB664200F8C0B0 /* TrickListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117D20FC25BB664200F8C0B0 /* TrickListView.swift */; };
@@ -33,6 +34,9 @@
 		11AFA80E2559D10E00856E69 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 11AFA80D2559D10E00856E69 /* Kingfisher */; };
 		11B3ED7523DCF27000ACE06C /* TricksTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B3ED7423DCF27000ACE06C /* TricksTableSection.swift */; };
 		11B3ED7723DCF28E00ACE06C /* TricksSettingsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B3ED7623DCF28E00ACE06C /* TricksSettingsType.swift */; };
+		11BAEADD25CB245100F0B51C /* Resolver-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 11BAEADC25CB245100F0B51C /* Resolver-Dynamic */; };
+		11BAEADE25CB245100F0B51C /* Resolver-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 11BAEADC25CB245100F0B51C /* Resolver-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		11BAEAE225CB412600F0B51C /* AppDelegate+Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BAEAE125CB412500F0B51C /* AppDelegate+Resolver.swift */; };
 		11E253BA23D486EB00FB6DFA /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E253B923D486EB00FB6DFA /* SearchCell.swift */; };
 		11EF715F242EBD0C0005B6B8 /* PrerequisiteHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EF715E242EBD0C0005B6B8 /* PrerequisiteHeaderView.swift */; };
 		11F7CB3325ACD3290089E5AB /* SpeedTimerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7CB3225ACD3280089E5AB /* SpeedTimerDataSource.swift */; };
@@ -138,6 +142,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				11BAEADE25CB245100F0B51C /* Resolver-Dynamic in Embed Frameworks */,
 				11AF9DF723527EAD00746773 /* Pods_Tricktionary.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -151,6 +156,7 @@
 		11297F5425B0BEDA0009D0B7 /* SpeedTimerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimerDelegate.swift; sourceTree = "<group>"; };
 		114DB60A23D3CD9300AAEA45 /* TrickSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickSearchVC.swift; sourceTree = "<group>"; };
 		114E58D623E9DE8300D63C80 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		115775DB25BF6A5B0050D2E4 /* TrickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickView.swift; sourceTree = "<group>"; };
 		115FEACC25AE0B190065384D /* SpeedEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedEventCell.swift; sourceTree = "<group>"; };
 		115FEAD125AE13F40065384D /* SpeedListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedListCell.swift; sourceTree = "<group>"; };
 		117D20FC25BB664200F8C0B0 /* TrickListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickListView.swift; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 		11AF9DF5235277C400746773 /* Tricktionary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tricktionary.entitlements; sourceTree = "<group>"; };
 		11B3ED7423DCF27000ACE06C /* TricksTableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksTableSection.swift; sourceTree = "<group>"; };
 		11B3ED7623DCF28E00ACE06C /* TricksSettingsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksSettingsType.swift; sourceTree = "<group>"; };
+		11BAEAE125CB412500F0B51C /* AppDelegate+Resolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Resolver.swift"; sourceTree = "<group>"; };
 		11E253B923D486EB00FB6DFA /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		11EF715E242EBD0C0005B6B8 /* PrerequisiteHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrerequisiteHeaderView.swift; sourceTree = "<group>"; };
 		11F7CB3225ACD3280089E5AB /* SpeedTimerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimerDataSource.swift; sourceTree = "<group>"; };
@@ -268,6 +275,7 @@
 			files = (
 				11AFA80E2559D10E00856E69 /* Kingfisher in Frameworks */,
 				11AF9DF623527EAD00746773 /* Pods_Tricktionary.framework in Frameworks */,
+				11BAEADD25CB245100F0B51C /* Resolver-Dynamic in Frameworks */,
 				11AFA7EA2559CEFA00856E69 /* FirebaseRemoteConfig in Frameworks */,
 				11AFA7EC2559CEFA00856E69 /* FirebaseStorage in Frameworks */,
 				11AFA7F02559CEFA00856E69 /* FirebaseFirestore in Frameworks */,
@@ -302,6 +310,14 @@
 				4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		115775DA25BF6A480050D2E4 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				115775DB25BF6A5B0050D2E4 /* TrickView.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		115FEAD025AE13D80065384D /* View */ = {
@@ -500,6 +516,7 @@
 		EA7F22D2219EDC3C00C43599 /* Trick detail */ = {
 			isa = PBXGroup;
 			children = (
+				115775DA25BF6A480050D2E4 /* SwiftUI */,
 				11A6D257241037DC0016C55B /* View */,
 				EA7F22D3219EDC5600C43599 /* TrickDetailViewController.swift */,
 				EA85B514219EDFA200F975A2 /* TrickDetailViewModel.swift */,
@@ -537,6 +554,7 @@
 				11AF9DF5235277C400746773 /* Tricktionary.entitlements */,
 				EAC23ABA219D8E3B0086D9E2 /* Classes */,
 				EA8C1D5A219CE61D00F4D502 /* AppDelegate.swift */,
+				11BAEAE125CB412500F0B51C /* AppDelegate+Resolver.swift */,
 				EA8C1D5E219CE61D00F4D502 /* Main.storyboard */,
 				EA8C1D64219CE61D00F4D502 /* Assets.xcassets */,
 				EA8C1D66219CE61D00F4D502 /* LaunchScreen.storyboard */,
@@ -736,6 +754,7 @@
 				11AFA7ED2559CEFA00856E69 /* FirebaseAuth */,
 				11AFA7EF2559CEFA00856E69 /* FirebaseFirestore */,
 				11AFA80D2559D10E00856E69 /* Kingfisher */,
+				11BAEADC25CB245100F0B51C /* Resolver-Dynamic */,
 			);
 			productName = Tricktionary;
 			productReference = EA8C1D57219CE61D00F4D502 /* Tricktionary.app */;
@@ -818,6 +837,7 @@
 			packageReferences = (
 				11AFA7E82559CEFA00856E69 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				11AFA80C2559D10E00856E69 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				11BAEADB25CB245100F0B51C /* XCRemoteSwiftPackageReference "Resolver" */,
 			);
 			productRefGroup = EA8C1D58219CE61D00F4D502 /* Products */;
 			projectDirPath = "";
@@ -1091,6 +1111,8 @@
 				EA1A48D521EA78FA0086FC79 /* MenuCell.swift in Sources */,
 				EA073DF621FA792A0046799C /* SettingsViewController.swift in Sources */,
 				11B3ED7523DCF27000ACE06C /* TricksTableSection.swift in Sources */,
+				115775DC25BF6A5B0050D2E4 /* TrickView.swift in Sources */,
+				11BAEAE225CB412600F0B51C /* AppDelegate+Resolver.swift in Sources */,
 				EAF9B499225A7894001AB242 /* SubmitViewModel.swift in Sources */,
 				EAE6E1D121F3F1F20033D918 /* ControllView.swift in Sources */,
 				EABCC85F224D8A8A00ED3B90 /* BaseCenterViewController.swift in Sources */,
@@ -1473,7 +1495,15 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.15.7;
+				minimumVersion = 6.0.0;
+			};
+		};
+		11BAEADB25CB245100F0B51C /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1503,6 +1533,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 11AFA80C2559D10E00856E69 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		11BAEADC25CB245100F0B51C /* Resolver-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 11BAEADB25CB245100F0B51C /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = "Resolver-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 

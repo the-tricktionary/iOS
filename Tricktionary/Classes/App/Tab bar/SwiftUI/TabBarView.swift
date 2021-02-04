@@ -7,9 +7,14 @@
 //
 
 import SwiftUI
+import Resolver
 
 struct TabBarView: View {
-
+    
+    init() {
+        Resolver.registerDependencies()
+    }
+    
     var body: some View {
         
         TabView {

@@ -48,16 +48,40 @@ struct Trick: Codable {
     var description: String
     var levels: Levels?
     var prerequisites: [Prerequisites]?
+    
+    init(_ data: [String: Any]) {
+        self.name = (data["name"] as? String) ?? ""
+        self.videos = Video(data: data)
+        self.description = (data["description"] as? String) ?? ""
+        self.levels = Levels((data["levels"] as? [String: Any]))
+        let preres = data["prerequisites"] as? [[String: Any]]
+        self.prerequisites = preres?.compactMap {
+            let val = $0["id"] as? String
+            return Prerequisites(val)
+        }
+    }
+}
+
+extension Trick: Hashable {
+    static func == (lhs: Trick, rhs: Trick) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(name)
+        hasher.combine(description)
+    }
 }
 
 struct Video: Codable {
     var youtube: String
 
     init?(data: [String : Any]?) {
-        guard let _youtube = data?["youtube"] as? String else {
+        guard let videos = data?["videos"] as? [String: Any] else {
             fatalError("Error with deserialize video")
         }
-        self.youtube = _youtube
+        self.youtube = (videos["youtube"] as? String) ?? ""
     }
 }
 
@@ -66,18 +90,18 @@ struct Levels: Codable {
     var irsf: LevelsFields
     var wjr: LevelsFields
     
-    init?(_ levelsData: [String : Any]) {
-        if let ijru = levelsData["ijru"] as? [String : Any] {
+    init?(_ levelsData: [String : Any]?) {
+        if let ijru = levelsData?["ijru"] as? [String : Any] {
             self.ijru = LevelsFields(level: ijru["level"] as? String)
         } else {
             self.ijru = LevelsFields(level: nil)
         }
-        if let irsf = levelsData["irsf"] as? [String : Any] {
+        if let irsf = levelsData?["irsf"] as? [String : Any] {
             self.irsf = LevelsFields(level: irsf["level"] as? String)
         } else {
             self.irsf = LevelsFields(level: nil)
         }
-        if let wjr = levelsData["wjr"] as? [String : Any] {
+        if let wjr = levelsData?["wjr"] as? [String : Any] {
             self.wjr = LevelsFields(level: wjr["level"] as? String)
         } else {
             self.wjr = LevelsFields(level: nil)
@@ -91,6 +115,19 @@ struct LevelsFields: Codable {
 
 struct Prerequisites: Codable {
     var id: String
+    
+    init?(_ id: String?) {
+        guard let id = id else { return nil }
+        self.id = id
+    }
+    
+    init?(_ data: [String: Any]) {
+        if let prerequisites = data["prerequisites"] as? [String: Any] {
+            self.id = (prerequisites["id"] as? String) ?? ""
+        } else {
+            return nil
+        }
+    }
 }
 
 enum Type: String {

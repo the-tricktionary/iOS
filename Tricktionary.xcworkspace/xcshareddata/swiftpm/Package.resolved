@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "0e548b700c7c123dd3b2ac776e90d63a540f084d",
-          "version": "5.15.7"
+          "revision": "0be276f6a7fd54af4c3eb03f2d12e12d8c8a1a1d",
+          "version": "6.0.1"
         }
       },
       {
@@ -80,6 +80,15 @@
           "branch": null,
           "revision": "d8accebc8fa32f57196df191e733f946e955c549",
           "version": "1.2.11"
+        }
+      },
+      {
+        "package": "Resolver",
+        "repositoryURL": "https://github.com/hmlongco/Resolver.git",
+        "state": {
+          "branch": null,
+          "revision": "2d15bf5b33b3c95704e84a5b2a43485606bdd5c4",
+          "version": "1.4.0"
         }
       }
     ]

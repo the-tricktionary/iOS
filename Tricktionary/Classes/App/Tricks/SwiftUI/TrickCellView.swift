@@ -19,6 +19,7 @@ struct TrickCellView: View {
             VStack {
                 HStack {
                     Text(name)
+                        .padding(.top, 17)
                     Spacer()
                 }
                 level.map { level in
@@ -26,9 +27,11 @@ struct TrickCellView: View {
                         Image("ijru")
                             .resizable()
                             .frame(width: 16, height: 16)
+                            .padding(.bottom, 13)
                         Text(level)
                             .font(.system(size: 12))
                             .foregroundColor(.red)
+                            .padding(.bottom, 13)
                         Spacer()
                     }
                 }
@@ -37,6 +40,8 @@ struct TrickCellView: View {
             Image(done == true ? "done" : "empty")
                 .resizable()
                 .frame(width: 27, height: 27)
+                .padding(.top, 24)
+                .padding(.bottom, 19)
         }
     }
 }

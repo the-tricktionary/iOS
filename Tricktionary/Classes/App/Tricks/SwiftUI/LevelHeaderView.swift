@@ -39,3 +39,10 @@ struct LevelHeaderView: View {
         }
     }
 }
+
+struct LevelHeaderContent {
+    let title: String
+    let tricks: Int
+    let completed: Int
+    var collapsed: Bool
+}

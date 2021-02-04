@@ -8,32 +8,32 @@
 
 import Foundation
 import SwiftUI
+import Resolver
 
 struct TrickListView: View {
-    @ObservedObject var vm = TricksViewModel(dataProvider: TrickManager.shared,
-                             remoteConfig: TRRemoteConfig(),
-                             settings: Settings(),
-                             userManager: UserManager(),
-                             tricksManager: TricksContentManager(userManager: UserManager(),
-                                                                 checklistDataProvider: TrickManager.shared))
-    
     @State var pickerPresented = false
     @State private var picker: Picker = .levels
     
+    @InjectedObject var viewModel: TricksViewModel
+    
     init() {
-        vm.getTricks()
+        self.viewModel.getTricks(silent: false)
+        
     }
         
     var body: some View {
         NavigationView {
             List {
-                ForEach(vm.uiSections) { section in
+                SearchBar(text: $viewModel.searchText)
+                    .padding([.leading, .trailing], -20)
+                    .padding([.top, .bottom], -7)
+                ForEach(viewModel.uiSections) { section in
                     let header = LevelHeaderView(title: section.name,
                                                  tricks: section.tricks,
                                                  completed: section.completed ?? 0,
                                                  collapsed: section.collapsed,
                                                  onTap: { name in
-                                                    self.vm.toggleSection(name: name)
+                                                    self.viewModel.toggleSection(name: name)
                                                  }
                     )
                     Section(header: header) {
@@ -42,37 +42,44 @@ struct TrickListView: View {
                                 TrickCellView(name: row.title,
                                               level: row.levels[.ijru] ?? nil,
                                               done: row.isDone)
-                                NavigationLink(destination: Text(row.title)) {
+                                NavigationLink(destination: TrickView(name: row.title,
+                                                                      ijruLevel: row.levels[.ijru] ?? nil,
+                                                                      done: row.isDone)) {
                                     EmptyView()
                                 }
+                                .opacity(0)
                             }
                         }
                     }
                 }
             }
-            .animation(.linear(duration: 0.2))
-            .navigationBarTitle("Tricks", displayMode: .inline)
+            .onAppear(perform: {
+                self.viewModel.getTricks(silent: true)
+            })
+            .listStyle(PlainListStyle())
+            .animation(.default)
+            .navigationBarTitle("Tricks", displayMode: .automatic)
             .navigationBarItems(leading:
                                     Button(action: {
                                         picker = .disciplines
                                         pickerPresented = true
                                     }, label: {
-                                        Text(self.vm.disciplines[self.vm.selectedDiscipline].name)
+                                        Text(self.viewModel.disciplines[self.viewModel.selectedDiscipline].name)
                                     }),
                                 trailing:
                                     Button(action: {
                                         picker = .levels
                                         pickerPresented = true
                                     }, label: {
-                                        Text("Level \(self.vm.selectedLevel)")
+                                        Text("Level \(self.viewModel.selectedLevel)")
                                     })
             )
         }
+        .background(SwiftUI.Color.red)
         .actionSheet(isPresented: $pickerPresented) {
             self.getSheet(for: picker)
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        
     }
     
     private func getSheet(for picker: Picker) -> ActionSheet {
@@ -85,16 +92,16 @@ struct TrickListView: View {
     }
     
     private func makeLevelPickerSheet() -> ActionSheet {
-        var actionSheetButtons: [ActionSheet.Button] = vm.levels.map { level in
-            .default(Text("Level \(level)"), action: { self.vm.selectedLevel = level })
+        var actionSheetButtons: [ActionSheet.Button] = viewModel.levels.map { level in
+            .default(Text("Level \(level)"), action: { self.viewModel.selectedLevel = level })
         }
         actionSheetButtons.append(.cancel())
         return ActionSheet(title: Text("Level picker"), message: Text("Select level"), buttons: actionSheetButtons)
     }
     
     private func makeDisciplinePickerSheet() -> ActionSheet {
-        var actionSheetButtons: [ActionSheet.Button] = vm.disciplines.map { discipline in
-            .default(Text(discipline.name), action: { self.vm.selectedDiscipline = self.vm.disciplines.index(of: discipline) ?? 0 })
+        var actionSheetButtons: [ActionSheet.Button] = viewModel.disciplines.map { discipline in
+            .default(Text(discipline.name), action: { self.viewModel.selectedDiscipline = self.viewModel.disciplines.index(of: discipline) ?? 0 })
         }
         actionSheetButtons.append(.cancel())
         return ActionSheet(title: Text("Discipline picker"), message: Text("Select discipline"), buttons: actionSheetButtons)
@@ -102,5 +109,42 @@ struct TrickListView: View {
     
     private enum Picker {
         case levels, disciplines
+    }
+}
+
+struct SearchBar: UIViewRepresentable {
+
+    @Binding var text: String
+
+    class Coordinator: NSObject, UISearchBarDelegate {
+
+        @Binding var text: String
+
+        init(text: Binding<String>) {
+            _text = text
+        }
+
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            text = searchText
+        }
+    }
+
+    func makeCoordinator() -> SearchBar.Coordinator {
+        return Coordinator(text: $text)
+    }
+
+    func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
+        let searchBar = UISearchBar()
+        searchBar.delegate = context.coordinator
+        searchBar.searchBarStyle = .minimal
+        searchBar.backgroundColor = Color.red
+        searchBar.placeholder = "Search trick"
+        searchBar.tintColor = .white
+        searchBar.barTintColor = .red
+        return searchBar
+    }
+
+    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<SearchBar>) {
+        uiView.text = text
     }
 }

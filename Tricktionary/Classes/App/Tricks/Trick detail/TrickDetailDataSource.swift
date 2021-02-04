@@ -36,7 +36,7 @@ extension TrickDetailViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TrickInfo", for: indexPath) as! TrickInfoCell
             cell.customize(with: TrickInfoCell.Content(id: viewModel.trick?.id,
-                                                       name: viewModel.trickName,
+                                                       name: viewModel.trick?.name ?? "",
                                                        level: viewModel.trick?.levels?.ijru.level ?? "",
                                                        favorite: false, completed: viewModel.isDone))
             cell.doneTapped = { [weak self] id in
