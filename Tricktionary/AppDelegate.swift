@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         UINavigationBar.appearance().standardAppearance = navBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
         UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().layer.shadowColor = UIColor.clear.cgColor
         
         UITabBar.appearance().barTintColor = Color.red
         UITabBar.appearance().unselectedItemTintColor = .white

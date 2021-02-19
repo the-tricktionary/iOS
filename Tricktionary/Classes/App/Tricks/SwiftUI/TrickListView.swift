@@ -9,76 +9,52 @@
 import Foundation
 import SwiftUI
 import Resolver
+import Combine
 
-struct TrickListView: View {
+struct TrickListView: View, Resolving {
     @State var pickerPresented = false
     @State private var picker: Picker = .levels
     
+    @ObservedObject var searchBar: SearchBar = SearchBar()
+    
     @InjectedObject var viewModel: TricksViewModel
+
+    var cancelable = Set<AnyCancellable>()
     
     init() {
         self.viewModel.getTricks(silent: false)
-        
     }
         
     var body: some View {
         NavigationView {
-            List {
-                SearchBar(text: $viewModel.searchText)
-                    .padding([.leading, .trailing], -20)
-                    .padding([.top, .bottom], -7)
-                ForEach(viewModel.uiSections) { section in
-                    let header = LevelHeaderView(title: section.name,
-                                                 tricks: section.tricks,
-                                                 completed: section.completed ?? 0,
-                                                 collapsed: section.collapsed,
-                                                 onTap: { name in
-                                                    self.viewModel.toggleSection(name: name)
-                                                 }
-                    )
-                    Section(header: header) {
-                        ForEach(section.rows) { row in
-                            ZStack {
-                                TrickCellView(name: row.title,
-                                              level: row.levels[.ijru] ?? nil,
-                                              done: row.isDone)
-                                NavigationLink(destination: TrickView(name: row.title,
-                                                                      ijruLevel: row.levels[.ijru] ?? nil,
-                                                                      done: row.isDone)) {
-                                    EmptyView()
-                                }
-                                .opacity(0)
-                            }
-                        }
-                    }
+            self.makeListView()
+                .add(self.searchBar)
+                .onAppear(perform: {
+                    self.viewModel.getTricks(silent: true)
+                })
+                .listStyle(PlainListStyle())
+                .animation(.default)
+                .navigationBarTitle("Tricks", displayMode: .inline)
+                .navigationBarItems(leading:
+                                        Button(action: {
+                                            picker = .disciplines
+                                            pickerPresented = true
+                                        }, label: {
+                                            Text(self.viewModel.disciplines[self.viewModel.selectedDiscipline].name)
+                                        }),
+                                    trailing:
+                                        Button(action: {
+                                            picker = .levels
+                                            pickerPresented = true
+                                        }, label: {
+                                            Text("Level \(self.viewModel.selectedLevel)")
+                                        })
+                )
+                .actionSheet(isPresented: $pickerPresented) {
+                    self.getSheet(for: picker)
                 }
-            }
-            .onAppear(perform: {
-                self.viewModel.getTricks(silent: true)
-            })
-            .listStyle(PlainListStyle())
-            .animation(.default)
-            .navigationBarTitle("Tricks", displayMode: .automatic)
-            .navigationBarItems(leading:
-                                    Button(action: {
-                                        picker = .disciplines
-                                        pickerPresented = true
-                                    }, label: {
-                                        Text(self.viewModel.disciplines[self.viewModel.selectedDiscipline].name)
-                                    }),
-                                trailing:
-                                    Button(action: {
-                                        picker = .levels
-                                        pickerPresented = true
-                                    }, label: {
-                                        Text("Level \(self.viewModel.selectedLevel)")
-                                    })
-            )
         }
         .background(SwiftUI.Color.red)
-        .actionSheet(isPresented: $pickerPresented) {
-            self.getSheet(for: picker)
-        }
         .navigationViewStyle(StackNavigationViewStyle())
     }
     
@@ -107,44 +83,190 @@ struct TrickListView: View {
         return ActionSheet(title: Text("Discipline picker"), message: Text("Select discipline"), buttons: actionSheetButtons)
     }
     
+    private func makeListView() -> some View {
+        List {
+            ForEach(viewModel.uiSections) { section in
+                let header = LevelHeaderView(title: section.name,
+                                             tricks: section.tricks,
+                                             completed: section.completed ?? 0,
+                                             collapsed: section.collapsed,
+                                             onTap: { name in
+                                                self.viewModel.toggleSection(name: name)
+                                             }
+                )
+                Section(header: header) {
+                    ForEach(section.rows.filter { $0.title.lowercased().contains(self.searchBar.text.lowercased()) || self.searchBar.text.isEmpty }) { row in
+                        ZStack {
+                            TrickCellView(name: row.title,
+                                          level: row.levels[.ijru] ?? nil,
+                                          done: row.isDone)
+                            NavigationLink(destination: TrickView(name: row.title,
+                                                                  ijruLevel: row.levels[.ijru] ?? nil,
+                                                                  done: row.isDone)) {
+                                EmptyView()
+                            }
+                            .opacity(0)
+                        }
+                    }
+                }
+            }
+        }
+        .padding(.top, -8)
+    }
+    
     private enum Picker {
         case levels, disciplines
     }
+    
+    private func calculateContentOffset(fromOutsideProxy outsideProxy: GeometryProxy, insideProxy: GeometryProxy) -> CGFloat {
+            outsideProxy.frame(in: .global).minY - insideProxy.frame(in: .global).minY
+        }
 }
 
-struct SearchBar: UIViewRepresentable {
+struct ScrollOffsetPreferenceKey: PreferenceKey {
+    typealias Value = [CGFloat]
+    
+    static var defaultValue: [CGFloat] = [0]
+    
+    static func reduce(value: inout [CGFloat], nextValue: () -> [CGFloat]) {
+        value.append(contentsOf: nextValue())
+    }
+}
 
+struct SearchBarView: View {
     @Binding var text: String
-
-    class Coordinator: NSObject, UISearchBarDelegate {
-
-        @Binding var text: String
-
-        init(text: Binding<String>) {
-            _text = text
+ 
+    @State private var isEditing = false
+ 
+    var body: some View {
+        HStack {
+ 
+            TextField("Search ...", text: $text)
+                .padding(7)
+                .padding(.horizontal, 25)
+                .background(SwiftUI.Color(.systemGray6))
+                .cornerRadius(8)
+                .padding(.horizontal, 10)
+                .onTapGesture {
+                    self.isEditing = true
+                }
+                .overlay(
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 15)
+                 
+                        if isEditing {
+                            Button(action: {
+                                self.text = ""
+                            }) {
+                                Image(systemName: "multiply.circle.fill")
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing, 15)
+                            }
+                        }
+                    }
+                )
+ 
+            if isEditing {
+                Button(action: {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                                    to: nil,
+                                                    from: nil,
+                                                    for: nil)
+                    self.isEditing = false
+                    self.text = ""
+ 
+                }) {
+                    Text("Cancel")
+                }
+                .padding(.trailing, 10)
+                .transition(.move(edge: .trailing))
+                .animation(.default)
+            }
         }
+    }
+}
 
-        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            text = searchText
+class SearchBar: NSObject, ObservableObject {
+    
+    @Published var text: String = ""
+    let searchController: UISearchController = UISearchController(searchResultsController: nil)
+    
+    override init() {
+        super.init()
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchResultsUpdater = self
+    }
+}
+
+extension SearchBar: UISearchResultsUpdating {
+   
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        // Publish search bar text changes.
+        if let searchBarText = searchController.searchBar.text {
+            self.text = searchBarText
         }
     }
+}
 
-    func makeCoordinator() -> SearchBar.Coordinator {
-        return Coordinator(text: $text)
+struct SearchBarModifier: ViewModifier {
+    
+    let searchBar: SearchBar
+    
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                ViewControllerResolver { viewController in
+                    viewController.navigationItem.searchController = self.searchBar.searchController
+                }
+                    .frame(width: 0, height: 0)
+            )
     }
+}
 
-    func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
-        let searchBar = UISearchBar()
-        searchBar.delegate = context.coordinator
-        searchBar.searchBarStyle = .minimal
-        searchBar.backgroundColor = Color.red
-        searchBar.placeholder = "Search trick"
-        searchBar.tintColor = .white
-        searchBar.barTintColor = .red
-        return searchBar
+extension View {
+    
+    func add(_ searchBar: SearchBar) -> some View {
+        return self.modifier(SearchBarModifier(searchBar: searchBar))
     }
+}
 
-    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<SearchBar>) {
-        uiView.text = text
+final class ViewControllerResolver: UIViewControllerRepresentable {
+    
+    let onResolve: (UIViewController) -> Void
+        
+    init(onResolve: @escaping (UIViewController) -> Void) {
+        self.onResolve = onResolve
+    }
+    
+    func makeUIViewController(context: Context) -> ParentResolverViewController {
+        ParentResolverViewController(onResolve: onResolve)
+    }
+    
+    func updateUIViewController(_ uiViewController: ParentResolverViewController, context: Context) { }
+}
+
+class ParentResolverViewController: UIViewController {
+    
+    let onResolve: (UIViewController) -> Void
+    
+    init(onResolve: @escaping (UIViewController) -> Void) {
+        self.onResolve = onResolve
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Use init(onResolve:) to instantiate ParentResolverViewController.")
+    }
+        
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        
+        if let parent = parent {
+            onResolve(parent)
+        }
     }
 }
