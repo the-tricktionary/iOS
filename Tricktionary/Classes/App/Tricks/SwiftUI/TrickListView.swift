@@ -11,7 +11,7 @@ import SwiftUI
 import Resolver
 import Combine
 
-struct TrickListView: View, Resolving {
+struct TrickListView: View {
     @State var pickerPresented = false
     @State private var picker: Picker = .levels
     

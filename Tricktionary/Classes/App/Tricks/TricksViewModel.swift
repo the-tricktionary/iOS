@@ -11,39 +11,31 @@ import FirebaseFirestore
 import FirebaseRemoteConfig
 import FirebaseAuth
 import Combine
+import Resolver
 
-protocol TricksViewModelType {
-    var loading: CurrentValueSubject<Bool, Never> { get }
-    var sections: CurrentValueSubject<[TableSection], Never> { get }
-    var selectedLevel: Int { get set }
-    var levels: [Int] { get }
-    var disciplines: [Disciplines] { get }
-    var selectedDiscipline: Int { get set }
-    var settings: TricksListSettingsType { get }
-    var isPullToRefresh: Bool { get set }
-    var tricksManager: TricksContentManager { get }
-    var uiTricks: [BaseTrick] { get }
-    var uiSections: [TableSection] { get }
-    var searchText: String { get set }
-    
-    func toggleSection(name: String)
-    func getFilteredTricks(substring: String) -> [BaseTrick]?
-    func getTricks(silent: Bool)
-}
-
-class TricksViewModel: TricksViewModelType, ObservableObject {
-
+class TricksViewModel: ObservableObject {
     // MARK: - Variables
-
-    private var cancelable = Set<AnyCancellable>()
-    private var allTricksId: [String : String] = [String : String]()
-    let sections = CurrentValueSubject<[TableSection], Never>([])
-    private let tricks = CurrentValueSubject<[BaseTrick], Never>([])
+    // DI
+    @Injected var tricksManager: TricksContentManager
+    @Injected var dataProvider: TricksDataProviderType
+    @Injected var remoteConfig: RemoteConfigType
+    @Injected var userManager: UserManagerType
+    @Injected var settings: TricksListSettingsType
+    
+    // published
     @Published var uiTricks: [BaseTrick] = []
     @Published var uiSections: [TableSection] = []
     @Published var searchText: String = ""
-    var loading = CurrentValueSubject<Bool, Never>(true)
 
+    // private
+    private var cancelable = Set<AnyCancellable>()
+    private var allTricksId: [String : String] = [String : String]()
+    private let tricks = CurrentValueSubject<[BaseTrick], Never>([])
+    
+    // public
+    let sections = CurrentValueSubject<[TableSection], Never>([])
+    var loading = CurrentValueSubject<Bool, Never>(true)
+    var hovno: Bool = true
     var isPullToRefresh: Bool = false
 
     var selectedLevel: Int = 1 {
@@ -73,26 +65,9 @@ class TricksViewModel: TricksViewModelType, ObservableObject {
         remoteConfig.disciplines
     }
 
-    var tricksManager: TricksContentManager
-    
-    private let dataProvider: TricksDataProviderType
-    private let remoteConfig: RemoteConfigType
-    private let userManager: UserManagerType
-    var settings: TricksListSettingsType
-    
     // MARK: - Initializer
     
-    init(dataProvider: TricksDataProviderType,
-         remoteConfig: RemoteConfigType,
-         settings: TricksListSettingsType,
-         userManager: UserManagerType,
-         tricksManager: TricksContentManager) {
-        self.dataProvider = dataProvider
-        self.remoteConfig = remoteConfig
-        self.settings = settings
-        self.userManager = userManager
-        self.tricksManager = tricksManager
-        
+    init() {
         bind()
     }
     
@@ -151,7 +126,7 @@ class TricksViewModel: TricksViewModelType, ObservableObject {
     }
     
     func done(trickName: String) -> Bool {
-        guard let trickId = tricks.value.filter { $0.name == trickName }.first?.id else {
+        guard let trickId = tricks.value.filter({ $0.name == trickName }).first?.id else {
             return false
         }
         return tricksManager.completedTricks.contains(trickId)
@@ -243,10 +218,6 @@ class TricksViewModel: TricksViewModelType, ObservableObject {
         let levels = tricks.value.map { trick -> Int in
             return trick.level
         }
-        if let min = levels.min() {
-            selectedLevel = min
-        } else {
-            selectedLevel = 1
-        }
+        selectedLevel = levels.min() ?? 1
     }
 }

@@ -41,18 +41,17 @@ extension Resolver {
                                  checklistDataProvider: resolver.resolve(ChecklistDataProviderType.self, name: nil, args: nil))
         }.scope(.shared)
         
+        register {
+            Settings()
+        }.implements(TricksListSettingsType.self)
+        
         Self.registerViewModels()
     }
     
     private static func registerViewModels() {
-        register { resolver, _ in
-            TricksViewModel(dataProvider: resolver.resolve(TricksDataProviderType.self, name: nil, args: nil),
-                            remoteConfig: resolver.resolve(RemoteConfigType.self, name: nil, args: nil),
-                            settings: Settings(),
-                            userManager: resolver.resolve(UserManagerType.self, name: nil, args: nil),
-                            tricksManager: resolver.resolve(TricksContentManager.self, name: nil, args: nil))
+        register {
+            TricksViewModel()
         }
-        .implements(TricksViewModelType.self)
         
         register { resolver, _ in
             TrickDetailViewModel(dataProvider: resolver.resolve(TrickDetailDataProviderType.self, name: nil, args: nil),

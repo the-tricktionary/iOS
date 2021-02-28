@@ -19,11 +19,7 @@ class ViewControllerFactory {
     }
 
     static func makeTrickListVC() -> TricksViewController {
-        let vm = TricksViewModel(dataProvider: Self.resolver.resolve(TricksDataProviderType.self)!,
-                                 remoteConfig: Self.resolver.resolve(RemoteConfigType.self)!,
-                                 settings: Settings(),
-                                 userManager: Self.resolver.resolve(UserManagerType.self)!,
-                                 tricksManager: Self.resolver.resolve(TricksContentManager.self)!)
+        let vm = TricksViewModel()
         let vc = TricksViewController(viewModel: vm)
         return vc
     }

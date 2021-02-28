@@ -9,7 +9,7 @@
 import SwiftUI
 import Resolver
 
-struct TabBarView: View {
+struct TabBarView: View, Resolving {
     
     init() {
         Resolver.registerDependencies()
