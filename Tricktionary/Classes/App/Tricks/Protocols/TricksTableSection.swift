@@ -9,7 +9,7 @@
 import Foundation
 
 struct TableSection: Identifiable {
-    var id = UUID()
+    var id: String
     var name: String
     var rows: [TrickLevelCell.Content]
     var collapsed: Bool

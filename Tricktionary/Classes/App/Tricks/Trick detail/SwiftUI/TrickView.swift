@@ -16,7 +16,7 @@ struct TrickView: View {
     var ijruLevel: String?
     @InjectedObject var vm: TrickDetailViewModel
     
-    init(name: String, ijruLevel: String?, done: Bool) {
+    init(name: String, ijruLevel: String?) {
         self.name = name
         self.ijruLevel = ijruLevel
     }

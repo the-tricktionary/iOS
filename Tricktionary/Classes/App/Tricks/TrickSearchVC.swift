@@ -65,7 +65,7 @@ extension TrickSearchVC: UITableViewDataSource {
             return UITableViewCell()
         }
         let trick = filteredTricks.value[indexPath.row]
-        cell.customize(with: TrickLevelCell.Content(title: trick.name, levels: [
+        cell.customize(with: TrickLevelCell.Content(id: trick.name, title: trick.name, levels: [
             .ijru: trick.levels?.ijru.level ?? ""
         ], isDone: completed.contains(trick.id ?? "")))
         return cell

@@ -12,19 +12,27 @@ import Resolver
 import Combine
 
 struct TrickListView: View {
+    
+    // MARK: - Variables
+    // State
     @State var pickerPresented = false
     @State private var picker: Picker = .levels
     
-    @ObservedObject var searchBar: SearchBar = SearchBar()
-    
+    // Observed object
     @InjectedObject var viewModel: TricksViewModel
-
-    var cancelable = Set<AnyCancellable>()
     
+    @ObservedObject var searchBar: SearchBar = SearchBar()
+
+    // Private
+    private var cancelable = Set<AnyCancellable>()
+    
+    
+    // MARK: - Initializer
     init() {
         self.viewModel.getTricks(silent: false)
     }
-        
+    
+    // MARK: - Body
     var body: some View {
         NavigationView {
             self.makeListView()
@@ -51,14 +59,16 @@ struct TrickListView: View {
                                         })
                 )
                 .actionSheet(isPresented: $pickerPresented) {
-                    self.getSheet(for: picker)
+                    self.getSheet()
                 }
         }
         .background(SwiftUI.Color.red)
         .navigationViewStyle(StackNavigationViewStyle())
     }
     
-    private func getSheet(for picker: Picker) -> ActionSheet {
+    /// Action sheet
+    /// - Returns: Action sheet for selected picker type
+    private func getSheet() -> ActionSheet {
         switch picker {
         case .levels:
             return makeLevelPickerSheet()
@@ -67,6 +77,8 @@ struct TrickListView: View {
         }
     }
     
+    /// Create level picker action sheet
+    /// - Returns: ActionSheet
     private func makeLevelPickerSheet() -> ActionSheet {
         var actionSheetButtons: [ActionSheet.Button] = viewModel.levels.map { level in
             .default(Text("Level \(level)"), action: { self.viewModel.selectedLevel = level })
@@ -75,6 +87,8 @@ struct TrickListView: View {
         return ActionSheet(title: Text("Level picker"), message: Text("Select level"), buttons: actionSheetButtons)
     }
     
+    /// Create discipline picker action sheet
+    /// - Returns: ActionSheet
     private func makeDisciplinePickerSheet() -> ActionSheet {
         var actionSheetButtons: [ActionSheet.Button] = viewModel.disciplines.map { discipline in
             .default(Text(discipline.name), action: { self.viewModel.selectedDiscipline = self.viewModel.disciplines.index(of: discipline) ?? 0 })
@@ -83,6 +97,8 @@ struct TrickListView: View {
         return ActionSheet(title: Text("Discipline picker"), message: Text("Select discipline"), buttons: actionSheetButtons)
     }
     
+    /// Create list view
+    /// - Returns: some View
     private func makeListView() -> some View {
         List {
             ForEach(viewModel.uiSections) { section in
@@ -101,8 +117,7 @@ struct TrickListView: View {
                                           level: row.levels[.ijru] ?? nil,
                                           done: row.isDone)
                             NavigationLink(destination: TrickView(name: row.title,
-                                                                  ijruLevel: row.levels[.ijru] ?? nil,
-                                                                  done: row.isDone)) {
+                                                                  ijruLevel: row.levels[.ijru] ?? nil)) {
                                 EmptyView()
                             }
                             .opacity(0)
@@ -114,22 +129,9 @@ struct TrickListView: View {
         .padding(.top, -8)
     }
     
+    /// Picker type
     private enum Picker {
         case levels, disciplines
-    }
-    
-    private func calculateContentOffset(fromOutsideProxy outsideProxy: GeometryProxy, insideProxy: GeometryProxy) -> CGFloat {
-            outsideProxy.frame(in: .global).minY - insideProxy.frame(in: .global).minY
-        }
-}
-
-struct ScrollOffsetPreferenceKey: PreferenceKey {
-    typealias Value = [CGFloat]
-    
-    static var defaultValue: [CGFloat] = [0]
-    
-    static func reduce(value: inout [CGFloat], nextValue: () -> [CGFloat]) {
-        value.append(contentsOf: nextValue())
     }
 }
 

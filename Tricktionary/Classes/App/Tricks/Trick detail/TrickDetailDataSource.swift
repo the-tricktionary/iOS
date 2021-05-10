@@ -47,7 +47,8 @@ extension TrickDetailViewController: UITableViewDataSource {
         case 1:
             let trick = viewModel.preprequisites.value[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "TrickPrerequisites", for: indexPath) as! TrickLevelCell
-            cell.customizePrerequisite(with: TrickLevelCell.Content(title: trick.name,
+            cell.customizePrerequisite(with: TrickLevelCell.Content(id: trick.name,
+                                                                    title: trick.name,
                                                                     levels: [.ijru : trick.levels?.ijru.level ?? ""],
                                                                     isDone: false))
             return cell

@@ -13,8 +13,12 @@ import Combine
 public protocol UserManagerType {
     var userStateDidChange: PassthroughSubject<Bool, Never> { get }
     var userName: String? { get }
+    var email: String? { get }
     var userId: String? { get }
     var logged: Bool { get }
+    var imageData: Data? { get }
+    
+    func logout()
 }
 
 class UserManager: UserManagerType {
@@ -31,11 +35,31 @@ class UserManager: UserManagerType {
         Auth.auth().currentUser?.displayName
     }
     
+    var imageData: Data? {
+        guard let url = Auth.auth().currentUser?.photoURL else {
+            return nil
+        }
+        return try? Data(contentsOf: url)
+    }
+    
+    var email: String? {
+        Auth.auth().currentUser?.email
+    }
+    
     // MARK: - Initializer
     init() {
         bind()
     }
     
+    // MAKR: - Public
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            userStateDidChange.send(true)
+        } catch {
+            print("### Logout error \(error)")
+        }
+    }
     // MARK: - Privates
     private func bind() {
         Auth.auth().addStateDidChangeListener { (auth, user) in

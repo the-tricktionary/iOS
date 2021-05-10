@@ -10,11 +10,6 @@ import SwiftUI
 import Resolver
 
 struct TabBarView: View, Resolving {
-    
-    init() {
-        Resolver.registerDependencies()
-    }
-    
     var body: some View {
         
         TabView {
@@ -29,7 +24,7 @@ struct TabBarView: View, Resolving {
                     Text("Speed timer")
                 }
             
-            Text("Here will be speed data")
+            SpeedDataView()
                 .tabItem {
                     Image("data")
                     Text("Speed data")
@@ -41,7 +36,7 @@ struct TabBarView: View, Resolving {
                     Text("Submit")
                 }
             
-            Text("Here will be menu")
+            MenuView()
                 .tabItem {
                     Image("settings")
                     Text("Menu")

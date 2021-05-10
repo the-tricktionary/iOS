@@ -36,14 +36,17 @@ extension Resolver {
         }
         .implements(TrickDetailDataProviderType.self)
         
-        register { resolver, _ in
-            TricksContentManager(userManager: resolver.resolve(UserManagerType.self, name: nil, args: nil),
-                                 checklistDataProvider: resolver.resolve(ChecklistDataProviderType.self, name: nil, args: nil))
-        }.scope(.shared)
+        register {
+            TricksContentManager()
+        }
+        .implements(TricksContentManagerType.self)
+        .scope(.shared)
         
         register {
             Settings()
-        }.implements(TricksListSettingsType.self)
+        }
+        .implements(TricksListSettingsType.self)
+        .implements(SettingsViewModelType.self)
         
         Self.registerViewModels()
     }
@@ -53,12 +56,59 @@ extension Resolver {
             TricksViewModel()
         }
         
+        register {
+            SpeedDataViewModel()
+        }
+        
+        register {
+            MenuViewModel()
+        }
+        
         register { resolver, _ in
             TrickDetailViewModel(dataProvider: resolver.resolve(TrickDetailDataProviderType.self, name: nil, args: nil),
                                  settings: Settings(),
                                  tricksManager: resolver.resolve(TricksContentManager.self, name: nil, args: nil))
         }
         .implements(TrickDetailViewModelType.self)
+        
+        register {
+            SettingsViewModel()
+        }
     }
     
+}
+
+extension Resolver.Name {
+    static let localDataSource = Self("local")
+    static let remoteDataSource = Self("remote")
+}
+
+protocol DataSourceType {
+    func legitimize()
+}
+
+class LocalDataSource: DataSourceType {
+    func legitimize() {
+        print("Hello I'm local data source")
+    }
+}
+class RemoteDataSource: DataSourceType {
+    func legitimize() {
+        print("Hello I'm remote data source")
+    }
+}
+
+class DataProvider: Resolving {
+    
+    private let local: Bool
+    
+    private lazy var dataSource: DataSourceType? = resolver.optional(DataSourceType.self, name: local ? .localDataSource : .remoteDataSource)
+    
+    init(local: Bool) {
+        self.local = local
+    }
+    
+    func sayHello() {
+        dataSource?.legitimize()
+    }
 }

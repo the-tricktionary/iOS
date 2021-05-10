@@ -15,16 +15,17 @@ import LifetimeTracker
 import Swinject
 import SwiftMonkeyPaws
 import SwiftUI
+import Resolver
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
     private var paws: MonkeyPaws?
-    var resolver: Resolver?
+    var resolver: Swinject.Resolver?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        resolverDemo()
         FirebaseApp.configure()
         UserDefaults.standard.register(defaults: [PxSettings.newScreen : false])
 
@@ -67,15 +68,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func registerDependencies() {
+        Resolver.registerDependencies()
         let container = Container()
         container.register(TricksDataProviderType.self) { _ in
             TrickManager()
         }.inObjectScope(.container)
         container.register(TrickDetailDataProviderType.self) { _ in TrickManager() }.inObjectScope(.container)
         container.register(UserManagerType.self) { _ in UserManager() }.inObjectScope(.container)
-        container.register(TricksContentManager.self) { resolver in
-            TricksContentManager(userManager: resolver.resolve(UserManagerType.self)!,
-                                 checklistDataProvider: TrickManager.shared)
+        container.register(TricksContentManagerType.self) { resolver in
+            TricksContentManager()
         }.inObjectScope(.container)
         container.register(RemoteConfigType.self) { _ in
             TRRemoteConfig()
@@ -159,5 +160,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
+    }
+    
+    func resolverDemo() {
+        Resolver.register(name: .localDataSource) {
+            LocalDataSource() as DataSourceType
+        }
+        
+        Resolver.register(name: .remoteDataSource) {
+            RemoteDataSource() as DataSourceType
+        }
+        
+        let local = DataProvider(local: true)
+        let remote = DataProvider(local: false)
+        
+        local.sayHello()
+        remote.sayHello()
     }
 }

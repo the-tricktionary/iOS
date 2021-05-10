@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class TrickLevelCell: BaseCell {
     
@@ -212,7 +213,7 @@ class LevelView: UIView {
 
 extension TrickLevelCell {
     struct Content: Hashable, Identifiable {
-        var id = UUID()
+        var id: String
         var title: String
         var levels: [Organization : String?]
         var isDone: Bool

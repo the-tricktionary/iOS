@@ -13,10 +13,16 @@ import FirebaseAuth
 import Combine
 import Resolver
 
+enum TrickListState {
+    case loading
+    case error
+    case fetched([TableSection])
+}
+
 class TricksViewModel: ObservableObject {
     // MARK: - Variables
     // DI
-    @Injected var tricksManager: TricksContentManager
+    @Injected var tricksManager: TricksContentManagerType
     @Injected var dataProvider: TricksDataProviderType
     @Injected var remoteConfig: RemoteConfigType
     @Injected var userManager: UserManagerType
@@ -26,6 +32,8 @@ class TricksViewModel: ObservableObject {
     @Published var uiTricks: [BaseTrick] = []
     @Published var uiSections: [TableSection] = []
     @Published var searchText: String = ""
+    
+    var state = PassthroughSubject<TrickListState, Never>()
 
     // private
     private var cancelable = Set<AnyCancellable>()
@@ -37,6 +45,10 @@ class TricksViewModel: ObservableObject {
     var loading = CurrentValueSubject<Bool, Never>(true)
     var hovno: Bool = true
     var isPullToRefresh: Bool = false
+    
+    var username: String? {
+        userManager.userName
+    }
 
     var selectedLevel: Int = 1 {
         didSet {
@@ -106,7 +118,8 @@ class TricksViewModel: ObservableObject {
                 if section.collapsed {
                     let tricksForLevel = self.tricks.value.filter { $0.level == selectedLevel }
                     self.sections.value[index].rows = tricksForLevel.filter { $0.type == name }
-                        .map { TrickLevelCell.Content(title: $0.name,
+                        .map { TrickLevelCell.Content(id: $0.name,
+                                                      title: $0.name,
                                                       levels: makeLevels(trick: $0),
                                                       isDone: self.isDone($0)) }
                     self.sections.value[index].collapsed = false
@@ -155,23 +168,26 @@ class TricksViewModel: ObservableObject {
             let rows = tricksForLevel
                 .filter { $0.type == type }
                 .map {
-                    TrickLevelCell.Content(title: $0.name,
+                    TrickLevelCell.Content(id: $0.name,
+                                           title: $0.name,
                                            levels: makeLevels(trick: $0),
                                            isDone: isDone($0))
                 }
-            return result + [TableSection(name: type,
-                                   rows: rows,
-                                   collapsed: false,
-                                   tricks: rows.count,
-                                   completed: self.userManager.logged ? rows.filter { $0.isDone }.count : nil)]
+            return result + [TableSection(id: type,
+                                          name: type,
+                                          rows: rows,
+                                          collapsed: false,
+                                          tricks: rows.count,
+                                          completed: self.userManager.logged ? rows.filter { $0.isDone }.count : nil)]
         }
         uiSections = sections.value
     }
     
     private func makeFilteredContent(tricks: [BaseTrick]?) {
-        uiSections = [TableSection(name: "Searched",
+        uiSections = [TableSection(id: "search",
+                                   name: "Searched",
                                    rows: tricks?.map {
-                                    TrickLevelCell.Content(title: $0.name, levels: self.makeLevels(trick: $0), isDone: isDone($0))
+                                    TrickLevelCell.Content(id: $0.name, title: $0.name, levels: self.makeLevels(trick: $0), isDone: isDone($0))
                                    } ?? [],
                                    collapsed: false,
                                    tricks: tricks?.count ?? 0)]

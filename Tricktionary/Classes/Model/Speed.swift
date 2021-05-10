@@ -9,8 +9,16 @@
 import Foundation
 import Firebase
 
-class Speed: Codable {
+class Speed: Codable, Hashable, Identifiable {
+    static func == (lhs: Speed, rhs: Speed) -> Bool {
+        lhs.hashValue == rhs.hashValue
+    }
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(event)
+        hasher.combine(speedId)
+    }
+    var id = UUID().uuidString
     // MARK: Variables
     var avgJumps: Double = 0.0
     var created: Date?

@@ -7,7 +7,32 @@
 //
 
 import XCTest
+import Resolver
+import Combine
 
 class TricktionaryTests: XCTestCase {
     
+    override class func setUp() {
+        super.setUp()
+        Resolver.registerTrickListDependencies()
+    }
+    
+    func testTrickList() {
+        let vm = TricksViewModel()
+        XCTAssert(vm.username == "Marek")
+    }
+    
+    func testCheckListEmpty() {
+        let vm = TricksViewModel()
+        XCTAssert(vm.tricksManager.completedTricks.isEmpty)
+    }
+    
+    func testCheckListNotEmpty() {
+        Resolver.register {
+            TricksContentManagerTestNotEmpty()
+        }.implements(TricksContentManagerType.self)
+        
+        let vm = TricksViewModel()
+        XCTAssert(vm.tricksManager.completedTricks.count == 2)
+    }
 }

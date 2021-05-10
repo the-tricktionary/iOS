@@ -9,22 +9,25 @@
 import Foundation
 import FirebaseAuth
 import Combine
+import Resolver
 
-class TricksContentManager {
+protocol TricksContentManagerType {
+    var completedTricks: [String] { get }
+}
+
+class TricksContentManager: TricksContentManagerType {
     
     // MARK: - Variables
     // public
     var completedTricks: [String] = []
     
     // private
-    private let userManager: UserManagerType
-    private let chcecklistDataProvider: ChecklistDataProviderType
+    @Injected var userManager: UserManagerType
+    @Injected var chcecklistDataProvider: ChecklistDataProviderType
     private var cancelables = Set<AnyCancellable>()
     
     // MARK: - Initializer
-    init(userManager: UserManagerType, checklistDataProvider: ChecklistDataProviderType) {
-        self.userManager = userManager
-        self.chcecklistDataProvider = checklistDataProvider
+    init() {
         bind()
     }
     

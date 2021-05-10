@@ -54,7 +54,6 @@ protocol ChecklistDataProviderType {
 }
 
 class TrickManager: TricksDataProviderType, TrickDetailDataProviderType, ChecklistDataProviderType {
-    var hovno: Bool = true
     func getTricks(discipline: Disciplines) -> AnyPublisher<[BaseTrick], Error> {
         let firestore = Firestore.firestore()
         let documentReference = firestore.collection(discipline.identity)

@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import SwiftMonkey
 
 class TricktionaryUITests: XCTestCase {
 
