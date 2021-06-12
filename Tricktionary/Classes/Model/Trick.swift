@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct BaseTrick: Codable {
+struct BaseTrick: Codable, Identifiable {
     let Id = UUID()
     var name: String
     var level: Int
@@ -41,7 +41,7 @@ extension BaseTrick: Hashable {
     }
 }
 
-struct Trick: Codable {
+struct Trick: Codable, Identifiable {
     var id: String?
     var name: String
     var videos: Video?

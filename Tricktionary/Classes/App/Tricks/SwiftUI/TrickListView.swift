@@ -81,7 +81,10 @@ struct TrickListView: View {
     /// - Returns: ActionSheet
     private func makeLevelPickerSheet() -> ActionSheet {
         var actionSheetButtons: [ActionSheet.Button] = viewModel.levels.map { level in
-            .default(Text("Level \(level)"), action: { self.viewModel.selectedLevel = level })
+            .default(Text("Level \(level)"), action: {
+                self.viewModel.selectedLevel = level
+                self.viewModel.level.send(level)
+            })
         }
         actionSheetButtons.append(.cancel())
         return ActionSheet(title: Text("Level picker"), message: Text("Select level"), buttons: actionSheetButtons)
@@ -91,7 +94,10 @@ struct TrickListView: View {
     /// - Returns: ActionSheet
     private func makeDisciplinePickerSheet() -> ActionSheet {
         var actionSheetButtons: [ActionSheet.Button] = viewModel.disciplines.map { discipline in
-            .default(Text(discipline.name), action: { self.viewModel.selectedDiscipline = self.viewModel.disciplines.index(of: discipline) ?? 0 })
+            .default(Text(discipline.name), action: {
+                self.viewModel.selectedDiscipline = self.viewModel.disciplines.index(of: discipline) ?? 0
+                self.viewModel.discipline.send(self.viewModel.disciplines.index(of: discipline) ?? 0)
+            })
         }
         actionSheetButtons.append(.cancel())
         return ActionSheet(title: Text("Discipline picker"), message: Text("Select discipline"), buttons: actionSheetButtons)

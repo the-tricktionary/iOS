@@ -12,6 +12,11 @@ import ReactiveSwift
 import FirebaseAuth
 import Combine
 
+enum SpeedError: Error {
+    case notLoggedIn
+    case unkwnown(Error)
+}
+
 protocol SpeedTimerDataProviderType {
     func fetchEvents() -> AnyPublisher<[SpeedEvent], Error>
 }
@@ -63,11 +68,11 @@ class SpeedManager: SpeedTimerDataProviderType {
                 if error != nil {
                     print(error?.localizedDescription ?? "Some error")
                 }
-                
+
                 guard let snapshot = snapshot else {
                     return
                 }
-                
+
                 snapshot.documents.forEach({ (document) in
                     let dictionary = document.data()
                     let speed = Speed(data: dictionary)

@@ -24,7 +24,7 @@
 		118D877E232BE550001DFB1F /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D877D232BE550001DFB1F /* ProfileDataSource.swift */; };
 		118D8780232BE577001DFB1F /* ProfileDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118D877F232BE577001DFB1F /* ProfileDelegate.swift */; };
 		11A59719247935AD006F4F3E /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A59718247935AD006F4F3E /* ViewControllerFactory.swift */; };
-		11A6D259241037E90016C55B /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A6D258241037E90016C55B /* VideoView.swift */; };
+		11A6D259241037E90016C55B /* VideoViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A6D258241037E90016C55B /* VideoViewWrapper.swift */; };
 		11A892DE232960A3009BCA7B /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A892DD232960A3009BCA7B /* ProfileInfo.swift */; };
 		11AF9DF623527EAD00746773 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
 		11AF9DF723527EAD00746773 /* Pods_Tricktionary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -187,7 +187,7 @@
 		118D877D232BE550001DFB1F /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
 		118D877F232BE577001DFB1F /* ProfileDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDelegate.swift; sourceTree = "<group>"; };
 		11A59718247935AD006F4F3E /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
-		11A6D258241037E90016C55B /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		11A6D258241037E90016C55B /* VideoViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewWrapper.swift; sourceTree = "<group>"; };
 		11A892DD232960A3009BCA7B /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		11AF9DF5235277C400746773 /* Tricktionary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tricktionary.entitlements; sourceTree = "<group>"; };
 		11B3ED7423DCF27000ACE06C /* TricksTableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksTableSection.swift; sourceTree = "<group>"; };
@@ -382,7 +382,7 @@
 		11A6D257241037DC0016C55B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				11A6D258241037E90016C55B /* VideoView.swift */,
+				11A6D258241037E90016C55B /* VideoViewWrapper.swift */,
 				11813DF22422AC69001F53E8 /* TrickInfoCell.swift */,
 				11EF715E242EBD0C0005B6B8 /* PrerequisiteHeaderView.swift */,
 			);
@@ -676,6 +676,7 @@
 			children = (
 				EABCC85E224D8A8A00ED3B90 /* BaseCenterViewController.swift */,
 				EAF9F27B222DBAF200237EDF /* BaseViewController.swift */,
+				EA7F22D2219EDC3C00C43599 /* Trick detail */,
 				EA37A3AF21E696CF0061E44D /* Login */,
 				EA37A3A521E690160061E44D /* Menu */,
 				EAED98FF227F6D610017766F /* Profile */,
@@ -705,7 +706,6 @@
 			children = (
 				117D20FB25BB663000F8C0B0 /* SwiftUI */,
 				11B3ED7323DCF24A00ACE06C /* Protocols */,
-				EA7F22D2219EDC3C00C43599 /* Trick detail */,
 				EA7AAB30219E2138000858EE /* TricksDataSource.swift */,
 				EA7AAB32219E2160000858EE /* TricksDelegate.swift */,
 				114DB60A23D3CD9300AAEA45 /* TrickSearchVC.swift */,
@@ -1195,7 +1195,7 @@
 				EAA4EE4B2205E08F003347D6 /* LoginViewModel.swift in Sources */,
 				11B3ED7723DCF28E00ACE06C /* TricksSettingsType.swift in Sources */,
 				EA3C728A2287584600324576 /* TabBarViewController.swift in Sources */,
-				11A6D259241037E90016C55B /* VideoView.swift in Sources */,
+				11A6D259241037E90016C55B /* VideoViewWrapper.swift in Sources */,
 				118D877E232BE550001DFB1F /* ProfileDataSource.swift in Sources */,
 				EACF63DE21EE962A00D7D836 /* RegistrationView.swift in Sources */,
 				EA7F22D4219EDC5600C43599 /* TrickDetailViewController.swift in Sources */,
@@ -1322,7 +1322,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1377,7 +1377,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

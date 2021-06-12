@@ -92,7 +92,7 @@ class ProfileViewModel: ProfileViewModelType {
     }
     
     private func getUser() -> User? {
-       return Auth.auth().currentUser
+        return Auth.auth().currentUser
     }
 
     private func countCompletedByLevel() {

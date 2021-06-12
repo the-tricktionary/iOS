@@ -11,17 +11,21 @@ import ReactiveSwift
 import Combine
 
 class SpeedDataViewModel: ObservableObject {
-    
     // MARK: Variables
     
     @Published var speeds: [Speed] = []
     var isLoaded: MutableProperty<Bool> = MutableProperty<Bool>(false)
-    
+
+    private let speedDataRepository: SpeedManager
+
     // MARK: Public
+    init(speedDataRepository: SpeedManager) {
+        self.speedDataRepository = speedDataRepository
+    }
     
     func getSpeedData(starting: @escaping () -> Void, finish: @escaping () -> Void) {
         var data: [Speed] = []
-        SpeedManager.shared.getSpeedData(starting: {
+        speedDataRepository.getSpeedData(starting: {
             starting()
         }, completion: { (speed) in
             data.append(speed)

@@ -16,7 +16,7 @@ protocol TrickDetailViewModelType {
     var isDone: Bool { get set }
     var trick: Trick? { get set }
     var preprequisites: CurrentValueSubject<[Trick], Never> { get }
-    var video: CurrentValueSubject<VideoView.Content?, Never> { get }
+    var video: CurrentValueSubject<VideoViewWrapper.Content?, Never> { get }
     var settings: TrickDetailSettingsType { get }
     var tricksManager: TricksContentManager { get }
 
@@ -38,6 +38,7 @@ class TrickDetailViewModel: TrickDetailViewModelType, ObservableObject {
     @Published var uiTrick: Trick?
     @Published var uiPreprequisites: [Trick]?
     @Published var videoThumbnail: URL?
+    @Published var uiViedeo: VideoViewWrapper.Content?
 
     var onLoad: (() -> Void)?
     var onStartLoading: (() -> Void)?
@@ -46,7 +47,7 @@ class TrickDetailViewModel: TrickDetailViewModelType, ObservableObject {
     
     var trick: Trick?
     var preprequisites = CurrentValueSubject<[Trick], Never>([])
-    var video = CurrentValueSubject<VideoView.Content?, Never>(nil)
+    var video = CurrentValueSubject<VideoViewWrapper.Content?, Never>(nil)
 
     var thumbnail = PassthroughSubject<String, Never>()
 
@@ -89,7 +90,8 @@ class TrickDetailViewModel: TrickDetailViewModelType, ObservableObject {
                     self.loadPrerequisites(with: prerequisites)
                 }
                 if let video = trick.videos {
-                    self.video.send(self.makeVideoContent(with: video))
+                    self.video.send(self.makeVideoContent(with: video)) // deprecated
+                    self.uiViedeo = self.makeVideoContent(with: video)
                     self.videoThumbnail = URL(string: self.thumbnailURL(video.youtube))
                     self.thumbnail.send(self.thumbnailURL(video.youtube))
                 }
@@ -106,6 +108,7 @@ class TrickDetailViewModel: TrickDetailViewModelType, ObservableObject {
                 trickId == id
             }
         }
+
         TrickManager.shared.markTrickAsDone(ids: ids)
             .receive(on: DispatchQueue.main)
             .sink { (completion) in
@@ -133,8 +136,8 @@ class TrickDetailViewModel: TrickDetailViewModelType, ObservableObject {
             .store(in: &cancelable)
     }
 
-    private func makeVideoContent(with video: Video) -> VideoView.Content {
-        return VideoView.Content(imageUrlString: thumbnailURL(video.youtube),
+    private func makeVideoContent(with video: Video) -> VideoViewWrapper.Content {
+        return VideoViewWrapper.Content(imageUrlString: thumbnailURL(video.youtube),
                                  showPlaceholder: settings.autoPlay,
                                  url: video.youtube,
                                  fullScreen: settings.fullscreen,

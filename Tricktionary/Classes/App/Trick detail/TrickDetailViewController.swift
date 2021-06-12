@@ -15,7 +15,7 @@ class TrickDetailViewController: BaseCenterViewController {
     // MARK: Variables
     
     let tableView: UITableView = UITableView()
-    private let videoView = VideoView()
+    private let videoView = VideoViewWrapper()
     
     var viewModel: TrickDetailViewModelType
     

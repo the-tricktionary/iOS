@@ -12,7 +12,20 @@ import UIKit
 import WebKit
 import SwiftUI
 
-class VideoView: UIView, YoutubePlayerViewDelegate {
+struct VideoView: UIViewRepresentable {
+
+    var content: VideoViewWrapper.Content
+
+    func makeUIView(context: Context) -> VideoViewWrapper {
+        VideoViewWrapper()
+    }
+
+    func updateUIView(_ uiView: VideoViewWrapper, context: Context) {
+        uiView.customize(with: content)
+    }
+}
+
+class VideoViewWrapper: UIView, YoutubePlayerViewDelegate {
 
     // MARK: - Variables
     // public
@@ -105,7 +118,7 @@ class VideoView: UIView, YoutubePlayerViewDelegate {
     }
 }
 
-extension VideoView {
+extension VideoViewWrapper {
     struct Content {
         var imageUrlString: String
         var showPlaceholder: Bool

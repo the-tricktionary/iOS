@@ -57,7 +57,7 @@ extension Resolver {
         }
         
         register {
-            SpeedDataViewModel()
+            SpeedDataViewModel(speedDataRepository: SpeedManager.shared)
         }
         
         register {

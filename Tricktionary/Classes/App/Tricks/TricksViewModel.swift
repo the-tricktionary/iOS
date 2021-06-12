@@ -32,6 +32,9 @@ class TricksViewModel: ObservableObject {
     @Published var uiTricks: [BaseTrick] = []
     @Published var uiSections: [TableSection] = []
     @Published var searchText: String = ""
+
+    let level = CurrentValueSubject<Int, Never>(1)
+    let discipline = CurrentValueSubject<Int, Never>(0)
     
     var state = PassthroughSubject<TrickListState, Never>()
 
@@ -43,7 +46,7 @@ class TricksViewModel: ObservableObject {
     // public
     let sections = CurrentValueSubject<[TableSection], Never>([])
     var loading = CurrentValueSubject<Bool, Never>(true)
-    var hovno: Bool = true
+
     var isPullToRefresh: Bool = false
     
     var username: String? {
@@ -202,6 +205,12 @@ class TricksViewModel: ObservableObject {
             let filtered = self.getFilteredTricks(substring: substring)
             self.makeFilteredContent(tricks: filtered)
         }.store(in: &cancelable)
+
+        level.combineLatest(discipline)
+            .sink { (level, discipline) in
+                print("### discipline \(discipline) level \(level)")
+            }
+            .store(in: &cancelable)
     }
 
     // MARK: - Helpers
