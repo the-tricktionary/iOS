@@ -33,10 +33,10 @@ class TricksViewModel: ObservableObject {
     @Published var uiSections: [TableSection] = []
     @Published var searchText: String = ""
 
+    @Published var state: TrickListState = .loading
+
     let level = CurrentValueSubject<Int, Never>(1)
     let discipline = CurrentValueSubject<Int, Never>(0)
-    
-    var state = PassthroughSubject<TrickListState, Never>()
 
     // private
     private var cancelable = Set<AnyCancellable>()
@@ -93,6 +93,7 @@ class TricksViewModel: ObservableObject {
             makeContent()
             return
         }
+        state = .loading
         tricks.value.removeAll()
         dataProvider.getTricks(discipline: disciplines[selectedDiscipline])
             .receive(on: DispatchQueue.main)
@@ -184,6 +185,7 @@ class TricksViewModel: ObservableObject {
                                           completed: self.userManager.logged ? rows.filter { $0.isDone }.count : nil)]
         }
         uiSections = sections.value
+        state = .fetched(sections.value)
     }
     
     private func makeFilteredContent(tricks: [BaseTrick]?) {

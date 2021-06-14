@@ -35,32 +35,39 @@ struct TrickListView: View {
     // MARK: - Body
     var body: some View {
         NavigationView {
-            self.makeListView()
-                .add(self.searchBar)
-                .onAppear(perform: {
-                    self.viewModel.getTricks(silent: true)
-                })
-                .listStyle(PlainListStyle())
-                .animation(.default)
-                .navigationBarTitle("Tricks", displayMode: .inline)
-                .navigationBarItems(leading:
-                                        Button(action: {
-                                            picker = .disciplines
-                                            pickerPresented = true
-                                        }, label: {
-                                            Text(self.viewModel.disciplines[self.viewModel.selectedDiscipline].name)
-                                        }),
-                                    trailing:
-                                        Button(action: {
-                                            picker = .levels
-                                            pickerPresented = true
-                                        }, label: {
-                                            Text("Level \(self.viewModel.selectedLevel)")
-                                        })
-                )
-                .actionSheet(isPresented: $pickerPresented) {
-                    self.getSheet()
-                }
+            switch viewModel.state {
+            case .loading:
+                Text("Loading ...")
+            case .fetched(_):
+                self.makeListView()
+                    .add(self.searchBar)
+                    .onAppear(perform: {
+                        self.viewModel.getTricks(silent: true)
+                    })
+                    .listStyle(PlainListStyle())
+                    .animation(.default)
+                    .navigationBarTitle("Tricks", displayMode: .inline)
+                    .navigationBarItems(leading:
+                                            Button(action: {
+                                                picker = .disciplines
+                                                pickerPresented = true
+                                            }, label: {
+                                                Text(self.viewModel.disciplines[self.viewModel.selectedDiscipline].name)
+                                            }),
+                                        trailing:
+                                            Button(action: {
+                                                picker = .levels
+                                                pickerPresented = true
+                                            }, label: {
+                                                Text("Level \(self.viewModel.selectedLevel)")
+                                            })
+                    )
+                    .actionSheet(isPresented: $pickerPresented) {
+                        self.getSheet()
+                    }
+            default:
+                Text("ou noooou")
+            }
         }
         .background(SwiftUI.Color.red)
         .navigationViewStyle(StackNavigationViewStyle())

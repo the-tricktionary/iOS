@@ -42,8 +42,10 @@ struct MenuView: View {
                     }
                 } else {
                     NavigationView {
-                        Text("Hello, sign in")
-                            .navigationBarTitle("Sign in", displayMode: .inline)
+                        LoginVC(onClose: {
+                            self.activeSheet = nil
+                        })
+                            .navigationBarTitle("Login", displayMode: .inline)
                     }
                 }
             case .setting:

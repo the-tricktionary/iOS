@@ -12,6 +12,23 @@ import GoogleSignIn
 import Firebase
 import ReactiveSwift
 import ReactiveCocoa
+import SwiftUI
+
+struct LoginVC: UIViewControllerRepresentable {
+    var onClose: (() -> Void)?
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<LoginVC>) -> LoginViewController {
+        let vc = LoginViewController(viewModel: LoginViewModel())
+        vc.onClose = {
+            onClose?()
+        }
+        return vc
+    }
+
+    func updateUIViewController(_ uiViewController: LoginViewController, context: UIViewControllerRepresentableContext<LoginVC>) {
+        //
+    }
+}
 
 class LoginViewController: BaseCenterViewController, GIDSignInDelegate {
     
@@ -43,24 +60,15 @@ class LoginViewController: BaseCenterViewController, GIDSignInDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if #available(iOS 13.0, *) {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(close))
-        } else {
-            let closeButton = UIBarButtonItem(image: UIImage(named: "clear"),
-                                              style: .plain,
-                                              target: self,
-                                              action: #selector(close))
-            closeButton.tintColor = .white
-            navigationItem.leftBarButtonItem = closeButton
-        }
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(close))
         
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
         
         view.backgroundColor = UIColor.white
         
-        navigationItem.title = "Login"
+        title = "Login"
         
         contentView.backgroundColor = .white
         contentView.layer.borderWidth = 1
