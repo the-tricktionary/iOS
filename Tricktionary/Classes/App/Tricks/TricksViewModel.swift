@@ -15,7 +15,7 @@ import Resolver
 
 enum TrickListState {
     case loading
-    case error
+    case error(String)
     case fetched([TableSection])
 }
 
@@ -101,6 +101,7 @@ class TricksViewModel: ObservableObject {
                 print(completion)
             switch completion {
             case .failure(let error):
+                self.state = .error(error.localizedDescription)
                 print("### Error \(error.localizedDescription)")
             default:
                 break

@@ -12,6 +12,8 @@ import FirebaseAuth
 import FirebaseRemoteConfig
 import Combine
 
+// TODO: Use cases with injected repositories
+
 enum Disciplines {
     case singleRope, wheels, doubleDutch
 
@@ -56,11 +58,11 @@ protocol ChecklistDataProviderType {
 class TrickManager: TricksDataProviderType, TrickDetailDataProviderType, ChecklistDataProviderType {
     func getTricks(discipline: Disciplines) -> AnyPublisher<[BaseTrick], Error> {
         let firestore = Firestore.firestore()
-        let documentReference = firestore.collection(discipline.identity)
+        let documentReference = firestore.collection("tricks")
         let publisher = PassthroughSubject<[BaseTrick], Error>()
         documentReference.getDocuments { (snapshot, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "Some error")
+            if let error = error {
+                publisher.send(completion: .failure(error))
             }
             
             guard let snapshot = snapshot, snapshot.isEmpty == false else {

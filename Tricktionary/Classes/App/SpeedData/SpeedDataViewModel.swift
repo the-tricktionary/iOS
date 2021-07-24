@@ -9,12 +9,18 @@
 import Foundation
 import ReactiveSwift
 import Combine
+import FirebaseAuth
 
 class SpeedDataViewModel: ObservableObject {
+    enum State {
+        case loading
+        case notLogged
+        case loaded(data: [Speed])
+    }
     // MARK: Variables
     
     @Published var speeds: [Speed] = []
-    var isLoaded: MutableProperty<Bool> = MutableProperty<Bool>(false)
+    @Published var state: State = .loading
 
     private let speedDataRepository: SpeedManager
 
@@ -24,14 +30,20 @@ class SpeedDataViewModel: ObservableObject {
     }
     
     func getSpeedData(starting: @escaping () -> Void, finish: @escaping () -> Void) {
+        guard Auth.auth().currentUser != nil else {
+            state = .notLogged
+            return
+        }
         var data: [Speed] = []
         speedDataRepository.getSpeedData(starting: {
+            self.state = .loading
             starting()
         }, completion: { (speed) in
             data.append(speed)
             self.speeds.append(speed)
         }) {
             self.speeds = data
+            self.state = .loaded(data: data)
             finish()
         }
     }

@@ -10,11 +10,14 @@
 		1119BF702561D512004D1D89 /* TricksContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119BF6F2561D512004D1D89 /* TricksContentManager.swift */; };
 		111E19FD25F027FD005D4732 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E19FC25F027FD005D4732 /* MenuViewModel.swift */; };
 		11297F5525B0BEDA0009D0B7 /* SpeedTimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11297F5425B0BEDA0009D0B7 /* SpeedTimerDelegate.swift */; };
+		11336E9926ACA6460090DD69 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11336E9826ACA6460090DD69 /* UserDefaults.swift */; };
 		114DB60B23D3CD9300AAEA45 /* TrickSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114DB60A23D3CD9300AAEA45 /* TrickSearchVC.swift */; };
 		114E58D723E9DE8300D63C80 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E58D623E9DE8300D63C80 /* SettingsViewModel.swift */; };
 		115775DC25BF6A5B0050D2E4 /* TrickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115775DB25BF6A5B0050D2E4 /* TrickView.swift */; };
 		115FEACD25AE0B190065384D /* SpeedEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115FEACC25AE0B190065384D /* SpeedEventCell.swift */; };
 		115FEAD225AE13F40065384D /* SpeedListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115FEAD125AE13F40065384D /* SpeedListCell.swift */; };
+		116E2EB1268DD8B3007CE093 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
+		116E2EB6268DD92C007CE093 /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 116E2EB5268DD92C007CE093 /* Resolver */; };
 		117D20FD25BB664200F8C0B0 /* TrickListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117D20FC25BB664200F8C0B0 /* TrickListView.swift */; };
 		117D210225BB7FB700F8C0B0 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117D210125BB7FB700F8C0B0 /* TabBarView.swift */; };
 		117D210825BCA86F00F8C0B0 /* TrickCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117D210725BCA86F00F8C0B0 /* TrickCellView.swift */; };
@@ -26,8 +29,6 @@
 		11A59719247935AD006F4F3E /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A59718247935AD006F4F3E /* ViewControllerFactory.swift */; };
 		11A6D259241037E90016C55B /* VideoViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A6D258241037E90016C55B /* VideoViewWrapper.swift */; };
 		11A892DE232960A3009BCA7B /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A892DD232960A3009BCA7B /* ProfileInfo.swift */; };
-		11AF9DF623527EAD00746773 /* Pods_Tricktionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; };
-		11AF9DF723527EAD00746773 /* Pods_Tricktionary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C1F60BB72BD59E522B363957 /* Pods_Tricktionary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11AFA7EA2559CEFA00856E69 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 11AFA7E92559CEFA00856E69 /* FirebaseRemoteConfig */; };
 		11AFA7EC2559CEFA00856E69 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 11AFA7EB2559CEFA00856E69 /* FirebaseStorage */; };
 		11AFA7EE2559CEFA00856E69 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 11AFA7ED2559CEFA00856E69 /* FirebaseAuth */; };
@@ -35,8 +36,6 @@
 		11AFA80E2559D10E00856E69 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 11AFA80D2559D10E00856E69 /* Kingfisher */; };
 		11B3ED7523DCF27000ACE06C /* TricksTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B3ED7423DCF27000ACE06C /* TricksTableSection.swift */; };
 		11B3ED7723DCF28E00ACE06C /* TricksSettingsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B3ED7623DCF28E00ACE06C /* TricksSettingsType.swift */; };
-		11BAEADD25CB245100F0B51C /* Resolver-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 11BAEADC25CB245100F0B51C /* Resolver-Dynamic */; };
-		11BAEADE25CB245100F0B51C /* Resolver-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 11BAEADC25CB245100F0B51C /* Resolver-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		11BAEAE225CB412600F0B51C /* AppDelegate+Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BAEAE125CB412500F0B51C /* AppDelegate+Resolver.swift */; };
 		11BC0C5825F8237B00AD3961 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BC0C5725F8237B00AD3961 /* SettingsView.swift */; };
 		11CCD77E25EECB8100F3D18B /* TricksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB36219E21FE000858EE /* TricksViewModel.swift */; };
@@ -50,7 +49,6 @@
 		11CCD79625EECD7100F3D18B /* TrickLevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7AAB2E219E1CD7000858EE /* TrickLevelCell.swift */; };
 		11CCD79925EECD8600F3D18B /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF8CB8E21EFE0CE00684288 /* BaseCell.swift */; };
 		11CCD79C25EECDCC00F3D18B /* UI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FACC5925AE36F800BD8623 /* UI+Extension.swift */; };
-		11CCD7A025EED01F00F3D18B /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 11CCD79F25EED01F00F3D18B /* Resolver */; };
 		11CCD7A525EED21D00F3D18B /* TrickListResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CCD7A425EED21D00F3D18B /* TrickListResolver.swift */; };
 		11CCD7AB25EED25400F3D18B /* TrickListDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CCD7AA25EED25400F3D18B /* TrickListDependencies.swift */; };
 		11CCD7B025EEE8DB00F3D18B /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CCD7AF25EEE8DB00F3D18B /* MenuView.swift */; };
@@ -60,7 +58,6 @@
 		11F7CB3325ACD3290089E5AB /* SpeedTimerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7CB3225ACD3280089E5AB /* SpeedTimerDataSource.swift */; };
 		11FACC5A25AE36F800BD8623 /* UI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FACC5925AE36F800BD8623 /* UI+Extension.swift */; };
 		21AE64B71C33C1370ACB4612 /* Pods_TricktionaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C21046409F446A8239DA7B /* Pods_TricktionaryTests.framework */; };
-		75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4F8EFA895F7CF0AEBF0798 /* Pods_TricktionaryUITests.framework */; };
 		EA01954921F123BB00A86011 /* SpeedTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA01954821F123BB00A86011 /* SpeedTimerViewController.swift */; };
 		EA073DF621FA792A0046799C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DF521FA792A0046799C /* SettingsViewController.swift */; };
 		EA073DF921FA83660046799C /* PxUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA073DF821FA83660046799C /* PxUserDefaults.swift */; };
@@ -102,7 +99,6 @@
 		EA8C1D65219CE61D00F4D502 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA8C1D64219CE61D00F4D502 /* Assets.xcassets */; };
 		EA8C1D68219CE61D00F4D502 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA8C1D66219CE61D00F4D502 /* LaunchScreen.storyboard */; };
 		EA8C1D73219CE61D00F4D502 /* TricktionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D72219CE61D00F4D502 /* TricktionaryTests.swift */; };
-		EA8C1D7E219CE61D00F4D502 /* TricktionaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8C1D7D219CE61D00F4D502 /* TricktionaryUITests.swift */; };
 		EA8C1D90219CEA8A00F4D502 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA8C1D8F219CEA8A00F4D502 /* GoogleService-Info.plist */; };
 		EAA4EE4B2205E08F003347D6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA4EE4A2205E08F003347D6 /* LoginViewModel.swift */; };
 		EAACBCDC21D02E83007AEDFE /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACBCDB21D02E83007AEDFE /* VideoCell.swift */; };
@@ -144,40 +140,20 @@
 			remoteGlobalIDString = EA8C1D56219CE61C00F4D502;
 			remoteInfo = Tricktionary;
 		};
-		EA8C1D7A219CE61D00F4D502 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA8C1D4F219CE61C00F4D502 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EA8C1D56219CE61C00F4D502;
-			remoteInfo = Tricktionary;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		11AF9DF823527EAD00746773 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				11BAEADE25CB245100F0B51C /* Resolver-Dynamic in Embed Frameworks */,
-				11AF9DF723527EAD00746773 /* Pods_Tricktionary.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0E842B02D5F0CAD2F4D519AD /* Pods-TricktionaryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TricktionaryTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1119BF6F2561D512004D1D89 /* TricksContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksContentManager.swift; sourceTree = "<group>"; };
 		111E19FC25F027FD005D4732 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		11297F5425B0BEDA0009D0B7 /* SpeedTimerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTimerDelegate.swift; sourceTree = "<group>"; };
+		11336E9826ACA6460090DD69 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		114DB60A23D3CD9300AAEA45 /* TrickSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickSearchVC.swift; sourceTree = "<group>"; };
 		114E58D623E9DE8300D63C80 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		115775DB25BF6A5B0050D2E4 /* TrickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickView.swift; sourceTree = "<group>"; };
 		115FEACC25AE0B190065384D /* SpeedEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedEventCell.swift; sourceTree = "<group>"; };
 		115FEAD125AE13F40065384D /* SpeedListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedListCell.swift; sourceTree = "<group>"; };
+		116198C226AB4E3C00E3BF46 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = SOURCE_ROOT; };
 		117D20FC25BB664200F8C0B0 /* TrickListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickListView.swift; sourceTree = "<group>"; };
 		117D210125BB7FB700F8C0B0 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		117D210725BCA86F00F8C0B0 /* TrickCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickCellView.swift; sourceTree = "<group>"; };
@@ -254,7 +230,6 @@
 		EA8C1D6E219CE61D00F4D502 /* TricktionaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TricktionaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA8C1D72219CE61D00F4D502 /* TricktionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricktionaryTests.swift; sourceTree = "<group>"; };
 		EA8C1D74219CE61D00F4D502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EA8C1D79219CE61D00F4D502 /* TricktionaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TricktionaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA8C1D7D219CE61D00F4D502 /* TricktionaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricktionaryUITests.swift; sourceTree = "<group>"; };
 		EA8C1D7F219CE61D00F4D502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA8C1D8F219CEA8A00F4D502 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -298,11 +273,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				11AFA80E2559D10E00856E69 /* Kingfisher in Frameworks */,
-				11AF9DF623527EAD00746773 /* Pods_Tricktionary.framework in Frameworks */,
-				11BAEADD25CB245100F0B51C /* Resolver-Dynamic in Frameworks */,
+				116E2EB1268DD8B3007CE093 /* Pods_Tricktionary.framework in Frameworks */,
 				11AFA7EA2559CEFA00856E69 /* FirebaseRemoteConfig in Frameworks */,
 				11AFA7EC2559CEFA00856E69 /* FirebaseStorage in Frameworks */,
 				11AFA7F02559CEFA00856E69 /* FirebaseFirestore in Frameworks */,
+				116E2EB6268DD92C007CE093 /* Resolver in Frameworks */,
 				11AFA7EE2559CEFA00856E69 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,16 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11CCD7A025EED01F00F3D18B /* Resolver in Frameworks */,
 				21AE64B71C33C1370ACB4612 /* Pods_TricktionaryTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EA8C1D76219CE61D00F4D502 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				75168B5F1A99EFC2DF24650D /* Pods_TricktionaryUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,7 +570,6 @@
 			children = (
 				EA8C1D57219CE61D00F4D502 /* Tricktionary.app */,
 				EA8C1D6E219CE61D00F4D502 /* TricktionaryTests.xctest */,
-				EA8C1D79219CE61D00F4D502 /* TricktionaryUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -612,6 +577,7 @@
 		EA8C1D59219CE61D00F4D502 /* Tricktionary */ = {
 			isa = PBXGroup;
 			children = (
+				116198C226AB4E3C00E3BF46 /* schema.json */,
 				11AF9DF5235277C400746773 /* Tricktionary.entitlements */,
 				EAC23ABA219D8E3B0086D9E2 /* Classes */,
 				EA8C1D5A219CE61D00F4D502 /* AppDelegate.swift */,
@@ -750,6 +716,7 @@
 			isa = PBXGroup;
 			children = (
 				EAD3D73921F8FE9F00F39A22 /* SpeachUtil.swift */,
+				11336E9826ACA6460090DD69 /* UserDefaults.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -804,7 +771,6 @@
 				EA8C1D55219CE61C00F4D502 /* Resources */,
 				C063A5A15E51AD97BF5C3CB9 /* [CP] Embed Pods Frameworks */,
 				6A3BADD057D69E8A3A53BBF5 /* [CP] Copy Pods Resources */,
-				11AF9DF823527EAD00746773 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -817,7 +783,7 @@
 				11AFA7ED2559CEFA00856E69 /* FirebaseAuth */,
 				11AFA7EF2559CEFA00856E69 /* FirebaseFirestore */,
 				11AFA80D2559D10E00856E69 /* Kingfisher */,
-				11BAEADC25CB245100F0B51C /* Resolver-Dynamic */,
+				116E2EB5268DD92C007CE093 /* Resolver */,
 			);
 			productName = Tricktionary;
 			productReference = EA8C1D57219CE61D00F4D502 /* Tricktionary.app */;
@@ -841,32 +807,10 @@
 			);
 			name = TricktionaryTests;
 			packageProductDependencies = (
-				11CCD79F25EED01F00F3D18B /* Resolver */,
 			);
 			productName = TricktionaryTests;
 			productReference = EA8C1D6E219CE61D00F4D502 /* TricktionaryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		EA8C1D78219CE61D00F4D502 /* TricktionaryUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EA8C1D88219CE61D00F4D502 /* Build configuration list for PBXNativeTarget "TricktionaryUITests" */;
-			buildPhases = (
-				84D5EC4D3E45DC9F2CDBD0F0 /* [CP] Check Pods Manifest.lock */,
-				EA8C1D75219CE61D00F4D502 /* Sources */,
-				EA8C1D76219CE61D00F4D502 /* Frameworks */,
-				EA8C1D77219CE61D00F4D502 /* Resources */,
-				13BC251151528BAD4EF5FAAE /* [CP] Embed Pods Frameworks */,
-				70C81E7E67C946268BF72519 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				EA8C1D7B219CE61D00F4D502 /* PBXTargetDependency */,
-			);
-			name = TricktionaryUITests;
-			productName = TricktionaryUITests;
-			productReference = EA8C1D79219CE61D00F4D502 /* TricktionaryUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -885,10 +829,6 @@
 						CreatedOnToolsVersion = 10.1;
 						TestTargetID = EA8C1D56219CE61C00F4D502;
 					};
-					EA8C1D78219CE61D00F4D502 = {
-						CreatedOnToolsVersion = 10.1;
-						TestTargetID = EA8C1D56219CE61C00F4D502;
-					};
 				};
 			};
 			buildConfigurationList = EA8C1D52219CE61C00F4D502 /* Build configuration list for PBXProject "Tricktionary" */;
@@ -903,7 +843,7 @@
 			packageReferences = (
 				11AFA7E82559CEFA00856E69 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				11AFA80C2559D10E00856E69 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				11BAEADB25CB245100F0B51C /* XCRemoteSwiftPackageReference "Resolver" */,
+				116E2EB4268DD92C007CE093 /* XCRemoteSwiftPackageReference "Resolver" */,
 			);
 			productRefGroup = EA8C1D58219CE61D00F4D502 /* Products */;
 			projectDirPath = "";
@@ -911,7 +851,6 @@
 			targets = (
 				EA8C1D56219CE61C00F4D502 /* Tricktionary */,
 				EA8C1D6D219CE61D00F4D502 /* TricktionaryTests */,
-				EA8C1D78219CE61D00F4D502 /* TricktionaryUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -929,13 +868,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EA8C1D6C219CE61D00F4D502 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EA8C1D77219CE61D00F4D502 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -960,23 +892,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TricktionaryTests/Pods-TricktionaryTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		13BC251151528BAD4EF5FAAE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1C73EACFE03ADD48B2A83A50 /* [CP] Check Pods Manifest.lock */ = {
@@ -1029,41 +944,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tricktionary/Pods-Tricktionary-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		70C81E7E67C946268BF72519 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TricktionaryUITests/Pods-TricktionaryUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		84D5EC4D3E45DC9F2CDBD0F0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TricktionaryUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C063A5A15E51AD97BF5C3CB9 /* [CP] Embed Pods Frameworks */ = {
@@ -1167,6 +1047,7 @@
 				EA1A48D921EA8BFC0086FC79 /* MenuDataSource.swift in Sources */,
 				11BC0C5825F8237B00AD3961 /* SettingsView.swift in Sources */,
 				11E253BA23D486EB00FB6DFA /* SearchCell.swift in Sources */,
+				11336E9926ACA6460090DD69 /* UserDefaults.swift in Sources */,
 				EAF9B49B225A78D1001AB242 /* VideoStorageManager.swift in Sources */,
 				EA7AAB35219E21B8000858EE /* TricksLevelHeaderCell.swift in Sources */,
 				11A59719247935AD006F4F3E /* ViewControllerFactory.swift in Sources */,
@@ -1228,14 +1109,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EA8C1D75219CE61D00F4D502 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EA8C1D7E219CE61D00F4D502 /* TricktionaryUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1243,11 +1116,6 @@
 			isa = PBXTargetDependency;
 			target = EA8C1D56219CE61C00F4D502 /* Tricktionary */;
 			targetProxy = EA8C1D6F219CE61D00F4D502 /* PBXContainerItemProxy */;
-		};
-		EA8C1D7B219CE61D00F4D502 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EA8C1D56219CE61C00F4D502 /* Tricktionary */;
-			targetProxy = EA8C1D7A219CE61D00F4D502 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1481,48 +1349,6 @@
 			};
 			name = Release;
 		};
-		EA8C1D89219CE61D00F4D502 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43F91D7EECE300294FAA4D49 /* Pods-TricktionaryUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CTPJ8YRP37;
-				INFOPLIST_FILE = TricktionaryUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = Stovicek.TricktionaryUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Tricktionary;
-			};
-			name = Debug;
-		};
-		EA8C1D8A219CE61D00F4D502 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5B3396B1EE7E1116033D700 /* Pods-TricktionaryUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CTPJ8YRP37;
-				INFOPLIST_FILE = TricktionaryUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = Stovicek.TricktionaryUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Tricktionary;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1553,18 +1379,17 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EA8C1D88219CE61D00F4D502 /* Build configuration list for PBXNativeTarget "TricktionaryUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EA8C1D89219CE61D00F4D502 /* Debug */,
-				EA8C1D8A219CE61D00F4D502 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		116E2EB4268DD92C007CE093 /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.3;
+			};
+		};
 		11AFA7E82559CEFA00856E69 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1581,17 +1406,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		11BAEADB25CB245100F0B51C /* XCRemoteSwiftPackageReference "Resolver" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hmlongco/Resolver.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		116E2EB5268DD92C007CE093 /* Resolver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 116E2EB4268DD92C007CE093 /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = Resolver;
+		};
 		11AFA7E92559CEFA00856E69 /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 11AFA7E82559CEFA00856E69 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -1616,16 +1438,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 11AFA80C2559D10E00856E69 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		11BAEADC25CB245100F0B51C /* Resolver-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 11BAEADB25CB245100F0B51C /* XCRemoteSwiftPackageReference "Resolver" */;
-			productName = "Resolver-Dynamic";
-		};
-		11CCD79F25EED01F00F3D18B /* Resolver */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 11BAEADB25CB245100F0B51C /* XCRemoteSwiftPackageReference "Resolver" */;
-			productName = Resolver;
 		};
 /* End XCSwiftPackageProductDependency section */
 

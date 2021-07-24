@@ -38,6 +38,7 @@ struct TrickListView: View {
             switch viewModel.state {
             case .loading:
                 Text("Loading ...")
+                    .navigationBarTitle("Tricks", displayMode: .inline)
             case .fetched(_):
                 self.makeListView()
                     .add(self.searchBar)
@@ -65,8 +66,9 @@ struct TrickListView: View {
                     .actionSheet(isPresented: $pickerPresented) {
                         self.getSheet()
                     }
-            default:
-                Text("ou noooou")
+            case let .error(error):
+                Text("Error: \(error)")
+                    .navigationBarTitle("Tricks")
             }
         }
         .background(SwiftUI.Color.red)

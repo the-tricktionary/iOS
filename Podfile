@@ -16,13 +16,11 @@ target 'Tricktionary' do
 	pod 'ChameleonFramework'
 	pod 'LifetimeTracker'
 	pod 'Swinject'
-	pod 'SwiftMonkeyPaws'
+	pod 'Apollo'
 
   target 'TricktionaryTests' do
     inherit! :search_paths
     # Pods for testing
-	pod 'SwiftMonkey'
-	pod 'SwiftMonkeyPaws'
 	pod 'GoogleSignIn'
 	pod 'SnapKit'
 	pod 'ReactiveCocoa'
@@ -33,23 +31,6 @@ target 'Tricktionary' do
 	pod 'ChameleonFramework'
 	pod 'LifetimeTracker'
 	pod 'Swinject'
-  end
-
-  target 'TricktionaryUITests' do
-    inherit! :search_paths
-    # Pods for testing
-	pod 'SwiftMonkeyPaws'
-	pod 'GoogleSignIn'
-	pod 'SnapKit'
-	pod 'ReactiveCocoa'
-	pod 'RxSwift'
-	pod 'YoutubePlayerView'
-	pod 'SwiftChart'
-	pod 'Charts'
-	pod 'ChameleonFramework'
-	pod 'LifetimeTracker'
-	pod 'Swinject'
-	pod 'SwiftMonkey'
   end
 
 end

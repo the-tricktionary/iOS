@@ -210,7 +210,7 @@ class LoginViewController: BaseCenterViewController, GIDSignInDelegate {
         
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-        
+        // TODO: HERE WE GET TOKENS
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 print("Error while sign in with google \(error.localizedDescription)")

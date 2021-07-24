@@ -14,28 +14,43 @@ struct SpeedDataView: View {
     
     @InjectedObject var viewModel: SpeedDataViewModel
     
-    init() {
-        viewModel.getSpeedData {
-            //
-        } finish: {
-            //
-        }
-    }
-    
     var body: some View {
         NavigationView {
-            List(viewModel.speeds) { speed in
-                ZStack {
-                    SpeedEventCellView(eventName: speed.name ?? "No name",
-                                       score: speed.score,
-                                       misses: speed.misses,
-                                       noMiss: speed.noMissScore)
-                    NavigationLink(destination: Text(speed.name ?? "No name")) {
-                        EmptyView()
-                    }
-                    .opacity(0)
+            switch viewModel.state {
+            case .loading:
+                Text("Loading ...")
+                    .navigationBarTitle("Speed data", displayMode: .inline)
+            case .notLogged:
+                VStack {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .padding()
+                    Text("You are not logged in")
                 }
-            }.navigationBarTitle("Speed data", displayMode: .inline)
+                .navigationBarTitle("Speed data", displayMode: .inline)
+            case .loaded(let data):
+                List(data) { speed in
+                    ZStack {
+                        SpeedEventCellView(eventName: speed.name ?? "No name",
+                                           score: speed.score,
+                                           misses: speed.misses,
+                                           noMiss: speed.noMissScore)
+                        NavigationLink(destination: Text(speed.name ?? "No name")) {
+                            EmptyView()
+                        }
+                        .opacity(0)
+                    }
+                }
+                .navigationBarTitle("Speed data", displayMode: .inline)
+            }
+        }.onAppear {
+            viewModel.getSpeedData {
+                //
+            } finish: {
+                //
+            }
+
         }
     }
 }
