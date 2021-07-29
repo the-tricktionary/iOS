@@ -16,7 +16,6 @@ target 'Tricktionary' do
 	pod 'ChameleonFramework'
 	pod 'LifetimeTracker'
 	pod 'Swinject'
-	pod 'Apollo'
 
   target 'TricktionaryTests' do
     inherit! :search_paths

@@ -10,12 +10,22 @@ import Foundation
 import Firebase
 
 struct BaseTrick: Codable, Identifiable {
+    internal init(name: String, level: Int, type: String, levels: Levels? = nil, id: String? = nil) {
+        self.name = name
+        self.level = level
+        self.type = type
+        self.levels = levels
+        self.id = id
+    }
+
     let Id = UUID()
     var name: String
     var level: Int
     var type: String
     var levels: Levels?
     var id: String?
+
+
     
     init(data: [String : Any]) {
         guard let name = data["name"] as? String, let level = data["level"] as? Int, let type = data["type"] as? String else {
@@ -93,6 +103,8 @@ struct Levels: Codable {
     init?(_ levelsData: [String : Any]?) {
         if let ijru = levelsData?["ijru"] as? [String : Any] {
             self.ijru = LevelsFields(level: ijru["level"] as? String)
+        } else if let ijru = levelsData?["ijru"] as? String {
+            self.ijru = LevelsFields(level: ijru)
         } else {
             self.ijru = LevelsFields(level: nil)
         }

@@ -102,7 +102,6 @@ class TricksViewModel: ObservableObject {
             switch completion {
             case .failure(let error):
                 self.state = .error(error.localizedDescription)
-                print("### Error \(error.localizedDescription)")
             default:
                 break
             }

@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseRemoteConfig
 import Combine
+import Apollo
 
 // TODO: Use cases with injected repositories
 
@@ -57,25 +58,38 @@ protocol ChecklistDataProviderType {
 
 class TrickManager: TricksDataProviderType, TrickDetailDataProviderType, ChecklistDataProviderType {
     func getTricks(discipline: Disciplines) -> AnyPublisher<[BaseTrick], Error> {
-        let firestore = Firestore.firestore()
-        let documentReference = firestore.collection("tricks")
+        var tricks: [BaseTrick]?
         let publisher = PassthroughSubject<[BaseTrick], Error>()
-        documentReference.getDocuments { (snapshot, error) in
-            if let error = error {
+        var disc: Discipline {
+            switch discipline {
+            case .singleRope:
+                return .singleRope
+            case .wheels:
+                return .wheel
+            case .doubleDutch:
+                return .doubleDutch
+            }
+        }
+        Network.shared.apollo.fetch(query: TrickListQuery(tricksDiscipline: disc)) { result in
+            switch result {
+            case let .success(data):
+                tricks = data.data?.tricks.compactMap { trick in
+                    let tricktionaryLevel = trick.levels.first { $0.organisation == "tricktionary" }?.level ?? "0"
+                    let levels = trick.levels.reduce(into: [String: Any]()) { result, level in
+                        if level.organisation != "tricktionary" {
+                            result[level.organisation] = level.level
+                        }
+                    }
+                    return BaseTrick(name: trick.localisation?.name ?? "-",
+                                     level: Int(tricktionaryLevel) ?? 0,
+                                     type: trick.trickType.rawValue,
+                                     levels: Levels(levels),
+                                     id: trick.id)
+                }
+                publisher.send(tricks ?? [])
+            case let .failure(error):
                 publisher.send(completion: .failure(error))
             }
-            
-            guard let snapshot = snapshot, snapshot.isEmpty == false else {
-                publisher.send(completion: .failure(NSError(domain: "Error", code: 1, userInfo: nil) as Error))
-                return
-            }
-            var list: [BaseTrick] = []
-            snapshot.documents.forEach({ (document) in
-                var trick = BaseTrick(data: document.data())
-                trick.id = document.documentID
-                list.append(trick)
-            })
-            publisher.send(list)
         }
         return publisher.eraseToAnyPublisher()
     }

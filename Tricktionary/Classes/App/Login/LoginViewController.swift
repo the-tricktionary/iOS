@@ -207,7 +207,7 @@ class LoginViewController: BaseCenterViewController, GIDSignInDelegate {
         }
         
         guard let authentication = user.authentication else { return }
-        
+        print("### token \(authentication.idToken)")
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
         // TODO: HERE WE GET TOKENS

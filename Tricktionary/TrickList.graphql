@@ -1,0 +1,18 @@
+query TrickList($tricksDiscipline: Discipline) {
+  tricks(discipline: $tricksDiscipline) {
+    id
+    trickType
+    localisation {
+      name
+    }
+    prerequisites {
+      localisation {
+        name
+      }
+    }
+    levels {
+      level
+      organisation
+    }
+  }
+}

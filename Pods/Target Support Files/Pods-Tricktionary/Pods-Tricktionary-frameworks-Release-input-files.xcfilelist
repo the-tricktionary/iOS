@@ -1,5 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-Tricktionary/Pods-Tricktionary-frameworks.sh
-${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework
 ${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework
 ${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework
 ${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
