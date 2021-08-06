@@ -52,6 +52,15 @@ extension BaseTrick: Hashable {
 }
 
 struct Trick: Codable, Identifiable {
+    internal init(id: String? = nil, name: String, videos: Video? = nil, description: String, levels: Levels? = nil, prerequisites: [Prerequisites]? = nil) {
+        self.id = id
+        self.name = name
+        self.videos = videos
+        self.description = description
+        self.levels = levels
+        self.prerequisites = prerequisites
+    }
+    
     var id: String?
     var name: String
     var videos: Video?
@@ -85,6 +94,10 @@ extension Trick: Hashable {
 }
 
 struct Video: Codable {
+    internal init(youtube: String) {
+        self.youtube = youtube
+    }
+    
     var youtube: String
 
     init?(data: [String : Any]?) {

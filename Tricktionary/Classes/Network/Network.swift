@@ -8,9 +8,10 @@
 
 import Foundation
 import Apollo
+import FirebaseAuth
 
 class Network {
   static let shared = Network()
-
+    
   private(set) lazy var apollo = ApolloClient(url: URL(string: "https://api.the-tricktionary.com/")!)
 }

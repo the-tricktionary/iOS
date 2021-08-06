@@ -1,0 +1,15 @@
+query TrickDetail($trickId: ID!) {
+  trick(id: $trickId) {
+    localisation {
+      name
+      description
+    }
+    levels {
+      organisation
+      level
+    }
+    videos {
+      videoId
+    }
+  }
+}

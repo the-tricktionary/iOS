@@ -27,6 +27,7 @@ class TricksViewModel: ObservableObject {
     @Injected var remoteConfig: RemoteConfigType
     @Injected var userManager: UserManagerType
     @Injected var settings: TricksListSettingsType
+    @Injected var trickListUseCase: TrickListUseCase
     
     // published
     @Published var uiTricks: [BaseTrick] = []
@@ -95,25 +96,24 @@ class TricksViewModel: ObservableObject {
         }
         state = .loading
         tricks.value.removeAll()
-        dataProvider.getTricks(discipline: disciplines[selectedDiscipline])
+        trickListUseCase.loadTricks(discipline: "")
             .receive(on: DispatchQueue.main)
             .sink { completion in
-                print(completion)
-            switch completion {
-            case .failure(let error):
-                self.state = .error(error.localizedDescription)
-            default:
-                break
-            }
-        } receiveValue: { trickList in
-            self.tricks.value.append(contentsOf: trickList)
-            self.uiTricks = trickList
-            self.allTricksId = trickList.reduce(into: [String: String]()) {
-                $0[$1.name] = $1.id
-            }
-            self.loading.send(false)
-            self.selectMinLevel()
-        }.store(in: &cancelable)
+                switch completion {
+                case .failure(let error):
+                    self.state = .error(error.localizedDescription)
+                default:
+                    break
+                }
+            } receiveValue: { trickList in
+                self.tricks.value.append(contentsOf: trickList)
+                self.uiTricks = trickList
+                self.allTricksId = trickList.reduce(into: [String: String]()) {
+                    $0[$1.name] = $1.id
+                }
+                self.loading.send(false)
+                self.selectMinLevel()
+            }.store(in: &cancelable)
     }
 
     func toggleSection(name: String) {

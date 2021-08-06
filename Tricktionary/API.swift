@@ -109,6 +109,269 @@ public enum TrickType: RawRepresentable, Equatable, Hashable, CaseIterable, Apol
   }
 }
 
+public final class TrickDetailQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query TrickDetail($trickId: ID!) {
+      trick(id: $trickId) {
+        __typename
+        localisation {
+          __typename
+          name
+          description
+        }
+        levels {
+          __typename
+          organisation
+          level
+        }
+        videos {
+          __typename
+          videoId
+        }
+      }
+    }
+    """
+
+  public let operationName: String = "TrickDetail"
+
+  public var trickId: GraphQLID
+
+  public init(trickId: GraphQLID) {
+    self.trickId = trickId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["trickId": trickId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Query"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("trick", arguments: ["id": GraphQLVariable("trickId")], type: .object(Trick.selections)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(trick: Trick? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "trick": trick.flatMap { (value: Trick) -> ResultMap in value.resultMap }])
+    }
+
+    public var trick: Trick? {
+      get {
+        return (resultMap["trick"] as? ResultMap).flatMap { Trick(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "trick")
+      }
+    }
+
+    public struct Trick: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Trick"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("localisation", type: .object(Localisation.selections)),
+          GraphQLField("levels", type: .nonNull(.list(.nonNull(.object(Level.selections))))),
+          GraphQLField("videos", type: .nonNull(.list(.nonNull(.object(Video.selections))))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(localisation: Localisation? = nil, levels: [Level], videos: [Video]) {
+        self.init(unsafeResultMap: ["__typename": "Trick", "localisation": localisation.flatMap { (value: Localisation) -> ResultMap in value.resultMap }, "levels": levels.map { (value: Level) -> ResultMap in value.resultMap }, "videos": videos.map { (value: Video) -> ResultMap in value.resultMap }])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var localisation: Localisation? {
+        get {
+          return (resultMap["localisation"] as? ResultMap).flatMap { Localisation(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "localisation")
+        }
+      }
+
+      public var levels: [Level] {
+        get {
+          return (resultMap["levels"] as! [ResultMap]).map { (value: ResultMap) -> Level in Level(unsafeResultMap: value) }
+        }
+        set {
+          resultMap.updateValue(newValue.map { (value: Level) -> ResultMap in value.resultMap }, forKey: "levels")
+        }
+      }
+
+      public var videos: [Video] {
+        get {
+          return (resultMap["videos"] as! [ResultMap]).map { (value: ResultMap) -> Video in Video(unsafeResultMap: value) }
+        }
+        set {
+          resultMap.updateValue(newValue.map { (value: Video) -> ResultMap in value.resultMap }, forKey: "videos")
+        }
+      }
+
+      public struct Localisation: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["TrickLocalisation"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            GraphQLField("description", type: .scalar(String.self)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(name: String, description: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "TrickLocalisation", "name": name, "description": description])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var name: String {
+          get {
+            return resultMap["name"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        public var description: String? {
+          get {
+            return resultMap["description"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "description")
+          }
+        }
+      }
+
+      public struct Level: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["TrickLevel"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("organisation", type: .nonNull(.scalar(String.self))),
+            GraphQLField("level", type: .nonNull(.scalar(String.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(organisation: String, level: String) {
+          self.init(unsafeResultMap: ["__typename": "TrickLevel", "organisation": organisation, "level": level])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var organisation: String {
+          get {
+            return resultMap["organisation"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "organisation")
+          }
+        }
+
+        public var level: String {
+          get {
+            return resultMap["level"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "level")
+          }
+        }
+      }
+
+      public struct Video: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["Video"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("videoId", type: .nonNull(.scalar(String.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(videoId: String) {
+          self.init(unsafeResultMap: ["__typename": "Video", "videoId": videoId])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var videoId: String {
+          get {
+            return resultMap["videoId"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "videoId")
+          }
+        }
+      }
+    }
+  }
+}
+
 public final class TrickListQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =

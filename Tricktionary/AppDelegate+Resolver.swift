@@ -15,6 +15,10 @@ extension Resolver {
             UserManager()
         }
         .implements(UserManagerType.self)
+
+        register {
+            TrickListUseCase(trickListRepository: TrickListRepository())
+        }
         
         register {
             TrickManager.shared
